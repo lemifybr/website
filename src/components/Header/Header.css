@@ -4,17 +4,17 @@
   left: 0;
   right: 0;
   z-index: 100;
-  padding: 12px 0 0;
+  padding: 0;
   transition: all 0.3s var(--ease-smooth);
+  background: transparent;
 }
 
 .header.scrolled {
-  padding: 0;
-  background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  border-bottom: none;
-  box-shadow: 0 4px 24px rgba(28, 64, 59, 0.08);
+  background: rgba(13, 31, 29, 0.88);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
 }
 
 .header-inner {
@@ -33,7 +33,7 @@
 .header-brand {
   font-size: 22px;
   font-weight: 700;
-  color: var(--primary);
+  color: #fff;
   text-decoration: none;
   letter-spacing: -0.02em;
   display: flex;
@@ -77,13 +77,13 @@
 }
 
 .nav-slider.is-hovering {
-  background: #f0f0f0;
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .header-nav a {
   font-size: 14px;
   font-weight: 500;
-  color: var(--text-muted);
+  color: rgba(255, 255, 255, 0.65);
   text-decoration: none;
   padding: 10px 20px;
   border-radius: 8px;
@@ -93,11 +93,11 @@
 }
 
 .header-nav a:hover {
-  color: var(--primary);
+  color: #fff;
 }
 
 .header-nav a.active {
-  color: var(--primary);
+  color: #fff;
   font-weight: 600;
 }
 
@@ -114,6 +114,29 @@
   height: 42px;
   padding: 0 20px;
   font-size: 14px;
+}
+
+/* Dark theme overrides for header buttons */
+.header-actions .btn-outline {
+  color: rgba(255, 255, 255, 0.8);
+  border-color: rgba(255, 255, 255, 0.2);
+  background: transparent;
+}
+
+.header-actions .btn-outline:hover {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.header-actions .btn-primary {
+  background: var(--secondary);
+  color: var(--primary);
+  border-radius: 100px;
+}
+
+.header-actions .btn-primary:hover {
+  background: #e5f68a;
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -135,7 +158,7 @@
 .hamburger span {
   width: 100%;
   height: 2px;
-  background-color: var(--primary);
+  background-color: #fff;
   border-radius: 2px;
   transition: all 0.3s var(--ease-smooth);
 }
@@ -161,7 +184,7 @@
   right: -100%;
   width: 100%;
   height: 100vh;
-  background: #fff;
+  background: #0d1f1d;
   z-index: 150;
   padding: 100px 32px 40px;
   display: flex;
@@ -183,12 +206,12 @@
 .mobile-nav a {
   font-size: 24px;
   font-weight: 600;
-  color: var(--primary);
+  color: rgba(255, 255, 255, 0.85);
   text-decoration: none;
 }
 
 .mobile-nav a.active {
-  color: var(--secondary-dark);
+  color: var(--secondary);
 }
 
 .mobile-actions {
