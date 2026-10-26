@@ -1,0 +1,1 @@
+Coloque aqui os vídeos dos módulos (.mp4) e referencie em src/docs/modules.js, ex.: video: "/docs/videos/dashboard.mp4"

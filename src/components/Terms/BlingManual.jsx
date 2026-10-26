@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import './Terms.css';
-import Header from '../Header/Header';
-import Footer from '../Footer/Footer';
+import Header from '../../institutional/Header.jsx';
+import '../../institutional/site.css';
+import Footer from '../../institutional/Footer.jsx';
 import step1 from '../../assets/bling/step1.gif'; // ajuste o caminho se necessário
 import step2 from '../../assets/bling/step2.gif'; // ajuste o caminho se necessário
 import step3 from '../../assets/bling/step3.gif'; // ajuste o caminho se necessário 
@@ -12,7 +13,7 @@ const BlingManual = () => {
     }, []);
 
     return (
-        <div className="terms-page">
+        <div className="terms-page inst">
             <Header scrolled={true} />
 
             <div className="terms-container">
@@ -80,7 +81,7 @@ const BlingManual = () => {
                     href="https://app.lemify.com.br/signup" 
                     target="_blank" 
                     rel="noreferrer" 
-                    className="btn btn-secondary create-account-margin"
+                    className="btn btn--dark create-account-margin"
                 >
                     Criar minha conta
                 </a>
@@ -95,7 +96,7 @@ const BlingManual = () => {
                         </a>.
                     </li>
 
-                    <li>No menu lateral, navegue até a seção de <strong>Configurações > Integrações</strong>.</li>
+                    <li>No menu lateral, navegue até a seção de <strong>Configurações &gt; Integrações</strong>.</li>
 
                     <li>
                         Localize o card do <strong>Bling</strong> e clique em <strong>"Integrar"</strong>.

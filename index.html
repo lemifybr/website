@@ -3,15 +3,128 @@
 
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/src/assets/icon.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <title>Lemify - Atendimento Unificado</title>
+
+  <title>Lemify · IA que atende, agenda e vende pelo WhatsApp</title>
+  <meta name="description" content="Família de softwares com IA para empresas brasileiras. Os agentes de IA do Lemify respondem seus clientes na hora, em qualquer canal, e trabalham lado a lado com a sua equipe." />
+  <link rel="canonical" href="https://lemify.com.br/" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="theme-color" content="#1c403b" />
+  <meta name="author" content="Lemify Tecnologia Ltda." />
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" href="/logo.png" />
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Lemify" />
+  <meta property="og:locale" content="pt_BR" />
+  <meta property="og:url" content="https://lemify.com.br/" />
+  <meta property="og:title" content="Lemify · IA que atende, agenda e vende pelo WhatsApp" />
+  <meta property="og:description" content="Os agentes de IA do Lemify respondem seus clientes na hora, em qualquer canal, e trabalham lado a lado com a sua equipe." />
+  <meta property="og:image" content="https://lemify.com.br/og-image.jpg" />
+  <meta property="og:image:alt" content="Atendente de loja finalizando uma venda com ajuda do Lemify" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Lemify · IA que atende, agenda e vende pelo WhatsApp" />
+  <meta name="twitter:description" content="Família de softwares com IA para empresas brasileiras." />
+  <meta name="twitter:image" content="https://lemify.com.br/og-image.jpg" />
+
+  <!-- Para buscadores e agentes de IA: resumo em texto simples -->
+  <link rel="alternate" type="text/markdown" href="/llms.txt" title="Lemify em texto simples (llms.txt)" />
+
+  <!-- Dados estruturados (schema.org) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://lemify.com.br/#organization",
+        "name": "Lemify",
+        "legalName": "Lemify Tecnologia Ltda.",
+        "taxID": "69.768.422/0001-08",
+        "url": "https://lemify.com.br/",
+        "logo": "https://lemify.com.br/logo.png",
+        "description": "Empresa brasileira de tecnologia que desenvolve uma família de softwares com inteligência artificial para atendimento, vendas e gestão.",
+        "address": { "@type": "PostalAddress", "addressLocality": "São Paulo", "addressRegion": "SP", "addressCountry": "BR" },
+        "contactPoint": [
+          { "@type": "ContactPoint", "contactType": "customer support", "email": "contato@lemify.com.br", "telephone": "+55-11-95783-9501", "availableLanguage": "pt-BR" }
+        ],
+        "sameAs": [
+          "https://instagram.com/lemifybr",
+          "https://www.linkedin.com/company/lemify",
+          "https://www.facebook.com/lemify"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://lemify.com.br/#website",
+        "url": "https://lemify.com.br/",
+        "name": "Lemify",
+        "inLanguage": "pt-BR",
+        "publisher": { "@id": "https://lemify.com.br/#organization" }
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://lemify.com.br/#lemify",
+        "name": "Lemify",
+        "alternateName": "Lemify · Atendimento e CRM",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "inLanguage": "pt-BR",
+        "description": "Plataforma de atendimento e CRM para empresas que vendem e atendem por conversa, com todos os canais numa caixa só e agentes de IA trabalhando junto com a equipe.",
+        "url": "https://app.lemify.com.br/",
+        "publisher": { "@id": "https://lemify.com.br/#organization" }
+      }
+    ]
+  }
+  </script>
 </head>
 
 <body>
-  <div id="root"></div>
+  <div id="root">
+    <!-- Conteúdo estático para quem não executa JavaScript (buscadores, agentes de IA). O React substitui este bloco ao carregar. -->
+    <div style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">
+      <header><a href="/">Lemify</a></header>
+      <main>
+        <h1>IA que atende, agenda e vende pelo WhatsApp da sua empresa.</h1>
+        <p>Os agentes de IA do Lemify respondem seus clientes na hora, em qualquer canal, e trabalham lado a lado com a sua equipe.</p>
+
+        <h2>Uma solução com IA para cada tipo de negócio</h2>
+        <ul>
+          <li><strong>Lemify · Atendimento e CRM</strong>: para empresas que vendem e atendem por conversa, com todos os canais numa caixa só e agentes de IA trabalhando junto com a equipe.</li>
+          <li><strong>LemiFood</strong> (em desenvolvimento): para restaurantes, lanchonetes e delivery.</li>
+          <li><strong>LemiClinic</strong> (em desenvolvimento): para clínicas médicas, odontológicas e consultórios.</li>
+        </ul>
+
+        <h2>Agentes de IA com nome, personalidade e função</h2>
+        <ul>
+          <li>Lemi: agente principal, atende na hora, em todos os canais.</li>
+          <li>Maia: agendamento, agenda, confirma e remarca compromissos.</li>
+          <li>Theo: vendas, mantém o funil e as negociações em dia.</li>
+          <li>Otto: cadastro, completa os dados de cada cliente.</li>
+          <li>Nico: retorno, retoma quem parou de responder.</li>
+          <li>Íris: relatórios, transforma conversas em informação para decidir.</li>
+        </ul>
+
+        <h2>Integrações</h2>
+        <p>Meta, Google, TikTok, iFood, Mercado Livre, Shopify, Nuvemshop, Bling, Omie, Conta Azul, Asaas e Tiny ERP.</p>
+
+        <h2>Contato</h2>
+        <p>E-mail: contato@lemify.com.br · WhatsApp: (11) 95783-9501 · Instagram: @lemifybr</p>
+        <p>Lemify Tecnologia Ltda. · CNPJ 69.768.422/0001-08 · São Paulo, SP</p>
+      </main>
+      <footer>
+        <a href="/termos">Termos de uso</a>
+        <a href="/privacidade">Política de privacidade</a>
+        <a href="/reembolso">Política de reembolso</a>
+        <a href="/termos-ia">Termos de IA</a>
+        <a href="/google-disclosure">Divulgação de uso de dados do Google</a>
+        <a href="/lgpd">Segurança e LGPD</a>
+      </footer>
+    </div>
+  </div>
+  <noscript>Este site precisa de JavaScript para exibir a experiência completa. O resumo do conteúdo está disponível em /llms.txt.</noscript>
   <script type="module" src="/src/main.jsx"></script>
 </body>
 

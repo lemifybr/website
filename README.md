@@ -1,40 +1,60 @@
-# Lemify - Landing Page
+# Lemify · Site institucional
 
-Esta é a landing page do Lemify, uma plataforma de atendimento unificado.
+Site institucional do Lemify (família de softwares com IA para empresas brasileiras).
 
-## Tecnologias Utilizadas
+## Tecnologias
 
-- **React 19**
-- **Vite**
-- **@xyflow/react** (para animações de fluxo no Hero)
-- **Vanilla CSS** (estilização modular por componente)
+- **React 19** + **Vite**
+- **GSAP** (ScrollTrigger) para animações de scroll, parallax e sticky
+- **Lenis** para o scroll suavizado
+- CSS puro, escopado em `.inst`
 
-## Estrutura do Projeto
-
-O projeto segue uma estrutura baseada em componentes, onde cada seção da LP é um componente independente dentro de `src/components`.
+## Estrutura
 
 ```text
+index.html               # meta tags, Open Graph, JSON-LD e conteúdo estático (SEO/AIO)
+public/
+  robots.txt             # libera buscadores e crawlers de IA
+  sitemap.xml            # páginas indexáveis
+  llms.txt               # resumo em texto simples para agentes de IA
+  favicon.svg, logo.png, og-image.jpg
 src/
-  components/    # Seções da página (Hero, Features, Plans, etc)
-  assets/        # Imagens e vetores locais
-  App.jsx        # Composição principal da página
-  main.jsx       # Ponto de entrada
-  index.css      # Estilos globais e variáveis
+  App.jsx                # roteamento por pathname + SEO por página
+  seo.js                 # título, descrição e canonical de cada rota
+  institutional/         # site institucional (Hero, Sections, Header, Footer...)
+    siteConfig.js        # contatos, links e CNPJ (edite aqui)
+    assets/              # imagens, mascotes, logos de integrações
+  legal/                 # documentos legais (um arquivo .js por documento) + LegalPage.jsx
+  blog/                  # blog: lista, post e renderizador de Markdown
+  components/Terms/      # manual de integração do Bling
 ```
 
-## Como rodar localmente
+## Rotas
 
-1. Instale as dependências:
-   ```bash
-   npm install
-   ```
+`/` · `/blog` · `/blog/:slug` · `/docs` · `/termos` · `/privacidade` · `/reembolso` · `/termos-ia` · `/google-disclosure` · `/lgpd` · `/manual/bling`. Qualquer outro caminho
+retorna 404 na Vercel (ver `vercel.json`).
 
-2. Inicie o servidor de desenvolvimento:
-   ```bash
-   npm run dev
-   ```
+## SEO e AIO: o que mexer ao publicar
 
-3. Para gerar a build de produção:
-   ```bash
-   npm run build
-   ```
+- O domínio `https://lemify.com.br` está escrito em `index.html`, `src/seo.js`,
+  `public/robots.txt`, `public/sitemap.xml` e `public/llms.txt`. Se for outro, troque nos cinco.
+- Ao mudar textos da home, atualize também o bloco estático dentro de `<div id="root">`
+  em `index.html` e o `public/llms.txt`.
+- `public/og-image.jpg` é uma foto provisória; troque por uma arte 1200x630.
+
+## Blog
+
+Os posts são gerenciados pelo LCC (API restrita do backend do Lemify, `/v1/blog/*`, mesma chave das métricas).
+O navegador nunca fala com essa API: ele chama as funções do próprio site em `api/blog`, que usam a chave no servidor
+e devolvem só posts publicados. `/sitemap.xml` é gerado por `api/sitemap.js` e inclui os posts.
+
+Variáveis de ambiente (veja `.env.example`; na Vercel em Settings > Environment Variables): `BLOG_API_KEY` e `LEMIFY_API_URL`.
+
+## Como rodar
+
+```bash
+npm install
+npm run dev      # desenvolvimento
+npm run build    # produção (dist/)
+npm run lint
+```

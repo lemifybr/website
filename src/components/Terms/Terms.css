@@ -64,3 +64,5 @@
 .terms-container li {
   margin-bottom: 0.5rem;
 }
+/* Páginas legais usam o header/rodapé do site institucional (.inst) */
+.terms-page.inst .terms-container { margin-top: 56px; }

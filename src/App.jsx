@@ -1,78 +1,39 @@
-import './App.css'
-import '@xyflow/react/dist/style.css'
-import React, { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
-import Header from './components/Header/Header.jsx'
-import HeroFlow from './components/Hero/HeroFlow.jsx'
-import Features from './components/Features/Features.jsx'
-import Showcase from './components/Showcase/Showcase.jsx'
-import Integrations from './components/Integrations/Integrations.jsx'
-import Footer from './components/Footer/Footer.jsx'
-import ScrollToTop from './components/Common/ScrollToTop.jsx'
-import Terms from './components/Terms/Terms.jsx'
-import Privacy from './components/Terms/Privacy.jsx'
-import LGPD from './components/Terms/LGPD.jsx'
+import Site from './institutional/Site.jsx'
 import BlingManual from './components/Terms/BlingManual.jsx'
+import LegalPage from './legal/LegalPage.jsx'
+import DocsPage from './docs/DocsPage.jsx'
+import BlogList from './blog/BlogList.jsx'
+import BlogPost from './blog/BlogPost.jsx'
+import termos from './legal/termos.js'
+import privacidade from './legal/privacidade.js'
+import reembolso from './legal/reembolso.js'
+import termosIa from './legal/termosIa.js'
+import google from './legal/google.js'
+import lgpd from './legal/lgpd.js'
+import { applySeo, SEO } from './seo.js'
+
+const LEGAL_DOCS = [termos, privacidade, reembolso, termosIa, google, lgpd]
 
 function App() {
-  const [scrolled, setScrolled] = useState(false);
-  const path = window.location.pathname;
+  const path = window.location.pathname.replace(/\/+$/, '') || '/'
+  const doc = LEGAL_DOCS.find((d) => d.path === path)
+  const post = path.match(/^\/blog\/([^/]+)$/)
+  const known = !!doc || path === '/manual/bling' || path === '/docs' || path === '/blog' || !!post
 
   useEffect(() => {
-    const THRESH_ON = 50;
-    const THRESH_OFF = 10;
-    const onScroll = () => {
-      const y = window.scrollY || window.pageYOffset || 0;
-      setScrolled(y > THRESH_ON);
-    };
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+    applySeo(known ? SEO[path.startsWith('/blog/') ? '/blog' : path] : SEO['/'], known ? path : '/')
+    // Só força o topo em páginas sem âncora; com #hash o navegador cuida do scroll.
+    if (!window.location.hash) window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+  }, [known, path])
 
-  useEffect(() => {
-    try {
-      if ('scrollRestoration' in window.history) {
-        window.history.scrollRestoration = 'manual';
-      }
-    } catch { }
-    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
-    return () => {
-      try {
-        if ('scrollRestoration' in window.history) {
-          window.history.scrollRestoration = 'auto';
-        }
-      } catch { }
-    };
-  }, []);
-
-  if (path === '/termos') {
-    return <Terms />;
-  }
-
-  if (path === '/privacidade') {
-    return <Privacy />;
-  }
-
-  if (path === '/lgpd') {
-    return <LGPD />;
-  }
-
-  if (path === '/manual/bling') {
-    return <BlingManual />;
-  }
-
-  return (
-    <div className="lp">
-      <Header scrolled={scrolled} />
-      <HeroFlow />
-      <Features />
-      <Showcase />
-      <Integrations />
-      <Footer />
-      <ScrollToTop />
-    </div>
-  )
+  if (doc) return <LegalPage doc={doc} />
+  if (path === '/manual/bling') return <BlingManual />
+  if (path === '/docs') return <DocsPage />
+  if (path === '/blog') return <BlogList />
+  if (post) return <BlogPost slug={decodeURIComponent(post[1])} />
+  return <Site />
 }
 
 export default App

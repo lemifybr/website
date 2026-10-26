@@ -1,0 +1,38 @@
+/* ───── Hero ───── */
+.hero { padding: 6px 36px 20px; max-width: 1552px; margin-inline: auto; }
+.hero__stage { position: relative; isolation: isolate; height: min(820px, calc(100vh - 118px)); min-height: 620px; border-radius: 44px; overflow: hidden; background: var(--brand); color: #fff; --mx: 70%; --my: 30%; will-change: transform; }
+.hero__media { position: absolute; inset: 0; z-index: -3; }
+.hero__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1.2s ease; }
+.hero__img.is-on { opacity: 1; animation: kenburns 9s ease-out forwards; }
+@keyframes kenburns { from { transform: scale(1.1); } to { transform: scale(1); } }
+.hero__shade { position: absolute; inset: 0; z-index: -2; background: linear-gradient(0deg, rgba(10, 30, 27, 0.92) 0%, rgba(10, 30, 27, 0.55) 38%, rgba(10, 30, 27, 0.05) 70%), linear-gradient(90deg, rgba(10, 30, 27, 0.78) 0%, rgba(10, 30, 27, 0.55) 35%, transparent 72%); }
+.hero__spot { position: absolute; inset: 0; z-index: -1; background: radial-gradient(420px circle at var(--mx) var(--my), rgba(216, 254, 106, 0.22), transparent 65%); pointer-events: none; }
+.hero__tabs { position: relative; display: flex; flex-wrap: wrap; gap: 6px; padding: 6px; border-radius: 99px; background: rgba(255, 255, 255, 0.16); backdrop-filter: blur(16px); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.25); }
+.hero__tabs button { position: relative; z-index: 1; font: inherit; font-size: 14px; font-weight: 600; padding: 9px 16px; border-radius: 99px; border: 0; background: none; color: rgba(255, 255, 255, 0.85); cursor: pointer; transition: color 0.35s; }
+.hero__tabs button.is-on { color: var(--brand); }
+.hero__tabs button:not(.is-on):hover { color: #fff; }
+.hero__pill { position: absolute; left: 0; top: 0; z-index: 0; border-radius: 99px; background: #fff; box-shadow: 0 6px 16px -6px rgba(0, 0, 0, 0.4); transition: transform 0.55s var(--ease), width 0.55s var(--ease), height 0.4s; pointer-events: none; }
+.hero__copy { position: absolute; left: clamp(24px, 4vw, 56px); top: 0; bottom: 0; width: min(680px, 56%); display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 18px; }
+.inst .hero__copy .display { font-size: clamp(32px, 3.4vw, 54px); line-height: 1.04; }
+.hero__row { display: grid; gap: 26px; justify-items: start; }
+.inst .hero__lead { max-width: 440px; font-size: clamp(14px, 1.05vw, 16px); line-height: 1.55; font-weight: 400; color: rgba(255, 255, 255, 0.8); }
+.hero__cta { display: flex; flex-wrap: wrap; gap: 12px; }
+.inst .btn--glass { color: #fff; background: rgba(255, 255, 255, 0.16); backdrop-filter: blur(14px); border-color: rgba(255, 255, 255, 0.3); }
+.inst .btn--glass:hover { background: #fff; color: var(--brand); }
+
+@media (max-width: 900px) {
+  .hero { padding: 6px 12px 12px; }
+  .hero__stage { height: auto; min-height: 780px; border-radius: 32px; }
+  .hero__copy { left: 20px; right: 20px; }
+}
+
+/* O deslize do seletor é feedback da interação; continua animado mesmo com "reduzir movimento". */
+.inst .hero__pill { transition-duration: 0.55s, 0.55s, 0.4s !important; }
+.inst .hero__tabs button { transition-duration: 0.35s !important; }
+
+/* Título troca junto com o segmento: entra com um deslize suave. */
+.hero__title-in { display: block; animation: heroTitleIn 0.7s var(--ease) both; }
+@keyframes heroTitleIn { from { opacity: 0; transform: translateY(14px); } }
+
+/* Botões do hero: mesmo tamanho dos do header, um pouco mais altos. */
+.inst .hero__cta .btn--sm { padding: 14px 26px; font-size: 15px; min-width: 0; }

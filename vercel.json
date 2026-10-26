@@ -5,7 +5,47 @@
   "outputDirectory": "dist",
   "rewrites": [
     {
-      "source": "/(.*)",
+      "source": "/sitemap.xml",
+      "destination": "/api/sitemap"
+    },
+    {
+      "source": "/blog",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/blog/:slug",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/docs",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/termos",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/privacidade",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/reembolso",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/termos-ia",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/google-disclosure",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/lgpd",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/manual/bling",
       "destination": "/index.html"
     }
   ],
