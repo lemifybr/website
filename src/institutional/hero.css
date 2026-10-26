@@ -36,3 +36,18 @@
 
 /* Botões do hero: mesmo tamanho dos do header, um pouco mais altos. */
 .inst .hero__cta .btn--sm { padding: 14px 26px; font-size: 15px; min-width: 0; }
+
+/* Tablet e celular: o texto usa a largura toda e os segmentos ficam numa linha só, com rolagem lateral. */
+@media (max-width: 900px) {
+  .hero__copy { width: auto; }
+  .hero__tabs { flex-wrap: nowrap; max-width: 100%; overflow-x: auto; scrollbar-width: none; gap: 2px; padding: 4px; }
+  .hero__tabs::-webkit-scrollbar { display: none; }
+  .hero__tabs button { flex: none; }
+}
+@media (max-width: 560px) {
+  .hero { padding-inline: 8px; }
+  .hero__stage { min-height: 720px; border-radius: 28px; }
+  .hero__copy { left: 16px; right: 16px; gap: 16px; }
+  .hero__tabs button { font-size: 13px; padding: 8px 13px; }
+  .inst .hero__cta .btn--sm { padding: 13px 22px; }
+}

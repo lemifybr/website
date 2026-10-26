@@ -28,7 +28,14 @@ export default function Hero() {
     }
     place()
     window.addEventListener('resize', place)
-    return () => window.removeEventListener('resize', place)
+    // As medidas mudam quando a fonte termina de carregar ou a barra muda de tamanho.
+    document.fonts?.ready.then(place)
+    const ro = typeof ResizeObserver === 'undefined' ? null : new ResizeObserver(place)
+    ro?.observe(tabsRef.current)
+    return () => {
+      window.removeEventListener('resize', place)
+      ro?.disconnect()
+    }
   }, [i])
   const interacted = useRef(false)
 
