@@ -1,4 +1,4 @@
-import { configured, lemify, cache, send, publicPost } from '../_blog.js'
+import { configured, lcc, cache, send, publicPost } from '../_blog.js'
 
 // GET /api/blog/:slug
 export default async function handler(req, res) {
@@ -10,7 +10,7 @@ export default async function handler(req, res) {
   if (!/^[a-z0-9-]{1,160}$/.test(slug)) return send(res, 404, { error: 'Post não encontrado' })
 
   try {
-    const { status, body } = await lemify(`/v1/blog/posts/slug/${slug}?onlyLive=true`)
+    const { status, body } = await lcc(`/api/site/blog/posts/${slug}`)
     if (status === 404) return send(res, 404, { error: 'Post não encontrado' })
     if (status !== 200 || !body) return send(res, 502, { error: 'Falha ao carregar o post' })
     cache(res)

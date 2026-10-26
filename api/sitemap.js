@@ -1,4 +1,4 @@
-import { configured, lemify } from './_blog.js'
+import { configured, lcc } from './_blog.js'
 
 const SITE = 'https://lemify.com.br'
 const today = () => new Date().toISOString().slice(0, 10)
@@ -28,7 +28,7 @@ export default async function handler(_req, res) {
       let page = 1
       let totalPages = 1
       do {
-        const { status, body } = await lemify(`/v1/blog/posts?onlyLive=true&limit=100&page=${page}`)
+        const { status, body } = await lcc(`/api/site/blog/posts?limit=100&page=${page}`)
         if (status !== 200 || !body) break
         for (const p of body.data || []) {
           urls.push({ loc: `${SITE}/blog/${p.slug}`, lastmod: (p.publishedAt || '').slice(0, 10) || today(), freq: 'monthly', prio: '0.6' })

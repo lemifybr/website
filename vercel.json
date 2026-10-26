@@ -14,7 +14,7 @@
     },
     {
       "source": "/blog/:slug",
-      "destination": "/index.html"
+      "destination": "/api/blog-page?slug=:slug"
     },
     {
       "source": "/docs",

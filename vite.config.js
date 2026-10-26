@@ -3,7 +3,7 @@ import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
 
 // Em produção as funções de /api rodam na Vercel. No `npm run dev` este plugin executa as mesmas
-// funções (api/**) localmente, com as variáveis do .env (ex.: BLOG_API_KEY e LEMIFY_API_URL).
+// funções (api/**) localmente, com as variáveis do .env (ex.: BLOG_API_KEY e LCC_API_URL).
 function apiDev(env) {
   const routes = [
     [/^\/api\/blog\/?$/, '/api/blog/index.js'],

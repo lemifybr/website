@@ -44,11 +44,11 @@ retorna 404 na Vercel (ver `vercel.json`).
 
 ## Blog
 
-Os posts são gerenciados pelo LCC (API restrita do backend do Lemify, `/v1/blog/*`, mesma chave das métricas).
+Os posts ficam no banco do LCC e são gerenciados lá (menu Blog). O LCC expõe uma API restrita por chave (`/api/site/blog/posts`, `BLOG_SITE_API_KEY` no LCC).
 O navegador nunca fala com essa API: ele chama as funções do próprio site em `api/blog`, que usam a chave no servidor
-e devolvem só posts publicados. `/sitemap.xml` é gerado por `api/sitemap.js` e inclui os posts.
+e devolvem só posts publicados. `/blog/:slug` é servido por `api/blog-page.js`, que devolve o HTML já com título, meta tags, JSON-LD e o texto do artigo (SEO e agentes de IA que não executam JavaScript); o React assume por cima. `/sitemap.xml` é gerado por `api/sitemap.js` e inclui os posts.
 
-Variáveis de ambiente (veja `.env.example`; na Vercel em Settings > Environment Variables): `BLOG_API_KEY` e `LEMIFY_API_URL`.
+Variáveis de ambiente (veja `.env.example`; na Vercel em Settings > Environment Variables): `LCC_API_URL` (URL do backend do LCC) e `BLOG_API_KEY` (igual à `BLOG_SITE_API_KEY` do LCC).
 
 ## Como rodar
 

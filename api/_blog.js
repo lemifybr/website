@@ -1,12 +1,12 @@
 /* global process */
-// Ponte entre o site e a API restrita do blog no backend do Lemify.
+// Ponte entre o site e a API restrita do blog no LCC (os posts ficam no banco do LCC).
 // A chave fica só aqui (variável de ambiente do servidor) e nunca vai para o navegador.
-const BASE = (process.env.LEMIFY_API_URL || 'https://api.lemify.com.br').replace(/\/+$/, '')
-const KEY = (process.env.BLOG_API_KEY || process.env.METRICS_API_KEY || '').trim()
+const BASE = (process.env.LCC_API_URL || '').trim().replace(/\/+$/, '')
+const KEY = (process.env.BLOG_API_KEY || '').trim()
 
-export const configured = () => Boolean(KEY)
+export const configured = () => Boolean(KEY && BASE)
 
-export async function lemify(path) {
+export async function lcc(path) {
   const res = await fetch(`${BASE}${path}`, {
     headers: { Authorization: `Bearer ${KEY}`, Accept: 'application/json' },
     signal: AbortSignal.timeout(8000),
