@@ -181,7 +181,7 @@ export function Agents() {
       gsap.utils.toArray('.agent').forEach((row, k) => {
         ScrollTrigger.create({
           trigger: row, start: 'top 55%', end: 'bottom 55%',
-          onToggle: (s) => { if (s.isActive && window.matchMedia('(min-width: 901px)').matches) setOn(k) },
+          onToggle: (s) => { if (s.isActive) setOn(k) },
         })
       })
     }, root)
