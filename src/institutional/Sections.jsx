@@ -15,6 +15,7 @@ import intGoogle from './assets/integrations/google.svg'
 import intTiktok from './assets/integrations/tiktok.svg'
 import intIfood from './assets/integrations/ifood.svg'
 import { VALUES, STEPS, SITE } from './siteConfig.js'
+import { FAQ } from './faq.js'
 import retail from './assets/retail.jpg'
 import food from './assets/food.jpg'
 import clinic from './assets/clinic.jpg'
@@ -258,6 +259,28 @@ export function Support() {
             </li>
           ))}
         </ol>
+      </div>
+    </section>
+  )
+}
+
+/* ───────────── Perguntas frequentes ───────────── */
+export function Faq() {
+  return (
+    <section className="faq" id="perguntas" aria-labelledby="faq-titulo">
+      <div className="wrap faq__in">
+        <div className="head">
+          <span className="eyebrow" data-reveal>Perguntas frequentes</span>
+          <Words as="h2" id="faq-titulo" className="h2" text="Tudo o que você precisa saber sobre o Lemify" />
+        </div>
+        <div className="faq__list">
+          {FAQ.map((f) => (
+            <details className="faq__item" key={f.q}>
+              <summary>{f.q}</summary>
+              <p>{f.a}</p>
+            </details>
+          ))}
+        </div>
       </div>
     </section>
   )

@@ -9,6 +9,7 @@ function apiDev(env) {
     [/^\/api\/blog\/?$/, '/api/blog/index.js'],
     [/^\/api\/blog\/[^/]+\/?$/, '/api/blog/[slug].js'],
     [/^\/api\/sitemap\/?$/, '/api/sitemap.js'],
+    [/^\/llms(-full)?\.txt$/, '/api/llms.js'],
   ]
   return {
     name: 'api-dev',
