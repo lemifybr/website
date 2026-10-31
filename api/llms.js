@@ -46,7 +46,7 @@ Resolver de verdade; simples de usar; ninguém começa sozinho; dados com respon
 ## Contato
 
 - E-mail: contato@lemify.com.br
-- WhatsApp: +55 11 95783-9501 (https://wa.me/5511957839501)
+- WhatsApp: +55 11 4863-5054 (https://wa.me/551148635054)
 - Instagram: https://instagram.com/lemifybr
 - LinkedIn: https://www.linkedin.com/company/lemify
 - Facebook: https://www.facebook.com/lemify

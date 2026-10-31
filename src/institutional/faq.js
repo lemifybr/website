@@ -41,6 +41,6 @@ export const FAQ = [
   },
   {
     q: 'Como falo com o time do Lemify?',
-    a: `Pelo e-mail ${SITE.email} ou pelo WhatsApp (11) 95783-9501 (${SITE.whatsappUrl}).`,
+    a: `Pelo e-mail ${SITE.email} ou pelo WhatsApp (11) 4863-5054 (${SITE.whatsappUrl}).`,
   },
 ]

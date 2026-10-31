@@ -148,8 +148,8 @@ const BlingManual = () => {
 
                     <li>
                         <strong>WhatsApp:</strong>{" "}
-                        <a href="https://wa.me/5511957839501" target="_blank" rel="noreferrer">
-                            (11) 95783-9501
+                        <a href="https://wa.me/551148635054" target="_blank" rel="noreferrer">
+                            (11) 4863-5054
                         </a>
                     </li>
 

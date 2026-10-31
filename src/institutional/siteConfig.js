@@ -1,8 +1,8 @@
 // Links e contatos centralizados. Itens marcados com TODO ainda são placeholders do conteúdo original.
 export const SITE = {
   email: 'contato@lemify.com.br',
-  whatsappLabel: 'WhatsApp (11) 95783-9501',
-  whatsappUrl: 'https://wa.me/5511957839501',
+  whatsappLabel: 'WhatsApp (11) 4863-5054',
+  whatsappUrl: 'https://wa.me/551148635054',
   instagram: '@lemifybr',
   instagramUrl: 'https://instagram.com/lemifybr',
   linkedinUrl: 'https://www.linkedin.com/company/lemify',
