@@ -305,7 +305,7 @@ export function Contact() {
         <Words as="h2" id="contato-titulo" className="display display--light" text="Vamos conversar?" />
         <p data-reveal>Conte o que a sua empresa precisa. A gente indica o produto certo e responde rapidinho.</p>
         <div className="contact__cta" data-reveal>
-          <Magnetic><a className="btn btn--lime btn--lg" href={`mailto:${SITE.email}`}>Fale com a gente <Arrow /></a></Magnetic>
+          <Magnetic><a className="btn btn--lime btn--lg" href={`${SITE.whatsappUrl}?text=${encodeURIComponent('Olá! Vim pelo site e quero conhecer o Lemify.')}`} target="_blank" rel="noopener noreferrer">Fale com a gente <Arrow /></a></Magnetic>
           <a className="btn btn--outline-light btn--lg" href={SITE.productPage}>Conhecer o Lemify</a>
         </div>
       </div>
