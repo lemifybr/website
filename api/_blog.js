@@ -11,7 +11,16 @@ export async function lcc(path) {
     headers: { Authorization: `Bearer ${KEY}`, Accept: 'application/json' },
     signal: AbortSignal.timeout(8000),
   })
-  const body = await res.json().catch(() => null)
+  // As imagens do blog ficam no LCC. Se ele devolver o caminho relativo (/api/blog/media/...), na capa
+  // e dentro do texto, completa com o endereço do LCC; senão o navegador procuraria no domínio do site.
+  const text = await res.text()
+  const body = (() => {
+    try {
+      return JSON.parse(text.replace(/(["(])(?:https?:\/\/(?:www\.)?lemify\.com\.br)?\/api\/blog\/media\//g, `$1${BASE}/api/blog/media/`))
+    } catch {
+      return null
+    }
+  })()
   return { status: res.status, body }
 }
 
