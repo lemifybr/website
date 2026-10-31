@@ -57,7 +57,7 @@ export default function Footer() {
           <span>Lemify · {new Date().getFullYear()} · Todos os direitos reservados.</span>
           <span>Lemify Tecnologia Ltda. · CNPJ: {SITE.cnpj}</span>
         </div>
-        <a className="foot__top" href="/#topo">Voltar ao topo ↑</a>
+        <a className="foot__top" href="/#inicio">Voltar ao topo ↑</a>
       </div>
     </footer>
   )

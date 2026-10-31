@@ -50,12 +50,12 @@ export default function Header() {
       </div>
       <header className={`nav ${scrolled ? 'is-scrolled' : ''}`}>
         <div className="nav__inner">
-          <a href="/#topo" className="nav__logo" aria-label="Lemify" onClick={close}>
+          <a href="/#inicio" className="nav__logo" aria-label="Lemify" onClick={close}>
             <img src={logo} alt="Lemify" />
           </a>
 
           <nav className="nav__links" aria-label="Principal">
-            <a href="/#topo">Início</a>
+            <a href="/#inicio">Início</a>
             <div className="dd">
               <button type="button" className="dd__btn">Empresa <i /></button>
               <div className="dd__panel dd__panel--list">
@@ -97,7 +97,7 @@ export default function Header() {
 
       <div data-lenis-prevent className={`drawer ${open ? 'is-open' : ''}`} aria-hidden={!open}>
         {[
-          ['Início', '/#topo'], ['Produtos', '/#produtos'], ['Missão e valores', '/#valores'],
+          ['Início', '/#inicio'], ['Produtos', '/#produtos'], ['Missão e valores', '/#valores'],
           ['Agentes', '/#agentes'], ['Como trabalhamos', '/#suporte'], ['Blog', '/blog'], ['Contato', '/#contato'],
         ].map(([t, h]) => <a key={t} href={h} onClick={close}>{t}</a>)}
         <div className="drawer__auth">

@@ -89,7 +89,7 @@ export default function Hero() {
 
 
   return (
-    <section className="hero" id="topo" ref={root}>
+    <section className="hero" id="inicio" ref={root}>
       <div className="hero__stage"
         onMouseEnter={() => { paused.current = true }} onMouseLeave={() => { paused.current = false }}>
         <div className="hero__media">
