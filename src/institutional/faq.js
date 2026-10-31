@@ -5,11 +5,7 @@ import { SITE } from './siteConfig.js'
 export const FAQ = [
   {
     q: 'O que é o Lemify?',
-    a: 'O Lemify é uma plataforma brasileira de atendimento e CRM com inteligência artificial, da Lemify Tecnologia Ltda. Ele reúne os canais de conversa (WhatsApp, Instagram, Facebook Messenger e e-mail) numa caixa só e conta com agentes de IA que respondem os clientes na hora e trabalham lado a lado com a equipe.',
-  },
-  {
-    q: 'Para quem o Lemify é indicado?',
-    a: 'Para pequenas e médias empresas que vendem e atendem por conversa: varejo, clínicas, restaurantes, imobiliárias, beleza e estética, atacado, móveis e decoração e serviços.',
+    a: 'O Lemify é uma plataforma brasileira de atendimento e CRM com inteligência artificial, da Lemify Tecnologia Ltda. Ele reúne os canais de conversa (WhatsApp, Instagram, Facebook Messenger e e-mail) numa caixa só e conta com agentes de IA que respondem os clientes na hora e trabalham lado a lado com a equipe. É indicado para pequenas e médias empresas que vendem e atendem por conversa: varejo, clínicas, restaurantes, imobiliárias, beleza e estética, atacado, móveis e decoração e serviços.',
   },
   {
     q: 'Quais são os agentes de IA do Lemify?',
@@ -34,13 +30,5 @@ export const FAQ = [
   {
     q: 'O Lemify trata os dados conforme a LGPD?',
     a: 'Segurança e LGPD são um dos valores do Lemify desde a primeira conversa. Os detalhes estão na Política de Privacidade (lemify.com.br/privacidade) e na página Segurança e LGPD (lemify.com.br/lgpd).',
-  },
-  {
-    q: 'Existe uma versão do Lemify para restaurantes e clínicas?',
-    a: 'O LemiFood (restaurantes, lanchonetes e delivery) e o LemiClinic (clínicas médicas, odontológicas e consultórios) estão em desenvolvimento. Até o lançamento, dá para começar pelo Lemify e receber uma oferta para migrar.',
-  },
-  {
-    q: 'Como falo com o time do Lemify?',
-    a: `Pelo e-mail ${SITE.email} ou pelo WhatsApp (11) 4863-5054 (${SITE.whatsappUrl}).`,
   },
 ]
