@@ -16,6 +16,11 @@ export function initPostHog() {
       const { default: posthog } = await import('posthog-js')
       posthog.init(KEY, {
         api_host: HOST,
+        // Mesma identidade do visitante em lemify.com.br e app.lemify.com.br: o cookie fica no domínio
+        // principal (.lemify.com.br) e o app, com a mesma chave, o reaproveita. Assim o funil
+        // site -> cadastro -> login aparece como uma pessoa só.
+        persistence: 'localStorage+cookie',
+        cross_subdomain_cookie: true,
         autocapture: true, // cliques e interações (heatmaps)
         capture_pageview: true, // cada página do site é um carregamento completo
         capture_pageleave: true,
