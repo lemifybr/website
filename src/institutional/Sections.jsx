@@ -66,6 +66,8 @@ const PRODUCTS = [
     d: 'Para empresas que vendem e atendem por conversa, com todos os canais numa caixa só e agentes de IA trabalhando junto com a equipe.', cta: 'Conhecer o Lemify', href: SITE.productPage },
 ]
 
+const SEGMENTS = ['Varejo', 'Clínicas', 'Restaurantes', 'Imobiliárias', 'Beleza e estética', 'Atacado', 'Móveis e decoração', 'Serviços']
+
 /** Produtos: leque de cartões. O ativo se expande (clique, foco ou rodízio automático) e os outros ficam estreitos e escurecidos. */
 export function Products() {
   const [on, setOn] = useState(0)
@@ -80,9 +82,11 @@ export function Products() {
     <section className="products" id="produtos" aria-labelledby="produtos-titulo">
       <div className="wrap">
         <div className="head">
-          <span className="eyebrow" data-reveal>Produtos</span>
-          <Words as="h2" id="produtos-titulo" className="h2" text="Uma solução com IA para o seu negócio" />
-          <p className="head__p" data-reveal>Atendimento, CRM e agentes de IA numa plataforma só.</p>
+          <span className="eyebrow" data-reveal>Segmentos</span>
+          <Words as="h2" id="produtos-titulo" className="h2" text="Uma solução com IA para cada tipo de negócio" />
+          <ul className="segs" data-reveal aria-label="Segmentos atendidos">
+            {SEGMENTS.map((s) => <li key={s}>{s}</li>)}
+          </ul>
         </div>
 
         <div className="pfan" data-reveal onMouseEnter={() => { hover.current = true }} onMouseLeave={() => { hover.current = false }}>
