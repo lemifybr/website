@@ -29,6 +29,13 @@ import icImobiliarias from './assets/segments/imobiliarias.png'
 import icBeleza from './assets/segments/beleza.png'
 import icAtacado from './assets/segments/atacado.png'
 import icServicos from './assets/segments/servicos.png'
+import phVarejo from './assets/segments/photos/varejo.jpg'
+import phClinicas from './assets/segments/photos/clinicas.jpg'
+import phRestaurantes from './assets/segments/photos/restaurantes.jpg'
+import phImobiliarias from './assets/segments/photos/imobiliarias.jpg'
+import phBeleza from './assets/segments/photos/beleza.jpg'
+import phAtacado from './assets/segments/photos/atacado.jpg'
+import phServicos from './assets/segments/photos/servicos.jpg'
 
 /* ───────────── Integrações: carrossel de logos ───────────── */
 const INTEGRATIONS = [
@@ -67,6 +74,8 @@ export function Integrations() {
 
 /* ───────────── Segmentos: abas com painel (imagem + texto) ───────────── */
 const ICONS = { varejo: icVarejo, clinicas: icClinicas, restaurantes: icRestaurantes, imobiliarias: icImobiliarias, beleza: icBeleza, atacado: icAtacado, servicos: icServicos }
+
+const PHOTOS = { varejo: phVarejo, clinicas: phClinicas, restaurantes: phRestaurantes, imobiliarias: phImobiliarias, beleza: phBeleza, atacado: phAtacado, servicos: phServicos }
 
 const SEGMENTS = [
   { n: 'Varejo', ic: 'varejo', c: '#f6e3a1', t: 'Responda na hora e feche mais vendas', d: 'A IA responde dúvidas de estoque, preço e entrega e leva o cliente até a compra, mesmo quando a loja está cheia ou fechada.', q: 'Oi! Tem esse tênis no 39?', a: 'Tem sim! Separo um para você retirar hoje ou prefere receber em casa?' },
@@ -109,7 +118,7 @@ export function Products() {
 
           <div className="segtabs__panel" id="seg-panel" role="tabpanel" aria-labelledby={`seg-tab-${on}`} key={on}>
             <div className="segtabs__media" style={{ '--c': s.c }}>
-              <img className="segtabs__ic" src={ICONS[s.ic]} alt="" />
+              <img className="segtabs__photo" src={PHOTOS[s.ic]} alt="" />
               <div className="segtabs__chat segtabs__chat--in"><small>Cliente</small><p>{s.q}</p></div>
               <div className="segtabs__chat segtabs__chat--out"><small>Resposta da IA</small><p>{s.a}</p></div>
             </div>
