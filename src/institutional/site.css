@@ -38,13 +38,11 @@ html.lenis:has(.inst) { scroll-behavior: auto !important; }
 .products .head .head__p { margin-inline: auto; max-width: 560px; }
 /* Segmentos: barra de abas + painel com imagem e texto. */
 .inst .segtabs { margin-top: 40px; }
-.inst .segtabs__bar { display: flex; border-radius: 24px; background: #ece9df; overflow-x: auto; scrollbar-width: none; }
+.inst .segtabs__bar { display: flex; gap: 4px; width: fit-content; max-width: 100%; margin-inline: auto; padding: 6px; border-radius: 999px; background: #fff; box-shadow: inset 0 0 0 1px rgba(28, 64, 59, 0.12); overflow-x: auto; scrollbar-width: none; }
 .inst .segtabs__bar::-webkit-scrollbar { display: none; }
-.inst .segtabs__bar button { flex: 1 0 auto; position: relative; padding: 26px 24px; border: 0; background: none; font: inherit; font-size: 18px; font-weight: 600; letter-spacing: -0.01em; color: var(--brand); cursor: pointer; white-space: nowrap; transition: opacity 0.25s; opacity: 0.75; }
-.inst .segtabs__bar button:hover { opacity: 1; }
-.inst .segtabs__bar button::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: var(--brand); transform: scaleX(0); transition: transform 0.35s var(--ease); }
-.inst .segtabs__bar button.is-on { opacity: 1; }
-.inst .segtabs__bar button.is-on::after { transform: scaleX(1); }
+.inst .segtabs__bar button { flex: 0 0 auto; padding: 11px 20px; border: 0; border-radius: 999px; background: none; font: inherit; font-size: 15px; font-weight: 600; color: var(--brand); cursor: pointer; white-space: nowrap; transition: background 0.3s var(--ease), color 0.3s var(--ease); }
+.inst .segtabs__bar button:hover:not(.is-on) { background: rgba(28, 64, 59, 0.07); }
+.inst .segtabs__bar button.is-on { background: var(--brand); color: #fff; }
 .inst .segtabs__panel { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(32px, 6vw, 80px); align-items: center; margin-top: 40px; animation: segIn 0.5s var(--ease); }
 @keyframes segIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
 .inst .segtabs__media { position: relative; aspect-ratio: 1 / 1; max-height: 560px; width: 100%; border-radius: 32px; background: var(--c); overflow: hidden; display: grid; place-items: center; }
@@ -61,7 +59,7 @@ html.lenis:has(.inst) { scroll-behavior: auto !important; }
 .inst .segtabs__link:hover svg { transform: translateX(4px); }
 @media (max-width: 900px) {
   .inst .segtabs__panel { grid-template-columns: 1fr; gap: 28px; }
-  .inst .segtabs__bar button { padding: 20px 18px; font-size: 16px; }
+  .inst .segtabs__bar button { padding: 10px 16px; font-size: 14px; }
 }
 .inst .sp { font-size: 0; }
 .inst .head__p { margin-top: 18px; font-size: 19px; color: var(--muted); }
