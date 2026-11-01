@@ -22,6 +22,14 @@ import theo from './assets/theo.webp'
 import otto from './assets/otto.webp'
 import nico from './assets/nico.webp'
 import iris from './assets/iris.webp'
+import icVarejo from './assets/segments/varejo.png'
+import icClinicas from './assets/segments/clinicas.png'
+import icRestaurantes from './assets/segments/restaurantes.png'
+import icImobiliarias from './assets/segments/imobiliarias.png'
+import icBeleza from './assets/segments/beleza.png'
+import icAtacado from './assets/segments/atacado.png'
+import icMoveis from './assets/segments/moveis.png'
+import icServicos from './assets/segments/servicos.png'
 
 /* ───────────── Integrações: carrossel de logos ───────────── */
 const INTEGRATIONS = [
@@ -59,27 +67,18 @@ export function Integrations() {
 }
 
 /* ───────────── Segmentos: carrossel de cartões ───────────── */
-// Ícones de traço (64x64), um por tipo de negócio.
-const ICONS = {
-  varejo: <><path d="M12 22h40l-3 32H15z" /><path d="M22 22v-4a10 10 0 0 1 20 0v4" /></>,
-  clinicas: <path d="M26 10h12v16h16v12H38v16H26V38H10V26h16z" />,
-  restaurantes: <><path d="M16 8v12a6 6 0 0 0 12 0V8M22 8v48" /><path d="M46 56V8c-7 4-10 12-10 22h10" /></>,
-  imobiliarias: <><path d="M8 30 32 10l24 20" /><path d="M14 26v28h36V26" /><path d="M27 54V38h10v16" /></>,
-  beleza: <><path d="M30 8c2 13 7 18 20 20-13 2-18 7-20 20-2-13-7-18-20-20 13-2 18-7 20-20z" /><path d="M50 40c1 5 3 7 8 8-5 1-7 3-8 8-1-5-3-7-8-8 5-1 7-3 8-8z" /></>,
-  atacado: <><path d="M32 8 54 20v24L32 56 10 44V20z" /><path d="m10 20 22 12 22-12M32 32v24" /></>,
-  moveis: <><path d="M12 30v-6a6 6 0 0 1 6-6h28a6 6 0 0 1 6 6v6" /><path d="M6 34a5 5 0 0 1 10 0v6h32v-6a5 5 0 0 1 10 0v14H6z" /><path d="M14 48v6M50 48v6" /></>,
-  servicos: <path d="M44 10a12 12 0 0 0-11 16L10 49a5 5 0 0 0 7 7l23-23a12 12 0 0 0 16-11l-8 8-7-2-2-7z" />,
-}
+// Ícones do Icons8 (icons8.com), um por tipo de negócio.
+const ICONS = { varejo: icVarejo, clinicas: icClinicas, restaurantes: icRestaurantes, imobiliarias: icImobiliarias, beleza: icBeleza, atacado: icAtacado, moveis: icMoveis, servicos: icServicos }
 
 const SEGMENTS = [
-  { n: 'Varejo', ic: 'varejo', d: 'Responde dúvidas de estoque, preço e entrega e leva o cliente até a compra.', c: '#c9dbb8' },
-  { n: 'Clínicas', ic: 'clinicas', d: 'Agenda, confirma e remarca consultas sem a recepção parar para responder.', c: '#bcd8ff' },
-  { n: 'Restaurantes', ic: 'restaurantes', d: 'Atende pedidos e dúvidas de cardápio no horário de pico, sem fila.', c: '#d8fe6a' },
-  { n: 'Imobiliárias', ic: 'imobiliarias', d: 'Responde interessados, qualifica o contato e marca visitas.', c: '#ffcfa8' },
-  { n: 'Beleza e estética', ic: 'beleza', d: 'Preenche a agenda, lembra o cliente do horário e reativa quem sumiu.', c: '#dcc8ff' },
-  { n: 'Atacado', ic: 'atacado', d: 'Mantém cadastros, tabelas e pedidos recorrentes em dia.', c: '#ffc9d6' },
-  { n: 'Móveis e decoração', ic: 'moveis', d: 'Acompanha orçamentos longos e retoma o cliente na hora certa.', c: '#c9dbb8' },
-  { n: 'Serviços', ic: 'servicos', d: 'Cuida de orçamentos, ordens de serviço e agenda em minutos.', c: '#d8fe6a' },
+  { n: 'Varejo', ic: 'varejo', d: 'Responde dúvidas de estoque, preço e entrega e leva o cliente até a compra.' },
+  { n: 'Clínicas', ic: 'clinicas', d: 'Agenda, confirma e remarca consultas sem a recepção parar para responder.' },
+  { n: 'Restaurantes', ic: 'restaurantes', d: 'Atende pedidos e dúvidas de cardápio no horário de pico, sem fila.' },
+  { n: 'Imobiliárias', ic: 'imobiliarias', d: 'Responde interessados, qualifica o contato e marca visitas.' },
+  { n: 'Beleza e estética', ic: 'beleza', d: 'Preenche a agenda, lembra o cliente do horário e reativa quem sumiu.' },
+  { n: 'Atacado', ic: 'atacado', d: 'Mantém cadastros, tabelas e pedidos recorrentes em dia.' },
+  { n: 'Móveis e decoração', ic: 'moveis', d: 'Acompanha orçamentos longos e retoma o cliente na hora certa.' },
+  { n: 'Serviços', ic: 'servicos', d: 'Cuida de orçamentos, ordens de serviço e agenda em minutos.' },
 ]
 
 /** Segmentos atendidos: carrossel de cartões com rolagem por toque, setas e avanço automático (pausa com o mouse ou o foco). */
@@ -126,14 +125,15 @@ export function Products() {
         onFocus={() => { paused.current = true }} onBlur={() => { paused.current = false }}>
         <ul className="segs__track" ref={track} onScroll={sync} aria-label="Segmentos atendidos">
           {SEGMENTS.map((s, k) => (
-            <li className="seg" key={s.n} style={{ '--c': s.c }}>
+            <li className="seg" key={s.n}>
               <span className="seg__n">{String(k + 1).padStart(2, '0')}</span>
               <h3>{s.n}</h3>
               <p>{s.d}</p>
-              <span className="seg__ic" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">{ICONS[s.ic]}</svg></span>
+              <span className="seg__ic" aria-hidden="true"><img src={ICONS[s.ic]} alt="" loading="lazy" /></span>
             </li>
           ))}
         </ul>
+        <p className="segs__credit">Ícones: <a href="https://icons8.com" target="_blank" rel="noopener noreferrer">Icons8</a></p>
         <div className="segs__nav">
           <button type="button" onClick={() => step(-1)} disabled={edge.start} aria-label="Segmento anterior"><Arrow /></button>
           <button type="button" onClick={() => step(1)} disabled={edge.end} aria-label="Próximo segmento"><Arrow /></button>
@@ -190,12 +190,12 @@ export function Values() {
 
 /* ───────────── Agentes: painel sticky troca com o scroll ───────────── */
 const AGENTS = [
-  { n: 'Lemi', r: 'Agente principal', d: 'Atende na hora, em todos os canais.', img: lemi, alt: 'Lemi, mascote amarelo de moletom verde, acenando', c: '#d8fe6a' },
-  { n: 'Maia', r: 'Agendamento', d: 'Agenda, confirma e remarca compromissos.', img: maia, alt: 'Maia, mascote azul de laço lima, piscando', c: '#bcd8ff' },
-  { n: 'Theo', r: 'Vendas', d: 'Mantém o funil e as negociações em dia.', img: theo, alt: 'Theo, mascote verde-sálvia de gravata', c: '#c9dbb8' },
-  { n: 'Otto', r: 'Cadastro', d: 'Completa os dados de cada cliente.', img: otto, alt: 'Otto, mascote rosa com as mãos no rosto', c: '#ffc9d6' },
-  { n: 'Nico', r: 'Retorno', d: 'Retoma quem parou de responder.', img: nico, alt: 'Nico, mascote pêssego de jaqueta verde, sorrindo', c: '#ffcfa8' },
-  { n: 'Íris', r: 'Relatórios', d: 'Transforma conversas em informação para decidir.', img: iris, alt: 'Íris, mascote lilás de óculos, pensativa', c: '#dcc8ff' },
+  { n: 'Lemi', r: 'Agente principal', d: 'Atende na hora, em todos os canais.', img: lemi, alt: 'Lemi, mascote amarelo de moletom verde, acenando' },
+  { n: 'Maia', r: 'Agendamento', d: 'Agenda, confirma e remarca compromissos.', img: maia, alt: 'Maia, mascote azul de laço lima, piscando' },
+  { n: 'Theo', r: 'Vendas', d: 'Mantém o funil e as negociações em dia.', img: theo, alt: 'Theo, mascote verde-sálvia de gravata' },
+  { n: 'Otto', r: 'Cadastro', d: 'Completa os dados de cada cliente.', img: otto, alt: 'Otto, mascote rosa com as mãos no rosto' },
+  { n: 'Nico', r: 'Retorno', d: 'Retoma quem parou de responder.', img: nico, alt: 'Nico, mascote pêssego de jaqueta verde, sorrindo' },
+  { n: 'Íris', r: 'Relatórios', d: 'Transforma conversas em informação para decidir.', img: iris, alt: 'Íris, mascote lilás de óculos, pensativa' },
 ]
 
 export function Agents() {
