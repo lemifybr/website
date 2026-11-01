@@ -218,9 +218,6 @@ export function Support() {
           <span className="eyebrow" data-reveal>Nosso jeito de trabalhar</span>
           <Words as="h2" id="suporte-titulo" className="h2" text="Do primeiro dia em diante, a gente está junto." />
           <p className="head__p" data-reveal>Na implantação guiada, a gente acompanha cada etapa com você, e todo cliente conta com suporte de gente de verdade.</p>
-          <div data-reveal style={{ marginTop: 28 }}>
-            <Magnetic><a className="btn btn--dark" href="#contato">Fale com a gente <Arrow /></a></Magnetic>
-          </div>
         </div>
         <ol className="sstack">
           {STEPS.map((s, k) => (
