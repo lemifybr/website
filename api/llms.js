@@ -12,9 +12,6 @@ const BASE = `# Lemify
 ## Produtos
 
 - Lemify · Atendimento e CRM (disponível): para empresas que vendem e atendem por conversa, com todos os canais (WhatsApp, Instagram e outros) numa caixa só e agentes de IA trabalhando junto com a equipe. Cadastro: https://app.lemify.com.br/signup · Login: https://app.lemify.com.br/login
-- Lemi Food (em desenvolvimento): para restaurantes, lanchonetes e delivery.
-- Lemi Clinic (em desenvolvimento): para clínicas médicas, odontológicas e consultórios. Até o lançamento, dá para começar pelo Lemify.
-
 ## Agentes de IA do Lemify
 
 - Lemi: agente principal, atende na hora, em todos os canais.

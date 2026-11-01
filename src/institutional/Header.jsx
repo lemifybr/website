@@ -3,8 +3,6 @@ import { Magnetic } from './motion.jsx'
 import { SITE } from './siteConfig.js'
 import logo from './assets/logo-dark.svg'
 import retail from './assets/retail.jpg'
-import food from './assets/food.jpg'
-import clinic from './assets/clinic.jpg'
 
 const Arrow = () => (
   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -20,8 +18,6 @@ const COMPANY = [
 
 const PRODUCTS = [
   ['Lemify', 'Atendimento e CRM', 'Para empresas que vendem e atendem por conversa.', 'Disponível', retail, SITE.productPage],
-  ['LemiFood', '', 'Para restaurantes, lanchonetes e delivery.', 'Em desenvolvimento', food, '/#contato'],
-  ['LemiClinic', '', 'Para clínicas médicas, odontológicas e consultórios.', 'Em desenvolvimento', clinic, '/#contato'],
 ]
 
 export default function Header() {

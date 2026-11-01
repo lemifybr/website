@@ -17,8 +17,6 @@ import intIfood from './assets/integrations/ifood.svg'
 import { VALUES, STEPS, SITE } from './siteConfig.js'
 import { FAQ } from './faq.js'
 import retail from './assets/retail.jpg'
-import food from './assets/food.jpg'
-import clinic from './assets/clinic.jpg'
 import crew from './assets/crew.webp'
 import lemi from './assets/lemi.webp'
 import maia from './assets/maia.webp'
@@ -66,10 +64,6 @@ export function Integrations() {
 const PRODUCTS = [
   { id: 'lemify', status: '', ok: true, name: 'Lemify', sub: 'Atendimento e CRM', short: 'Atendimento, CRM e agentes de IA para quem vende.', mock: true, img: retail, alt: 'Atendente de loja finalizando uma venda pelo celular do cliente',
     d: 'Para empresas que vendem e atendem por conversa, com todos os canais numa caixa só e agentes de IA trabalhando junto com a equipe.', cta: 'Conhecer o Lemify', href: SITE.productPage },
-  { id: 'food', status: '', sub: 'Restaurantes e delivery', short: 'Para restaurantes, lanchonetes e delivery.', name: 'LemiFood', words: ['Lemi', 'Food'], img: food, alt: 'Balcão de restaurante com sistema de pedidos',
-    d: 'Para restaurantes, lanchonetes e delivery.', cta: 'Conhecer', href: '#contato' },
-  { id: 'clinic', status: '', sub: 'Clínicas e consultórios', short: 'Para clínicas médicas e consultórios.', name: 'LemiClinic', words: ['Lemi', 'Clinic'], img: clinic, alt: 'Profissionais de saúde conferindo uma ficha na recepção da clínica',
-    d: 'Para clínicas médicas, odontológicas e consultórios. Até o lançamento, dá para começar pelo Lemify e receber uma oferta para migrar.', cta: 'Conhecer', href: '#contato' },
 ]
 
 /** Produtos: leque de cartões. O ativo se expande (clique, foco ou rodízio automático) e os outros ficam estreitos e escurecidos. */
@@ -87,8 +81,8 @@ export function Products() {
       <div className="wrap">
         <div className="head">
           <span className="eyebrow" data-reveal>Produtos</span>
-          <Words as="h2" id="produtos-titulo" className="h2" text="Uma solução com IA para cada tipo de negócio" />
-          <p className="head__p" data-reveal>Cada produto é pensado para a rotina de um segmento.</p>
+          <Words as="h2" id="produtos-titulo" className="h2" text="Uma solução com IA para o seu negócio" />
+          <p className="head__p" data-reveal>Atendimento, CRM e agentes de IA numa plataforma só.</p>
         </div>
 
         <div className="pfan" data-reveal onMouseEnter={() => { hover.current = true }} onMouseLeave={() => { hover.current = false }}>

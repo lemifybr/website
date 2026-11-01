@@ -44,8 +44,6 @@ export default function Footer() {
         <nav aria-label="Produtos">
           <h4>Produtos</h4>
           <a href={SITE.productPage}>Lemify · Atendimento e CRM</a>
-          <a href="/#produtos">LemiFood · em desenvolvimento</a>
-          <a href="/#produtos">LemiClinic · em desenvolvimento</a>
         </nav>
         <nav aria-label="Legal">
           <h4>Legal</h4>

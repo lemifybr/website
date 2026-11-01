@@ -32,8 +32,6 @@
 .inst .pfan__cap p { font-size: 14px; line-height: 1.45; color: var(--muted); }
 .pfan__bar { position: absolute; z-index: 3; left: 16px; right: 16px; bottom: 16px; padding: 14px 18px; border-radius: 999px; text-align: center; font-size: 16px; font-weight: 600; letter-spacing: -0.01em; color: var(--brand); background: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transition: opacity 0.4s, transform 0.6s var(--ease); }
 .pfan__w { font-weight: inherit; }
-.pfan__w--food { color: #8a5a34; }
-.pfan__w--clinic { color: #6fb4f2; }
 .pfan__item.is-on .pfan__bar { opacity: 0; transform: translateY(10px); pointer-events: none; }
 .pfan__link { display: inline-flex; margin-top: 2px; align-items: center; gap: 8px; margin-top: 4px; font-weight: 600; color: var(--brand); border-bottom: 1.5px solid currentColor; padding-bottom: 2px; }
 .pfan__link svg { transition: transform 0.3s var(--ease); }
@@ -60,10 +58,6 @@
 /* Evita a linha fina escura no canto: o fundo do cartão aberto tem a mesma cor do recorte (sem sobra de verde na borda suavizada). */
 .pfan__item.is-on .pfan__card { background: var(--cream); }
 .pfan__cap { border-bottom-right-radius: 36px; }
-
-/* Etiqueta da solução: cada produto usa a cor do seu nome (marrom no LemiFood, azul no LemiClinic). */
-.inst .pfan__cap .pfan__tag--food { background: #8a5a34; color: #fff; }
-.inst .pfan__cap .pfan__tag--clinic { background: #6fb4f2; color: var(--brand); }
 
 /* Descrição simples acima; o nome do produto fica dentro da etiqueta. */
 .inst .pfan__cap .pfan__desc { font-size: 17px; line-height: 1.45; font-weight: 500; color: var(--muted); margin: 0; }

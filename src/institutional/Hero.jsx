@@ -2,14 +2,10 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { gsap, ScrollTrigger, canHover, prefersReducedMotion, Magnetic, Words } from './motion.jsx'
 import { Arrow } from './Header.jsx'
 import retail from './assets/retail.jpg'
-import clinic from './assets/clinic.jpg'
-import food from './assets/food.jpg'
 import office from './assets/office.jpg'
 
 const SCENES = [
   { tab: 'Varejo', h: 'Nosso agente de IA responde seus clientes no WhatsApp e fecha a venda com você.', img: retail, alt: 'Atendente de loja finalizando uma venda', q: 'Oi! Tem esse tênis no 39?', a: 'Tem sim! Separo um para você retirar hoje ou prefere receber em casa?', ok: 'Pedido encaminhado para a equipe' },
-  { tab: 'Clínicas', h: 'Agenda, prontuário e confirmações sem trabalho manual.', img: clinic, alt: 'Recepção de clínica', q: 'Queria marcar uma limpeza essa semana.', a: 'Tenho quinta às 10h ou sexta às 16h. Qual fica melhor para você?', ok: 'Consulta confirmada na agenda' },
-  { tab: 'Restaurantes', h: 'Pedidos, cozinha e entregas conectados, sem fila e sem erro.', img: food, alt: 'Balcão de restaurante', q: 'Vocês entregam no Centro?', a: 'Entregamos sim, em até 40 minutos. Quer ver o cardápio de hoje?', ok: 'Pedido anotado e enviado para a cozinha' },
   { tab: 'Serviços', h: 'Orçamentos, ordens de serviço e agenda em minutos.', img: office, alt: 'Equipe conversando em um escritório', q: 'Preciso de um orçamento de manutenção.', a: 'Claro! Me passa o endereço e o melhor horário que eu já te envio o orçamento.', ok: 'Orçamento criado no CRM' },
 ]
 
