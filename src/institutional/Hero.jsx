@@ -2,11 +2,9 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { gsap, ScrollTrigger, canHover, prefersReducedMotion, Magnetic, Words } from './motion.jsx'
 import { Arrow } from './Header.jsx'
 import retail from './assets/retail.jpg'
-import office from './assets/office.jpg'
 
 const SCENES = [
   { tab: 'Varejo', h: 'A IA responde seus clientes no WhatsApp enquanto você cuida do seu negócio.', img: retail, alt: 'Mulher de camisa verde-clara trabalhando no notebook ao ar livre', q: 'Oi! Tem esse tênis no 39?', a: 'Tem sim! Separo um para você retirar hoje ou prefere receber em casa?', ok: 'Pedido encaminhado para a equipe' },
-  { tab: 'Serviços', h: 'Orçamentos, ordens de serviço e agenda em minutos.', img: office, alt: 'Profissional de suéter verde em um escritório colorido', q: 'Preciso de um orçamento de manutenção.', a: 'Claro! Me passa o endereço e o melhor horário que eu já te envio o orçamento.', ok: 'Orçamento criado no CRM' },
 ]
 
 export default function Hero() {
@@ -98,7 +96,7 @@ export default function Hero() {
 
 
         <div className="hero__copy">
-          <div className="hero__tabs" role="tablist" aria-label="Segmentos" ref={tabsRef}>
+          <div className="hero__tabs" hidden={SCENES.length < 2} role="tablist" aria-label="Segmentos" ref={tabsRef}>
             {pill && <span className="hero__pill" aria-hidden="true" style={{ transform: `translate(${pill.x}px, ${pill.y}px)`, width: pill.w, height: pill.h }} />}
           {SCENES.map((x, k) => (
             <button key={x.tab} role="tab" aria-selected={k === i} className={k === i ? 'is-on' : ''} onClick={() => { interacted.current = true; setI(k) }}>{x.tab}</button>

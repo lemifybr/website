@@ -51,3 +51,4 @@
   .hero__tabs button { font-size: 13px; padding: 8px 13px; }
   .inst .hero__cta .btn--sm { padding: 13px 22px; }
 }
+.hero__tabs[hidden] { display: none; }
