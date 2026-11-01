@@ -5,7 +5,7 @@ import retail from './assets/retail.jpg'
 import office from './assets/office.jpg'
 
 const SCENES = [
-  { tab: 'Varejo', h: 'Pare de perder venda por demorar a responder no WhatsApp.', img: retail, alt: 'Mulher de camisa verde-clara trabalhando no notebook ao ar livre', q: 'Oi! Tem esse tênis no 39?', a: 'Tem sim! Separo um para você retirar hoje ou prefere receber em casa?', ok: 'Pedido encaminhado para a equipe' },
+  { tab: 'Varejo', h: 'A IA responde seus clientes no WhatsApp enquanto você cuida do seu negócio.', img: retail, alt: 'Mulher de camisa verde-clara trabalhando no notebook ao ar livre', q: 'Oi! Tem esse tênis no 39?', a: 'Tem sim! Separo um para você retirar hoje ou prefere receber em casa?', ok: 'Pedido encaminhado para a equipe' },
   { tab: 'Serviços', h: 'Orçamentos, ordens de serviço e agenda em minutos.', img: office, alt: 'Profissional de suéter verde em um escritório colorido', q: 'Preciso de um orçamento de manutenção.', a: 'Claro! Me passa o endereço e o melhor horário que eu já te envio o orçamento.', ok: 'Orçamento criado no CRM' },
 ]
 
@@ -109,7 +109,7 @@ export default function Hero() {
           </h1>
           <div className="hero__row">
             <p className="hero__lead">
-              O Lemify responde seus clientes na hora, em qualquer canal, e deixa o atendimento em ordem para você focar no que importa: vender.
+              Atenda na hora, em qualquer canal, sem perder nenhuma venda e sem precisar de uma equipe grande.
             </p>
             <div className="hero__cta">
               <Magnetic><a className="btn btn--lime btn--sm" href="#produtos">Conheça nossas soluções <Arrow /></a></Magnetic>
