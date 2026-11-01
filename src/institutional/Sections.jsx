@@ -65,48 +65,31 @@ export function Integrations() {
   )
 }
 
-/* ───────────── Segmentos: carrossel de cartões ───────────── */
-// Ícones do Icons8, um por tipo de negócio.
+/* ───────────── Segmentos: abas com painel (imagem + texto) ───────────── */
 const ICONS = { varejo: icVarejo, clinicas: icClinicas, restaurantes: icRestaurantes, imobiliarias: icImobiliarias, beleza: icBeleza, atacado: icAtacado, servicos: icServicos }
 
 const SEGMENTS = [
-  { n: 'Varejo', ic: 'varejo', d: 'Responde dúvidas de estoque, preço e entrega e leva o cliente até a compra.', c: '#f6e3a1' },
-  { n: 'Clínicas', ic: 'clinicas', d: 'Agenda, confirma e remarca consultas sem a recepção parar para responder.', c: '#9fd8e6' },
-  { n: 'Restaurantes', ic: 'restaurantes', d: 'Atende pedidos e dúvidas de cardápio no horário de pico, sem fila.', c: '#f2a98e' },
-  { n: 'Imobiliárias', ic: 'imobiliarias', d: 'Responde interessados, qualifica o contato e marca visitas.', c: '#e6d8b8' },
-  { n: 'Beleza e estética', ic: 'beleza', d: 'Preenche a agenda, lembra o cliente do horário e reativa quem sumiu.', c: '#f3cf6e' },
-  { n: 'Atacado', ic: 'atacado', d: 'Mantém cadastros, tabelas e pedidos recorrentes em dia.', c: '#b8e6dc' },
-  { n: 'Serviços', ic: 'servicos', d: 'Cuida de orçamentos, ordens de serviço e agenda em minutos.', c: '#c5d0d8' },
+  { n: 'Varejo', ic: 'varejo', c: '#f6e3a1', t: 'Responda na hora e feche mais vendas', d: 'A IA responde dúvidas de estoque, preço e entrega e leva o cliente até a compra, mesmo quando a loja está cheia ou fechada.', q: 'Oi! Tem esse tênis no 39?', a: 'Tem sim! Separo um para você retirar hoje ou prefere receber em casa?' },
+  { n: 'Clínicas', ic: 'clinicas', c: '#9fd8e6', t: 'Agenda cheia sem a recepção parar', d: 'A IA agenda, confirma e remarca consultas pelo WhatsApp, e a sua equipe cuida de quem está na sala de espera.', q: 'Queria marcar uma limpeza essa semana.', a: 'Tenho quinta às 10h ou sexta às 16h. Qual fica melhor para você?' },
+  { n: 'Restaurantes', ic: 'restaurantes', c: '#f2a98e', t: 'Pedidos e dúvidas sem fila, no horário de pico', d: 'A IA atende dúvidas de cardápio, anota pedidos e avisa a cozinha, enquanto você cuida do balcão e das entregas.', q: 'Vocês entregam no Centro?', a: 'Entregamos sim, em até 40 minutos. Quer ver o cardápio de hoje?' },
+  { n: 'Imobiliárias', ic: 'imobiliarias', c: '#e6d8b8', t: 'Cada interessado atendido, cada visita marcada', d: 'A IA responde quem pergunta sobre um imóvel, entende o que a pessoa procura e marca a visita na sua agenda.', q: 'O apartamento de 2 quartos ainda está disponível?', a: 'Está sim! Posso marcar uma visita para amanhã às 15h?' },
+  { n: 'Beleza e estética', ic: 'beleza', c: '#f3cf6e', t: 'Agenda preenchida e clientes de volta', d: 'A IA preenche os horários, lembra o cliente do atendimento e chama de volta quem sumiu.', q: 'Tem horário para escova no sábado?', a: 'Tenho às 10h e às 14h. Qual você prefere?' },
+  { n: 'Atacado', ic: 'atacado', c: '#b8e6dc', t: 'Pedidos recorrentes sem planilha', d: 'A IA mantém cadastros e tabelas em dia e repete pedidos de clientes antigos em poucas mensagens.', q: 'Quero repetir o pedido da semana passada.', a: 'Claro! Mesmos itens e quantidades. Confirmo para entrega na sexta?' },
+  { n: 'Serviços', ic: 'servicos', c: '#c5d0d8', t: 'Orçamentos e agenda em minutos', d: 'A IA recebe o pedido, pede as informações que faltam e já deixa o orçamento e a visita encaminhados.', q: 'Preciso de um orçamento de manutenção.', a: 'Claro! Me passa o endereço e o melhor horário que já te envio o orçamento.' },
 ]
 
-/** Segmentos atendidos: carrossel de cartões com rolagem por toque, setas e avanço automático (pausa com o mouse ou o foco). */
+/** Segmentos atendidos: abas no topo e, abaixo, imagem com exemplo de conversa ao lado do texto do segmento. */
 export function Products() {
-  const track = useRef(null)
-  const paused = useRef(false)
-  const [edge, setEdge] = useState({ start: true, end: false })
+  const [on, setOn] = useState(0)
+  const s = SEGMENTS[on]
 
-  const sync = () => {
-    const t = track.current
-    if (t) setEdge({ start: t.scrollLeft < 8, end: t.scrollLeft + t.clientWidth >= t.scrollWidth - 8 })
+  const onKey = (e) => {
+    if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return
+    e.preventDefault()
+    const next = (on + (e.key === 'ArrowRight' ? 1 : SEGMENTS.length - 1)) % SEGMENTS.length
+    setOn(next)
+    document.getElementById(`seg-tab-${next}`)?.focus()
   }
-  const step = (dir) => {
-    const t = track.current
-    const card = t?.querySelector('.seg')
-    if (!card) return
-    t.scrollBy({ left: dir * (card.offsetWidth + 20), behavior: prefersReducedMotion() ? 'auto' : 'smooth' })
-  }
-
-  useEffect(() => {
-    sync()
-    const t = track.current
-    const id = setInterval(() => {
-      if (paused.current || prefersReducedMotion() || !t) return
-      if (t.scrollLeft + t.clientWidth >= t.scrollWidth - 8) t.scrollTo({ left: 0, behavior: 'smooth' })
-      else step(1)
-    }, 4500)
-    window.addEventListener('resize', sync)
-    return () => { clearInterval(id); window.removeEventListener('resize', sync) }
-  }, [])
 
   return (
     <section className="products" id="produtos" aria-labelledby="produtos-titulo">
@@ -114,32 +97,33 @@ export function Products() {
         <div className="head">
           <span className="eyebrow" data-reveal>Segmentos</span>
           <Words as="h2" id="produtos-titulo" className="h2" text="Uma solução com IA para cada tipo de negócio" />
-          <p className="head__p" data-reveal>Cada segmento tem uma rotina. Os agentes se adaptam à sua.</p>
         </div>
-      </div>
 
-      <div className="segs" data-reveal
-        onMouseEnter={() => { paused.current = true }} onMouseLeave={() => { paused.current = false }}
-        onFocus={() => { paused.current = true }} onBlur={() => { paused.current = false }}>
-        <ul className="segs__track" ref={track} onScroll={sync} aria-label="Segmentos atendidos">
-          {SEGMENTS.map((s, k) => (
-            <li className="seg" key={s.n} style={{ '--c': s.c }}>
-              <span className="seg__n">{String(k + 1).padStart(2, '0')}</span>
-              <h3>{s.n}</h3>
+        <div className="segtabs" data-reveal>
+          <div className="segtabs__bar" role="tablist" aria-label="Segmentos atendidos" onKeyDown={onKey}>
+            {SEGMENTS.map((x, k) => (
+              <button key={x.n} id={`seg-tab-${k}`} type="button" role="tab" aria-selected={k === on} aria-controls="seg-panel" tabIndex={k === on ? 0 : -1}
+                className={k === on ? 'is-on' : ''} onClick={() => setOn(k)}>{x.n}</button>
+            ))}
+          </div>
+
+          <div className="segtabs__panel" id="seg-panel" role="tabpanel" aria-labelledby={`seg-tab-${on}`} key={on}>
+            <div className="segtabs__media" style={{ '--c': s.c }}>
+              <img className="segtabs__ic" src={ICONS[s.ic]} alt="" />
+              <div className="segtabs__chat segtabs__chat--in"><small>Cliente</small><p>{s.q}</p></div>
+              <div className="segtabs__chat segtabs__chat--out"><small>Resposta da IA</small><p>{s.a}</p></div>
+            </div>
+            <div className="segtabs__text">
+              <h3>{s.t}</h3>
               <p>{s.d}</p>
-              <span className="seg__ic" aria-hidden="true"><img src={ICONS[s.ic]} alt="" loading="lazy" /></span>
-            </li>
-          ))}
-        </ul>
-        <div className="segs__nav">
-          <button type="button" onClick={() => step(-1)} disabled={edge.start} aria-label="Segmento anterior"><Arrow /></button>
-          <button type="button" onClick={() => step(1)} disabled={edge.end} aria-label="Próximo segmento"><Arrow /></button>
+              <a className="segtabs__link" href={SITE.signup}>Testar grátis <Arrow /></a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
   )
 }
-
 
 /* ───────────── Agentes: painel sticky troca com o scroll ───────────── */
 const AGENTS = [
