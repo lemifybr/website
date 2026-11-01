@@ -62,7 +62,7 @@ export function Integrations() {
 
 /* ───────────── Produtos: cartões sticky empilhados ───────────── */
 const PRODUCTS = [
-  { id: 'lemify', status: '', ok: true, name: 'Lemify', sub: 'Atendimento e CRM', short: 'Atendimento, CRM e agentes de IA para quem vende.', mock: true, img: retail, alt: 'Atendente de loja finalizando uma venda pelo celular do cliente',
+  { id: 'lemify', status: '', ok: true, name: 'Lemify', sub: 'Atendimento e CRM', short: 'Atendimento, CRM e agentes de IA para quem vende.', mock: true, img: retail, alt: 'Mulher de blazer verde sorrindo em uma área de loja',
     d: 'Para empresas que vendem e atendem por conversa, com todos os canais numa caixa só e agentes de IA trabalhando junto com a equipe.', cta: 'Conhecer o Lemify', href: SITE.productPage },
 ]
 
