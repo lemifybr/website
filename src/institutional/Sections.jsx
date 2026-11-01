@@ -103,7 +103,7 @@ export function Products() {
           <div className="segtabs__bar" role="tablist" aria-label="Segmentos atendidos" onKeyDown={onKey}>
             {SEGMENTS.map((x, k) => (
               <button key={x.n} id={`seg-tab-${k}`} type="button" role="tab" aria-selected={k === on} aria-controls="seg-panel" tabIndex={k === on ? 0 : -1}
-                className={k === on ? 'is-on' : ''} onClick={() => setOn(k)}>{x.n}</button>
+                className={k === on ? 'is-on' : ''} onClick={() => setOn(k)}><img src={ICONS[x.ic]} alt="" />{x.n}</button>
             ))}
           </div>
 
