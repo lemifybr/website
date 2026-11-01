@@ -4,7 +4,7 @@ import './site.css'
 import { Cursor, useScrollMotion, useSmoothScroll, ScrollTrigger } from './motion.jsx'
 import Header from './Header.jsx'
 import Hero from './Hero.jsx'
-import { Integrations, Products, Values, Agents, Support, Faq, Contact } from './Sections.jsx'
+import { Integrations, Products, Agents, Support, Faq, Contact } from './Sections.jsx'
 import Footer from './Footer.jsx'
 import LatestPosts from '../blog/LatestPosts.jsx'
 
@@ -27,7 +27,6 @@ export default function Site() {
         <Hero />
         <Integrations />
         <Products />
-        <Values />
         <Agents />
         <Support />
         <LatestPosts />

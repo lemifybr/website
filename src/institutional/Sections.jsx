@@ -13,7 +13,7 @@ import intMeta from './assets/integrations/meta.svg'
 import intGoogle from './assets/integrations/google.svg'
 import intTiktok from './assets/integrations/tiktok.svg'
 import intIfood from './assets/integrations/ifood.svg'
-import { VALUES, STEPS, SITE } from './siteConfig.js'
+import { STEPS, SITE } from './siteConfig.js'
 import { FAQ } from './faq.js'
 import crew from './assets/crew.webp'
 import lemi from './assets/lemi.webp'
@@ -28,7 +28,6 @@ import icRestaurantes from './assets/segments/restaurantes.png'
 import icImobiliarias from './assets/segments/imobiliarias.png'
 import icBeleza from './assets/segments/beleza.png'
 import icAtacado from './assets/segments/atacado.png'
-import icMoveis from './assets/segments/moveis.png'
 import icServicos from './assets/segments/servicos.png'
 
 /* ───────────── Integrações: carrossel de logos ───────────── */
@@ -68,7 +67,7 @@ export function Integrations() {
 
 /* ───────────── Segmentos: carrossel de cartões ───────────── */
 // Ícones do Icons8, um por tipo de negócio.
-const ICONS = { varejo: icVarejo, clinicas: icClinicas, restaurantes: icRestaurantes, imobiliarias: icImobiliarias, beleza: icBeleza, atacado: icAtacado, moveis: icMoveis, servicos: icServicos }
+const ICONS = { varejo: icVarejo, clinicas: icClinicas, restaurantes: icRestaurantes, imobiliarias: icImobiliarias, beleza: icBeleza, atacado: icAtacado, servicos: icServicos }
 
 const SEGMENTS = [
   { n: 'Varejo', ic: 'varejo', d: 'Responde dúvidas de estoque, preço e entrega e leva o cliente até a compra.', c: '#f6e3a1' },
@@ -77,7 +76,6 @@ const SEGMENTS = [
   { n: 'Imobiliárias', ic: 'imobiliarias', d: 'Responde interessados, qualifica o contato e marca visitas.', c: '#e6d8b8' },
   { n: 'Beleza e estética', ic: 'beleza', d: 'Preenche a agenda, lembra o cliente do horário e reativa quem sumiu.', c: '#f3cf6e' },
   { n: 'Atacado', ic: 'atacado', d: 'Mantém cadastros, tabelas e pedidos recorrentes em dia.', c: '#b8e6dc' },
-  { n: 'Móveis e decoração', ic: 'moveis', d: 'Acompanha orçamentos longos e retoma o cliente na hora certa.', c: '#d9b99b' },
   { n: 'Serviços', ic: 'servicos', d: 'Cuida de orçamentos, ordens de serviço e agenda em minutos.', c: '#c5d0d8' },
 ]
 
@@ -142,50 +140,6 @@ export function Products() {
   )
 }
 
-
-/* ───────────── Valores: título parado + cartões empilhando na lateral ───────────── */
-export function Values() {
-  const root = useRef(null)
-  useEffect(() => {
-    if (prefersReducedMotion()) return
-    const ctx = gsap.context(() => {
-      const items = gsap.utils.toArray('.vitem')
-      items.forEach((item, k) => {
-        const next = items[k + 1]
-        if (!next) return
-        gsap.to(item.querySelector('.vitem__in'), {
-          scale: 0.92, opacity: 0.6, ease: 'none',
-          scrollTrigger: { trigger: next, start: 'top 85%', end: 'top 25%', scrub: true },
-        })
-      })
-    }, root)
-    return () => ctx.revert()
-  }, [])
-  return (
-    <section className="values" id="valores" ref={root} aria-labelledby="valores-titulo">
-      <div className="wrap values__grid">
-        <div className="values__side">
-          <span className="eyebrow" data-reveal>Visão e valores</span>
-          <Words as="h2" id="valores-titulo" className="h2" text="Queremos ser a família de softwares com IA de referência para os negócios brasileiros." />
-          <p data-reveal>Com uma solução pensada para a rotina de cada segmento, guiada por cinco valores.</p>
-        </div>
-        <div className="values__list">
-          {VALUES.map((v, k) => (
-            <div className="vitem" key={v.n} style={{ '--i': k }}>
-              <div className="vitem__in">
-                <Tilt className="vcard" max={5}>
-                  <span className="vcard__n">{v.n}</span>
-                  <h3>{v.t}</h3>
-                  <p>{v.d}</p>
-                </Tilt>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
 
 /* ───────────── Agentes: painel sticky troca com o scroll ───────────── */
 const AGENTS = [

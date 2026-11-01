@@ -35,7 +35,6 @@ export default function Footer() {
         </div>
         <nav aria-label="Lemify">
           <h4>Lemify</h4>
-          <a href="/#valores">Missão e valores</a>
           <a href="/docs">Documentação</a>
           <a href="/blog">Blog</a>
           <a href="/#agentes">Agentes</a>

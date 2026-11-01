@@ -23,7 +23,7 @@ const BASE = `# Lemify
 
 ## Para quem é
 
-Pequenas e médias empresas que vendem e atendem pelo WhatsApp, pelo Instagram e por outros canais de conversa: varejo, clínicas, restaurantes, imobiliárias, beleza e estética, atacado, móveis e decoração e serviços.
+Pequenas e médias empresas que vendem e atendem pelo WhatsApp, pelo Instagram e por outros canais de conversa: varejo, clínicas, restaurantes, imobiliárias, beleza e estética, atacado e serviços.
 
 ## Integrações
 

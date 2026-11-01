@@ -12,7 +12,6 @@ const Arrow = () => (
 export { Arrow }
 
 const COMPANY = [
-  ['Missão, visão e valores', 'O que nos move e como decidimos.', '/#valores'],
   ['Nosso jeito de trabalhar', 'Implantação, treinamento e suporte.', '/#suporte'],
 ]
 
@@ -93,7 +92,7 @@ export default function Header() {
 
       <div data-lenis-prevent className={`drawer ${open ? 'is-open' : ''}`} aria-hidden={!open}>
         {[
-          ['Início', '/#inicio'], ['Produtos', '/#produtos'], ['Missão e valores', '/#valores'],
+          ['Início', '/#inicio'], ['Produtos', '/#produtos'],
           ['Agentes', '/#agentes'], ['Como trabalhamos', '/#suporte'], ['Blog', '/blog'], ['Contato', '/#contato'],
         ].map(([t, h]) => <a key={t} href={h} onClick={close}>{t}</a>)}
         <div className="drawer__auth">

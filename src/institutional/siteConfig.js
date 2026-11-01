@@ -25,5 +25,4 @@ export const STEPS = [
   { k: 'Etapa 1', t: 'Implantação guiada', d: 'A gente configura junto com você, a partir de modelos prontos para o seu segmento.' },
   { k: 'Etapa 2', t: 'Treinamento da equipe', d: 'Todo mundo aprende a usar dentro da própria rotina, sem depender de manual.' },
   { k: 'Etapa 3', t: '30 dias de acompanhamento', d: 'Ajustes finos com a operação já rodando, até tudo estar redondo.' },
-  { k: 'Depois', t: 'Suporte de gente de verdade', d: 'Pelo WhatsApp e por um canal direto dentro da plataforma.' },
 ]

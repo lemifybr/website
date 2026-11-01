@@ -5,7 +5,7 @@ import { SITE } from './siteConfig.js'
 export const FAQ = [
   {
     q: 'O que é o Lemify?',
-    a: 'O Lemify é uma plataforma brasileira de atendimento e CRM com inteligência artificial, da Lemify Tecnologia Ltda. Ele reúne os canais de conversa (WhatsApp, Instagram, Facebook Messenger e e-mail) numa caixa só e conta com agentes de IA que respondem os clientes na hora e trabalham lado a lado com a equipe. É indicado para pequenas e médias empresas que vendem e atendem por conversa: varejo, clínicas, restaurantes, imobiliárias, beleza e estética, atacado, móveis e decoração e serviços.',
+    a: 'O Lemify é uma plataforma brasileira de atendimento e CRM com inteligência artificial, da Lemify Tecnologia Ltda. Ele reúne os canais de conversa (WhatsApp, Instagram, Facebook Messenger e e-mail) numa caixa só e conta com agentes de IA que respondem os clientes na hora e trabalham lado a lado com a equipe. É indicado para pequenas e médias empresas que vendem e atendem por conversa: varejo, clínicas, restaurantes, imobiliárias, beleza e estética, atacado e serviços.',
   },
   {
     q: 'Quais são os agentes de IA do Lemify?',
