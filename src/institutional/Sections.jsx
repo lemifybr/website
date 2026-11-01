@@ -67,18 +67,18 @@ export function Integrations() {
 }
 
 /* ───────────── Segmentos: carrossel de cartões ───────────── */
-// Ícones do Icons8 (icons8.com), um por tipo de negócio.
+// Ícones do Icons8, um por tipo de negócio.
 const ICONS = { varejo: icVarejo, clinicas: icClinicas, restaurantes: icRestaurantes, imobiliarias: icImobiliarias, beleza: icBeleza, atacado: icAtacado, moveis: icMoveis, servicos: icServicos }
 
 const SEGMENTS = [
-  { n: 'Varejo', ic: 'varejo', d: 'Responde dúvidas de estoque, preço e entrega e leva o cliente até a compra.' },
-  { n: 'Clínicas', ic: 'clinicas', d: 'Agenda, confirma e remarca consultas sem a recepção parar para responder.' },
-  { n: 'Restaurantes', ic: 'restaurantes', d: 'Atende pedidos e dúvidas de cardápio no horário de pico, sem fila.' },
-  { n: 'Imobiliárias', ic: 'imobiliarias', d: 'Responde interessados, qualifica o contato e marca visitas.' },
-  { n: 'Beleza e estética', ic: 'beleza', d: 'Preenche a agenda, lembra o cliente do horário e reativa quem sumiu.' },
-  { n: 'Atacado', ic: 'atacado', d: 'Mantém cadastros, tabelas e pedidos recorrentes em dia.' },
-  { n: 'Móveis e decoração', ic: 'moveis', d: 'Acompanha orçamentos longos e retoma o cliente na hora certa.' },
-  { n: 'Serviços', ic: 'servicos', d: 'Cuida de orçamentos, ordens de serviço e agenda em minutos.' },
+  { n: 'Varejo', ic: 'varejo', d: 'Responde dúvidas de estoque, preço e entrega e leva o cliente até a compra.', c: '#f6e3a1' },
+  { n: 'Clínicas', ic: 'clinicas', d: 'Agenda, confirma e remarca consultas sem a recepção parar para responder.', c: '#9fd8e6' },
+  { n: 'Restaurantes', ic: 'restaurantes', d: 'Atende pedidos e dúvidas de cardápio no horário de pico, sem fila.', c: '#f2a98e' },
+  { n: 'Imobiliárias', ic: 'imobiliarias', d: 'Responde interessados, qualifica o contato e marca visitas.', c: '#e6d8b8' },
+  { n: 'Beleza e estética', ic: 'beleza', d: 'Preenche a agenda, lembra o cliente do horário e reativa quem sumiu.', c: '#f3cf6e' },
+  { n: 'Atacado', ic: 'atacado', d: 'Mantém cadastros, tabelas e pedidos recorrentes em dia.', c: '#b8e6dc' },
+  { n: 'Móveis e decoração', ic: 'moveis', d: 'Acompanha orçamentos longos e retoma o cliente na hora certa.', c: '#d9b99b' },
+  { n: 'Serviços', ic: 'servicos', d: 'Cuida de orçamentos, ordens de serviço e agenda em minutos.', c: '#c5d0d8' },
 ]
 
 /** Segmentos atendidos: carrossel de cartões com rolagem por toque, setas e avanço automático (pausa com o mouse ou o foco). */
@@ -125,7 +125,7 @@ export function Products() {
         onFocus={() => { paused.current = true }} onBlur={() => { paused.current = false }}>
         <ul className="segs__track" ref={track} onScroll={sync} aria-label="Segmentos atendidos">
           {SEGMENTS.map((s, k) => (
-            <li className="seg" key={s.n}>
+            <li className="seg" key={s.n} style={{ '--c': s.c }}>
               <span className="seg__n">{String(k + 1).padStart(2, '0')}</span>
               <h3>{s.n}</h3>
               <p>{s.d}</p>
@@ -133,7 +133,6 @@ export function Products() {
             </li>
           ))}
         </ul>
-        <p className="segs__credit">Ícones: <a href="https://icons8.com" target="_blank" rel="noopener noreferrer">Icons8</a></p>
         <div className="segs__nav">
           <button type="button" onClick={() => step(-1)} disabled={edge.start} aria-label="Segmento anterior"><Arrow /></button>
           <button type="button" onClick={() => step(1)} disabled={edge.end} aria-label="Próximo segmento"><Arrow /></button>
