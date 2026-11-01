@@ -54,6 +54,7 @@ html.lenis:has(.inst) { scroll-behavior: auto !important; }
 .inst .segtabs__chat p { margin: 4px 0 0; font-size: 15px; line-height: 1.35; font-weight: 500; }
 .inst .segtabs__chat--in { bottom: 27%; background: #fff; color: var(--brand); }
 .inst .segtabs__chat--out { bottom: 6%; left: 14%; background: var(--brand); color: #fff; }
+.inst .segtabs__text { max-width: 590px; }
 .inst .segtabs__text h3 { margin: 0; font-size: clamp(30px, 3.6vw, 48px); line-height: 1.05; letter-spacing: -0.035em; font-weight: 600; color: var(--brand); }
 .inst .segtabs__text p { margin: 20px 0 0; font-size: 19px; line-height: 1.55; color: var(--muted); }
 .inst .segtabs__link { display: inline-flex; align-items: center; gap: 8px; margin-top: 30px; font-weight: 600; color: var(--brand); border-bottom: 1.5px solid currentColor; padding-bottom: 2px; }
