@@ -5,7 +5,7 @@ import retail from './assets/retail.jpg'
 import office from './assets/office.jpg'
 
 const SCENES = [
-  { tab: 'Varejo', h: 'Nosso agente de IA responde seus clientes no WhatsApp e fecha a venda com você.', img: retail, alt: 'Mulher de blazer verde sorrindo em uma área de loja', q: 'Oi! Tem esse tênis no 39?', a: 'Tem sim! Separo um para você retirar hoje ou prefere receber em casa?', ok: 'Pedido encaminhado para a equipe' },
+  { tab: 'Varejo', h: 'Nosso agente de IA responde seus clientes no WhatsApp e fecha a venda com você.', img: retail, alt: 'Duas mulheres de verde sorrindo em frente a uma loja', q: 'Oi! Tem esse tênis no 39?', a: 'Tem sim! Separo um para você retirar hoje ou prefere receber em casa?', ok: 'Pedido encaminhado para a equipe' },
   { tab: 'Serviços', h: 'Orçamentos, ordens de serviço e agenda em minutos.', img: office, alt: 'Profissional de suéter verde em um escritório colorido', q: 'Preciso de um orçamento de manutenção.', a: 'Claro! Me passa o endereço e o melhor horário que eu já te envio o orçamento.', ok: 'Orçamento criado no CRM' },
 ]
 

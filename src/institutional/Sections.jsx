@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { gsap, ScrollTrigger, Magnetic, Tilt, Words, prefersReducedMotion } from './motion.jsx'
 import { Arrow } from './Header.jsx'
-import ProductMock from './ProductMock.jsx'
 import intMeli from './assets/integrations/meli.png'
 import intOmie from './assets/integrations/omie.png'
 import intTiny from './assets/integrations/tiny.webp'
@@ -16,7 +15,6 @@ import intTiktok from './assets/integrations/tiktok.svg'
 import intIfood from './assets/integrations/ifood.svg'
 import { VALUES, STEPS, SITE } from './siteConfig.js'
 import { FAQ } from './faq.js'
-import retail from './assets/retail.jpg'
 import crew from './assets/crew.webp'
 import lemi from './assets/lemi.webp'
 import maia from './assets/maia.webp'
@@ -60,23 +58,58 @@ export function Integrations() {
   )
 }
 
-/* ───────────── Produtos: cartões sticky empilhados ───────────── */
-const PRODUCTS = [
-  { id: 'lemify', status: '', ok: true, name: 'Lemify', sub: 'Atendimento e CRM', short: 'Atendimento, CRM e agentes de IA para quem vende.', mock: true, img: retail, alt: 'Mulher de blazer verde sorrindo em uma área de loja',
-    d: 'Para empresas que vendem e atendem por conversa, com todos os canais numa caixa só e agentes de IA trabalhando junto com a equipe.', cta: 'Conhecer o Lemify', href: SITE.productPage },
+/* ───────────── Segmentos: carrossel de cartões ───────────── */
+// Ícones de traço (64x64), um por tipo de negócio.
+const ICONS = {
+  varejo: <><path d="M12 22h40l-3 32H15z" /><path d="M22 22v-4a10 10 0 0 1 20 0v4" /></>,
+  clinicas: <path d="M26 10h12v16h16v12H38v16H26V38H10V26h16z" />,
+  restaurantes: <><path d="M16 8v12a6 6 0 0 0 12 0V8M22 8v48" /><path d="M46 56V8c-7 4-10 12-10 22h10" /></>,
+  imobiliarias: <><path d="M8 30 32 10l24 20" /><path d="M14 26v28h36V26" /><path d="M27 54V38h10v16" /></>,
+  beleza: <><path d="M30 8c2 13 7 18 20 20-13 2-18 7-20 20-2-13-7-18-20-20 13-2 18-7 20-20z" /><path d="M50 40c1 5 3 7 8 8-5 1-7 3-8 8-1-5-3-7-8-8 5-1 7-3 8-8z" /></>,
+  atacado: <><path d="M32 8 54 20v24L32 56 10 44V20z" /><path d="m10 20 22 12 22-12M32 32v24" /></>,
+  moveis: <><path d="M12 30v-6a6 6 0 0 1 6-6h28a6 6 0 0 1 6 6v6" /><path d="M6 34a5 5 0 0 1 10 0v6h32v-6a5 5 0 0 1 10 0v14H6z" /><path d="M14 48v6M50 48v6" /></>,
+  servicos: <path d="M44 10a12 12 0 0 0-11 16L10 49a5 5 0 0 0 7 7l23-23a12 12 0 0 0 16-11l-8 8-7-2-2-7z" />,
+}
+
+const SEGMENTS = [
+  { n: 'Varejo', ic: 'varejo', d: 'Responde dúvidas de estoque, preço e entrega e leva o cliente até a compra.', c: '#c9dbb8' },
+  { n: 'Clínicas', ic: 'clinicas', d: 'Agenda, confirma e remarca consultas sem a recepção parar para responder.', c: '#bcd8ff' },
+  { n: 'Restaurantes', ic: 'restaurantes', d: 'Atende pedidos e dúvidas de cardápio no horário de pico, sem fila.', c: '#d8fe6a' },
+  { n: 'Imobiliárias', ic: 'imobiliarias', d: 'Responde interessados, qualifica o contato e marca visitas.', c: '#ffcfa8' },
+  { n: 'Beleza e estética', ic: 'beleza', d: 'Preenche a agenda, lembra o cliente do horário e reativa quem sumiu.', c: '#dcc8ff' },
+  { n: 'Atacado', ic: 'atacado', d: 'Mantém cadastros, tabelas e pedidos recorrentes em dia.', c: '#ffc9d6' },
+  { n: 'Móveis e decoração', ic: 'moveis', d: 'Acompanha orçamentos longos e retoma o cliente na hora certa.', c: '#c9dbb8' },
+  { n: 'Serviços', ic: 'servicos', d: 'Cuida de orçamentos, ordens de serviço e agenda em minutos.', c: '#d8fe6a' },
 ]
 
-const SEGMENTS = ['Varejo', 'Clínicas', 'Restaurantes', 'Imobiliárias', 'Beleza e estética', 'Atacado', 'Móveis e decoração', 'Serviços']
-
-/** Produtos: leque de cartões. O ativo se expande (clique, foco ou rodízio automático) e os outros ficam estreitos e escurecidos. */
+/** Segmentos atendidos: carrossel de cartões com rolagem por toque, setas e avanço automático (pausa com o mouse ou o foco). */
 export function Products() {
-  const [on, setOn] = useState(0)
-  const hover = useRef(false)
+  const track = useRef(null)
+  const paused = useRef(false)
+  const [edge, setEdge] = useState({ start: true, end: false })
+
+  const sync = () => {
+    const t = track.current
+    if (t) setEdge({ start: t.scrollLeft < 8, end: t.scrollLeft + t.clientWidth >= t.scrollWidth - 8 })
+  }
+  const step = (dir) => {
+    const t = track.current
+    const card = t?.querySelector('.seg')
+    if (!card) return
+    t.scrollBy({ left: dir * (card.offsetWidth + 20), behavior: prefersReducedMotion() ? 'auto' : 'smooth' })
+  }
 
   useEffect(() => {
-    const t = setTimeout(() => { if (!hover.current) setOn((v) => (v + 1) % PRODUCTS.length) }, 8000)
-    return () => clearTimeout(t)
-  }, [on])
+    sync()
+    const t = track.current
+    const id = setInterval(() => {
+      if (paused.current || prefersReducedMotion() || !t) return
+      if (t.scrollLeft + t.clientWidth >= t.scrollWidth - 8) t.scrollTo({ left: 0, behavior: 'smooth' })
+      else step(1)
+    }, 4500)
+    window.addEventListener('resize', sync)
+    return () => { clearInterval(id); window.removeEventListener('resize', sync) }
+  }, [])
 
   return (
     <section className="products" id="produtos" aria-labelledby="produtos-titulo">
@@ -84,39 +117,32 @@ export function Products() {
         <div className="head">
           <span className="eyebrow" data-reveal>Segmentos</span>
           <Words as="h2" id="produtos-titulo" className="h2" text="Uma solução com IA para cada tipo de negócio" />
-          <ul className="segs" data-reveal aria-label="Segmentos atendidos">
-            {SEGMENTS.map((s) => <li key={s}>{s}</li>)}
-          </ul>
+          <p className="head__p" data-reveal>Cada segmento tem uma rotina. Os agentes se adaptam à sua.</p>
         </div>
+      </div>
 
-        <div className="pfan" data-reveal onMouseEnter={() => { hover.current = true }} onMouseLeave={() => { hover.current = false }}>
-          {PRODUCTS.map((p, k) => {
-            const active = k === on
-            return (
-              <article className={`pfan__item ${active ? 'is-on' : ''}`} key={p.id}>
-                <div className="pfan__card">
-                  <img className="pfan__photo" src={p.img} alt={active ? p.alt : ''} loading="lazy" />
-                  {p.mock && <div className="pfan__mock" aria-hidden={!active}><ProductMock /></div>}
-                  <span className="pfan__bar" aria-hidden="true">{p.words ? <><span className="sr">{p.words[0]}</span><b className={`pfan__w pfan__w--${p.id}`}>{p.words[1]}</b></> : p.name}</span>
-                  <div className="pfan__cap" aria-hidden={!active}>
-                    <div className="pfan__capin">
-                    <span className={`badge pfan__tag pfan__tag--${p.id}`}>{p.words ? <><span className="sr">{p.words[0]}</span><b className={`pfan__w pfan__w--${p.id}`}>{p.words[1]}</b></> : p.name}</span>
-                    <p className="pfan__desc">{p.short}</p>
-                    <a className="pfan__link" href={p.href} tabIndex={active ? 0 : -1}>{p.cta} <Arrow /></a>
-                    </div>
-                  </div>
-                  {!active && (
-                    <button type="button" className="pfan__hit" onClick={() => setOn(k)} onFocus={() => setOn(k)} aria-label={`Ver ${p.name}`} data-cursor="Ver" />
-                  )}
-                </div>
-              </article>
-            )
-          })}
+      <div className="segs" data-reveal
+        onMouseEnter={() => { paused.current = true }} onMouseLeave={() => { paused.current = false }}
+        onFocus={() => { paused.current = true }} onBlur={() => { paused.current = false }}>
+        <ul className="segs__track" ref={track} onScroll={sync} aria-label="Segmentos atendidos">
+          {SEGMENTS.map((s, k) => (
+            <li className="seg" key={s.n} style={{ '--c': s.c }}>
+              <span className="seg__n">{String(k + 1).padStart(2, '0')}</span>
+              <h3>{s.n}</h3>
+              <p>{s.d}</p>
+              <span className="seg__ic" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">{ICONS[s.ic]}</svg></span>
+            </li>
+          ))}
+        </ul>
+        <div className="segs__nav">
+          <button type="button" onClick={() => step(-1)} disabled={edge.start} aria-label="Segmento anterior"><Arrow /></button>
+          <button type="button" onClick={() => step(1)} disabled={edge.end} aria-label="Próximo segmento"><Arrow /></button>
         </div>
       </div>
     </section>
   )
 }
+
 
 /* ───────────── Valores: título parado + cartões empilhando na lateral ───────────── */
 export function Values() {
