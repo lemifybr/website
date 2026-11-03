@@ -14,7 +14,7 @@ export default function Hero() {
   const tabsRef = useRef(null)
   const [pill, setPill] = useState(null)
 
-  // O indicador branco desliza até o botão ativo (e se reposiciona se a barra quebrar de linha).
+  // O indicador branco desliza até o botão ativo (e se reposiciona se a barra quebrar de linha)
   useLayoutEffect(() => {
     const place = () => {
       const b = tabsRef.current?.querySelectorAll('button')[i]
