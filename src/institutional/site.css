@@ -49,11 +49,12 @@ html.lenis:has(.inst) { scroll-behavior: auto !important; }
 @keyframes segIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
 .inst .segtabs__media { position: relative; aspect-ratio: 1 / 1; max-height: 560px; width: 100%; border-radius: 32px; background: var(--c); overflow: hidden; display: grid; place-items: center; }
 .inst .segtabs__photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.inst .segtabs__chat { position: absolute; left: 6%; width: min(300px, 78%); padding: 14px 18px; border-radius: 18px; box-shadow: 0 14px 30px -14px rgba(14, 36, 33, 0.35); }
+.inst .segtabs__chats { position: absolute; left: 6%; right: 6%; bottom: 6%; display: flex; flex-direction: column; gap: 10px; }
+.inst .segtabs__chat { width: min(300px, 92%); padding: 14px 18px; border-radius: 18px; box-shadow: 0 14px 30px -14px rgba(14, 36, 33, 0.35); }
 .inst .segtabs__chat small { display: block; font-size: 12px; font-weight: 600; opacity: 0.65; }
 .inst .segtabs__chat p { margin: 4px 0 0; font-size: 15px; line-height: 1.35; font-weight: 500; }
-.inst .segtabs__chat--in { bottom: 27%; background: #fff; color: var(--brand); }
-.inst .segtabs__chat--out { bottom: 6%; left: 14%; background: var(--brand); color: #fff; }
+.inst .segtabs__chat--in { background: #fff; color: var(--brand); }
+.inst .segtabs__chat--out { margin-left: 8%; background: var(--brand); color: #fff; }
 .inst .segtabs__text { max-width: 590px; }
 .inst .segtabs__text h3 { margin: 0; font-size: clamp(30px, 3.6vw, 48px); line-height: 1.05; letter-spacing: -0.035em; font-weight: 600; color: var(--brand); }
 .inst .segtabs__text p { margin: 20px 0 0; font-size: 19px; line-height: 1.55; color: var(--muted); }
@@ -62,7 +63,9 @@ html.lenis:has(.inst) { scroll-behavior: auto !important; }
 .inst .segtabs__link:hover svg { transform: translateX(4px); }
 @media (max-width: 900px) {
   .inst .segtabs__panel { grid-template-columns: 1fr; gap: 28px; }
-  .inst .segtabs__bar button { padding: 10px 16px; font-size: 14px; }
+  .inst .segtabs__bar { justify-content: flex-start; width: 100%; -webkit-mask-image: linear-gradient(90deg, #000 90%, transparent); mask-image: linear-gradient(90deg, #000 90%, transparent); }
+  .inst .segtabs__bar button { padding: 9px 16px 9px 10px; font-size: 14px; }
+  .inst .segtabs__media { aspect-ratio: 4 / 5; }
 }
 .inst .sp { font-size: 0; }
 .inst .head__p { margin-top: 18px; font-size: 19px; color: var(--muted); }

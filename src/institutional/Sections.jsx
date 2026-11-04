@@ -88,6 +88,12 @@ const SEGMENTS = [
 ]
 
 /** Segmentos atendidos: abas no topo e, abaixo, imagem com exemplo de conversa ao lado do texto do segmento. */
+// No celular a barra rola de lado: leva a aba escolhida para o meio.
+const centerTab = (el) => {
+  const bar = el?.parentElement
+  if (bar) bar.scrollTo({ left: el.offsetLeft - (bar.clientWidth - el.offsetWidth) / 2, behavior: prefersReducedMotion() ? 'auto' : 'smooth' })
+}
+
 export function Products() {
   const [on, setOn] = useState(0)
   const s = SEGMENTS[on]
@@ -97,7 +103,9 @@ export function Products() {
     e.preventDefault()
     const next = (on + (e.key === 'ArrowRight' ? 1 : SEGMENTS.length - 1)) % SEGMENTS.length
     setOn(next)
-    document.getElementById(`seg-tab-${next}`)?.focus()
+    const t = document.getElementById(`seg-tab-${next}`)
+    t?.focus()
+    centerTab(t)
   }
 
   return (
@@ -112,15 +120,17 @@ export function Products() {
           <div className="segtabs__bar" role="tablist" aria-label="Segmentos atendidos" onKeyDown={onKey}>
             {SEGMENTS.map((x, k) => (
               <button key={x.n} id={`seg-tab-${k}`} type="button" role="tab" aria-selected={k === on} aria-controls="seg-panel" tabIndex={k === on ? 0 : -1}
-                className={k === on ? 'is-on' : ''} onClick={() => setOn(k)}><img src={ICONS[x.ic]} alt="" />{x.n}</button>
+                className={k === on ? 'is-on' : ''} onClick={(e) => { setOn(k); centerTab(e.currentTarget) }}><img src={ICONS[x.ic]} alt="" />{x.n}</button>
             ))}
           </div>
 
           <div className="segtabs__panel" id="seg-panel" role="tabpanel" aria-labelledby={`seg-tab-${on}`} key={on}>
             <div className="segtabs__media" style={{ '--c': s.c }}>
               <img className="segtabs__photo" src={PHOTOS[s.ic]} alt="" />
-              <div className="segtabs__chat segtabs__chat--in"><small>Cliente</small><p>{s.q}</p></div>
-              <div className="segtabs__chat segtabs__chat--out"><small>Resposta da IA</small><p>{s.a}</p></div>
+              <div className="segtabs__chats">
+                <div className="segtabs__chat segtabs__chat--in"><small>Cliente</small><p>{s.q}</p></div>
+                <div className="segtabs__chat segtabs__chat--out"><small>Resposta da IA</small><p>{s.a}</p></div>
+              </div>
             </div>
             <div className="segtabs__text">
               <h3>{s.t}</h3>
