@@ -187,7 +187,8 @@ export function Products() {
         x: () => focus() - center(N - 1), ease: 'none',
         scrollTrigger: {
           trigger: stage, pin: true, start: 'center center+=35', end: () => `+=${dist() * 1.15}`,
-          scrub: 0.7, invalidateOnRefresh: true,
+          // Remede antes das animações abaixo dela, que dependem do espaço extra que o pin cria.
+          scrub: 0.25, invalidateOnRefresh: true, refreshPriority: 1,
           onUpdate: (self) => {
             const i = Math.round(self.progress * (N - 1))
             if (i !== onRef.current) { onRef.current = i; setOn(i) }
@@ -274,27 +275,34 @@ export function Products() {
 
 /* ───────────── Agentes: painel sticky troca com o scroll ───────────── */
 const AGENTS = [
-  { n: 'Lemi', r: 'Agente principal', d: 'Atende na hora, em todos os canais.', img: lemi, alt: 'Lemi, mascote amarelo de moletom verde, acenando' },
-  { n: 'Maia', r: 'Agendamento', d: 'Agenda, confirma e remarca compromissos.', img: maia, alt: 'Maia, mascote azul de laço lima, piscando' },
-  { n: 'Theo', r: 'Vendas', d: 'Mantém o funil e as negociações em dia.', img: theo, alt: 'Theo, mascote verde-sálvia de gravata' },
-  { n: 'Otto', r: 'Cadastro', d: 'Completa os dados de cada cliente.', img: otto, alt: 'Otto, mascote rosa com as mãos no rosto' },
-  { n: 'Nico', r: 'Retorno', d: 'Retoma quem parou de responder.', img: nico, alt: 'Nico, mascote pêssego de jaqueta verde, sorrindo' },
-  { n: 'Íris', r: 'Relatórios', d: 'Transforma conversas em informação para decidir.', img: iris, alt: 'Íris, mascote lilás de óculos, pensativa' },
+  { n: 'Lemi', r: 'Agente principal', d: 'Atende na hora, em todos os canais.', img: lemi, alt: 'Lemi, mascote amarelo de moletom verde, acenando', c: '#d8fe6a' },
+  { n: 'Maia', r: 'Agendamento', d: 'Agenda, confirma e remarca compromissos.', img: maia, alt: 'Maia, mascote azul de laço lima, piscando', c: '#bcd8ff' },
+  { n: 'Theo', r: 'Vendas', d: 'Mantém o funil e as negociações em dia.', img: theo, alt: 'Theo, mascote verde-sálvia de gravata', c: '#c9dbb8' },
+  { n: 'Otto', r: 'Cadastro', d: 'Completa os dados de cada cliente.', img: otto, alt: 'Otto, mascote rosa com as mãos no rosto', c: '#ffc9d6' },
+  { n: 'Nico', r: 'Retorno', d: 'Retoma quem parou de responder.', img: nico, alt: 'Nico, mascote pêssego de jaqueta verde, sorrindo', c: '#ffcfa8' },
+  { n: 'Íris', r: 'Relatórios', d: 'Transforma conversas em informação para decidir.', img: iris, alt: 'Íris, mascote lilás de óculos, pensativa', c: '#dcc8ff' },
 ]
 
 export function Agents() {
   const root = useRef(null)
   const [on, setOn] = useState(0)
+  // O agente ativo é o da linha que cruza a altura de 55% da tela. Medido a cada rolagem, não depende de
+  // posições calculadas antes (que mudam quando imagens carregam ou quando a seção de segmentos fixa).
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.utils.toArray('.agent').forEach((row, k) => {
-        ScrollTrigger.create({
-          trigger: row, start: 'top 55%', end: 'bottom 55%',
-          onToggle: (s) => { if (s.isActive) setOn(k) },
-        })
-      })
-    }, root)
-    return () => ctx.revert()
+    const rows = [...root.current.querySelectorAll('.agent')]
+    let raf = 0
+    const pick = () => {
+      raf = 0
+      const line = window.innerHeight * 0.55
+      let k = rows.findIndex((r) => { const b = r.getBoundingClientRect(); return b.top <= line && b.bottom > line })
+      if (k < 0) k = rows[0].getBoundingClientRect().top > line ? 0 : rows.length - 1
+      setOn(k)
+    }
+    const onScroll = () => { if (!raf) raf = requestAnimationFrame(pick) }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onScroll)
+    pick()
+    return () => { cancelAnimationFrame(raf); window.removeEventListener('scroll', onScroll); window.removeEventListener('resize', onScroll) }
   }, [])
 
   return (
