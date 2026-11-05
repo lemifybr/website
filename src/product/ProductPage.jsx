@@ -25,7 +25,12 @@ export default function ProductPage({ page }) {
     el.dataset.product = page
     el.textContent = css
     document.head.appendChild(el)
-    return () => el.remove()
+    // A página usa a família "Bricolage Grotesque" pelo nome; o site institucional a registra com outro nome.
+    const font = document.createElement('link')
+    font.rel = 'stylesheet'
+    font.href = 'https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&display=swap'
+    document.head.appendChild(font)
+    return () => { el.remove(); font.remove() }
   }, [css, page])
 
   // Scripts originais da página (vídeo, modal, planos pela API). Rodam depois do HTML estar no DOM.
