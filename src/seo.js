@@ -20,6 +20,14 @@ export const SEO = {
     title: 'Blog do Lemify · Atendimento, vendas e IA',
     description: 'Novidades do Lemify, boas práticas de atendimento e vendas por conversa e o que aprendemos construindo IA para empresas brasileiras.',
   },
+  '/lemify': {
+    title: 'Lemify · Plataforma de atendimento e CRM com agentes de IA',
+    description: 'O Lemify é o software que reúne WhatsApp, Instagram, Messenger e e-mail numa caixa só, com vários atendentes, CRM, agenda e agentes de IA. Teste grátis por 14 dias, sem cartão.',
+  },
+  '/lemify/planos': {
+    title: 'Planos e preços · Lemify',
+    description: 'Planos do Lemify a partir de R$ 97 por mês, com agentes de IA para atendimento e vendas. Teste grátis por 14 dias, sem cartão.',
+  },
   '/docs': {
     title: 'Documentação do Lemify · Módulos e API',
     description: 'Aprenda a usar cada módulo do Lemify (atendimento, CRM, agenda, agentes de IA e mais) e integre seu sistema com a API.',

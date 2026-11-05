@@ -6,11 +6,11 @@
   "rewrites": [
     {
       "source": "/lemify",
-      "destination": "/lemify.html"
+      "destination": "/index.html"
     },
     {
       "source": "/lemify/planos",
-      "destination": "/lemify-planos.html"
+      "destination": "/index.html"
     },
     {
       "source": "/llms.txt",

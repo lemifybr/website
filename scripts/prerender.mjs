@@ -15,6 +15,7 @@ import { MODULES, GROUPS } from '../src/docs/modules.js'
 import { FAQ } from '../src/institutional/faq.js'
 import { SITE, esc, setHead, jsonLd, addToHead, setRoot } from '../api/_html.js'
 
+const prod = (n) => fs.readFileSync(path.resolve(path.dirname(fileURLToPath(import.meta.url)), `../src/product/${n}.body.html`), 'utf8')
 const dist = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../dist')
 const template = fs.readFileSync(path.join(dist, 'index.html'), 'utf8')
 
@@ -48,6 +49,8 @@ const faqBody = `<section><h2>Perguntas frequentes sobre o Lemify</h2>${FAQ.map(
 
 const pages = [
   ...[termos, privacidade, reembolso, termosIa, google, lgpd].map((d) => ({ route: d.path, body: legalBody(d), name: d.h1 })),
+  { route: '/lemify', body: prod('lemify'), name: 'Lemify · Atendimento e CRM' },
+  { route: '/lemify/planos', body: prod('planos'), name: 'Planos e preços do Lemify' },
   { route: '/docs', body: docsBody(), name: 'Documentação do Lemify' },
   { route: '/manual/bling', body: blingBody(), name: 'Manual de integração com o Bling' },
 ]

@@ -12,6 +12,7 @@ import reembolso from './legal/reembolso.js'
 import termosIa from './legal/termosIa.js'
 import google from './legal/google.js'
 import lgpd from './legal/lgpd.js'
+import ProductPage from './product/ProductPage.jsx'
 import { applySeo, SEO } from './seo.js'
 
 const LEGAL_DOCS = [termos, privacidade, reembolso, termosIa, google, lgpd]
@@ -20,7 +21,7 @@ function App() {
   const path = window.location.pathname.replace(/\/+$/, '') || '/'
   const doc = LEGAL_DOCS.find((d) => d.path === path)
   const post = path.match(/^\/blog\/([^/]+)$/)
-  const known = !!doc || path === '/manual/bling' || path === '/docs' || path === '/blog' || !!post
+  const known = !!doc || path === '/manual/bling' || path === '/docs' || path === '/blog' || path === '/lemify' || path === '/lemify/planos' || !!post
 
   useEffect(() => {
     applySeo(known ? SEO[path.startsWith('/blog/') ? '/blog' : path] : SEO['/'], known ? path : '/')
@@ -31,6 +32,8 @@ function App() {
   if (doc) return <LegalPage doc={doc} />
   if (path === '/manual/bling') return <BlingManual />
   if (path === '/docs') return <DocsPage />
+  if (path === '/lemify') return <ProductPage page="lemify" />
+  if (path === '/lemify/planos') return <ProductPage page="planos" />
   if (path === '/blog') return <BlogList />
   if (post) return <BlogPost slug={decodeURIComponent(post[1])} />
   return <Site />
