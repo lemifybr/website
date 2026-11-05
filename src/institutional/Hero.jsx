@@ -72,8 +72,6 @@ export default function Hero() {
         const nx = (e.clientX - r.left) / r.width - 0.5
         const ny = (e.clientY - r.top) / r.height - 0.5
         layers.forEach(({ x, y, d }) => { x(nx * d * 50); y(ny * d * 50) })
-        stage.style.setProperty('--mx', `${e.clientX - r.left}px`)
-        stage.style.setProperty('--my', `${e.clientY - r.top}px`)
       }
       stage.addEventListener('mousemove', move)
       return () => stage.removeEventListener('mousemove', move)
@@ -93,7 +91,6 @@ export default function Hero() {
           ))}
         </div>
         <div className="hero__shade" />
-        <div className="hero__spot" aria-hidden="true" />
 
 
         <div className="hero__copy">
