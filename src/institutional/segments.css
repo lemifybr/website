@@ -69,3 +69,10 @@
 @media (max-width: 900px) {
   .segs { padding-top: 80px; }
 }
+/* As trocas aqui são suaves e só acontecem quando a pessoa rola; mantém mesmo com "reduzir movimento". */
+@media (prefers-reduced-motion: reduce) {
+  .inst .seg { transition-duration: 0.8s !important; }
+  .inst .seg__media > img { transition-duration: 1.4s !important; }
+  .inst .segs__copy > *, .inst .segs__count b { animation-duration: 0.7s !important; }
+  .inst .segs__dots button { transition-duration: 0.4s !important; }
+}

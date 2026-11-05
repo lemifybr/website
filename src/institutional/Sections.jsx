@@ -159,7 +159,7 @@ const pad = (n) => String(n).padStart(2, '0')
 
 /**
  * Segmentos atendidos. No desktop a seção fica fixada e os cartões andam para a esquerda conforme a rolagem;
- * o painel ao lado mostra o segmento em foco. No celular (ou com movimento reduzido) vira um carrossel com encaixe.
+ * o painel ao lado mostra o segmento em foco. No celular vira um carrossel com encaixe.
  */
 export function Products() {
   const root = useRef(null)
@@ -174,7 +174,8 @@ export function Products() {
 
   useEffect(() => {
     const mm = gsap.matchMedia()
-    mm.add('(min-width: 901px) and (prefers-reduced-motion: no-preference)', () => {
+    // O movimento acompanha a rolagem da própria pessoa, então vale também com "reduzir movimento".
+    mm.add('(min-width: 901px)', () => {
       setPinned(true)
       const view = track.current.parentElement
       const dist = () => Math.max(0, track.current.scrollWidth - view.clientWidth)
