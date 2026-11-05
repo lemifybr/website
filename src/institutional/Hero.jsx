@@ -108,7 +108,7 @@ export default function Hero() {
           </h1>
           <div className="hero__row">
             <p className="hero__lead">
-              Somos a Lemify, empresa brasileira de tecnologia. Nossa IA responde seus clientes, organiza a agenda e ajuda a vender, enquanto você cuida do que importa.
+              Somos a Lemify, empresa brasileira de tecnologia. Reunimos soluções de IA para atendimento, vendas, agenda e gestão, prontas para o seu negócio.
             </p>
             <div className="hero__cta">
               <Magnetic><a className="btn btn--lime btn--sm" href={SITE.productPage}>Conheça o Lemify <Arrow /></a></Magnetic>
