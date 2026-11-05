@@ -152,10 +152,8 @@ const SEGMENTS = [
   { n: 'Imobiliárias', ic: 'imobiliarias', alt: 'Corretora de terno verde caminhando pela cidade', t: 'Cada interessado atendido, cada visita marcada', d: 'A IA responde quem pergunta sobre um imóvel, entende o que a pessoa procura e marca a visita na sua agenda.' },
   { n: 'Beleza e estética', ic: 'beleza', alt: 'Cabeleireira de blusa verde-clara arrumando o cabelo de um cliente', t: 'Agenda preenchida e clientes de volta', d: 'A IA preenche os horários, lembra o cliente do atendimento e chama de volta quem sumiu.' },
   { n: 'Atacado', ic: 'atacado', alt: 'Funcionário de camiseta verde separando caixas no estoque', t: 'Pedidos recorrentes sem planilha', d: 'A IA mantém cadastros e tabelas em dia e repete pedidos de clientes antigos em poucas mensagens.' },
-  { n: 'Serviços', ic: 'servicos', alt: 'Técnico de camiseta verde fazendo a manutenção de um ar-condicionado', t: 'Orçamentos e agenda em minutos', d: 'A IA recebe o pedido, pede as informações que faltam e já deixa o orçamento e a visita encaminhados.' },
+  { n: 'Serviços', ic: 'servicos', alt: 'Mecânico de blusa verde sentado na oficina com uma ferramenta na mão', t: 'Orçamentos e agenda em minutos', d: 'A IA recebe o pedido, pede as informações que faltam e já deixa o orçamento e a visita encaminhados.' },
 ]
-
-const pad = (n) => String(n).padStart(2, '0')
 
 /**
  * Segmentos atendidos. No desktop a seção fica fixada e os cartões andam para a esquerda conforme a rolagem;
@@ -164,7 +162,6 @@ const pad = (n) => String(n).padStart(2, '0')
 export function Products() {
   const root = useRef(null)
   const track = useRef(null)
-  const bar = useRef(null)
   const st = useRef(null)
   const onRef = useRef(0)
   const [on, setOn] = useState(0)
@@ -176,23 +173,30 @@ export function Products() {
     const mm = gsap.matchMedia()
     // O movimento acompanha a rolagem da própria pessoa, então vale também com "reduzir movimento".
     mm.add('(min-width: 901px)', () => {
+      // A classe entra já no DOM para as medidas abaixo usarem o layout fixado (o React repete no próximo render).
+      const stage = root.current.querySelector('.segs__stage')
+      stage.classList.add('is-pinned')
       setPinned(true)
-      const view = track.current.parentElement
-      const dist = () => Math.max(0, track.current.scrollWidth - view.clientWidth)
-      const tween = gsap.to(track.current, {
-        x: () => -dist(), ease: 'none',
+      const el = track.current
+      const view = el.parentElement
+      // O cartão em foco fica sempre no meio: a trilha anda do centro do primeiro ao centro do último.
+      const center = (i) => { const c = el.children[i]; return c ? c.offsetLeft + c.offsetWidth / 2 : 0 }
+      const dist = () => center(N - 1) - center(0)
+      const tween = gsap.fromTo(el, { x: () => view.clientWidth / 2 - center(0) }, {
+        x: () => view.clientWidth / 2 - center(N - 1), ease: 'none',
         scrollTrigger: {
-          trigger: root.current.querySelector('.segs__stage'), pin: true, start: 'top top', end: () => `+=${dist() * 1.15}`,
+          trigger: stage, pin: true, start: 'center center+=35', end: () => `+=${dist() * 1.15}`,
           scrub: 0.7, invalidateOnRefresh: true,
           onUpdate: (self) => {
             const i = Math.round(self.progress * (N - 1))
             if (i !== onRef.current) { onRef.current = i; setOn(i) }
-            if (bar.current) bar.current.style.transform = `scaleX(${self.progress})`
           },
         },
       })
       st.current = tween.scrollTrigger
-      return () => { st.current = null; setPinned(false) }
+      // Remede depois que fontes e layout assentarem.
+      const t = setTimeout(() => ScrollTrigger.refresh(), 300)
+      return () => { clearTimeout(t); st.current = null; stage.classList.remove('is-pinned'); setPinned(false) }
     })
     return () => mm.revert()
   }, [N])
@@ -231,15 +235,12 @@ export function Products() {
 
       <div className={`segs__stage ${pinned ? 'is-pinned' : ''}`}>
         <div className="segs__info">
-          <div className="segs__count" aria-hidden="true"><b key={on}>{pad(on + 1)}</b><span>/ {pad(N)}</span></div>
           <div className="segs__copy" key={on} aria-live="polite">
             <span className="segs__tag"><img src={ICONS[s.ic]} alt="" />{s.n}</span>
             <h3>{s.t}</h3>
             <p>{s.d}</p>
-            <a className="segs__link" href={SITE.signup}>Testar grátis <Arrow /></a>
           </div>
           <div className="segs__nav">
-            <div className="segs__bar" aria-hidden="true"><i ref={bar} /></div>
             <div className="segs__dots" role="group" aria-label="Escolher segmento">
               {SEGMENTS.map((x, k) => (
                 <button key={x.n} type="button" className={k === on ? 'is-on' : ''} aria-label={x.n} aria-current={k === on} onClick={() => goTo(k)} />
@@ -255,6 +256,7 @@ export function Products() {
                 <div className="seg__media">
                   <img src={PHOTOS[x.ic]} alt={x.alt} loading="lazy" />
                   <span className="seg__chip"><img src={ICONS[x.ic]} alt="" />{x.n}</span>
+                  <a className="seg__cta" href={SITE.signup} tabIndex={pinned && k !== on ? -1 : 0} aria-label={`Testar grátis para ${x.n.toLowerCase()}`}>Testar grátis <Arrow /></a>
                 </div>
                 <div className="seg__cap">
                   <h3>{x.t}</h3>

@@ -15,14 +15,16 @@
 .seg__chip { position: absolute; z-index: 2; top: 16px; left: 16px; display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px 7px 8px; border-radius: 99px; background: rgba(255, 255, 255, 0.86); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); font-size: 14px; font-weight: 600; color: var(--brand); }
 .inst .seg__chip img { width: 22px; height: 22px; object-fit: contain; }
 .seg__cap { display: none; }
+/* Botão dentro do cartão */
+.seg__cta { position: absolute; z-index: 2; left: 16px; bottom: 16px; display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; border-radius: 99px; background: var(--lime); color: var(--brand); font-size: 15px; font-weight: 600; box-shadow: 0 14px 28px -14px rgba(0, 0, 0, 0.55); transition: transform 0.35s var(--ease), background 0.3s, opacity 0.5s var(--ease); }
+.seg__cta svg { transition: transform 0.3s var(--ease); }
+.seg__cta:hover { background: #e6ff93; transform: translateY(-2px); }
+.seg__cta:hover svg { transform: translateX(4px); }
+.is-pinned .seg:not(.is-on) .seg__cta { opacity: 0; pointer-events: none; transform: translateY(10px); }
 
 /* Painel com o segmento em foco */
 .segs__info { display: grid; gap: 28px; align-content: center; }
-.segs__count { display: flex; align-items: baseline; gap: 10px; color: var(--brand); }
-.segs__count b { font-size: clamp(64px, 6vw, 96px); line-height: 0.9; font-weight: 600; letter-spacing: -0.05em; animation: segNum 0.6s var(--ease) both; }
-.segs__count span { font-size: 18px; font-weight: 600; opacity: 0.45; }
-@keyframes segNum { from { opacity: 0; transform: translateY(40%); } to { opacity: 1; transform: none; } }
-.segs__copy { display: grid; gap: 16px; justify-items: start; min-height: 290px; align-content: start; }
+.segs__copy { display: grid; gap: 16px; justify-items: start; min-height: 230px; align-content: start; }
 .segs__copy > * { animation: segCopy 0.7s var(--ease) both; }
 .segs__copy > :nth-child(2) { animation-delay: 0.06s; }
 .segs__copy > :nth-child(3) { animation-delay: 0.12s; }
@@ -32,32 +34,26 @@
 .inst .segs__tag img { width: 22px; height: 22px; object-fit: contain; }
 .inst .segs__copy h3 { font-size: clamp(30px, 2.8vw, 44px); line-height: 1.05; letter-spacing: -0.035em; font-weight: 600; color: var(--brand); }
 .inst .segs__copy p { font-size: 18px; line-height: 1.55; color: var(--muted); max-width: 440px; }
-.segs__link { display: inline-flex; align-items: center; gap: 8px; margin-top: 4px; font-weight: 600; color: var(--brand); border-bottom: 1.5px solid currentColor; padding-bottom: 2px; }
-.segs__link svg { transition: transform 0.3s var(--ease); }
-.segs__link:hover svg { transform: translateX(4px); }
 .segs__nav { display: grid; gap: 16px; }
-.segs__bar { height: 3px; border-radius: 3px; background: rgba(28, 64, 59, 0.12); overflow: hidden; max-width: 320px; }
-.segs__bar i { display: block; height: 100%; background: var(--brand); transform: scaleX(0); transform-origin: 0 50%; }
 .segs__dots { display: flex; gap: 8px; }
 .segs__dots button { width: 10px; height: 10px; padding: 0; border: 0; border-radius: 99px; background: rgba(28, 64, 59, 0.2); cursor: pointer; transition: width 0.4s var(--ease), background 0.3s; }
 .segs__dots button.is-on { width: 30px; background: var(--brand); }
 .segs__dots button:hover:not(.is-on) { background: rgba(28, 64, 59, 0.45); }
 
 /* Desktop: seção fixada, cartões andam para a esquerda */
-.segs__stage.is-pinned { height: 100vh; min-height: 640px; display: grid; grid-template-columns: minmax(300px, 400px) minmax(0, 1fr); gap: clamp(32px, 4vw, 72px); align-items: center; padding: 96px 0 32px max(36px, calc((100% - 1480px) / 2)); overflow: hidden; }
-.is-pinned .segs__view { height: 100%; display: flex; align-items: center; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 56px); mask-image: linear-gradient(90deg, transparent 0, #000 56px); }
-.is-pinned .segs__track { padding-left: 64px; }
+.segs__stage.is-pinned { display: grid; grid-template-columns: minmax(300px, 400px) minmax(0, 1fr); gap: clamp(32px, 4vw, 72px); align-items: center; padding: 24px 0 48px max(36px, calc((100% - 1480px) / 2)); overflow: hidden; }
+.is-pinned .segs__view { display: flex; align-items: center; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 56px, #000 calc(100% - 56px), transparent); mask-image: linear-gradient(90deg, transparent 0, #000 56px, #000 calc(100% - 56px), transparent); }
 /* O cartão também respeita a altura da tela, para caber inteiro com o menu em cima. */
 .is-pinned .seg { width: clamp(240px, min(24vw, calc((100vh - 230px) * 0.8)), 380px); }
-.is-pinned .segs__track { padding: 0 36px 0 0; align-items: center; }
-.is-pinned .seg:not(.is-on) { transform: scale(0.86); opacity: 0.55; filter: saturate(0.7); }
+.is-pinned .segs__track { padding: 0; align-items: center; }
+.is-pinned .seg:not(.is-on) { transform: scale(0.84); opacity: 0.45; filter: blur(2px) saturate(0.7); }
 .is-pinned .seg.is-on .seg__media > img { transform: scale(1); }
 .is-pinned .seg.is-on .seg__media { box-shadow: 0 40px 80px -40px rgba(14, 36, 33, 0.65); }
 
 /* Celular ou movimento reduzido: carrossel com encaixe; o texto vai dentro de cada cartão */
 .segs__stage:not(.is-pinned) { display: flex; flex-direction: column; gap: 22px; padding: 16px 0 96px; }
 .segs__stage:not(.is-pinned) .segs__info { order: 2; justify-items: center; }
-.segs__stage:not(.is-pinned) .segs__count, .segs__stage:not(.is-pinned) .segs__copy, .segs__stage:not(.is-pinned) .segs__bar { display: none; }
+.segs__stage:not(.is-pinned) .segs__copy { display: none; }
 .segs__stage:not(.is-pinned) .segs__view { overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding: 8px 0 4px; scroll-padding-inline: max(16px, calc((100% - 1480px) / 2)); }
 .segs__stage:not(.is-pinned) .segs__view::-webkit-scrollbar { display: none; }
 .segs__stage:not(.is-pinned) .segs__track { gap: 16px; padding-inline: max(16px, calc((100% - 1480px) / 2)); }
@@ -73,6 +69,6 @@
 @media (prefers-reduced-motion: reduce) {
   .inst .seg { transition-duration: 0.8s !important; }
   .inst .seg__media > img { transition-duration: 1.4s !important; }
-  .inst .segs__copy > *, .inst .segs__count b { animation-duration: 0.7s !important; }
+  .inst .segs__copy > *, .inst .seg__cta { animation-duration: 0.7s !important; }
   .inst .segs__dots button { transition-duration: 0.4s !important; }
 }
