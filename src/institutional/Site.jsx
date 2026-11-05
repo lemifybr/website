@@ -15,17 +15,7 @@ export default function Site() {
 
   useEffect(() => {
     const t = setTimeout(() => ScrollTrigger.refresh(), 400)
-    // Imagens com carregamento tardio mudam a altura da página; sem remedir, as animações por rolagem
-    // (seção fixada dos segmentos, destaque dos agentes) disparam no lugar errado.
-    let r
-    const onLoad = (e) => {
-      if (e.target.tagName !== 'IMG') return
-      clearTimeout(r)
-      r = setTimeout(() => ScrollTrigger.refresh(), 150)
-    }
-    const el = root.current
-    el.addEventListener('load', onLoad, true)
-    return () => { clearTimeout(t); clearTimeout(r); el.removeEventListener('load', onLoad, true) }
+    return () => clearTimeout(t)
   }, [])
 
   return (
