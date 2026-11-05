@@ -140,72 +140,131 @@ export function Integrations() {
   )
 }
 
-/* ───────────── Segmentos: abas com painel (imagem + texto) ───────────── */
+/* ───────────── Segmentos: cartões que deslizam na horizontal com o scroll ───────────── */
 const ICONS = { varejo: icVarejo, clinicas: icClinicas, restaurantes: icRestaurantes, imobiliarias: icImobiliarias, beleza: icBeleza, atacado: icAtacado, servicos: icServicos }
 
 const PHOTOS = { varejo: phVarejo, clinicas: phClinicas, restaurantes: phRestaurantes, imobiliarias: phImobiliarias, beleza: phBeleza, atacado: phAtacado, servicos: phServicos }
 
 const SEGMENTS = [
-  { n: 'Varejo', ic: 'varejo', c: '#f6e3a1', t: 'Responda na hora e feche mais vendas', d: 'A IA responde dúvidas de estoque, preço e entrega e leva o cliente até a compra, mesmo quando a loja está cheia ou fechada.', q: 'Oi! Tem esse tênis no 39?', a: 'Tem sim! Separo um para você retirar hoje ou prefere receber em casa?' },
-  { n: 'Clínicas', ic: 'clinicas', c: '#9fd8e6', t: 'Agenda cheia sem a recepção parar', d: 'A IA agenda, confirma e remarca consultas pelo WhatsApp, e a sua equipe cuida de quem está na sala de espera.', q: 'Queria marcar uma limpeza essa semana.', a: 'Tenho quinta às 10h ou sexta às 16h. Qual fica melhor para você?' },
-  { n: 'Restaurantes', ic: 'restaurantes', c: '#f2a98e', t: 'Pedidos e dúvidas sem fila, no horário de pico', d: 'A IA atende dúvidas de cardápio, anota pedidos e avisa a cozinha, enquanto você cuida do balcão e das entregas.', q: 'Vocês entregam no Centro?', a: 'Entregamos sim, em até 40 minutos. Quer ver o cardápio de hoje?' },
-  { n: 'Imobiliárias', ic: 'imobiliarias', c: '#e6d8b8', t: 'Cada interessado atendido, cada visita marcada', d: 'A IA responde quem pergunta sobre um imóvel, entende o que a pessoa procura e marca a visita na sua agenda.', q: 'O apartamento de 2 quartos ainda está disponível?', a: 'Está sim! Posso marcar uma visita para amanhã às 15h?' },
-  { n: 'Beleza e estética', ic: 'beleza', c: '#f3cf6e', t: 'Agenda preenchida e clientes de volta', d: 'A IA preenche os horários, lembra o cliente do atendimento e chama de volta quem sumiu.', q: 'Tem horário para escova no sábado?', a: 'Tenho às 10h e às 14h. Qual você prefere?' },
-  { n: 'Atacado', ic: 'atacado', c: '#b8e6dc', t: 'Pedidos recorrentes sem planilha', d: 'A IA mantém cadastros e tabelas em dia e repete pedidos de clientes antigos em poucas mensagens.', q: 'Quero repetir o pedido da semana passada.', a: 'Claro! Mesmos itens e quantidades. Confirmo para entrega na sexta?' },
-  { n: 'Serviços', ic: 'servicos', c: '#c5d0d8', t: 'Orçamentos e agenda em minutos', d: 'A IA recebe o pedido, pede as informações que faltam e já deixa o orçamento e a visita encaminhados.', q: 'Preciso de um orçamento de manutenção.', a: 'Claro! Me passa o endereço e o melhor horário que já te envio o orçamento.' },
+  { n: 'Varejo', ic: 'varejo', alt: 'Vendedora de avental verde atendendo numa floricultura', t: 'Responda na hora e feche mais vendas', d: 'A IA responde dúvidas de estoque, preço e entrega e leva o cliente até a compra, mesmo quando a loja está cheia ou fechada.', q: 'Oi! Tem esse buquê para hoje?', a: 'Tem sim! Separo um para você retirar ou prefere receber em casa?' },
+  { n: 'Clínicas', ic: 'clinicas', alt: 'Profissional de saúde com uniforme verde e estetoscópio', t: 'Agenda cheia sem a recepção parar', d: 'A IA agenda, confirma e remarca consultas pelo WhatsApp, e a sua equipe cuida de quem está na sala de espera.', q: 'Queria marcar uma consulta essa semana.', a: 'Tenho quinta às 10h ou sexta às 16h. Qual fica melhor para você?' },
+  { n: 'Restaurantes', ic: 'restaurantes', alt: 'Atendente de avental verde servindo no balcão de um café', t: 'Pedidos e dúvidas sem fila, no horário de pico', d: 'A IA atende dúvidas de cardápio, anota pedidos e avisa a cozinha, enquanto você cuida do balcão e das entregas.', q: 'Vocês entregam no Centro?', a: 'Entregamos sim, em até 40 minutos. Quer ver o cardápio de hoje?' },
+  { n: 'Imobiliárias', ic: 'imobiliarias', alt: 'Corretora de terno verde caminhando pela cidade', t: 'Cada interessado atendido, cada visita marcada', d: 'A IA responde quem pergunta sobre um imóvel, entende o que a pessoa procura e marca a visita na sua agenda.', q: 'O apartamento de 2 quartos ainda está disponível?', a: 'Está sim! Posso marcar uma visita para amanhã às 15h?' },
+  { n: 'Beleza e estética', ic: 'beleza', alt: 'Cabeleireira de blusa verde-clara arrumando o cabelo de um cliente', t: 'Agenda preenchida e clientes de volta', d: 'A IA preenche os horários, lembra o cliente do atendimento e chama de volta quem sumiu.', q: 'Tem horário para cortar no sábado?', a: 'Tenho às 10h e às 14h. Qual você prefere?' },
+  { n: 'Atacado', ic: 'atacado', alt: 'Funcionário de camiseta verde separando caixas no estoque', t: 'Pedidos recorrentes sem planilha', d: 'A IA mantém cadastros e tabelas em dia e repete pedidos de clientes antigos em poucas mensagens.', q: 'Quero repetir o pedido da semana passada.', a: 'Claro! Mesmos itens e quantidades. Confirmo para entrega na sexta?' },
+  { n: 'Serviços', ic: 'servicos', alt: 'Técnico de camiseta verde fazendo a manutenção de um ar-condicionado', t: 'Orçamentos e agenda em minutos', d: 'A IA recebe o pedido, pede as informações que faltam e já deixa o orçamento e a visita encaminhados.', q: 'Preciso de um orçamento de manutenção.', a: 'Claro! Me passa o endereço e o melhor horário que já te envio o orçamento.' },
 ]
 
-/** Segmentos atendidos: abas no topo e, abaixo, imagem com exemplo de conversa ao lado do texto do segmento. */
-// No celular a barra rola de lado: leva a aba escolhida para o meio.
-const centerTab = (el) => {
-  const bar = el?.parentElement
-  if (bar) bar.scrollTo({ left: el.offsetLeft - (bar.clientWidth - el.offsetWidth) / 2, behavior: prefersReducedMotion() ? 'auto' : 'smooth' })
-}
+const pad = (n) => String(n).padStart(2, '0')
 
+/**
+ * Segmentos atendidos. No desktop a seção fica fixada e os cartões andam para a esquerda conforme a rolagem;
+ * o painel ao lado mostra o segmento em foco. No celular (ou com movimento reduzido) vira um carrossel com encaixe.
+ */
 export function Products() {
+  const root = useRef(null)
+  const track = useRef(null)
+  const bar = useRef(null)
+  const st = useRef(null)
+  const onRef = useRef(0)
   const [on, setOn] = useState(0)
+  const [pinned, setPinned] = useState(false)
+  const N = SEGMENTS.length
   const s = SEGMENTS[on]
 
-  const onKey = (e) => {
-    if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return
-    e.preventDefault()
-    const next = (on + (e.key === 'ArrowRight' ? 1 : SEGMENTS.length - 1)) % SEGMENTS.length
-    setOn(next)
-    const t = document.getElementById(`seg-tab-${next}`)
-    t?.focus()
-    centerTab(t)
+  useEffect(() => {
+    const mm = gsap.matchMedia()
+    mm.add('(min-width: 901px) and (prefers-reduced-motion: no-preference)', () => {
+      setPinned(true)
+      const view = track.current.parentElement
+      const dist = () => Math.max(0, track.current.scrollWidth - view.clientWidth)
+      const tween = gsap.to(track.current, {
+        x: () => -dist(), ease: 'none',
+        scrollTrigger: {
+          trigger: root.current.querySelector('.segs__stage'), pin: true, start: 'top top', end: () => `+=${dist() * 1.15}`,
+          scrub: 0.7, invalidateOnRefresh: true,
+          onUpdate: (self) => {
+            const i = Math.round(self.progress * (N - 1))
+            if (i !== onRef.current) { onRef.current = i; setOn(i) }
+            if (bar.current) bar.current.style.transform = `scaleX(${self.progress})`
+          },
+        },
+      })
+      st.current = tween.scrollTrigger
+      return () => { st.current = null; setPinned(false) }
+    })
+    return () => mm.revert()
+  }, [N])
+
+  // No carrossel (celular), o cartão mais visível vira o ativo.
+  useEffect(() => {
+    if (pinned) return
+    const view = track.current.parentElement
+    const cards = [...track.current.children]
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting) { const i = cards.indexOf(e.target); onRef.current = i; setOn(i) } })
+    }, { root: view, threshold: 0.6 })
+    cards.forEach((c) => io.observe(c))
+    return () => io.disconnect()
+  }, [pinned])
+
+  const goTo = (k) => {
+    if (st.current) {
+      const t = st.current
+      window.scrollTo({ top: t.start + (t.end - t.start) * (k / (N - 1)) + 2, behavior: 'smooth' })
+    } else {
+      const card = track.current.children[k]
+      card?.parentElement.parentElement.scrollTo({ left: card.offsetLeft - 16, behavior: prefersReducedMotion() ? 'auto' : 'smooth' })
+    }
   }
 
   return (
-    <section className="products" id="segmentos" aria-labelledby="produtos-titulo">
+    <section className="segs" id="segmentos" ref={root} aria-labelledby="produtos-titulo">
       <div className="wrap">
-        <div className="head">
+        <div className="head segs__head">
           <span className="eyebrow" data-reveal>Para quem trabalhamos</span>
           <Words as="h2" id="produtos-titulo" className="h2" text="Do balcão da loja à agenda da clínica." />
           <p className="head__p" data-reveal>Cada negócio tem o seu ritmo. A gente adapta a tecnologia a ele, e não o contrário.</p>
         </div>
+      </div>
 
-        <div className="segtabs" data-reveal>
-          <div className="segtabs__bar" role="tablist" aria-label="Segmentos atendidos" onKeyDown={onKey}>
-            {SEGMENTS.map((x, k) => (
-              <button key={x.n} id={`seg-tab-${k}`} type="button" role="tab" aria-selected={k === on} aria-controls="seg-panel" tabIndex={k === on ? 0 : -1}
-                className={k === on ? 'is-on' : ''} onClick={(e) => { setOn(k); centerTab(e.currentTarget) }}><img src={ICONS[x.ic]} alt="" />{x.n}</button>
-            ))}
+      <div className={`segs__stage ${pinned ? 'is-pinned' : ''}`}>
+        <div className="segs__info">
+          <div className="segs__count" aria-hidden="true"><b key={on}>{pad(on + 1)}</b><span>/ {pad(N)}</span></div>
+          <div className="segs__copy" key={on} aria-live="polite">
+            <span className="segs__tag"><img src={ICONS[s.ic]} alt="" />{s.n}</span>
+            <h3>{s.t}</h3>
+            <p>{s.d}</p>
+            <a className="segs__link" href={SITE.signup}>Testar grátis <Arrow /></a>
           </div>
+          <div className="segs__nav">
+            <div className="segs__bar" aria-hidden="true"><i ref={bar} /></div>
+            <div className="segs__dots" role="group" aria-label="Escolher segmento">
+              {SEGMENTS.map((x, k) => (
+                <button key={x.n} type="button" className={k === on ? 'is-on' : ''} aria-label={x.n} aria-current={k === on} onClick={() => goTo(k)} />
+              ))}
+            </div>
+          </div>
+        </div>
 
-          <div className="segtabs__panel" id="seg-panel" role="tabpanel" aria-labelledby={`seg-tab-${on}`} key={on}>
-            <div className="segtabs__media" style={{ '--c': s.c }}>
-              <img className="segtabs__photo" src={PHOTOS[s.ic]} alt="" />
-              <div className="segtabs__chats">
-                <div className="segtabs__chat segtabs__chat--in"><small>Cliente</small><p>{s.q}</p></div>
-                <div className="segtabs__chat segtabs__chat--out"><small>Resposta da IA</small><p>{s.a}</p></div>
-              </div>
-            </div>
-            <div className="segtabs__text">
-              <h3>{s.t}</h3>
-              <p>{s.d}</p>
-              <a className="segtabs__link" href={SITE.signup}>Testar grátis <Arrow /></a>
-            </div>
+        <div className="segs__view" data-lenis-prevent-horizontal>
+          <div className="segs__track" ref={track}>
+            {SEGMENTS.map((x, k) => (
+              <article className={`seg ${k === on ? 'is-on' : ''}`} key={x.n} aria-label={x.n}>
+                <div className="seg__media">
+                  <img src={PHOTOS[x.ic]} alt={x.alt} loading="lazy" />
+                  <span className="seg__chip"><img src={ICONS[x.ic]} alt="" />{x.n}</span>
+                  <div className="seg__chats" aria-hidden={k !== on}>
+                    <div className="seg__chat seg__chat--in"><small>Cliente</small>{x.q}</div>
+                    <div className="seg__chat seg__chat--out"><small>Resposta da IA</small>{x.a}</div>
+                  </div>
+                </div>
+                <div className="seg__cap">
+                  <h3>{x.t}</h3>
+                  <p>{x.d}</p>
+                </div>
+              </article>
+            ))}
           </div>
         </div>
       </div>

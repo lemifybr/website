@@ -1,0 +1,82 @@
+/* ───── Segmentos: cartões que andam com o scroll (desktop) / carrossel com encaixe (celular) ───── */
+.segs { padding: 110px 0 0; position: relative; }
+.inst .segs__head { text-align: center; margin-inline: auto; margin-bottom: 24px; }
+.inst .segs__head .head__p { margin-inline: auto; max-width: 560px; }
+
+.segs__stage { position: relative; }
+.segs__view { position: relative; }
+.segs__track { display: flex; gap: 28px; width: max-content; will-change: transform; }
+
+/* Cartão */
+.seg { flex: none; width: clamp(280px, 24vw, 380px); transform-origin: 50% 70%; transition: transform 0.8s var(--ease), opacity 0.8s var(--ease), filter 0.8s var(--ease); }
+.seg__media { position: relative; aspect-ratio: 4 / 5; border-radius: 30px; overflow: hidden; background: #e7ebe2; box-shadow: 0 30px 60px -36px rgba(14, 36, 33, 0.55); }
+.inst .seg__media > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: scale(1.08); transition: transform 1.4s var(--ease); }
+.seg__media::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(14, 36, 33, 0) 45%, rgba(14, 36, 33, 0.55) 100%); pointer-events: none; }
+.seg__chip { position: absolute; z-index: 2; top: 16px; left: 16px; display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px 7px 8px; border-radius: 99px; background: rgba(255, 255, 255, 0.86); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); font-size: 14px; font-weight: 600; color: var(--brand); }
+.inst .seg__chip img { width: 22px; height: 22px; object-fit: contain; }
+.seg__chats { position: absolute; z-index: 2; left: 16px; right: 16px; bottom: 16px; display: grid; gap: 8px; }
+.seg__chat { width: fit-content; max-width: 88%; padding: 10px 14px; border-radius: 16px 16px 16px 6px; font-size: 14px; font-weight: 500; line-height: 1.35; box-shadow: 0 14px 28px -14px rgba(0, 0, 0, 0.5); opacity: 0; transform: translateY(14px) scale(0.96); transition: opacity 0.5s var(--ease), transform 0.6s var(--ease); }
+.seg__chat small { display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; opacity: 0.6; margin-bottom: 2px; }
+.seg__chat--in { background: #fff; color: var(--brand); }
+.seg__chat--out { justify-self: end; background: var(--lime); color: var(--brand); border-radius: 16px 16px 6px 16px; }
+.seg.is-on .seg__chat { opacity: 1; transform: none; }
+.seg.is-on .seg__chat--in { transition-delay: 0.25s; }
+.seg.is-on .seg__chat--out { transition-delay: 0.65s; }
+.seg__cap { display: none; }
+
+/* Painel com o segmento em foco */
+.segs__info { display: grid; gap: 28px; align-content: center; }
+.segs__count { display: flex; align-items: baseline; gap: 10px; color: var(--brand); }
+.segs__count b { font-size: clamp(64px, 6vw, 96px); line-height: 0.9; font-weight: 600; letter-spacing: -0.05em; animation: segNum 0.6s var(--ease) both; }
+.segs__count span { font-size: 18px; font-weight: 600; opacity: 0.45; }
+@keyframes segNum { from { opacity: 0; transform: translateY(40%); } to { opacity: 1; transform: none; } }
+.segs__copy { display: grid; gap: 16px; justify-items: start; min-height: 290px; align-content: start; }
+.segs__copy > * { animation: segCopy 0.7s var(--ease) both; }
+.segs__copy > :nth-child(2) { animation-delay: 0.06s; }
+.segs__copy > :nth-child(3) { animation-delay: 0.12s; }
+.segs__copy > :nth-child(4) { animation-delay: 0.18s; }
+@keyframes segCopy { from { opacity: 0; transform: translateY(18px); filter: blur(4px); } to { opacity: 1; transform: none; filter: none; } }
+.segs__tag { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px 6px 8px; border-radius: 99px; background: var(--lime); font-size: 14px; font-weight: 700; color: var(--brand); }
+.inst .segs__tag img { width: 22px; height: 22px; object-fit: contain; }
+.inst .segs__copy h3 { font-size: clamp(30px, 2.8vw, 44px); line-height: 1.05; letter-spacing: -0.035em; font-weight: 600; color: var(--brand); }
+.inst .segs__copy p { font-size: 18px; line-height: 1.55; color: var(--muted); max-width: 440px; }
+.segs__link { display: inline-flex; align-items: center; gap: 8px; margin-top: 4px; font-weight: 600; color: var(--brand); border-bottom: 1.5px solid currentColor; padding-bottom: 2px; }
+.segs__link svg { transition: transform 0.3s var(--ease); }
+.segs__link:hover svg { transform: translateX(4px); }
+.segs__nav { display: grid; gap: 16px; }
+.segs__bar { height: 3px; border-radius: 3px; background: rgba(28, 64, 59, 0.12); overflow: hidden; max-width: 320px; }
+.segs__bar i { display: block; height: 100%; background: var(--brand); transform: scaleX(0); transform-origin: 0 50%; }
+.segs__dots { display: flex; gap: 8px; }
+.segs__dots button { width: 10px; height: 10px; padding: 0; border: 0; border-radius: 99px; background: rgba(28, 64, 59, 0.2); cursor: pointer; transition: width 0.4s var(--ease), background 0.3s; }
+.segs__dots button.is-on { width: 30px; background: var(--brand); }
+.segs__dots button:hover:not(.is-on) { background: rgba(28, 64, 59, 0.45); }
+
+/* Desktop: seção fixada, cartões andam para a esquerda */
+.segs__stage.is-pinned { height: 100vh; min-height: 640px; display: grid; grid-template-columns: minmax(300px, 400px) minmax(0, 1fr); gap: clamp(32px, 4vw, 72px); align-items: center; padding: 96px 0 32px max(36px, calc((100% - 1480px) / 2)); overflow: hidden; }
+.is-pinned .segs__view { height: 100%; display: flex; align-items: center; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 56px); mask-image: linear-gradient(90deg, transparent 0, #000 56px); }
+.is-pinned .segs__track { padding-left: 64px; }
+/* O cartão também respeita a altura da tela, para caber inteiro com o menu em cima. */
+.is-pinned .seg { width: clamp(240px, min(24vw, calc((100vh - 230px) * 0.8)), 380px); }
+.is-pinned .segs__track { padding: 0 36px 0 0; align-items: center; }
+.is-pinned .seg:not(.is-on) { transform: scale(0.86); opacity: 0.55; filter: saturate(0.7); }
+.is-pinned .seg.is-on .seg__media > img { transform: scale(1); }
+.is-pinned .seg.is-on .seg__media { box-shadow: 0 40px 80px -40px rgba(14, 36, 33, 0.65); }
+
+/* Celular ou movimento reduzido: carrossel com encaixe; o texto vai dentro de cada cartão */
+.segs__stage:not(.is-pinned) { display: flex; flex-direction: column; gap: 22px; padding: 16px 0 96px; }
+.segs__stage:not(.is-pinned) .segs__info { order: 2; justify-items: center; }
+.segs__stage:not(.is-pinned) .segs__count, .segs__stage:not(.is-pinned) .segs__copy, .segs__stage:not(.is-pinned) .segs__bar { display: none; }
+.segs__stage:not(.is-pinned) .segs__view { overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding: 8px 0 4px; scroll-padding-inline: max(16px, calc((100% - 1480px) / 2)); }
+.segs__stage:not(.is-pinned) .segs__view::-webkit-scrollbar { display: none; }
+.segs__stage:not(.is-pinned) .segs__track { gap: 16px; padding-inline: max(16px, calc((100% - 1480px) / 2)); }
+.segs__stage:not(.is-pinned) .seg { width: min(82vw, 360px); scroll-snap-align: start; }
+.segs__stage:not(.is-pinned) .seg__cap { display: grid; gap: 8px; padding: 18px 4px 0; }
+.inst .seg__cap h3 { font-size: 22px; line-height: 1.15; letter-spacing: -0.02em; font-weight: 600; color: var(--brand); }
+.inst .seg__cap p { font-size: 15.5px; line-height: 1.5; color: var(--muted); }
+
+@media (max-width: 900px) {
+  .segs { padding-top: 80px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .seg__chat { opacity: 1; transform: none; }
+}

@@ -2,6 +2,7 @@
 @import './mock.css';
 @import './integrations.css';
 @import './company.css';
+@import './segments.css';
 /* Site institucional Lemify — escopo .inst para não colidir com a landing do produto (/lemify) */
 .inst {
   --brand: #1c403b;
@@ -35,46 +36,6 @@ html.lenis:has(.inst) { scroll-behavior: auto !important; }
 .inst .h2 { font-size: clamp(32px, 4.2vw, 60px); line-height: 1.04; letter-spacing: -0.03em; font-weight: 600; display: block; }
 .inst .eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; letter-spacing: 0.02em; color: var(--brand); background: var(--lime); padding: 7px 14px; border-radius: 99px; margin-bottom: 22px; }
 .inst .head { max-width: 820px; margin-bottom: 56px; }
-.products .head { text-align: center; margin-inline: auto; }
-.products .head .head__p { margin-inline: auto; max-width: 560px; }
-/* Segmentos: barra de abas + painel com imagem e texto. */
-.inst .segtabs { margin-top: 40px; }
-.inst .segtabs__bar { display: flex; gap: 4px; width: fit-content; max-width: 100%; margin-inline: auto; padding: 6px; border-radius: 999px; background: #fff; box-shadow: inset 0 0 0 1px rgba(28, 64, 59, 0.12); overflow-x: auto; scrollbar-width: none; }
-.inst .segtabs__bar::-webkit-scrollbar { display: none; }
-.inst .segtabs__bar button { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px 10px 14px; border: 0; border-radius: 999px; background: none; font: inherit; font-size: 15px; font-weight: 600; color: var(--brand); cursor: pointer; white-space: nowrap; transition: background 0.3s var(--ease), color 0.3s var(--ease); }
-.inst .segtabs__bar button:hover:not(.is-on) { background: rgba(28, 64, 59, 0.07); }
-.inst .segtabs__bar button.is-on { background: var(--brand); color: #fff; }
-.inst .segtabs__bar button img { width: 24px; height: 24px; object-fit: contain; transition: filter 0.3s var(--ease); }
-.inst .segtabs__bar button.is-on img { filter: invert(1); }
-.inst .segtabs__panel { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(32px, 6vw, 80px); align-items: center; margin-top: 40px; }
-/* Imagem na coluna da esquerda, maior e deslocada um pouco para a direita. */
-.inst .segtabs__media { justify-self: start; margin-left: 48px; position: relative; aspect-ratio: 1 / 1; max-width: 620px; max-height: 620px; width: calc(100% - 48px); border-radius: 32px; overflow: hidden; display: grid; place-items: center; animation: segMediaIn 0.6s var(--ease) both; }
-.inst .segtabs__photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-@keyframes segMediaIn { from { opacity: 0; transform: scale(0.94) translateY(10px); } to { opacity: 1; transform: none; } }
-@keyframes segTextIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
-@keyframes segChatIn { from { opacity: 0; transform: translateY(14px) scale(0.96); } to { opacity: 1; transform: none; } }
-.inst .segtabs__text { animation: segTextIn 0.6s var(--ease) both 0.08s; }
-.inst .segtabs__chat { animation: segChatIn 0.5s var(--ease) both; }
-.inst .segtabs__chat--in { animation-delay: 0.18s; }
-.inst .segtabs__chat--out { animation-delay: 0.3s; }
-.inst .segtabs__chats { position: absolute; left: 6%; right: 6%; bottom: 6%; display: flex; flex-direction: column; gap: 10px; }
-.inst .segtabs__chat { width: min(300px, 92%); padding: 14px 18px; border-radius: 18px; box-shadow: 0 14px 30px -14px rgba(14, 36, 33, 0.35); }
-.inst .segtabs__chat small { display: block; font-size: 12px; font-weight: 600; opacity: 0.65; }
-.inst .segtabs__chat p { margin: 4px 0 0; font-size: 15px; line-height: 1.35; font-weight: 500; }
-.inst .segtabs__chat--in { background: #fff; color: var(--brand); }
-.inst .segtabs__chat--out { margin-left: 8%; background: var(--brand); color: #fff; }
-.inst .segtabs__text { max-width: 590px; }
-.inst .segtabs__text h3 { margin: 0; font-size: clamp(30px, 3.6vw, 48px); line-height: 1.05; letter-spacing: -0.035em; font-weight: 600; color: var(--brand); }
-.inst .segtabs__text p { margin: 20px 0 0; font-size: 19px; line-height: 1.55; color: var(--muted); }
-.inst .segtabs__link { display: inline-flex; align-items: center; gap: 8px; margin-top: 30px; font-weight: 600; color: var(--brand); border-bottom: 1.5px solid currentColor; padding-bottom: 2px; }
-.inst .segtabs__link svg { transition: transform 0.3s var(--ease); }
-.inst .segtabs__link:hover svg { transform: translateX(4px); }
-@media (max-width: 900px) {
-  .inst .segtabs__panel { grid-template-columns: 1fr; gap: 28px; }
-  .inst .segtabs__bar { justify-content: flex-start; width: 100%; -webkit-mask-image: linear-gradient(90deg, #000 90%, transparent); mask-image: linear-gradient(90deg, #000 90%, transparent); }
-  .inst .segtabs__bar button { padding: 9px 16px 9px 10px; font-size: 14px; }
-  .inst .segtabs__media { justify-self: center; aspect-ratio: 4 / 5; width: 100%; max-width: 320px; margin-inline: auto; }
-}
 .inst .sp { font-size: 0; }
 .inst .head__p { margin-top: 18px; font-size: 19px; color: var(--muted); }
 .inst .w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.08em; margin-bottom: -0.08em; }
