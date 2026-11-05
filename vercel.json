@@ -5,6 +5,14 @@
   "outputDirectory": "dist",
   "rewrites": [
     {
+      "source": "/lemify",
+      "destination": "/lemify.html"
+    },
+    {
+      "source": "/lemify/planos",
+      "destination": "/lemify-planos.html"
+    },
+    {
       "source": "/llms.txt",
       "destination": "/api/llms"
     },
@@ -76,7 +84,7 @@
       ]
     },
     {
-      "source": "/assets/(.*)",
+      "source": "/(assets|lemify-assets)/(.*)",
       "headers": [
         {
           "key": "Cache-Control",

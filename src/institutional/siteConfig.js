@@ -10,7 +10,7 @@ export const SITE = {
   signup: 'https://app.lemify.com.br/signup',
   customerArea: 'https://app.lemify.com.br/login',
   cnpj: '69.768.422/0001-08',
-  productPage: 'https://app.lemify.com.br/signup', // TODO: confirmar destino de "Conhecer o Lemify"/Planos (a landing antiga foi removida)
+  productPage: '/lemify',
 }
 
 export const VALUES = [

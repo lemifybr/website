@@ -1,0 +1,1282 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://lemify.com.br/lemify">
+<title>Lemify · Plataforma de atendimento e CRM com agentes de IA</title>
+<meta name="description" content="O Lemify é o software que reúne WhatsApp, Instagram, Messenger e e-mail numa caixa só, com vários atendentes, CRM, agenda e agentes de IA. Teste grátis por 14 dias, sem cartão.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Lemify · Plataforma de atendimento e CRM com agentes de IA">
+<meta property="og:description" content="O Lemify é o software que reúne WhatsApp, Instagram, Messenger e e-mail numa caixa só, com vários atendentes, CRM, agenda e agentes de IA. Teste grátis por 14 dias, sem cartão.">
+<meta name="theme-color" content="#1C403B">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F6F5EE}
+h1,h2,h3,blockquote,.disp{font-family:'Bricolage Grotesque',sans-serif}
+a{color:#0E2421}a:hover{color:#56635F}
+.btn{transition:transform .2s ease,box-shadow .2s ease,filter .2s ease}
+.btn:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(14,36,33,.22);filter:brightness(1.04)}
+.arr{display:inline-block;transition:transform .25s ease}
+.btn:hover .arr,.tlink:hover .arr{transform:translateX(5px)}
+.tlink{background-image:linear-gradient(currentColor,currentColor);background-size:0% 1.5px;background-position:0 100%;background-repeat:no-repeat;transition:background-size .3s ease}
+.tlink:hover{background-size:100% 1.5px}
+.nav-link{background-image:linear-gradient(#0E2421,#0E2421);background-size:0% 2px;background-position:0 85%;background-repeat:no-repeat;transition:background-size .25s ease}
+.nav-link:hover{background-size:100% 2px}
+.lift{transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s ease}
+.lift:hover{transform:translateY(-6px);box-shadow:0 24px 48px rgba(14,36,33,.14)}
+.mascot img{transition:transform .45s cubic-bezier(.3,1.5,.5,1)}
+.mascot:hover img{transform:translateY(-8px) scale(1.04)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+.in{animation:fadeUp .8s cubic-bezier(.2,.7,.2,1) both}
+.d1{animation-delay:.08s}.d2{animation-delay:.18s}.d3{animation-delay:.3s}.d4{animation-delay:.45s}.d5{animation-delay:.6s}
+.m1{animation-delay:.6s}.m2{animation-delay:1.3s}.m3{animation-delay:2.1s}.m4{animation-delay:2.8s}.m5{animation-delay:3.6s}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.float{animation:floaty 6s ease-in-out infinite}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.marquee{animation:marquee 36s linear infinite}
+.marquee-wrap:hover .marquee{animation-play-state:paused}
+@keyframes turn{to{transform:rotate(360deg)}}
+.turn{animation:turn 60s linear infinite}
+.faq summary{list-style:none;cursor:pointer}
+.faq summary::-webkit-details-marker{display:none}
+.faq .plus{transition:transform .25s ease}
+.faq[open] .plus{transform:rotate(45deg)}
+.faq summary:hover{color:#56635F}
+.peek{position:absolute;z-index:0;pointer-events:none}
+.peek .bob{display:block;animation:bob 5s ease-in-out infinite}
+.peek .bob2{animation-duration:6.2s;animation-delay:-2s}
+.peek img{display:block;width:100%;height:auto;transition:transform .55s cubic-bezier(.3,1.4,.5,1)}
+.peek-host:hover .peek img,.shot:hover + .peek img{transform:translateY(-18px)}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@supports (animation-timeline: view()){@keyframes rise{from{transform:translateY(60%)}to{transform:none}}.peek{animation:rise linear both;animation-timeline:view();animation-range:entry 0% entry 100%}}
+.shot{position:absolute;z-index:2;background:#fff;border:1px solid #E1E4DA;border-radius:18px;overflow:hidden;box-shadow:0 24px 50px rgba(14,36,33,.14);transition:transform .45s cubic-bezier(.2,.7,.2,1),box-shadow .45s ease}
+.shot:hover{transform:translateY(-6px);box-shadow:0 30px 60px rgba(14,36,33,.2)}
+.shot img{display:block;width:100%;height:auto}
+.mk{position:absolute;top:10px;right:10px;width:30px;height:30px;border-radius:50%;background:#1C403B;color:var(--acc);font:700 14px/1 'Bricolage Grotesque',sans-serif;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,.18)}
+@media (max-width: 900px){.collage{height:auto !important;display:flex;flex-direction:column;gap:20px}.collage .shot{position:relative !important;left:auto !important;top:auto !important;width:100% !important;max-width:520px;margin:0 auto}.collage .shot-menu,.collage .peek{display:none}}
+@media (max-width: 760px){.topnav{display:none !important}}
+@media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important}}
+.hbg{position:absolute;inset:0;pointer-events:none;z-index:0}
+.dots{position:absolute;inset:0;background-image:radial-gradient(rgba(246,245,238,.16) 1px,transparent 1.4px);background-size:26px 26px;-webkit-mask-image:radial-gradient(ellipse 55% 60% at 22% 45%,#000 10%,transparent 72%);mask-image:radial-gradient(ellipse 55% 60% at 22% 45%,#000 10%,transparent 72%)}
+.grain{position:absolute;inset:0;opacity:.13;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+@media (max-width: 760px){.deco{display:none}}
+/* ===== v2 ===== */
+.hv{position:relative;max-width:1240px;margin:56px auto 0;height:620px}
+.nav-d{color:#F6F5EE;background-image:linear-gradient(#F6F5EE,#F6F5EE)}
+.nav-d:hover{color:#BCCDC7}
+@media (max-width: 560px){.hdr-sub,.hdr-in{display:none !important}}
+/* ===== fundo interativo do topo ===== */
+#topo .hx{pointer-events:none}
+#topo .hx a,#topo .hx .hv-shot,#topo .hx .phone,#topo .hx .hcard{pointer-events:auto}
+#topo .hbg .gx{pointer-events:auto}
+.gx{position:absolute;left:50%;top:0;display:grid;-webkit-mask-image:radial-gradient(ellipse 62% 70% at 50% 34%,#000 35%,transparent 92%);mask-image:radial-gradient(ellipse 62% 70% at 50% 34%,#000 35%,transparent 92%)}
+.gx i{display:block;position:relative}
+
+.gx.gc{width:2240px;margin-left:-1120px;grid-template-columns:repeat(40,56px);grid-auto-rows:56px}
+.gc i{border-right:1px solid rgba(246,245,238,.045);border-bottom:1px solid rgba(246,245,238,.045);transition:background-color 2.2s ease}
+.gc i:hover{background-color:rgba(246,245,238,.09);transition:background-color 0s}
+.bms{position:absolute;inset:0;overflow:hidden;-webkit-mask-image:radial-gradient(ellipse 62% 70% at 50% 34%,#000 35%,transparent 92%);mask-image:radial-gradient(ellipse 62% 70% at 50% 34%,#000 35%,transparent 92%)}
+.bm{position:absolute;display:block;opacity:0}
+.bv{top:0;width:1px;height:150px;margin-left:-1px;background:linear-gradient(180deg,rgba(246,245,238,0),color-mix(in srgb,var(--acc) 85%,transparent))}
+.bl{left:0;height:1px;width:170px;background:linear-gradient(90deg,rgba(246,245,238,0),color-mix(in srgb,var(--acc) 85%,transparent))}
+.br{right:0;height:1px;width:170px;background:linear-gradient(270deg,rgba(246,245,238,0),color-mix(in srgb,var(--acc) 85%,transparent))}
+@media (prefers-reduced-motion: no-preference){
+.bv{animation:bv 7s linear infinite}.bl{animation:bl 8s linear infinite}.br{animation:brr 8s linear infinite}
+}
+@keyframes bv{0%{transform:translateY(-160px);opacity:0}12%{opacity:1}70%{opacity:1}100%{transform:translateY(720px);opacity:0}}
+@keyframes bl{0%{transform:translateX(-180px);opacity:0}15%{opacity:1}70%{opacity:1}100%{transform:translateX(300px);opacity:0}}
+@keyframes brr{0%{transform:translateX(180px);opacity:0}15%{opacity:1}70%{opacity:1}100%{transform:translateX(-300px);opacity:0}}
+
+.hv-shot{bottom:0;display:flex;flex-direction:column}
+.hbg .glow{position:absolute;left:50%;bottom:-30%;width:1600px;height:1000px;margin-left:-800px;background:radial-gradient(closest-side,rgba(246,245,238,.08),rgba(246,245,238,0));pointer-events:none}
+.hv-shot{position:absolute;left:0;right:0;top:120px;border-radius:24px 24px 0 0;overflow:hidden;background:#F6F5EE;box-shadow:0 -20px 70px rgba(0,0,0,.3)}
+.phone{position:absolute;left:50%;top:0;width:312px;margin-left:-156px;height:650px;border-radius:48px;background:#000000;padding:9px;box-sizing:border-box;box-shadow:0 50px 90px rgba(0,0,0,.45),inset 0 0 0 1px rgba(255,255,255,.12);z-index:3}
+.phone.st{position:relative;left:auto;top:auto;margin:0 auto;width:340px;height:600px;box-shadow:0 40px 80px rgba(0,0,0,.35),inset 0 0 0 1px rgba(255,255,255,.12)}
+.scr{height:100%;border-radius:40px;background:#EFEEE7;overflow:hidden;display:flex;flex-direction:column;color:#0E2421;text-align:left}
+.ph-top{background:#1C403B;color:#F6F5EE;padding:36px 16px 12px;display:flex;align-items:center;gap:10px;position:relative;flex:none}
+.ph-top:before{content:"";position:absolute;top:10px;left:50%;width:84px;height:22px;margin-left:-42px;border-radius:999px;background:#000000}
+.ph-av{width:38px;height:38px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;font-weight:700;overflow:hidden;object-fit:cover}
+.ph-name{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+.ph-name strong{font-size:14.5px}
+.ph-name span{font-size:12px;color:#BCCDC7}
+.ph-wa{margin-left:auto;display:flex;align-items:center;gap:6px;font-size:11.5px;font-weight:600;color:#BCCDC7}
+.ph-wa i{width:8px;height:8px;border-radius:50%;background:#25D366;display:block}
+.ph-chat{flex:1;padding:14px 12px;display:flex;flex-direction:column;gap:8px;font-size:13.5px;line-height:1.42;min-height:0}
+.bub{max-width:84%;padding:9px 12px 6px;border-radius:16px;box-shadow:0 1px 1px rgba(14,36,33,.06);box-sizing:border-box}
+.bub small{display:block;text-align:right;font-size:10.5px;color:#56635F;margin-top:2px}
+.bub.c{align-self:flex-start;background:#FFFFFF;border-radius:16px 16px 16px 4px}
+.bub.a{align-self:flex-end;background:#F1FECB;border-radius:16px 16px 4px 16px}
+.slot{align-self:flex-end;position:relative;max-width:84%;display:flex;justify-content:flex-end}
+.slot .bub{max-width:100%}
+.ev{align-self:center;display:flex;align-items:center;gap:8px;background:#1C403B;color:#F6F5EE;font-size:12px;font-weight:600;padding:7px 12px;border-radius:12px;line-height:1.35;max-width:92%;box-sizing:border-box}
+.ev i{width:8px;height:8px;border-radius:50%;background:var(--acc);display:block;flex:none}
+.day{align-self:center;font-size:11px;font-weight:600;color:#56635F;background:#E4ECE5;padding:3px 10px;border-radius:8px}
+.tp{position:absolute;right:0;top:0;background:#F1FECB;border-radius:16px 16px 4px 16px;padding:12px 14px;display:none;gap:4px}
+.tp i{width:6px;height:6px;border-radius:50%;background:#56635F;display:block;animation:tdot 1s infinite}
+.tp i:nth-child(2){animation-delay:.15s}.tp i:nth-child(3){animation-delay:.3s}
+@keyframes tdot{0%,60%,100%{transform:none;opacity:.45}30%{transform:translateY(-3px);opacity:1}}
+.hcard{position:absolute;width:312px;z-index:4;color:#0E2421}
+.hcard .float{background:#F6F5EE;border-radius:20px;padding:10px 14px 10px 10px;box-shadow:0 18px 40px rgba(0,0,0,.25);display:flex;align-items:center;gap:12px}
+.hcard img{width:50px;height:50px;border-radius:14px;object-fit:cover;flex:none;display:block}
+.hcard span.t{display:flex;flex-direction:column;line-height:1.3}
+.hcard strong{font-size:14px}
+.hcard em{font-style:normal;font-size:13px;color:#56635F}
+@media (prefers-reduced-motion: no-preference){
+.hv .q{opacity:0;animation-duration:16s;animation-iteration-count:infinite;animation-timing-function:ease;animation-fill-mode:both}
+.q6{animation-name:q6}.q18{animation-name:q18}.q31{animation-name:q31}.q43{animation-name:q43}.q54{animation-name:q54}.q62{animation-name:q62}
+.hv .tp{display:flex;opacity:0;animation-duration:16s;animation-iteration-count:infinite;animation-fill-mode:both}
+.t1{animation-name:t1}.t2{animation-name:t2}
+}
+@keyframes q6{0%,5%{opacity:0;transform:translateY(8px)}8%,93%{opacity:1;transform:none}97%,100%{opacity:0;transform:none}}
+@keyframes q18{0%,17%{opacity:0;transform:translateY(8px)}20%,93%{opacity:1;transform:none}97%,100%{opacity:0;transform:none}}
+@keyframes q31{0%,30%{opacity:0;transform:translateY(8px)}33%,93%{opacity:1;transform:none}97%,100%{opacity:0;transform:none}}
+@keyframes q43{0%,42%{opacity:0;transform:translateY(8px)}45%,93%{opacity:1;transform:none}97%,100%{opacity:0;transform:none}}
+@keyframes q54{0%,53%{opacity:0;transform:translateY(8px)}56%,93%{opacity:1;transform:none}97%,100%{opacity:0;transform:none}}
+@keyframes q62{0%,61%{opacity:0;transform:translateY(8px)}64%,93%{opacity:1;transform:none}97%,100%{opacity:0;transform:none}}
+@keyframes t1{0%,9%{opacity:0}10%,17%{opacity:1}18%,100%{opacity:0}}
+@keyframes t2{0%,34%{opacity:0}35%,42%{opacity:1}43%,100%{opacity:0}}
+@media (max-width: 760px){.hv{height:520px}.hv-shot{display:none}.phone{width:286px;margin-left:-143px;height:580px}}
+.agr{position:absolute;opacity:0;pointer-events:none;width:1px;height:1px;margin:0}
+.ag-wrap{position:relative;max-width:1240px;margin:0 auto;padding:clamp(56px,7vw,104px) clamp(24px,4vw,48px);display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:48px 80px;align-items:center}
+@media (max-width: 960px){.ag-wrap{grid-template-columns:minmax(0,1fr)}}
+.ag-list{display:flex;flex-direction:column;gap:6px;margin-top:28px}
+.ag-i{display:grid;grid-template-columns:52px minmax(0,1fr);column-gap:16px;align-items:center;padding:10px 16px 10px 10px;border-radius:22px;cursor:pointer;border:1px solid transparent;transition:background .25s ease,border-color .25s ease}
+.ag-i:hover{background:rgba(246,245,238,.05)}
+.ag-i img{width:52px;height:52px;border-radius:16px;object-fit:cover;display:block}
+.ag-n{display:flex;flex-direction:column;line-height:1.3}
+.ag-n strong{font-size:17px}
+.ag-n span{font-size:14px;color:#BCCDC7}
+.ag-d{grid-column:2;font-size:15px;line-height:1.5;color:#BCCDC7;max-height:0;overflow:hidden;opacity:0;transition:max-height .35s ease,opacity .35s ease,margin .35s ease}
+#ag1:checked ~ .ag-wrap .ag-i1,#ag2:checked ~ .ag-wrap .ag-i2,#ag3:checked ~ .ag-wrap .ag-i3,#ag4:checked ~ .ag-wrap .ag-i4,#ag5:checked ~ .ag-wrap .ag-i5,#ag6:checked ~ .ag-wrap .ag-i6{background:rgba(246,245,238,.08);border-color:color-mix(in srgb, var(--acc) 40%, transparent)}
+#ag1:checked ~ .ag-wrap .ag-i1 .ag-d,#ag2:checked ~ .ag-wrap .ag-i2 .ag-d,#ag3:checked ~ .ag-wrap .ag-i3 .ag-d,#ag4:checked ~ .ag-wrap .ag-i4 .ag-d,#ag5:checked ~ .ag-wrap .ag-i5 .ag-d,#ag6:checked ~ .ag-wrap .ag-i6 .ag-d{max-height:140px;opacity:1;margin-top:6px}
+#ag1:focus-visible ~ .ag-wrap .ag-i1,#ag2:focus-visible ~ .ag-wrap .ag-i2,#ag3:focus-visible ~ .ag-wrap .ag-i3,#ag4:focus-visible ~ .ag-wrap .ag-i4,#ag5:focus-visible ~ .ag-wrap .ag-i5,#ag6:focus-visible ~ .ag-wrap .ag-i6{outline:2px solid var(--acc);outline-offset:2px}
+.ag-p{display:none;flex-direction:column;height:100%}
+#ag1:checked ~ .ag-wrap .ag-p1,#ag2:checked ~ .ag-wrap .ag-p2,#ag3:checked ~ .ag-wrap .ag-p3,#ag4:checked ~ .ag-wrap .ag-p4,#ag5:checked ~ .ag-wrap .ag-p5,#ag6:checked ~ .ag-wrap .ag-p6{display:flex}
+.ag-p .s{animation:pop .45s ease both}
+.ag-p .s1{animation-delay:.15s}.ag-p .s2{animation-delay:.8s}.ag-p .s3{animation-delay:1.45s}.ag-p .s4{animation-delay:2.1s}.ag-p .s5{animation-delay:2.75s}.ag-p .s6{animation-delay:3.4s}
+@keyframes pop{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:none}}
+.ficha{align-self:stretch;background:#FFFFFF;border-radius:16px;padding:12px 14px;display:flex;flex-direction:column;gap:7px;font-size:12.5px;box-shadow:0 1px 1px rgba(14,36,33,.06)}
+.ficha div{display:flex;justify-content:space-between;gap:10px}
+.ficha span{color:#56635F}
+.ficha b{font-weight:600;text-align:right}
+.tb-tabs{display:flex;justify-content:center;flex-wrap:wrap;gap:4px 36px;border-bottom:1px solid #E1E4DA;margin:4px auto 40px;max-width:760px}
+.tb-tabs label{cursor:pointer;padding:14px 2px;font-weight:600;font-size:16px;color:#56635F;border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .2s ease,border-color .2s ease}
+.tb-tabs label:hover{color:#0E2421}
+#tb1:checked ~ .tb-wrap .tl1,#tb2:checked ~ .tb-wrap .tl2,#tb3:checked ~ .tb-wrap .tl3,#tb4:checked ~ .tb-wrap .tl4{color:#0E2421;border-bottom-color:#0E2421}
+#tb1:focus-visible ~ .tb-wrap .tl1,#tb2:focus-visible ~ .tb-wrap .tl2,#tb3:focus-visible ~ .tb-wrap .tl3,#tb4:focus-visible ~ .tb-wrap .tl4{outline:2px solid #0E2421;outline-offset:4px}
+.tb-p{display:none;grid-template-columns:minmax(0,340px) minmax(0,1fr);gap:40px 56px;align-items:center}
+#tb1:checked ~ .tb-wrap .tp1,#tb2:checked ~ .tb-wrap .tp2,#tb3:checked ~ .tb-wrap .tp3,#tb4:checked ~ .tb-wrap .tp4{display:grid}
+.tb-fr{position:relative;min-height:520px;display:flex;align-items:center;justify-content:center}
+.tb-fr img{display:block;max-width:100%;max-height:520px;width:auto;height:auto;border-radius:16px;border:1px solid #E1E4DA;box-shadow:0 30px 60px rgba(14,36,33,.16);animation:pop .5s ease both}
+@media (max-width: 900px){.tb-p{grid-template-columns:minmax(0,1fr)}.tb-fr{min-height:0}}
+.tb-txt ul{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-direction:column;gap:10px}
+.tb-txt li{display:flex;gap:10px;align-items:flex-start;font-size:15.5px}
+.tb-txt li svg{flex:none;margin-top:3px}
+.case{border-radius:32px;padding:clamp(26px,3vw,40px);display:flex;flex-direction:column;gap:22px;box-sizing:border-box}
+.case blockquote{margin:0;font-size:15px;line-height:1.6;font-family:'Bricolage Grotesque',sans-serif}
+.case .who{margin-top:auto;display:flex;flex-direction:column;gap:6px;font-size:14px}
+.cl-logo{height:40px;display:flex;align-items:center}
+.cl-logo img{display:block;width:auto}
+.stick{position:sticky;bottom:22px;z-index:40;height:0;display:flex;align-items:flex-start;justify-content:center;pointer-events:none}
+.stick a{pointer-events:auto;position:relative;top:-66px;display:inline-flex;align-items:center;gap:12px;background:#1C403B;color:#F6F5EE;text-decoration:none;padding:9px 10px 9px 9px;border-radius:999px;box-shadow:0 18px 40px rgba(14,36,33,.35),inset 0 0 0 1px color-mix(in srgb, var(--acc) 18%, transparent);font-weight:700;font-size:15px;white-space:nowrap}
+.stick a:hover{color:#F6F5EE}
+.stick .ic{width:38px;height:38px;border-radius:50%;background:#163631;display:flex;align-items:center;justify-content:center;flex:none}
+.stick .go{width:38px;height:38px;border-radius:50%;background:var(--acc);color:#0E2421;display:flex;align-items:center;justify-content:center;flex:none;font-size:17px}
+.stick small{font-size:13px;font-weight:500;color:#BCCDC7}
+@supports (animation-timeline: scroll()){.stick a{animation:stickIn linear both;animation-timeline:scroll(root);animation-range:0px 760px}}
+@keyframes stickIn{0%,70%{opacity:0;transform:translateY(18px);pointer-events:none}100%{opacity:1;transform:none;pointer-events:auto}}
+#comecar{view-timeline-name:--fim}
+@supports (timeline-scope: --fim){.stick{animation:stickOut linear both;animation-timeline:--fim;animation-range:entry 5% entry 45%}}
+@keyframes stickOut{from{opacity:1}to{opacity:0;transform:translateY(30px);visibility:hidden}}
+@media (max-width: 560px){.stick small{display:none}}
+/* ===== v3 ===== */
+.rbar{position:fixed;left:0;top:0;right:0;height:3px;background:#1C403B;transform-origin:0 50%;transform:scaleX(0);z-index:60;pointer-events:none}
+@supports (animation-timeline: scroll()){.rbar{animation:rbar linear both;animation-timeline:scroll(root)}}
+@keyframes rbar{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.stack{display:inline-flex;align-items:center}
+.stack img + img{margin-left:-10px}
+.stm{max-width:1080px;margin:0 auto;padding:clamp(80px,9vw,128px) 24px 0;display:flex;flex-direction:column;align-items:center;gap:56px}
+.stm-p{margin:0;text-align:center;font-family:'Bricolage Grotesque',sans-serif;font-weight:500;font-size:clamp(26px,2.9vw,42px);line-height:1.36;letter-spacing:-0.02em;color:#0E2421;text-wrap:balance}
+.hv .hcard{width:344px}
+.chip{display:inline-flex;align-items:center;gap:.3em;padding:.1em .55em .1em .12em;border-radius:999px;font-size:.8em;font-weight:700;line-height:1;vertical-align:-.14em;letter-spacing:-0.01em;white-space:nowrap}
+.chip img{width:1.45em;height:1.45em;border-radius:50%;object-fit:cover;object-position:center top;display:block;background:rgba(255,255,255,.55)}
+@supports (animation-timeline: view()){
+.stm-p .w{animation:wl linear both;animation-timeline:view();animation-range:entry 100% cover 48%}
+.stm-p .chip{animation:cl linear both;animation-timeline:view();animation-range:entry 100% cover 48%}
+.js-n img{animation:nl linear both;animation-timeline:view();animation-range:entry 80% cover 45%}
+.js-tr i{animation:tf linear both;animation-timeline:view();animation-range:cover 25% cover 55%}
+}
+@keyframes wl{from{color:rgba(14,36,33,.18)}to{color:#0E2421}}
+@keyframes cl{from{opacity:.25;transform:scale(.92)}to{opacity:1;transform:none}}
+@keyframes nl{from{opacity:.35;transform:scale(.86)}to{opacity:1;transform:none}}
+@keyframes tf{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+.outc{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;width:100%}
+.outc > div{background:#FFFFFF;border:1px solid #E1E4DA;border-radius:28px 28px 28px 8px;padding:28px 26px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px}
+.outc h3{margin:8px 0 0;font-size:18px;font-weight:600;line-height:1.35}
+.outc p{margin:0;color:#56635F;font-size:15px;max-width:300px}
+.vs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;width:100%;max-width:1040px;margin:0 auto}
+.vs-c{border-radius:32px;padding:clamp(26px,3vw,40px);display:flex;flex-direction:column;gap:20px;box-sizing:border-box}
+.vs-c header{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:44px}
+.vs-c h3{margin:0;font-size:22px;font-weight:700;line-height:1.2}
+.vs-c ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.vs-c li{display:grid;grid-template-columns:24px minmax(0,1fr);column-gap:14px;padding:16px 0;border-top:1px solid rgba(86,99,95,.25)}
+.vs-c li svg{margin-top:2px}
+.vs-c li span{display:block;font-size:13px;font-weight:600;opacity:.7;margin-bottom:2px}
+.vs-c li p{margin:0;font-size:16px;line-height:1.5}
+.vs-bot{background:#E4ECE5;color:#56635F}
+.vs-ag{background:#1C403B;color:#F6F5EE}
+.vs-ag li{border-top-color:rgba(246,245,238,.14)}
+.vs-ag li p{font-weight:600}
+.ag-live{position:relative;z-index:1;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px 14px;padding:16px 24px;font-size:15px;color:#0E2421;text-align:center}
+.ag-live .dot{width:10px;height:10px;border-radius:50%;background:#1C403B;display:block;flex:none;box-shadow:0 0 0 0 rgba(14,36,33,.45);animation:pulse 2s ease-out infinite}
+.ag-live span{color:#163631}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(14,36,33,.45)}70%{box-shadow:0 0 0 10px rgba(14,36,33,0)}100%{box-shadow:0 0 0 0 rgba(14,36,33,0)}}
+.jl{list-style:none;margin:0 auto;padding:0;max-width:880px;width:100%}
+.js{display:grid;grid-template-columns:136px 56px minmax(0,1fr);column-gap:24px;align-items:start;position:relative;padding-bottom:26px}
+.js-t{font-weight:700;font-size:15px;text-align:right;padding-top:16px;line-height:1.35}
+.js-n{position:relative;z-index:1;width:56px;height:56px}
+.js-n img,.js-n .mk2{width:56px;height:56px;border-radius:50%;object-fit:cover;object-position:center top;display:block;box-shadow:0 0 0 4px #F6F5EE}
+.js-n .mk2{background:#1C403B;color:#F6F5EE;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px}
+.js-tr{position:absolute;left:187px;top:64px;bottom:6px;width:2px;border-radius:2px;background:#E4ECE5;overflow:hidden}
+.js-tr i{position:absolute;inset:0;background:#1C403B;transform-origin:50% 0;display:block}
+.js:last-child .js-tr{display:none}
+.js-c{background:#FFFFFF;border:1px solid #E1E4DA;border-radius:22px;padding:16px 22px 18px;display:flex;flex-direction:column;gap:4px}
+.js-c strong{font-size:15px}
+.js-c strong em{font-style:normal;font-weight:500;color:#56635F}
+.js-c p{margin:0;font-size:15.5px;line-height:1.55}
+.js-c .js-tm{display:none;font-style:normal;font-size:13px;font-weight:700;color:#56635F}
+.js.hl .js-c{background:#1C403B;border-color:#1C403B;color:#F6F5EE}
+.js.hl .js-c strong em{color:#BCCDC7}
+@media (max-width: 720px){.js{grid-template-columns:48px minmax(0,1fr);column-gap:16px}.js-t{display:none}.js-n,.js-n img,.js-n .mk2{width:48px;height:48px}.js-tr{left:23px;top:56px}.js-c .js-tm{display:block}}
+.seg{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;width:100%}
+.seg > div{background:#FFFFFF;border:1px solid #E1E4DA;border-radius:28px 28px 28px 8px;padding:26px 24px;display:flex;flex-direction:column;gap:12px}
+.seg header{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.seg h3{margin:0;font-size:19px;font-weight:700;line-height:1.25}
+.seg p{margin:0;color:#56635F;font-size:15px;line-height:1.55}
+.seg a{margin-top:auto;font-weight:700;font-size:15px;text-decoration:none;align-self:flex-start}
+@media (max-width: 1100px){.seg{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width: 900px){.outc,.vs{grid-template-columns:minmax(0,1fr)}}
+@media (max-width: 620px){.seg{grid-template-columns:minmax(0,1fr)}}
+.intg{display:flex;flex-direction:column;align-items:center;gap:26px;width:100%}
+.intg-t{margin:0;font-size:16px;font-weight:600;text-align:center}
+.intg-rows{position:relative;width:100%;display:flex;flex-direction:column;gap:14px;padding:6px 0}
+.ir{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 14%,#000 86%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0%,#000 14%,#000 86%,transparent 100%)}
+.ir-track{display:flex;gap:14px;width:max-content;padding-right:14px;animation:marquee 46s linear infinite}
+.ir-track.r2{animation-direction:reverse;animation-duration:52s}
+.ir-track.r3{animation-duration:58s}
+.pl{display:inline-flex;align-items:center;gap:9px;height:54px;padding:0 24px;background:#FFFFFF;border-radius:999px;flex:none;font-weight:600;font-size:15px;color:#0E2421;box-sizing:border-box;box-shadow:0 1px 2px rgba(14,36,33,.06)}
+.pl img{height:22px;width:auto;display:block}
+.intg-orb{position:absolute;left:50%;top:50%;width:108px;height:108px;margin:-54px 0 0 -54px;border-radius:50%;background:#1C403B;display:flex;align-items:center;justify-content:center;z-index:2;box-shadow:0 0 0 12px rgba(228,236,229,.9),0 0 0 26px color-mix(in srgb, var(--acc) 45%, transparent),0 24px 60px rgba(14,36,33,.35);animation:orb 3.6s ease-in-out infinite}
+.intg-orb img{width:46px;height:auto;display:block}
+@keyframes orb{0%,100%{box-shadow:0 0 0 12px rgba(228,236,229,.9),0 0 0 26px color-mix(in srgb, var(--acc) 45%, transparent),0 24px 60px rgba(14,36,33,.35)}50%{box-shadow:0 0 0 12px rgba(228,236,229,.9),0 0 0 34px color-mix(in srgb, var(--acc) 25%, transparent),0 24px 60px rgba(14,36,33,.35)}}
+.ba{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.ba > div{border-radius:18px;padding:14px 16px;display:flex;flex-direction:column;gap:4px}
+.ba span{font-size:13px;font-weight:700}
+.ba p{margin:0;font-size:14.5px;line-height:1.5}
+.ba-l > div:first-child{background:#F6F5EE;color:#56635F}
+.ba-l > div:last-child{background:#F1FECB;color:#0E2421}
+.ba-d > div:first-child{background:#163631;color:#BCCDC7}
+.ba-d > div:last-child{background:color-mix(in srgb, var(--acc) 14%, transparent);color:#F6F5EE}
+@media (max-width: 560px){.ba{grid-template-columns:minmax(0,1fr)}}
+.qa{display:flex;flex-direction:column;gap:6px;padding:20px 0;border-bottom:1px solid #E1E4DA}
+.qa:last-child{border-bottom:0}
+.qa h3{margin:0;font-size:19px;font-weight:700;line-height:1.35}
+.qa p{margin:0;color:#56635F;font-size:16px}
+.ph3{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;width:100%;padding-top:34px}
+.ph3-line{position:absolute;left:8px;right:8px;top:7px;height:3px;border-radius:3px;background:linear-gradient(90deg,#0E2421 0%,#0E2421 34%,var(--acc) 67%,#E1E4DA 100%)}
+.ph3 > div{position:relative;display:flex;flex-direction:column;gap:6px}
+.ph3 > div:before{content:"";position:absolute;left:0;top:-34px;width:17px;height:17px;border-radius:50%;background:#1C403B;box-shadow:0 0 0 5px #F6F5EE}
+.ph3 strong{font-size:17px}
+.ph3 p{margin:0;color:#56635F;font-size:15px}
+@media (max-width: 760px){.ph3{grid-template-columns:minmax(0,1fr);padding-top:0;padding-left:34px;gap:22px}.ph3-line{left:7px;right:auto;top:8px;bottom:8px;width:3px;height:auto;background:linear-gradient(180deg,#0E2421 0%,#0E2421 34%,var(--acc) 67%,#E1E4DA 100%)}.ph3 > div:before{left:-34px;top:2px}}
+/* ===== v5: narrativa revisada ===== */
+.prova{max-width:1100px;margin:0 auto;padding:clamp(40px,5vw,64px) 24px 0}
+.pv{background:#FFFFFF;border:1px solid #E1E4DA;border-radius:28px;padding:22px 30px;display:grid;grid-template-columns:auto auto minmax(0,1fr) auto;align-items:center;gap:18px 36px}
+.pv-n{display:flex;align-items:center;gap:12px}
+.pv-n strong{font-size:44px;line-height:1;font-weight:700;letter-spacing:-.03em}
+.pv-n span{font-size:14px;font-weight:600;line-height:1.3;max-width:96px}
+.pv blockquote{margin:0;font-size:16px;line-height:1.5;color:#0E2421}
+.pv a{font-weight:700;font-size:15px;text-decoration:none;white-space:nowrap}
+@media (max-width: 860px){.pv{grid-template-columns:minmax(0,1fr);justify-items:center;text-align:center;padding:26px 24px}}
+.dor{display:flex;gap:18px;padding:18px 0;border-bottom:1px solid rgba(86,99,95,.28)}
+.dor:last-child{border-bottom:0}
+.dor svg{flex:none;margin-top:2px}
+.dor p{margin:0;font-size:17px;font-weight:500;line-height:1.45;color:#0E2421}
+.gst{background:#1C403B;color:#F6F5EE;border-radius:32px;padding:clamp(26px,3.2vw,44px);display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:28px 56px;align-items:center}
+.gst h3{margin:0;font-size:clamp(22px,2.2vw,30px);font-weight:600;line-height:1.25;letter-spacing:-.01em}
+.gst p{margin:12px 0 0;color:#BCCDC7;font-size:16px;max-width:520px}
+.gst-chat{background:#EFEEE7;border-radius:24px;padding:16px;display:flex;flex-direction:column;gap:8px;color:#0E2421;font-size:14px;line-height:1.42}
+.gst-chat .who{font-size:11px;font-weight:700;color:#56635F;margin:0 4px -4px}
+.gst-chat .who.r{text-align:right}
+.flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;width:100%}
+.fl{position:relative;background:#FFFFFF;border:1px solid #E1E4DA;border-radius:28px 28px 28px 8px;padding:22px 20px;display:flex;flex-direction:column;gap:14px}
+.fl header{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.fl h3{margin:0;font-size:17px;font-weight:600;line-height:1.3}
+.fl:not(:last-child):after{content:"";position:absolute;right:-16px;top:50%;width:10px;height:10px;border-top:2px solid #0E2421;border-right:2px solid #0E2421;transform:translateY(-50%) rotate(45deg)}
+.mini{background:#F6F5EE;border-radius:16px;padding:12px 14px;font-size:13.5px;line-height:1.4;display:flex;flex-direction:column;gap:7px;margin-top:auto}
+.mini .row{display:flex;justify-content:space-between;gap:8px}
+.mini .row span{color:#56635F}
+.mini .row b{font-weight:600;text-align:right}
+.mini .ok{display:flex;align-items:center;gap:8px;font-weight:600}
+.mini .ok i{width:8px;height:8px;border-radius:50%;background:#1C403B;display:block;flex:none}
+.mini .msg{background:#FFFFFF;border-radius:14px 14px 14px 4px;padding:9px 11px;box-shadow:0 1px 1px rgba(14,36,33,.06)}
+@media (max-width: 1000px){.flow{grid-template-columns:repeat(2,minmax(0,1fr))}.fl:after{display:none}}
+.eq{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;width:100%;max-width:1120px;margin:0 auto}
+.eq-c{border-radius:28px;padding:clamp(24px,3vw,36px);display:flex;flex-direction:column;gap:18px}
+.eq-c header{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:40px}
+.eq-c h3{margin:0;font-size:20px;font-weight:700;line-height:1.25}
+.eq-c ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}
+.eq-c li{display:flex;gap:12px;align-items:flex-start;font-size:16px;line-height:1.45}
+.eq-c li svg{flex:none;margin-top:2px}
+.eq-a{background:#163631;color:#F6F5EE}
+.eq-p{background:#F6F5EE;color:#0E2421}
+.cfg{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.cfg > div{background:#F6F5EE;border-radius:28px 28px 28px 8px;padding:26px 22px;display:flex;flex-direction:column;gap:10px}
+.cfg h3{margin:4px 0 0;font-size:17px;font-weight:600;line-height:1.35}
+.cfg p{margin:0;color:#56635F;font-size:15px}
+.sup{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.sup > div{background:#FFFFFF;border-radius:24px;padding:22px 26px;display:flex;flex-direction:column;gap:6px}
+.sup strong{font-size:17px;line-height:1.35}
+.sup p{margin:0;color:#56635F;font-size:15px}
+@media (max-width: 1000px){.cfg{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width: 760px){.gst,.eq,.sup{grid-template-columns:minmax(0,1fr)}}
+@media (max-width: 560px){.flow,.cfg{grid-template-columns:minmax(0,1fr)}}
+/* ===== v6: telas novas e celular ===== */
+.hv-dark{background:#161618 !important;box-shadow:0 -20px 70px rgba(0,0,0,.45),inset 0 0 0 1px rgba(246,245,238,.08) !important}
+.tb-zoom{display:block;position:relative;border-radius:16px;cursor:zoom-in;color:#F6F5EE;text-decoration:none}
+.tb-zoom picture{display:block}
+.tb-fr img{background:#111113}
+.tb-zoom .zm{position:absolute;right:12px;bottom:12px;display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:999px;background:rgba(14,36,33,.78);font-size:13px;font-weight:600;opacity:0;transition:opacity .2s ease}
+.tb-zoom:hover .zm,.tb-zoom:focus-visible .zm{opacity:1}
+.ag-m{display:none}
+.ag-cap{align-self:center;font-size:11.5px;color:#56635F;margin-top:2px}
+@media (max-width: 760px){
+  /* contêineres: menos aninhamento, mais largura útil */
+  section:has(> .pnl){padding-left:8px !important;padding-right:8px !important}
+  .pnl{border-radius:28px !important}
+  .pnl-in{padding:44px 20px !important;gap:28px !important}
+  .sh{align-items:flex-start !important;text-align:left !important;gap:12px !important}
+  .sh h2,.sh p{max-width:none !important}
+  .sh-h{text-align:left !important;margin:0 0 20px !important}
+  .cta{width:100%;max-width:440px;justify-content:center;box-sizing:border-box;white-space:nowrap}
+  /* ritmo vertical: 64px entre seções claras, 48px antes de painel */
+  .marquee-wrap{padding:44px 0 0 !important}
+  .prova{padding:28px 16px 0 !important}
+  section[aria-label="O problema"]{padding-top:48px !important}
+  .stm{padding:64px 20px 0 !important;gap:24px !important}
+  #como-funciona{padding:64px 20px 0 !important;gap:24px !important}
+  #agentes{padding-top:48px !important}
+  #uma-venda{padding:64px 20px 0 !important;gap:28px !important}
+  section[aria-label="Como cada negócio usa"]{padding:64px 20px 0 !important;gap:24px !important}
+  #por-dentro{padding:64px 20px 0 !important}
+  section[aria-label="Agentes e equipe"]{padding-top:48px !important}
+  #configuracao{padding-top:12px !important}
+  #cases{padding:64px 20px 0 !important;gap:24px !important}
+  #duvidas{padding:64px 20px 48px !important;gap:16px !important}
+  #comecar{padding:0 8px 24px !important}
+  /* topo */
+  #topo header{padding:14px 16px !important;gap:10px !important;flex-wrap:nowrap !important}
+  #topo header > div{gap:14px !important}
+  #topo .hdr-cta{padding:10px 16px !important;min-height:44px !important;font-size:14px !important}
+  #topo .hdr-cta .arr{display:none}
+  #topo header > a:first-child{min-height:44px}
+  .case .who .tlink{padding:11px 0}
+  #topo .hx{padding-top:36px !important}
+  #topo .hx > div{gap:18px !important}
+  #topo h1{font-size:35px !important;line-height:1.08 !important}
+  #topo h1 br{display:none}
+  #topo .hx p{font-size:16.5px !important}
+  #topo .hx .in.d4{align-self:stretch;align-items:center}
+  /* faixa de confiança em lista compacta */
+  .marquee{gap:52px !important;padding-right:52px !important}
+  .marquee img{height:28px !important}
+  .trust{margin-top:28px !important;gap:0 !important;padding:0 20px !important}
+  .tr-i{display:grid !important;grid-template-columns:44px minmax(0,1fr);column-gap:14px;row-gap:0;align-items:center;justify-items:start;text-align:left !important;padding:14px 0 !important}
+  .tr-i .tr-ic{grid-row:span 2;width:44px;height:44px !important;margin:0 !important;justify-content:center;border-radius:14px;background:#E4ECE5}
+  .tr-i + .tr-i{padding-top:14px !important}
+  .trust .tr-i:first-child{display:flex !important;justify-content:flex-start !important;padding-top:4px !important}
+  .trust .tr-i:first-child .tr-ic{width:auto;height:auto !important;background:none;border-radius:0}
+  /* prova */
+  .pv{padding:22px 20px !important;gap:10px !important;border-radius:24px !important}
+  .pv a{min-height:44px;display:inline-flex;align-items:center;gap:6px}
+  /* problema: título, foto larga, dores; gestor com mais largura */
+  .pb-row{gap:20px !important}
+  .pb-txt{display:contents !important}
+  .pb-txt > *{flex:1 1 100%;min-width:0}
+  .pb-txt > h2{order:1}
+  .pb-txt > h2 strong,#como-funciona h2 strong{display:block}
+  .pb-ph{order:2;flex:1 1 100% !important}
+  .pb-txt > div{order:3}
+  .pb-img{aspect-ratio:16/10 !important;border-radius:88px 20px 88px 20px !important}
+  .dor{gap:14px;padding:15px 0}
+  .dor p{font-size:16px}
+  .gst{border-radius:24px;padding:24px 20px;gap:20px}
+  .gst h3{font-size:21px}
+  .gst p{font-size:15.5px}
+  /* ganhos em linhas compactas */
+  .stm-p{text-align:left;font-size:27px;line-height:1.25;width:100%}
+  .outc{gap:12px}
+  .outc > div{display:grid !important;grid-template-columns:64px minmax(0,1fr);column-gap:14px;row-gap:4px;align-items:start !important;text-align:left !important;padding:18px 18px 20px !important}
+  .outc > div > .stack{grid-row:span 2;margin-top:2px}
+  .outc .stack img{width:40px !important;height:40px !important}
+  .outc .stack img + img{margin-left:-16px !important}
+  .outc h3{margin:0 !important;font-size:17px}
+  .outc p{max-width:none !important}
+  /* demonstração */
+  .fl{padding:18px !important;border-radius:22px 22px 22px 8px}
+  /* agentes: lista em sanfona com a conversa logo abaixo */
+  #agentes .ag-wrap{padding:44px 20px 28px !important;gap:0 !important}
+  #agentes .ag-wrap > div:last-child{display:none}
+  .ag-list{gap:4px !important}
+  .ag-i{grid-template-columns:44px minmax(0,1fr) !important;column-gap:14px !important;padding:10px 12px 10px 8px !important;min-height:64px;box-sizing:border-box;border-radius:18px !important}
+  .ag-i img{width:44px !important;height:44px !important;border-radius:14px !important}
+  .ag-n strong{font-size:15.5px !important;line-height:1.3}
+  .ag-n span{font-size:13px !important}
+  .ag-i{position:relative;padding-right:38px !important}
+  .ag-i:after{content:"";position:absolute;right:18px;top:27px;width:8px;height:8px;border-right:2px solid #BCCDC7;border-bottom:2px solid #BCCDC7;transform:rotate(45deg);transition:transform .25s ease}
+  #ag1:checked ~ .ag-wrap .ag-i1:after,#ag2:checked ~ .ag-wrap .ag-i2:after,#ag3:checked ~ .ag-wrap .ag-i3:after,#ag4:checked ~ .ag-wrap .ag-i4:after,#ag5:checked ~ .ag-wrap .ag-i5:after,#ag6:checked ~ .ag-wrap .ag-i6:after{transform:translateY(4px) rotate(-135deg);border-color:var(--acc)}
+  .ag-m{flex-direction:column;gap:8px;background:#EFEEE7;color:#0E2421;border-radius:20px;padding:14px 12px 10px;margin:4px 0 12px;font-size:13.5px;line-height:1.42}
+  #ag1:checked ~ .ag-wrap .ag-m1,#ag2:checked ~ .ag-wrap .ag-m2,#ag3:checked ~ .ag-wrap .ag-m3,#ag4:checked ~ .ag-wrap .ag-m4,#ag5:checked ~ .ag-wrap .ag-m5,#ag6:checked ~ .ag-wrap .ag-m6{display:flex}
+  .ag-m .s{animation:pop .45s ease both}
+  .ag-m .s1{animation-delay:.1s}.ag-m .s2{animation-delay:.55s}.ag-m .s3{animation-delay:1s}.ag-m .s4{animation-delay:1.45s}.ag-m .s5{animation-delay:1.9s}.ag-m .s6{animation-delay:2.35s}
+  .ag-live{font-size:14px;padding:14px 20px}
+  /* telas: controle segmentado, imagem antes do texto */
+  .tb-tabs{flex-wrap:nowrap !important;justify-content:space-between !important;gap:4px !important;max-width:none !important;margin:0 0 18px !important;padding:4px;background:#E4ECE5;border-radius:999px;border-bottom:0 !important}
+  .tb-tabs label{flex:1 1 auto;display:flex;align-items:center;justify-content:center;min-height:44px;box-sizing:border-box;padding:0 10px !important;font-size:14px !important;border-radius:999px;border-bottom:0 !important;margin:0 !important}
+  #tb1:checked ~ .tb-wrap .tl1,#tb2:checked ~ .tb-wrap .tl2,#tb3:checked ~ .tb-wrap .tl3,#tb4:checked ~ .tb-wrap .tl4{background:#1C403B !important;color:#F6F5EE !important}
+  .tb-p{gap:20px !important}
+  .tb-fr{order:-1}
+  .tb-fr img{max-height:none !important;width:100% !important;border-radius:16px !important;box-shadow:0 16px 36px rgba(14,36,33,.18) !important}
+  .tb-zoom .zm{opacity:1;position:static;background:none;color:#0E2421;padding:0;margin-top:8px;min-height:40px;font-size:14px}
+  .tb-txt h3{font-size:21px !important}
+  #por-dentro > p{text-align:left !important}
+  /* equipe */
+  .eq-c{padding:22px 20px !important;border-radius:22px !important;gap:14px !important}
+  .eq-c li{font-size:15.5px}
+  .eq-a header .stack img{width:28px !important;height:28px !important}
+  /* configuração: passos em linha do tempo vertical */
+  .sup > div{padding:18px 20px !important}
+  .intg-orb{width:76px !important;height:76px !important;margin:-38px 0 0 -38px !important}
+  .intg-orb img{width:32px !important}
+  .pl{height:46px !important;padding:0 18px !important;font-size:14px !important}
+  /* cases */
+  #cases > div[style*="minmax(360px"]{grid-template-columns:minmax(0,1fr) !important}
+  .tband{padding:26px 20px !important;border-radius:24px !important;gap:18px !important}
+  .tband h3{font-size:22px !important}
+  .case{border-radius:24px !important;padding:24px 20px !important;gap:16px !important}
+  .vids{display:block !important;overflow:visible !important}
+  .vid:not(.vreal){display:none !important}
+  .vid.vreal{width:100%;max-width:440px;margin:0 auto}
+  /* dúvidas */
+  #duvidas h2{text-align:left !important}
+  .faq summary{padding:18px 0 !important;font-size:16.5px !important;line-height:1.35}
+  .faq p{font-size:15.5px}
+  /* fechamento e rodapé */
+  #comecar > div{border-radius:28px !important}
+  #comecar > div > div:first-child{padding:36px 22px 8px !important;gap:16px !important}
+  #comecar h2{font-size:31px !important}
+  #comecar > div > div:first-child > div{align-items:stretch !important}
+  footer{border-radius:28px 28px 0 0 !important}
+  footer > div{padding:32px 20px 96px !important;flex-direction:column;align-items:flex-start !important}
+  footer nav{gap:0 22px !important}
+  footer nav a{display:inline-flex;align-items:center;min-height:44px}
+  .stick a{padding:7px 7px 7px 8px;gap:10px}
+}
+@media (max-width: 720px){
+  .js{grid-template-columns:40px minmax(0,1fr) !important;column-gap:12px !important;padding-bottom:16px !important}
+  .js-n,.js-n img,.js-n .mk2{width:40px !important;height:40px !important}
+  .js-n .mk2{font-size:16px !important}
+  .js-tr{left:19px !important;top:48px !important}
+  .js-c{padding:14px 16px 16px !important;border-radius:18px !important}
+  .js-c p{font-size:15px}
+}
+@media (max-width: 620px){
+  .seg{display:flex !important;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px !important;margin:0 -20px;padding:2px 20px 12px;scroll-padding-left:20px;scrollbar-width:none}
+  .seg::-webkit-scrollbar{display:none}
+  .seg > div{flex:0 0 80%;scroll-snap-align:start;padding:22px 20px !important;box-sizing:border-box}
+  .seg a{min-height:44px;display:inline-flex;align-items:center;gap:6px}
+  section[aria-label="Como cada negócio usa"] > p{text-align:left !important}
+}
+@media (max-width: 560px){
+  .flow{gap:26px !important}
+  .fl:not(:last-child):after{display:block !important;right:auto !important;left:50% !important;top:auto !important;bottom:-19px !important;transform:translateX(-50%) rotate(135deg) !important}
+  .cfg{gap:0 !important}
+  .cfg > div{position:relative;display:grid !important;grid-template-columns:36px minmax(0,1fr);column-gap:14px;row-gap:4px;background:none !important;padding:0 0 22px !important;border-radius:0 !important}
+  .cfg > div .stepn{grid-row:span 2}
+  .cfg h3{margin:6px 0 0 !important;font-size:16.5px}
+  .cfg > div:not(:last-child):before{content:"";position:absolute;left:17px;top:42px;bottom:4px;width:2px;border-radius:2px;background:#CAD2CC}
+}
+@media (min-width: 380px) and (max-width: 560px){
+  #topo header .hdr-in{display:inline-flex !important;align-items:center;min-height:44px;padding:0 2px !important}
+}
+
+h1,h2,h3{text-wrap:balance}
+p,blockquote,li,.ag-d,.tr-s{text-wrap:pretty}
+.trust{max-width:1040px;margin:52px auto 0;padding:0 24px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+.tr-i{display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px;padding:4px 28px}
+.tr-i + .tr-i{border-left:1px solid #E1E4DA}
+.tr-ic{height:30px;display:flex;align-items:center;gap:10px;margin-bottom:8px;color:#56635F;font-size:13px;font-weight:600}
+.tr-i strong{font-size:16px;font-weight:600;line-height:1.35}
+.tr-s{font-size:14px;color:#56635F;line-height:1.5}
+.trust .tr-i:first-child{justify-content:center}
+.trust .tr-i:first-child .tr-ic{margin-bottom:0;height:auto;gap:12px;font-size:15px}
+@media (max-width: 760px){.trust{grid-template-columns:minmax(0,1fr);gap:22px}.tr-i + .tr-i{border-left:0;border-top:1px solid #E1E4DA;padding-top:22px}}
+.stepn{width:36px;height:36px;border-radius:50%;background:#1C403B;color:var(--acc);font:700 15px/36px 'Bricolage Grotesque',sans-serif;text-align:center;display:block}
+.ag-n strong{font-size:16px}.ag-d{font-size:14.5px}
+.tb-txt li{font-size:15px}
+.vid.vreal{padding:0}
+.vid.vreal:hover{transform:none;box-shadow:none}
+.vreal video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 35%;display:block;background:#1C403B}
+.vcap{position:absolute;left:0;right:0;top:0;padding:18px 20px 44px;display:flex;flex-direction:column;line-height:1.35;color:#F6F5EE;background:linear-gradient(180deg,rgba(0,0,0,.62),rgba(0,0,0,0));pointer-events:none}
+.tband{background:#E4ECE5;border-radius:32px;padding:clamp(30px,3.4vw,44px) 24px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:26px}
+.tband > div{width:100%;max-width:560px;text-align:left}
+.case > strong,.marquee-wrap > p{text-wrap:balance}
+.vcap strong{font-size:15px}.vcap span{font-size:13px;color:#BCCDC7}
+.depth{position:absolute;inset:0;background:radial-gradient(130% 95% at 50% 0%,rgba(0,0,0,0) 42%,rgba(0,0,0,.55) 100%)}
+.hp-div{width:1px;height:36px;background:rgba(228,236,229,.3);display:block}
+@media (max-width: 560px){.hp-div{display:none}}
+.bar{display:block;height:14px;border-radius:999px;transform-origin:left center}
+@supports (animation-timeline: view()){@keyframes grow{from{transform:scaleX(0)}to{transform:none}}.bar{animation:grow linear both;animation-timeline:view();animation-range:entry 30% cover 45%}}
+.vid{position:relative;margin:0;border-radius:28px;overflow:hidden;aspect-ratio:4/5;display:flex;flex-direction:column;justify-content:flex-end;padding:22px 24px;box-sizing:border-box;color:#0E2421;cursor:pointer;transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s ease}
+.vid:hover{transform:translateY(-6px);box-shadow:0 24px 48px rgba(14,36,33,.16)}
+.vid .play{position:absolute;left:50%;top:44%;width:78px;height:78px;margin:-39px 0 0 -39px;border-radius:50%;background:#1C403B;display:flex;align-items:center;justify-content:center;box-shadow:0 14px 30px rgba(14,36,33,.28);transition:transform .3s cubic-bezier(.3,1.4,.5,1)}
+.vid:hover .play{transform:scale(1.08)}
+@media (max-width: 760px){.vids{grid-template-columns:none !important;grid-auto-flow:column;grid-auto-columns:78%;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px}.vids .vid{scroll-snap-align:start}}
+
+/* ===== v7: identidade do site institucional ===== */
+:root{--brand:#1C403B;--brand-2:#163631;--ink:#0E2421;--lime:#D8FE6A;--lime-2:#F1FECB;--cream:#F6F5EE;--mint:#E4ECE5;--muted:#56635F;--line:#E1E4DA}
+body{background:var(--cream);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+h1{font-weight:600 !important}
+h1 strong{font-weight:600 !important}
+h2{font-weight:600 !important;font-size:clamp(30px,3.5vw,52px) !important;line-height:1.06 !important;letter-spacing:-.032em !important}
+h2 strong{font-weight:600 !important}
+.eyebrow{display:inline-flex;align-items:center;gap:6px;width:max-content;max-width:100%;box-sizing:border-box;padding:6px 13px;border-radius:999px;background:var(--lime);color:var(--ink);font-size:13px;font-weight:600;line-height:1.2;letter-spacing:0}
+.eyebrow.eb-w{background:#FFFFFF}
+.btn{font-weight:600 !important}
+/* topo */
+.annc{background:var(--brand);color:var(--cream);font-size:14px;text-align:center;padding:9px 16px;display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:2px 14px;line-height:1.4}
+.annc a{color:var(--lime);font-weight:600;text-decoration:none}
+.annc a:hover{color:var(--lime)}
+.annc a:hover .arr{transform:translateX(4px)}
+.site-h{max-width:1400px;margin:0 auto;padding:16px 28px;display:flex;align-items:center;justify-content:space-between;gap:12px 32px;box-sizing:border-box}
+.btn-o{display:inline-flex;align-items:center;min-height:46px;box-sizing:border-box;padding:11px 22px;border-radius:999px;border:1.5px solid var(--brand);color:var(--brand);font-size:15px;font-weight:600;text-decoration:none;transition:background .2s ease,color .2s ease}
+.btn-o:hover{background:var(--brand);color:var(--cream)}
+.hero-card{margin:0 16px;border-radius:40px}
+.hero-card .eyebrow{background:rgba(216,254,106,.14);color:var(--lime);box-shadow:inset 0 0 0 1px rgba(216,254,106,.3)}
+@media (max-width:760px){.hero-card{margin:0 8px;border-radius:28px}.annc{font-size:13px;padding:8px 14px}.site-h{padding:12px 16px}}
+@media (max-width:560px){.hdr-login{display:none}}
+@media (max-width:760px){.pb-txt > .eyebrow{flex:0 0 auto !important;order:0}}
+/* seções */
+.sh-eb{display:flex;justify-content:center;margin:0 0 16px}
+.stm-h{display:flex;flex-direction:column;align-items:center;gap:18px;text-align:center}
+.stm-p{font-weight:600;font-size:clamp(30px,3.6vw,54px);line-height:1.1;letter-spacing:-.032em}
+.stm-s{margin:0;font-size:17px;color:var(--muted)}
+.pb-txt .eyebrow{margin-bottom:-4px}
+/* o que é */
+.what{max-width:1280px;margin:0 auto;padding:clamp(80px,9vw,128px) 24px 0;display:flex;flex-direction:column;gap:clamp(28px,4vw,48px)}
+.what-g{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.08fr);gap:48px 72px;align-items:start}
+.what-t{display:flex;flex-direction:column;gap:18px;position:sticky;top:40px}
+.what-t > p{margin:0;font-size:18px;line-height:1.6;color:var(--muted);max-width:520px}
+.what-f{display:flex;flex-direction:column;gap:12px;margin-top:8px}
+.what-f div{display:flex;gap:12px;align-items:center;font-size:15.5px;font-weight:500}
+.what-ic{width:36px;height:36px;border-radius:12px;background:var(--mint);display:flex;align-items:center;justify-content:center;flex:none}
+.what-c{display:flex;flex-direction:column;gap:16px}
+.wc{border-radius:32px;padding:clamp(26px,3vw,40px);display:flex;flex-direction:column;gap:14px}
+.wc h3{margin:0 0 4px;font-size:22px;font-weight:600;letter-spacing:-.015em;line-height:1.25}
+.wc ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.wc li{display:grid;grid-template-columns:24px minmax(0,1fr);column-gap:14px;padding:13px 0;font-size:16px;line-height:1.45}
+.wc li + li{border-top:1px solid rgba(14,36,33,.09)}
+.wc li svg{margin-top:1px}
+.wc-yes{background:var(--brand);color:var(--cream)}
+.wc-yes li + li{border-top-color:rgba(246,245,238,.12)}
+.wc-no{background:#FFFFFF;border:1px solid var(--line)}
+.wc-no li{color:var(--muted)}
+.wc-note{margin:6px 0 0;padding:16px 18px;border-radius:18px;background:var(--lime-2);font-size:15px;line-height:1.5;color:var(--ink);font-weight:500}
+@media (max-width:900px){.what{padding:64px 20px 0;gap:28px}.what-g{grid-template-columns:minmax(0,1fr);gap:28px}.what-t{position:static}}
+/* dor -> solução */
+.fix{width:100%;display:flex;flex-direction:column;gap:12px}
+.fix-h,.fx{display:grid;grid-template-columns:minmax(0,.85fr) 44px minmax(0,1.3fr);align-items:center;column-gap:24px}
+.fix-h{padding:0 30px 2px;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.fx{background:#FFFFFF;border:1px solid var(--line);border-radius:28px;padding:22px 30px}
+.fx-p{display:flex;gap:12px;align-items:flex-start;color:var(--muted);font-size:16px;line-height:1.45}
+.fx-p svg{flex:none;margin-top:2px}
+.fx-a{width:44px;height:44px;border-radius:50%;background:var(--lime);display:flex;align-items:center;justify-content:center}
+.fx-s{display:flex;flex-direction:column;align-items:flex-start;gap:10px}
+.fx-s p{margin:0;font-size:17px;font-weight:500;line-height:1.45;color:var(--ink)}
+.fx-tag{display:inline-flex;align-items:center;gap:8px;padding:3px 12px 3px 3px;border-radius:999px;background:var(--mint);color:var(--brand);font-size:13px;font-weight:600}
+.fx-tag img{width:24px !important;height:24px !important;box-shadow:none !important}
+.fx-ib{width:24px;height:24px;border-radius:50%;background:#FFFFFF;display:flex;align-items:center;justify-content:center}
+@media (max-width:760px){.fix-h{display:none}.fx{grid-template-columns:minmax(0,1fr);row-gap:12px;padding:20px;border-radius:22px}.fx-a{width:34px;height:34px;transform:rotate(90deg)}}
+/* funcionalidades */
+.feat{max-width:1280px;margin:0 auto;padding:clamp(80px,9vw,128px) 24px 0;display:flex;flex-direction:column;gap:44px}
+.bento{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.bx{position:relative;border-radius:32px;padding:clamp(26px,3vw,38px);display:flex;flex-direction:column;gap:16px;background:#FFFFFF;border:1px solid var(--line);box-sizing:border-box;overflow:hidden}
+.bx.s2{grid-column:span 2}.bx.s3{grid-column:span 3}
+.bx-k{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;color:var(--muted)}
+.bx-k i{width:36px;height:36px;border-radius:12px;background:var(--mint);color:var(--brand);display:flex;align-items:center;justify-content:center}
+.bx h3{margin:0;font-size:clamp(22px,2vw,28px);font-weight:600;letter-spacing:-.022em;line-height:1.15;max-width:560px}
+.bx ul{list-style:none;margin:4px 0 0;padding:0;display:grid;gap:11px}
+.bx.s2 ul{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:32px}
+.bx.s3 ul{grid-template-columns:repeat(3,minmax(0,1fr));column-gap:32px}
+.bx li{display:grid;grid-template-columns:18px minmax(0,1fr);column-gap:10px;font-size:15.5px;line-height:1.45}
+.bx li svg{margin-top:3px;color:var(--brand)}
+.bx-tag{display:inline-block;margin-left:4px;padding:1px 8px;border-radius:999px;background:var(--lime);color:var(--ink);font-size:11.5px;font-weight:700;white-space:nowrap;vertical-align:1px}
+.bx.lime{background:var(--lime);border-color:transparent}
+.bx.lime .bx-k{color:var(--brand)}
+.bx.lime .bx-k i{background:rgba(255,255,255,.65)}
+.bx.dark{background:var(--brand);color:var(--cream);border-color:transparent}
+.bx.dark .bx-k{color:#BCCDC7}
+.bx.dark .bx-k i{background:rgba(246,245,238,.1);color:var(--lime)}
+.bx.dark li svg{color:var(--lime)}
+.bx-st{position:absolute;right:28px;top:28px}
+.bx-st img + img{margin-left:-12px}
+@media (max-width:1000px){.bento{grid-template-columns:repeat(2,minmax(0,1fr))}.bx.s2,.bx.s3{grid-column:span 2}.bx.s3 ul{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:680px){.feat{padding:64px 20px 0;gap:28px}.bento{grid-template-columns:minmax(0,1fr)}.bx.s2,.bx.s3{grid-column:auto}.bx.s2 ul,.bx.s3 ul{grid-template-columns:minmax(0,1fr)}.bx{border-radius:24px;padding:24px 20px}.bx-st{position:static;order:-1}}
+/* agentes em lime */
+#agentes .pnl{background:var(--lime) !important;color:var(--ink) !important}
+#agentes .hbg{display:none}
+#agentes .ag-i{grid-template-columns:60px minmax(0,1fr)}
+#agentes .ag-i img{width:60px;height:60px;border-radius:50%}
+#agentes .ag-i:hover{background:rgba(14,36,33,.05)}
+#agentes .ag-n span,#agentes .ag-d{color:#3D4D48}
+#agentes #ag1:checked ~ .ag-wrap .ag-i1,#agentes #ag2:checked ~ .ag-wrap .ag-i2,#agentes #ag3:checked ~ .ag-wrap .ag-i3,#agentes #ag4:checked ~ .ag-wrap .ag-i4,#agentes #ag5:checked ~ .ag-wrap .ag-i5,#agentes #ag6:checked ~ .ag-wrap .ag-i6{background:#FFFFFF;border-color:rgba(14,36,33,.08);box-shadow:0 14px 34px rgba(14,36,33,.10)}
+#agentes #ag1:focus-visible ~ .ag-wrap .ag-i1,#agentes #ag2:focus-visible ~ .ag-wrap .ag-i2,#agentes #ag3:focus-visible ~ .ag-wrap .ag-i3,#agentes #ag4:focus-visible ~ .ag-wrap .ag-i4,#agentes #ag5:focus-visible ~ .ag-wrap .ag-i5,#agentes #ag6:focus-visible ~ .ag-wrap .ag-i6{outline-color:var(--brand)}
+#agentes .ag-live{background:var(--brand);color:var(--cream)}
+#agentes .ag-live span{color:#BCCDC7}
+#agentes .ag-live .dot{background:var(--lime);animation:pulseL 2s ease-out infinite}
+@keyframes pulseL{0%{box-shadow:0 0 0 0 rgba(216,254,106,.55)}70%{box-shadow:0 0 0 10px rgba(216,254,106,0)}100%{box-shadow:0 0 0 0 rgba(216,254,106,0)}}
+@media (max-width:760px){#agentes .ag-i:after{border-color:var(--brand) !important}}
+/* etapas empilhadas */
+.stk{display:flex;flex-direction:column;gap:22px}
+.stk-c{position:sticky;top:calc(84px + var(--i) * 22px);display:grid;grid-template-columns:clamp(84px,12vw,176px) minmax(0,1fr);align-items:center;column-gap:clamp(20px,3vw,48px);min-height:230px;box-sizing:border-box;padding:clamp(28px,3.4vw,48px) clamp(26px,4vw,64px);border-radius:32px;box-shadow:0 -14px 40px rgba(14,36,33,.07),0 1px 0 rgba(14,36,33,.04)}
+.stk-n{font-family:'Bricolage Grotesque',system-ui,sans-serif;font-weight:600;font-size:clamp(88px,11vw,176px);line-height:.78;letter-spacing:-.06em;color:var(--brand);text-align:center}
+.stk-k{display:block;margin-bottom:10px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.stk-c h3{margin:0;font-size:clamp(24px,2.7vw,40px);font-weight:600;letter-spacing:-.028em;line-height:1.08}
+.stk-c p{margin:12px 0 0;font-size:17px;color:#3D4D48;max-width:540px}
+.stk-1{background:var(--lime)}.stk-2{background:var(--lime-2)}.stk-3{background:#FFFFFF}
+.stk-4{background:var(--brand);color:var(--cream)}.stk-4 .stk-n{color:var(--lime)}.stk-4 .stk-k{color:#BCCDC7}.stk-4 p{color:#D2DDD9}
+@media (max-width:760px){.stk{gap:14px}.stk-c{top:calc(24px + var(--i) * 14px);min-height:0;grid-template-columns:56px minmax(0,1fr);column-gap:16px;padding:22px 20px;border-radius:24px}.stk-n{font-size:64px}.stk-c h3{font-size:21px}.stk-c p{font-size:15.5px;margin-top:8px}}
+/* cases */
+.cases-g{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:stretch}
+.cases-g .vid{aspect-ratio:auto;min-height:420px}
+@media (max-width:1000px){.cases-g{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.cases-g .vid{grid-column:span 2;aspect-ratio:16/10;min-height:0}}
+@media (max-width:700px){.cases-g{grid-template-columns:minmax(0,1fr)}.cases-g .vid{grid-column:auto;aspect-ratio:4/5}}
+/* planos */
+.plans{max-width:1280px;margin:0 auto;padding:clamp(80px,9vw,128px) 24px 0;display:flex;flex-direction:column;gap:36px}
+.pg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:stretch;padding-top:14px}
+.pc{position:relative;background:#FFFFFF;border:1px solid var(--line);border-radius:32px;padding:34px 30px;display:flex;flex-direction:column;gap:16px}
+.pc h3{margin:0;font-size:26px;font-weight:600;letter-spacing:-.02em}
+.pc .pd{margin:0;color:var(--muted);font-size:15px;line-height:1.5;min-height:45px}
+.pp{display:flex;align-items:baseline;gap:6px;margin:4px 0 2px}
+.pp small{font-size:17px;font-weight:600}
+.pp strong{font-family:'Bricolage Grotesque',system-ui,sans-serif;font-size:56px;font-weight:600;letter-spacing:-.045em;line-height:1}
+.pp > span{color:var(--muted);font-size:15px}
+.pc-cta{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:52px;border-radius:999px;background:var(--brand);color:var(--cream);text-decoration:none;font-size:16px;padding:14px 20px}
+.pc-cta:hover{color:var(--cream)}
+.pc ul{list-style:none;margin:6px 0 0;padding:16px 0 0;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:11px}
+.pc li{display:grid;grid-template-columns:18px minmax(0,1fr);column-gap:10px;font-size:15.5px;line-height:1.45}
+.pc li svg{margin-top:3px;color:var(--brand)}
+.pc.ft{background:var(--brand);color:var(--cream);border-color:transparent;box-shadow:0 30px 60px rgba(14,36,33,.20)}
+.pc.ft .pd,.pc.ft .pp > span{color:#BCCDC7}
+.pc.ft .pc-cta{background:var(--lime);color:var(--ink)}
+.pc.ft ul{border-top-color:rgba(246,245,238,.14)}
+.pc.ft li svg{color:var(--lime)}
+.pc-b{position:absolute;top:-14px;left:28px;right:28px;width:max-content;max-width:calc(100% - 56px);padding:6px 13px;border-radius:999px;background:var(--lime);color:var(--ink);font-size:12.5px;font-weight:600;line-height:1.2}
+.p-all{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:10px 24px;font-size:15px}
+.p-all span{display:inline-flex;align-items:center;gap:8px;color:var(--muted)}
+.p-impl{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 32px;background:var(--mint);border-radius:28px;padding:24px 30px}
+.p-impl strong{font-size:17px}
+.p-impl p{margin:4px 0 0;color:var(--muted);font-size:15px;max-width:720px}
+.p-impl a{font-weight:600;text-decoration:none;white-space:nowrap}
+@media (max-width:960px){.pg{grid-template-columns:minmax(0,1fr);max-width:520px;width:100%;margin:0 auto;gap:28px}.pc .pd{min-height:0}}
+@media (max-width:760px){.plans{padding:64px 20px 0;gap:24px}.p-all{justify-content:flex-start;flex-direction:column;align-items:flex-start}.p-impl{padding:22px 20px;border-radius:22px}}
+/* fechamento */
+#comecar .fin{position:relative;overflow:hidden;background:var(--brand);color:var(--cream);border-radius:40px;display:flex;flex-direction:column;align-items:center;text-align:center}
+#comecar .fin:before{content:"";position:absolute;left:50%;bottom:-30%;width:1100px;height:700px;margin-left:-550px;background:radial-gradient(closest-side,rgba(216,254,106,.20),rgba(216,254,106,0));pointer-events:none}
+#comecar .fin-in{position:relative;padding:clamp(56px,7vw,104px) 24px 0;display:flex;flex-direction:column;align-items:center;gap:20px;max-width:1040px}
+#comecar .fin-in > p{margin:0;font-size:18px;color:#BCCDC7;max-width:560px}
+#comecar .fin-m{position:relative;display:block;width:min(780px,94%);height:auto;margin:36px auto -6px}
+@media (min-width:761px){#comecar h2{font-size:clamp(44px,6.4vw,96px) !important;line-height:.98 !important;letter-spacing:-.048em !important}}
+/* vídeo institucional */
+.hero-ctas{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:12px}
+.btn-ghost{display:inline-flex;align-items:center;gap:10px;min-height:56px;box-sizing:border-box;padding:8px 22px 8px 8px;border-radius:999px;background:rgba(246,245,238,.10);box-shadow:inset 0 0 0 1px rgba(246,245,238,.22);color:var(--cream);font-size:16px;font-weight:600;text-decoration:none;transition:background .2s ease}
+.btn-ghost:hover{background:rgba(246,245,238,.18);color:var(--cream)}
+.btn-ghost i{width:40px;height:40px;border-radius:50%;background:var(--lime);color:var(--ink);display:flex;align-items:center;justify-content:center;padding-left:2px;box-sizing:border-box}
+.vbox{margin:0;padding:clamp(18px,2.6vw,32px);border-radius:36px;background:var(--brand);color:var(--cream);display:flex;flex-direction:column;gap:clamp(16px,2vw,24px);scroll-margin-top:24px}
+.vbox-h{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;padding:4px 6px 0}
+.vbox-h h3{margin:0;font-size:clamp(21px,2.3vw,32px);font-weight:600;letter-spacing:-.022em;line-height:1.15;max-width:760px}
+.vbox-f{position:relative;aspect-ratio:16 / 9;max-width:100%;border-radius:22px;overflow:hidden;background:var(--ink);box-shadow:0 0 0 1px rgba(246,245,238,.16),0 24px 60px rgba(0,0,0,.28)}
+.vbox-f video{display:block;width:100%;height:100%;object-fit:cover;cursor:pointer}
+.vbox-play{position:absolute;left:50%;top:73%;transform:translate(-50%,-50%);display:inline-flex;align-items:center;gap:12px;padding:8px 24px 8px 8px;border-radius:999px;background:var(--lime);color:var(--ink);font-size:17px;font-weight:600;white-space:nowrap;pointer-events:none;box-shadow:0 18px 44px rgba(0,0,0,.35);transition:opacity .25s ease,transform .25s ease}
+.vbox-play i{width:48px;height:48px;border-radius:50%;background:var(--ink);color:var(--lime);display:flex;align-items:center;justify-content:center;padding-left:3px;box-sizing:border-box}
+.vbox-f:hover .vbox-play{transform:translate(-50%,-50%) scale(1.04)}
+.vbox-f.on .vbox-play{opacity:0}
+.vbox figcaption{padding:0 6px;font-size:14px;color:#BCCDC7}
+@media (max-width:760px){.hero-ctas{flex-direction:column;align-items:stretch;width:100%;max-width:440px;margin:0 auto}.btn-ghost{justify-content:center}.vbox{border-radius:24px;padding:14px}.vbox-f{border-radius:16px}.vbox-play{font-size:14px;padding:6px 16px 6px 6px;top:70%}.vbox-play i{width:36px;height:36px}}
+/* v8: topo mais limpo */
+.mbp{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:8px 14px;margin:34px auto 0;padding:0 20px;color:var(--muted);font-size:14px;font-weight:600}
+.mbp-d{width:1px;height:18px;background:var(--line);display:block}
+.lead{margin:0;font-size:clamp(17px,1.35vw,19px);line-height:1.6;color:var(--muted);max-width:680px}
+.what2,.ps{max-width:1120px;margin:0 auto;padding:clamp(96px,11vw,160px) 24px 0;display:flex;flex-direction:column;gap:clamp(32px,4vw,52px)}
+.what2{align-items:center}
+.vbox2{margin:0;width:100%;display:flex;flex-direction:column;align-items:center;gap:14px;scroll-margin-top:24px}
+.vbox2 .vbox-f{width:100%;border-radius:28px;box-shadow:0 0 0 1px rgba(14,36,33,.06),0 40px 90px rgba(14,36,33,.20)}
+.vbox2 figcaption{font-size:14px;color:var(--muted)}
+.notag{margin:0;display:inline-flex;align-items:center;gap:10px;max-width:100%;box-sizing:border-box;padding:12px 22px 12px 14px;border-radius:999px;background:var(--lime-2);color:var(--ink);font-size:15.5px;font-weight:500;line-height:1.4}
+.notag svg{flex:none}
+.ps-t{background:#FFFFFF;border:1px solid var(--line);border-radius:32px;padding:6px clamp(20px,3vw,44px) 10px}
+.ps-h,.ps-r{display:grid;grid-template-columns:minmax(0,.9fr) 40px minmax(0,1.25fr);column-gap:clamp(16px,2.6vw,36px);align-items:center}
+.ps-h{padding:22px 0 16px;border-bottom:1px solid var(--line);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.ps-r{padding:22px 0}
+.ps-r + .ps-r{border-top:1px solid var(--line)}
+.ps-p{margin:0;font-size:16px;line-height:1.45;color:var(--muted)}
+.ps-a{width:40px;height:40px;border-radius:50%;background:var(--lime);display:flex;align-items:center;justify-content:center}
+.ps-s{display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+.ps-s p{margin:0;font-size:17px;font-weight:500;line-height:1.45;color:var(--ink)}
+.ps-tag{padding:3px 10px;border-radius:999px;background:var(--mint);color:var(--brand);font-size:12.5px;font-weight:600}
+#agentes{padding-top:clamp(96px,11vw,160px) !important}
+@media (max-width:760px){.what2,.ps{padding:72px 20px 0;gap:28px}.what2 .sh,.ps .sh{align-items:flex-start !important;text-align:left !important}.vbox2 .vbox-f{border-radius:18px}.notag{border-radius:18px;align-items:flex-start;padding:14px 16px}.ps-t{border-radius:22px;padding:4px 18px 8px}.ps-h{display:none}.ps-r{grid-template-columns:minmax(0,1fr);row-gap:10px;padding:20px 0}.ps-a{width:30px;height:30px;transform:rotate(90deg)}#agentes{padding-top:72px !important}}
+/* planos: mensal/anual e Nano */
+.bill-r{position:fixed;left:0;top:50%;opacity:0;pointer-events:none;width:1px;height:1px;margin:0}
+.bill{align-self:center;display:inline-flex;gap:4px;padding:5px;border-radius:999px;background:#FFFFFF;border:1px solid var(--line)}
+.bill label{display:inline-flex;align-items:center;gap:8px;min-height:44px;box-sizing:border-box;padding:8px 20px;border-radius:999px;font-size:15px;font-weight:600;color:var(--muted);cursor:pointer;transition:background .2s ease,color .2s ease}
+.bill label em{font-style:normal;font-size:12px;font-weight:700;padding:3px 8px;border-radius:999px;background:var(--lime);color:var(--ink)}
+#bill-m:checked ~ .bill .bl-m,#bill-a:checked ~ .bill .bl-a{background:var(--brand);color:var(--cream)}
+#bill-m:focus-visible ~ .bill .bl-m,#bill-a:focus-visible ~ .bill .bl-a{outline:2px solid var(--brand);outline-offset:2px}
+.pa,.pa-n{display:none}
+#bill-a:checked ~ .pg .pm,#bill-a:checked ~ .nano .pm{display:none}
+#bill-a:checked ~ .pg .pa,#bill-a:checked ~ .nano .pa{display:inline}
+#bill-a:checked ~ .pg .pa-n{display:block}
+.pa-n{margin:-8px 0 2px;font-size:13px;color:var(--muted)}
+.pc.ft .pa-n{color:#BCCDC7}
+.pc-ag{display:flex;align-items:center;gap:12px;font-size:14px;line-height:1.4;font-weight:500}
+.pc-ag .stack img + img{margin-left:-9px}
+.nano{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 32px;padding:20px 28px 20px 20px;border-radius:28px;border:1.5px dashed rgba(28,64,59,.28)}
+.nano-t{display:flex;align-items:center;gap:16px;flex:1 1 520px;min-width:0}
+.nano-t p{margin:0;font-size:15.5px;line-height:1.5;color:var(--muted)}
+.nano-t strong{color:var(--ink)}
+.nano-k{flex:none}
+.nano-p{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.nano-v{font-size:15px;color:var(--muted);white-space:nowrap}
+.nano-v b{font-family:'Bricolage Grotesque',system-ui,sans-serif;font-size:30px;font-weight:600;letter-spacing:-.03em;color:var(--ink)}
+.nano-p a{font-weight:600;text-decoration:none;white-space:nowrap}
+@media (max-width:760px){.bill{align-self:flex-start}.nano{padding:18px;border-radius:22px}.nano-t{align-items:flex-start}}
+/* âncoras: o conteúdo de cada seção chega a 24px do topo (20px no celular) */
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+#o-que-e,#agentes{scroll-margin-top:calc(24px - clamp(96px,11vw,160px))}
+#funcionalidades,#planos{scroll-margin-top:calc(24px - clamp(80px,9vw,128px))}
+#cases,#duvidas,#por-dentro,#configuracao{scroll-margin-top:calc(24px - clamp(64px,8vw,112px))}
+@media (max-width:760px){#o-que-e,#agentes{scroll-margin-top:-52px}#funcionalidades,#planos,#cases,#duvidas,#por-dentro{scroll-margin-top:-44px}#configuracao{scroll-margin-top:8px}}
+/* seletores escondidos fixos na tela: clicar num agente ou numa aba não faz a página pular */
+.agr{position:fixed;top:50%;left:0}
+/* planos da API */
+.p-all .pa-t,.p-all .pa-t span{display:inline}
+[data-plan][hidden]{display:none !important}
+.stack img[hidden]{display:none !important}
+.pc-ag .stack img{margin-left:0 !important}
+.pc-ag .stack img:not([hidden]) ~ img:not([hidden]){margin-left:-9px !important}
+/* janela do vídeo */
+dialog.vmodal{width:min(1120px,calc(100vw - 48px));max-width:none;max-height:none;padding:0;border:0;background:transparent;overflow:visible;color:var(--cream)}
+dialog.vmodal::backdrop{background:rgba(14,36,33,.86);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+dialog.vmodal[open]{animation:vmIn .28s cubic-bezier(.2,.7,.2,1) both}
+@keyframes vmIn{from{opacity:0;transform:translateY(14px) scale(.98)}to{opacity:1;transform:none}}
+.vm-box{position:relative;aspect-ratio:16 / 9;max-height:calc(100vh - 120px);margin:0 auto;border-radius:24px;overflow:hidden;background:#000;box-shadow:0 40px 100px rgba(0,0,0,.5)}
+.vm-box video{display:block;width:100%;height:100%;object-fit:contain;background:#000}
+.vm-x{position:absolute;right:0;top:-58px;width:46px;height:46px;border-radius:50%;border:0;background:var(--cream);color:var(--ink);display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 10px 30px rgba(0,0,0,.3)}
+.vm-x:hover{background:var(--lime)}
+.vm-x:focus-visible{outline:2px solid var(--lime);outline-offset:3px}
+html.vm-on{overflow:hidden}
+@media (max-width:760px){dialog.vmodal{width:calc(100vw - 16px)}.vm-box{border-radius:14px}.vm-x{top:-54px}}
+/* rodapé */
+footer.ft{background:var(--brand);color:var(--cream);font-size:14.5px;border-radius:40px 40px 0 0;margin-top:0}
+.ft-in{max-width:1280px;margin:0 auto;padding:64px 24px 36px;display:grid;grid-template-columns:minmax(0,1.5fr) repeat(3,minmax(0,1fr));gap:36px 40px}
+.ft-b p{margin:18px 0 0;color:#BCCDC7;max-width:320px;line-height:1.55}
+.ft-ct{display:flex;flex-direction:column;gap:6px;margin-top:18px}
+.ft h4{margin:0 0 14px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--lime)}
+.ft nav{display:flex;flex-direction:column;gap:10px}
+.ft a{color:var(--cream);text-decoration:none}
+.ft a:hover{color:var(--lime)}
+.ft-bot{max-width:1280px;margin:0 auto;padding:20px 24px 28px;border-top:1px solid rgba(246,245,238,.12);display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 24px;color:#BCCDC7;font-size:13px}
+@media (max-width:860px){.ft-in{grid-template-columns:repeat(2,minmax(0,1fr))}.ft-b{grid-column:span 2}}
+@media (max-width:760px){footer.ft > .ft-in{display:grid !important;padding:44px 20px 24px !important;gap:28px 20px !important}footer.ft > .ft-bot{padding:18px 20px 104px !important;flex-direction:column}footer.ft nav a{min-height:40px}}
+</style>
+</head>
+<body>
+<div class="rbar" aria-hidden="true"></div>
+<div style="--acc: #D8FE6A; timeline-scope: --fim; width: 100%; overflow-x: clip; background: #F6F5EE; color: #0E2421; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 16px; line-height: 1.6;">
+
+
+
+<section id="topo">
+<header class="site-h">
+<a href="#topo" aria-label="Lemify Atendimento e CRM, início da página" style="display: flex; align-items: center; gap: 14px; text-decoration: none;"><img src="/lemify-assets/388e32f2047f602486606055c991ea8a.svg" alt="Lemify" style="height: 30px; width: auto; display: block;"><span class="hdr-sub" style="padding-left: 14px; border-left: 1px solid rgba(14, 36, 33, 0.16); font-size: 13.5px; font-weight: 600; color: #56635F; line-height: 1.2;">Atendimento<br>e CRM</span></a>
+<nav aria-label="Principal" class="topnav" style="display: flex; flex-wrap: wrap; align-items: center; gap: 4px 28px; font-size: 15px; font-weight: 500;">
+<a href="#o-que-e" class="nav-link" style="text-decoration: none; padding: 12px 0;">O que é</a>
+<a href="#funcionalidades" class="nav-link" style="text-decoration: none; padding: 12px 0;">Funcionalidades</a>
+<a href="#agentes" class="nav-link" style="text-decoration: none; padding: 12px 0;">Agentes de IA</a>
+<a href="#planos" class="nav-link" style="text-decoration: none; padding: 12px 0;">Planos</a>
+<a href="#cases" class="nav-link" style="text-decoration: none; padding: 12px 0;">Clientes</a>
+</nav>
+<div style="display: flex; align-items: center; gap: 10px;">
+<a href="https://app.lemify.com.br/login" class="btn-o hdr-login">Entrar</a>
+<a href="https://app.lemify.com.br/signup" class="btn hdr-cta" style="background: #1C403B; color: #F6F5EE; text-decoration: none; font-size: 15px; font-weight: 600; padding: 12px 22px; border-radius: 999px; min-height: 46px; box-sizing: border-box; display: inline-flex; align-items: center; gap: 8px;">Testar grátis <span class="arr">→</span></a>
+</div>
+</header>
+<div class="hero-card" style="position: relative; overflow: hidden; background: #1C403B; color: #F6F5EE;">
+<div class="hbg" aria-hidden="true"><span class="depth"></span><span class="gx gc"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="bms"><span class="bm bv" style="left: calc(50% + -840px); animation-delay: -0.0s; animation-duration: 6.7s;"></span><span class="bm bv" style="left: calc(50% + -672px); animation-delay: -6.6s; animation-duration: 6.1s;"></span><span class="bm bv" style="left: calc(50% + -504px); animation-delay: -4.0s; animation-duration: 7.7s;"></span><span class="bm bv" style="left: calc(50% + 504px); animation-delay: -0.0s; animation-duration: 7.3s;"></span><span class="bm bv" style="left: calc(50% + 672px); animation-delay: -2.6s; animation-duration: 5.9s;"></span><span class="bm bv" style="left: calc(50% + 840px); animation-delay: -5.4s; animation-duration: 5.9s;"></span><span class="bm bl" style="top: 112px; animation-delay: -2.5s; animation-duration: 7.2s;"></span><span class="bm br" style="top: 280px; animation-delay: -0.1s; animation-duration: 8.6s;"></span><span class="bm bl" style="top: 280px; animation-delay: -3.6s; animation-duration: 6.7s;"></span><span class="bm br" style="top: 448px; animation-delay: -4.4s; animation-duration: 6.1s;"></span><span class="bm bl" style="top: 448px; animation-delay: -2.7s; animation-duration: 8.5s;"></span><span class="bm br" style="top: 616px; animation-delay: -3.4s; animation-duration: 6.4s;"></span><span class="bm bl" style="top: 616px; animation-delay: -6.5s; animation-duration: 6.2s;"></span><span class="bm br" style="top: 784px; animation-delay: -2.0s; animation-duration: 8.7s;"></span></span><span class="glow"></span><span class="grain"></span></div>
+<div class="hx" style="position: relative; padding: clamp(48px, 6vw, 88px) clamp(20px, 4vw, 48px) 0;">
+<div style="max-width: 1000px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 20px;">
+<span class="eyebrow in d1">Software de atendimento e CRM com IA</span>
+<h1 class="in d2" style="margin: 0; font-size: clamp(38px, 4.7vw, 68px); line-height: 1.02; letter-spacing: -0.035em; max-width: 980px;">Venda mais com as conversas <br><strong style="color: #D8FE6A;">que sua empresa já recebe.</strong></h1>
+<p class="in d3" style="margin: 0; font-size: 18px; color: #BCCDC7; max-width: 660px;">Atendimento, CRM e agentes de IA numa plataforma só, para a sua equipe responder na hora e acompanhar cada cliente em todos os canais.</p>
+<div class="in d4" style="display: flex; flex-direction: column; align-items: center; gap: 10px; margin-top: 4px;">
+<div class="hero-ctas"><a href="https://app.lemify.com.br/signup" class="btn cta" style="background: #D8FE6A; color: #0E2421; text-decoration: none; font-size: 17px; font-weight: 700; padding: 17px 30px; border-radius: 999px; min-height: 56px; box-sizing: border-box; display: inline-flex; align-items: center; gap: 10px;">Testar grátis por 14 dias <span class="arr">→</span></a><a href="#video" class="btn-ghost" data-vmodal aria-haspopup="dialog"><i><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor" stroke="none"></path></svg></i>Ver o Lemify em 2 min</a></div>
+<span style="font-size: 14px; color: #BCCDC7;">Sem cartão e sem falar com vendedor.</span>
+
+</div>
+</div>
+<div class="hv in d5">
+<div class="hv-shot hv-dark"><div style="display: flex; gap: 8px; padding: 12px 16px; border-bottom: 1px solid rgba(246,245,238, 0.08);"><span style="width: 10px; height: 10px; border-radius: 50%; background: rgba(246,245,238, 0.16); display: block;"></span><span style="width: 10px; height: 10px; border-radius: 50%; background: rgba(246,245,238, 0.16); display: block;"></span><span style="width: 10px; height: 10px; border-radius: 50%; background: rgba(246,245,238, 0.16); display: block;"></span></div><div style="flex: 1; min-height: 0; overflow: hidden;"><img src="/lemify-assets/5e12f30514564db0389fa8fe9d16f723.webp" alt="Tela real do Lemify com a caixa de conversas de vários canais" style="width: 100%; height: auto; display: block;"></div></div>
+<div class="phone" role="img" aria-label="Conversa no WhatsApp: a cliente pergunta sobre um sofá às 22h14 e a agente Lemi responde na hora e agenda a visita para sábado">
+<div class="scr" aria-hidden="true">
+<div class="ph-top"><img class="ph-av" src="/lemify-assets/4288c321bd4e7cfab256b2c142fe2804.webp" alt="" style="background: #F1FECB; object-position: center top;"><span class="ph-name"><strong>Lemi</strong><span>online agora</span></span><span class="ph-wa"><i></i>WhatsApp</span></div>
+<div class="ph-chat">
+<span class="day">Hoje</span>
+<div class="bub c q q6">Oi! O sofá retrátil cinza ainda está disponível?<small>22:14</small></div>
+<div class="slot"><span class="tp t1"><i></i><i></i><i></i></span><div class="bub a q q18">Oi, Marina! Está sim. Ele sai por R$ 3.490 e entrega em até 7 dias úteis. Quer ver na loja?<small>22:14</small></div></div>
+<div class="bub c q q31">Quero! Sábado de manhã dá?<small>22:15</small></div>
+<div class="slot"><span class="tp t2"><i></i><i></i><i></i></span><div class="bub a q q43">Dá sim. Reservei sábado às 11h pra você e te mando a confirmação por aqui.<small>22:15</small></div></div>
+<span class="ev q q54"><i></i>Visita agendada · sábado, 11h</span>
+</div>
+</div>
+</div>
+<div class="hcard deco q q18" style="left: 0; top: 150px;"><div class="float"><img src="/lemify-assets/25cc23e8bc53ffa6856c1d2d4b04eb01.webp" alt="" style="background: #F1FECB;"><span class="t"><strong>Lemi respondeu em 10 segundos</strong><em>às 22:14, sem ninguém online</em></span></div></div>
+<div class="hcard deco q q43" style="right: 30px; top: 250px;"><div class="float"><img src="/lemify-assets/bfcd2809ec95079e6151f8d7d08579fa.webp" alt="" style="background: #CAD9C2;"><span class="t"><strong>Theo criou a negociação</strong><em>Sofá retrátil · R$ 3.490</em></span></div></div>
+</div>
+</div>
+</div>
+</section>
+
+<section aria-label="Clientes" class="marquee-wrap" style="padding: 56px 0 8px; overflow: hidden;">
+<p style="margin: 0 0 30px; text-align: center; font-size: 16px; font-weight: 500; color: #56635F; padding: 0 24px;">Mais de 2 mil empresas atendem com o Lemify</p>
+<div style="-webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 12%, #000 88%, transparent 100%); mask-image: linear-gradient(90deg, transparent 0%, #000 12%, #000 88%, transparent 100%);">
+<div class="marquee" style="display: flex; width: max-content; align-items: center; gap: 80px; padding-right: 80px;">
+<img src="/lemify-assets/0572fa0274db3c0c559291e102b0ec92.png" alt="Espazzo Móveis Conceito" style="height: 36px; width: auto; display: block; flex: none; opacity: 0.9;"><img src="/lemify-assets/2f9a25f1ab3725c5a235730a2b038ea9.png" alt="Instituto Guilherme Rocha" style="height: 30px; width: auto; display: block; flex: none; opacity: 0.9;"><img src="/lemify-assets/1273288ff07feafcdec8e389b7cd0dc6.png" alt="Vamos Sorrir Odontologia" style="height: 30px; width: auto; display: block; flex: none; opacity: 0.9;"><img src="/lemify-assets/a95925a819e85e05e6730c59c5bfb5ed.png" alt="Instituto Machado Xavier Odontologia" style="height: 32px; width: auto; display: block; flex: none; opacity: 0.9;"><img src="/lemify-assets/b28f30201ecd5a07fedf1dde363884e7.png" alt="Time Agência de Publicidade" style="height: 34px; width: auto; display: block; flex: none; opacity: 0.9;"><img src="/lemify-assets/775a9b63073212517d07fe8bc41bf55e.png" alt="PlanaSul" style="height: 34px; width: auto; display: block; flex: none; opacity: 0.9;"><img src="/lemify-assets/959bc971d2cf19404f893e1c9b44cb8e.png" alt="Nexuma Tecnologia" style="height: 30px; width: auto; display: block; flex: none; opacity: 0.9;"><img src="/lemify-assets/ce2376cd7126c526d561ebaf00771b49.png" alt="Zelura Cosméticos" style="height: 38px; width: auto; display: block; flex: none; opacity: 0.9;"><img src="/lemify-assets/01fe3f64d05d8c506e2159ac3e99c72c.png" alt="Cliente do Lemify" style="height: 40px; width: auto; display: block; flex: none; opacity: 0.9;">
+<img src="/lemify-assets/0572fa0274db3c0c559291e102b0ec92.png" alt="" style="height: 36px; width: auto; display: block; flex: none; opacity: 0.9;"><img src="/lemify-assets/2f9a25f1ab3725c5a235730a2b038ea9.png" alt="" style="height: 30px; width: auto; display: block; flex: none; opacity: 0.9;"><img src="/lemify-assets/1273288ff07feafcdec8e389b7cd0dc6.png" alt="" style="height: 30px; width: auto; display: block; flex: none; opacity: 0.9;"><img src="/lemify-assets/a95925a819e85e05e6730c59c5bfb5ed.png" alt="" style="height: 32px; width: auto; display: block; flex: none; opacity: 0.9;"><img src="/lemify-assets/b28f30201ecd5a07fedf1dde363884e7.png" alt="" style="height: 34px; width: auto; display: block; flex: none; opacity: 0.9;"><img src="/lemify-assets/775a9b63073212517d07fe8bc41bf55e.png" alt="" style="height: 34px; width: auto; display: block; flex: none; opacity: 0.9;"><img src="/lemify-assets/959bc971d2cf19404f893e1c9b44cb8e.png" alt="" style="height: 30px; width: auto; display: block; flex: none; opacity: 0.9;"><img src="/lemify-assets/ce2376cd7126c526d561ebaf00771b49.png" alt="" style="height: 38px; width: auto; display: block; flex: none; opacity: 0.9;"><img src="/lemify-assets/01fe3f64d05d8c506e2159ac3e99c72c.png" alt="" style="height: 40px; width: auto; display: block; flex: none; opacity: 0.9;">
+</div>
+</div>
+<p class="mbp"><img src="/lemify-assets/0611a174fe3f06853e7178f76a6df68a.webp" alt="Meta" style="height: 22px; width: auto; display: block;"><span class="mbp-d" aria-hidden="true"></span><span>Business Partner, parceiro oficial do Meta e WhatsApp</span></p>
+</section>
+
+
+<section id="o-que-e" aria-label="O que é o Lemify" class="what2">
+<div class="sh" style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 16px;">
+<span class="eyebrow">O que é o Lemify</span>
+<h2 style="margin: 0; max-width: 900px;">Um software de atendimento e vendas que a sua equipe usa todo dia</h2>
+<p class="lead">Você assina, conecta os canais da sua empresa e passa a atender, vender e acompanhar cada cliente num lugar só. Feito para quem vende por conversa: lojas, clínicas, imobiliárias, serviços, restaurantes, beleza e atacado.</p>
+</div>
+<figure class="vbox2" id="video">
+<div class="vbox-f"><video src="/lemify-assets/177ac1bb33c9823159cc32191995a59b.mp4" poster="/lemify-assets/ce808e779a4c2c542dc0448fa3378b4c.webp" controls playsinline preload="metadata" aria-label="Vídeo institucional: o que é o Lemify, em 2 minutos"></video><span class="vbox-play" aria-hidden="true"><i><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor" stroke="none"></path></svg></i>Assistir · 2 min</span></div>
+<figcaption>2 minutos, com legendas na tela.</figcaption>
+</figure>
+<p class="notag"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1C403B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7l10 10M17 7L7 17"></path></svg><span>O Lemify não é agência: não cria nem gerencia anúncios e não atende no seu lugar. É a ferramenta que a sua equipe usa.</span></p>
+</section>
+
+<section aria-label="Antes e depois do Lemify" class="ps">
+<div class="sh" style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 16px;">
+<span class="eyebrow">Antes e depois</span>
+<h2 style="margin: 0; max-width: 860px;">O cliente chama. A venda se perde na demora e na falta de retorno.</h2>
+<p class="lead">Veja o que muda quando o atendimento da sua empresa passa para o Lemify.</p>
+</div>
+<div class="ps-t"><div class="ps-h" aria-hidden="true"><span>Sem o Lemify</span><span></span><span>Com o Lemify</span></div><div class="ps-r"><p class="ps-p">A mensagem das 22h só é vista no dia seguinte.</p><span class="ps-a" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0E2421" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span><div class="ps-s"><p>O Lemi responde na hora, 24 horas por dia, com as informações e as regras da sua empresa.</p><span class="ps-tag">Agentes de IA</span></div></div><div class="ps-r"><p class="ps-p">Um WhatsApp num celular só, dividido entre várias pessoas.</p><span class="ps-a" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0E2421" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span><div class="ps-s"><p>Vários atendentes no mesmo número, com setores, filas e transferência sem perder o contexto.</p><span class="ps-tag">Caixa de entrada</span></div></div><div class="ps-r"><p class="ps-p">O cliente repete tudo ao trocar de atendente ou de canal.</p><span class="ps-a" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0E2421" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span><div class="ps-s"><p>Cada cliente tem um histórico único de todos os canais, que fica com a empresa e não com o atendente.</p><span class="ps-tag">Contatos</span></div></div><div class="ps-r"><p class="ps-p">O orçamento foi enviado e ninguém acompanhou.</p><span class="ps-a" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0E2421" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span><div class="ps-s"><p>A negociação entra no funil do CRM, e o Nico chama de novo quem parou de responder.</p><span class="ps-tag">CRM e follow-up</span></div></div><div class="ps-r"><p class="ps-p">A agenda é feita na mão e o cliente esquece o horário.</p><span class="ps-a" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0E2421" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span><div class="ps-s"><p>A Maia oferece os horários livres, marca, remarca e lembra o cliente antes.</p><span class="ps-tag">Agenda</span></div></div><div class="ps-r"><p class="ps-p">O gestor pergunta a cada vendedor como estão as vendas.</p><span class="ps-a" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0E2421" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span><div class="ps-s"><p>Um painel mostra tempo de resposta, funil, receita e o desempenho de cada pessoa da equipe.</p><span class="ps-tag">Painel</span></div></div></div>
+</section>
+
+
+
+<section id="agentes" style="padding: 0 16px;">
+<div class="pnl" style="position: relative; overflow: hidden; max-width: 1408px; margin: 0 auto; background: #1C403B; color: #F6F5EE; border-radius: 40px;">
+<div class="hbg" aria-hidden="true"><span class="depth"></span><span class="grain"></span></div>
+<input type="radio" name="ag" id="ag1" class="agr" checked aria-label="Lemi, Atendimento"><input type="radio" name="ag" id="ag2" class="agr" aria-label="Maia, Agendamento"><input type="radio" name="ag" id="ag3" class="agr" aria-label="Otto, Enriquecimento"><input type="radio" name="ag" id="ag4" class="agr" aria-label="Theo, CRM"><input type="radio" name="ag" id="ag5" class="agr" aria-label="Nico, Follow-up"><input type="radio" name="ag" id="ag6" class="agr" aria-label="Íris, Insights">
+<div class="ag-wrap" style="padding-bottom: clamp(48px, 5vw, 72px);">
+<div>
+<span class="eyebrow eb-w" style="margin-bottom: 18px;">Agentes de IA</span>
+<h2 style="margin: 0; font-weight: 500; font-size: clamp(28px, 2.8vw, 40px); line-height: 1.15; letter-spacing: -0.02em;">Seis agentes de IA, <strong style="font-weight: 700;">cada um com uma função</strong></h2>
+<p style="margin: 16px 0 0; font-size: 17px; color: #3D4D48; max-width: 560px;">Eles trabalham dentro do Lemify, na mesma ficha do cliente que a sua equipe usa. Você ativa os agentes conforme o seu plano e define o que cada um pode fazer.</p>
+<p style="margin: 22px 0 0; font-size: 14px; font-weight: 600; color: #1C403B;">Escolha uma tarefa e veja o agente trabalhando.</p>
+<div class="ag-list" style="margin-top: 14px;"><label for="ag1" class="ag-i ag-i1"><img src="/lemify-assets/4288c321bd4e7cfab256b2c142fe2804.webp" alt="" style="background: #F1FECB;"><span class="ag-n"><strong>Responda dúvidas mesmo fora do expediente</strong><span>Lemi · agente de atendimento</span></span><span class="ag-d">Lemi consulta as informações da sua empresa, responde ao cliente e chama a equipe quando precisa.</span></label><div class="ag-m ag-m1" aria-hidden="true"><div class="bub c s s1">Boa noite! Vocês entregam no Centro?<small>22:14</small></div><div class="bub a s s2">Boa noite! Entregamos sim, em até 3 dias úteis. Quer que eu te mande o catálogo com os preços?<small>22:14</small></div><div class="bub c s s3">Quero, por favor!<small>22:15</small></div><div class="bub a s s4">Pronto, mandei aqui. Se quiser, já separo o seu pedido.<small>22:15</small></div><span class="ev s s5"><i></i>Respondeu em 10 segundos, fora do horário comercial</span><span class="ag-cap">Conversa ilustrativa.</span></div><label for="ag2" class="ag-i ag-i2"><img src="/lemify-assets/9588b6492fbcd05850e3b69009e61e4c.webp" alt="" style="background: #D8E7EF;"><span class="ag-n"><strong>Marque horários sem ninguém no telefone</strong><span>Maia · agente de agendamento</span></span><span class="ag-d">Maia oferece os horários livres, marca, remarca e lembra o cliente antes.</span></label><div class="ag-m ag-m2" aria-hidden="true"><div class="bub c s s1">Oi! Queria marcar uma avaliação. Tem horário essa semana?<small>09:02</small></div><div class="bub a s s2">Tenho quinta às 14h ou sexta às 9h. Qual fica melhor pra você?<small>09:02</small></div><div class="bub c s s3">Sexta às 9h.<small>09:03</small></div><div class="bub a s s4">Prontinho, sexta às 9h está marcado. Um dia antes eu te mando um lembrete.<small>09:03</small></div><span class="ev s s5"><i></i>Agendado na agenda · sexta, 9h</span><span class="ag-cap">Conversa ilustrativa.</span></div><label for="ag3" class="ag-i ag-i3"><img src="/lemify-assets/81be5ebfeade9f0dc8be40ce139c5d29.webp" alt="" style="background: #F0DADE;"><span class="ag-n"><strong>Tenha a ficha de cada cliente preenchida</strong><span>Otto · agente de enriquecimento</span></span><span class="ag-d">Otto anota nome, cidade, interesse e origem a partir da conversa. Ninguém digita cadastro.</span></label><div class="ag-m ag-m3" aria-hidden="true"><div class="bub c s s1">Meu nome é Marina Alves, sou de Vitória.<small>14:22</small></div><div class="bub c s s2">Pode mandar no marina@exemplo.com<small>14:22</small></div><span class="ev s s3"><i></i>Ficha do cliente preenchida</span><div class="ficha s s4"><div><span>Nome</span><b>Marina Alves</b></div><div><span>Cidade</span><b>Vitória, ES</b></div><div><span>E-mail</span><b>marina@exemplo.com</b></div><div><span>Interesse</span><b>Sofá retrátil</b></div><div><span>Origem</span><b>Instagram</b></div></div><span class="ag-cap">Conversa ilustrativa.</span></div><label for="ag4" class="ag-i ag-i4"><img src="/lemify-assets/bfcd2809ec95079e6151f8d7d08579fa.webp" alt="" style="background: #CAD9C2;"><span class="ag-n"><strong>Acompanhe cada negociação na etapa certa</strong><span>Theo · agente de CRM</span></span><span class="ag-d">Theo cria a negociação e atualiza a etapa conforme a conversa avança.</span></label><div class="ag-m ag-m4" aria-hidden="true"><div class="bub c s s1">Gostei! Pode mandar o orçamento do sofá?<small>14:20</small></div><div class="bub a s s2">Claro! São R$ 3.490 em até 10x sem juros. Te mandei o orçamento aqui.<small>14:20</small></div><span class="ev s s3"><i></i>Negociação criada · R$ 3.490</span><span class="ev s s4"><i></i>Movida para a etapa Proposta enviada</span><span class="ev s s5"><i></i>Vendedora responsável avisada</span><span class="ag-cap">Conversa ilustrativa.</span></div><label for="ag5" class="ag-i ag-i5"><img src="/lemify-assets/939caed0768f159b15d48b7b63e34717.webp" alt="" style="background: #F3DCC7;"><span class="ag-n"><strong>Retome contatos que pararam de responder</strong><span>Nico · agente de follow-up</span></span><span class="ag-d">Nico chama de novo no tempo certo, com uma mensagem que faz sentido para aquele cliente.</span></label><div class="ag-m ag-m5" aria-hidden="true"><span class="day s s1">2 dias depois</span><div class="bub a s s2">Oi, Marina! Ficou alguma dúvida sobre o orçamento do sofá?<small>10:00</small></div><div class="bub c s s3">Oi! Fiquei sim. Dá pra entregar antes do dia 20?<small>10:07</small></div><div class="bub a s s4">Dá sim! Já chamei a vendedora pra fechar com você.<small>10:07</small></div><span class="ev s s5"><i></i>Cliente voltou para a conversa</span><span class="ag-cap">Conversa ilustrativa.</span></div><label for="ag6" class="ag-i ag-i6"><img src="/lemify-assets/ae93dbf37bf1171471288127cbe3828e.webp" alt="" style="background: #E4DDEB;"><span class="ag-n"><strong>Saiba o que está funcionando no comercial</strong><span>Íris · agente de insights</span></span><span class="ag-d">Íris mostra o que está trazendo venda e o que precisa de atenção.</span></label><div class="ag-m ag-m6" aria-hidden="true"><div class="ficha s s1"><div><span style="color: #0E2421; font-weight: 700;">Resumo da semana</span><b></b></div><div><span>Contatos recebidos</span><b>312</b></div><div><span>Respondidos em até 1 minuto</span><b>100%</b></div><div><span>Canal que mais vendeu</span><b>Instagram</b></div><div><span>Pergunta mais feita</span><b>prazo de entrega</b></div></div><div class="bub a s s2">Os contatos que vêm do Instagram estão fechando mais. Vale reforçar esse canal nesta semana.<small>08:00</small></div><span class="ev s s3"><i></i>Resumo pronto para a gestão</span><span class="ag-cap">Conversa ilustrativa.</span></div></div>
+</div>
+<div>
+<div class="phone st"><div class="scr"><div class="ag-p ag-p1"><div class="ph-top"><img class="ph-av" src="/lemify-assets/4288c321bd4e7cfab256b2c142fe2804.webp" alt="" style="background: #F1FECB;"><span class="ph-name"><strong>Lemi · Atendimento</strong><span>online agora</span></span><span class="ph-wa"><i></i>WhatsApp</span></div><div class="ph-chat"><div class="bub c s s1">Boa noite! Vocês entregam no Centro?<small>22:14</small></div><div class="bub a s s2">Boa noite! Entregamos sim, em até 3 dias úteis. Quer que eu te mande o catálogo com os preços?<small>22:14</small></div><div class="bub c s s3">Quero, por favor!<small>22:15</small></div><div class="bub a s s4">Pronto, mandei aqui. Se quiser, já separo o seu pedido.<small>22:15</small></div><span class="ev s s5"><i></i>Respondeu em 10 segundos, fora do horário comercial</span></div></div><div class="ag-p ag-p2"><div class="ph-top"><img class="ph-av" src="/lemify-assets/9588b6492fbcd05850e3b69009e61e4c.webp" alt="" style="background: #D8E7EF;"><span class="ph-name"><strong>Maia · Agendamento</strong><span>online agora</span></span><span class="ph-wa"><i></i>WhatsApp</span></div><div class="ph-chat"><div class="bub c s s1">Oi! Queria marcar uma avaliação. Tem horário essa semana?<small>09:02</small></div><div class="bub a s s2">Tenho quinta às 14h ou sexta às 9h. Qual fica melhor pra você?<small>09:02</small></div><div class="bub c s s3">Sexta às 9h.<small>09:03</small></div><div class="bub a s s4">Prontinho, sexta às 9h está marcado. Um dia antes eu te mando um lembrete.<small>09:03</small></div><span class="ev s s5"><i></i>Agendado na agenda · sexta, 9h</span></div></div><div class="ag-p ag-p3"><div class="ph-top"><img class="ph-av" src="/lemify-assets/81be5ebfeade9f0dc8be40ce139c5d29.webp" alt="" style="background: #F0DADE;"><span class="ph-name"><strong>Otto · Enriquecimento</strong><span>trabalhando nos bastidores</span></span><span class="ph-wa"><i></i>WhatsApp</span></div><div class="ph-chat"><div class="bub c s s1">Meu nome é Marina Alves, sou de Vitória.<small>14:22</small></div><div class="bub c s s2">Pode mandar no marina@exemplo.com<small>14:22</small></div><span class="ev s s3"><i></i>Ficha do cliente preenchida</span><div class="ficha s s4"><div><span>Nome</span><b>Marina Alves</b></div><div><span>Cidade</span><b>Vitória, ES</b></div><div><span>E-mail</span><b>marina@exemplo.com</b></div><div><span>Interesse</span><b>Sofá retrátil</b></div><div><span>Origem</span><b>Instagram</b></div></div></div></div><div class="ag-p ag-p4"><div class="ph-top"><img class="ph-av" src="/lemify-assets/bfcd2809ec95079e6151f8d7d08579fa.webp" alt="" style="background: #CAD9C2;"><span class="ph-name"><strong>Theo · CRM</strong><span>trabalhando nos bastidores</span></span><span class="ph-wa"><i></i>WhatsApp</span></div><div class="ph-chat"><div class="bub c s s1">Gostei! Pode mandar o orçamento do sofá?<small>14:20</small></div><div class="bub a s s2">Claro! São R$ 3.490 em até 10x sem juros. Te mandei o orçamento aqui.<small>14:20</small></div><span class="ev s s3"><i></i>Negociação criada · R$ 3.490</span><span class="ev s s4"><i></i>Movida para a etapa Proposta enviada</span><span class="ev s s5"><i></i>Vendedora responsável avisada</span></div></div><div class="ag-p ag-p5"><div class="ph-top"><img class="ph-av" src="/lemify-assets/939caed0768f159b15d48b7b63e34717.webp" alt="" style="background: #F3DCC7;"><span class="ph-name"><strong>Nico · Follow-up</strong><span>online agora</span></span><span class="ph-wa"><i></i>WhatsApp</span></div><div class="ph-chat"><span class="day s s1">2 dias depois</span><div class="bub a s s2">Oi, Marina! Ficou alguma dúvida sobre o orçamento do sofá?<small>10:00</small></div><div class="bub c s s3">Oi! Fiquei sim. Dá pra entregar antes do dia 20?<small>10:07</small></div><div class="bub a s s4">Dá sim! Já chamei a vendedora pra fechar com você.<small>10:07</small></div><span class="ev s s5"><i></i>Cliente voltou para a conversa</span></div></div><div class="ag-p ag-p6"><div class="ph-top"><img class="ph-av" src="/lemify-assets/ae93dbf37bf1171471288127cbe3828e.webp" alt="" style="background: #E4DDEB;"><span class="ph-name"><strong>Íris · Insights</strong><span>resumo da semana</span></span><span class="ph-wa">Painel</span></div><div class="ph-chat"><div class="ficha s s1"><div><span style="color: #0E2421; font-weight: 700;">Resumo da semana</span><b></b></div><div><span>Contatos recebidos</span><b>312</b></div><div><span>Respondidos em até 1 minuto</span><b>100%</b></div><div><span>Canal que mais vendeu</span><b>Instagram</b></div><div><span>Pergunta mais feita</span><b>prazo de entrega</b></div></div><div class="bub a s s2">Os contatos que vêm do Instagram estão fechando mais. Vale reforçar esse canal nesta semana.<small>08:00</small></div><span class="ev s s3"><i></i>Resumo pronto para a gestão</span></div></div></div></div>
+<p style="margin: 16px 0 0; text-align: center; font-size: 12px; color: #3D4D48;">Conversas ilustrativas.</p>
+</div>
+</div>
+</div>
+</section>
+
+
+
+<section id="por-dentro" style="max-width: 1280px; margin: 0 auto; padding: clamp(64px, 8vw, 112px) 24px 0; position: relative;">
+<div class="sh-eb"><span class="eyebrow">Por dentro do Lemify</span></div>
+<h2 class="sh-h" style="margin: 0; font-weight: 500; font-size: clamp(28px, 2.8vw, 40px); line-height: 1.15; letter-spacing: -0.02em; margin: 0 auto 16px; text-align: center; max-width: 1000px;">Você acompanha tudo <strong style="font-weight: 700;">sem perguntar a cada vendedor</strong></h2>
+<input type="radio" name="tb" id="tb1" class="agr" checked aria-label="Conversas"><input type="radio" name="tb" id="tb2" class="agr" aria-label="CRM"><input type="radio" name="tb" id="tb3" class="agr" aria-label="Agenda"><input type="radio" name="tb" id="tb4" class="agr" aria-label="Painel">
+<div class="tb-wrap">
+<div class="tb-tabs" role="tablist" aria-label="Telas do Lemify"><label for="tb1" class="tl1">Conversas</label><label for="tb2" class="tl2">CRM</label><label for="tb3" class="tl3">Agenda</label><label for="tb4" class="tl4">Painel</label></div>
+<div class="peek-host" style="position: relative;">
+<div style="position: relative; z-index: 1;"><div class="tb-p tp1"><div class="tb-txt" style="display: flex; flex-direction: column; gap: 14px;"><h3 style="margin: 0; font-size: 24px; font-weight: 700; line-height: 1.25; letter-spacing: -0.01em;">Veja quem está sendo atendido e quem precisa de atenção</h3><p style="margin: 0; color: #56635F; font-size: 16px;">Todas as conversas numa caixa só, com setor, responsável e resumo de cada uma.</p><ul><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0E2421" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg><span>Setores e filas para cada equipe</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0E2421" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg><span>Resumo da conversa escrito pela IA</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0E2421" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg><span>Etapa e notas do cliente ao lado da conversa</span></li></ul></div><div class="tb-fr"><a class="tb-zoom" href="/lemify-assets/5e12f30514564db0389fa8fe9d16f723.webp" target="_blank" rel="noopener" aria-label="Abrir a tela Conversas em tamanho real"><picture><source media="(max-width: 760px)" srcset="/lemify-assets/00391a45c4c5b1f9bdf770f9167aface.webp"><img src="/lemify-assets/5e12f30514564db0389fa8fe9d16f723.webp" alt="Tela real do Lemify: caixa de conversas com setores, responsáveis e a ficha do cliente ao lado"></picture><span class="zm" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="M16 16l4.5 4.5M11 8.5v5M8.5 11h5"></path></svg>Ver a tela inteira</span></a></div></div><div class="tb-p tp2"><div class="tb-txt" style="display: flex; flex-direction: column; gap: 14px;"><h3 style="margin: 0; font-size: 24px; font-weight: 700; line-height: 1.25; letter-spacing: -0.01em;">Acompanhe as negociações de cada funil</h3><p style="margin: 0; color: #56635F; font-size: 16px;">Negociações, receita ganha, ticket médio e conversão, com o funil etapa por etapa.</p><ul><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0E2421" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg><span>Funis com as etapas da sua empresa</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0E2421" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg><span>Receita, ticket médio e conversão por período</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0E2421" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg><span>Ganhos e perdas de cada etapa</span></li></ul></div><div class="tb-fr"><a class="tb-zoom" href="/lemify-assets/917e6bad91ef64219095357db8fbda52.webp" target="_blank" rel="noopener" aria-label="Abrir a tela CRM em tamanho real"><picture><source media="(max-width: 760px)" srcset="/lemify-assets/99a73a8bb7759059d11b39119f8673d8.webp"><img src="/lemify-assets/917e6bad91ef64219095357db8fbda52.webp" alt="Painel do CRM do Lemify com negociações, receita ganha, ticket médio, conversão e o funil por etapa"></picture><span class="zm" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="M16 16l4.5 4.5M11 8.5v5M8.5 11h5"></path></svg>Ver a tela inteira</span></a></div></div><div class="tb-p tp3"><div class="tb-txt" style="display: flex; flex-direction: column; gap: 14px;"><h3 style="margin: 0; font-size: 24px; font-weight: 700; line-height: 1.25; letter-spacing: -0.01em;">Organize os agendamentos da equipe numa visão só</h3><p style="margin: 0; color: #56635F; font-size: 16px;">Os horários marcados pela equipe e pelos agentes, por profissional e por unidade.</p><ul><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0E2421" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg><span>Visão por dia, semana e mês</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0E2421" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg><span>Filtro por profissional, unidade e status</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0E2421" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg><span>Confirmação e remarcação pelo agente</span></li></ul></div><div class="tb-fr"><a class="tb-zoom" href="/lemify-assets/37a7a272142536f49412e7a28aa03270.webp" target="_blank" rel="noopener" aria-label="Abrir a tela Agenda em tamanho real"><picture><source media="(max-width: 760px)" srcset="/lemify-assets/ad0fec97d142f4c9879d718e0f7476ea.webp"><img src="/lemify-assets/37a7a272142536f49412e7a28aa03270.webp" alt="Agenda do Lemify na visão do dia, com os horários marcados e os filtros por unidade, status e profissional"></picture><span class="zm" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="M16 16l4.5 4.5M11 8.5v5M8.5 11h5"></path></svg>Ver a tela inteira</span></a></div></div><div class="tb-p tp4"><div class="tb-txt" style="display: flex; flex-direction: column; gap: 14px;"><h3 style="margin: 0; font-size: 24px; font-weight: 700; line-height: 1.25; letter-spacing: -0.01em;">Identifique onde as vendas estão travando</h3><p style="margin: 0; color: #56635F; font-size: 16px;">Ganhos e perdas por dia, motivos de perda e o desempenho de cada pessoa da equipe.</p><ul><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0E2421" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg><span>Hoje, 7 dias, 30 dias ou o período que você escolher</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0E2421" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg><span>Motivos de ganho e de perda</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0E2421" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg><span>Desempenho de cada pessoa da equipe</span></li></ul></div><div class="tb-fr"><a class="tb-zoom" href="/lemify-assets/c2e91d5742dc8c13ba468a72c4de0160.webp" target="_blank" rel="noopener" aria-label="Abrir a tela Painel em tamanho real"><picture><source media="(max-width: 760px)" srcset="/lemify-assets/ad60d58858488e92dcfb2cbbab62cb1e.webp"><img src="/lemify-assets/c2e91d5742dc8c13ba468a72c4de0160.webp" alt="Painel do Lemify com ganhos e perdas por dia, motivos de perda e o desempenho de cada vendedor"></picture><span class="zm" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="M16 16l4.5 4.5M11 8.5v5M8.5 11h5"></path></svg>Ver a tela inteira</span></a></div></div></div>
+</div>
+</div>
+<p style="margin: 18px 0 0; text-align: center; font-size: 12px; color: #56635F;">Telas reais do Lemify. Nomes e contatos foram trocados por fictícios.</p>
+</section>
+
+<section id="funcionalidades" aria-label="Funcionalidades" class="feat">
+<div class="sh" style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 14px;">
+<span class="eyebrow">Funcionalidades</span>
+<h2 style="margin: 0; max-width: 940px;">Tudo o que o seu atendimento e o seu comercial precisam, numa plataforma só</h2>
+<p style="margin: 0; font-size: 17px; color: #56635F; max-width: 640px;">Do primeiro contato ao pós-venda, sem planilha, sem celular compartilhado e sem trocar de ferramenta.</p>
+</div>
+<div class="bento">
+<div class="bx lime s2"><span class="bx-k"><i><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 13.5h4.5l1.6 2.5h4.8l1.6-2.5h4.5"></path><path d="M6 5h12l2.5 8.5V19a1 1 0 0 1-1 1h-15a1 1 0 0 1-1-1v-5.5z"></path></svg></i>Atendimento</span><h3>Todas as conversas numa caixa só, com a equipe inteira atendendo</h3><ul><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg><span>WhatsApp, Instagram, Messenger e e-mail no mesmo lugar</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg><span>Vários atendentes, com setores e filas</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg><span>Transferência entre setores com o histórico junto</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg><span>Etiquetas e respostas rápidas</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg><span>Comentários das redes respondidos na plataforma</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg><span>Chat interno para a equipe combinar sem expor nada ao cliente</span></li></ul></div>
+<div class="bx "><span class="bx-k"><i><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="4" width="5" height="16" rx="1.5"></rect><rect x="10" y="4" width="5" height="10" rx="1.5"></rect><rect x="16.5" y="4" width="4" height="13" rx="1.5"></rect></svg></i>Vendas</span><h3>Cada oportunidade no funil certo</h3><ul><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg><span>CRM em quadro, com as etapas da sua empresa</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg><span>Orçamentos montados com o seu catálogo e tabelas de preço</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg><span>Origem de cada contato e de cada venda</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg><span>Nota de chance de compra para cada contato <span class="bx-tag">Pro</span></span></li></ul></div>
+<div class="bx "><span class="bx-k"><i><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2.5"></rect><path d="M3.5 10h17M8 3v4M16 3v4"></path></svg></i>Agenda</span><h3>Horários marcados sem ninguém no telefone</h3><ul><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg><span>Agenda por profissional e por unidade</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg><span>Confirmação, remarcação e lembrete pelo agente</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg><span>Integração com Google Agenda e links do Google Meet</span></li></ul></div>
+<div class="bx dark s2"><span class="bx-k"><i><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5l1.7 4.6 4.6 1.7-4.6 1.7L12 16.1l-1.7-4.6-4.6-1.7 4.6-1.7z"></path><path d="M18.5 14.5l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"></path></svg></i>IA e automação</span><h3>Agentes de IA e automações trabalhando por você</h3><ul><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg><span>Seis agentes, cada um com uma função</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg><span>Base de conhecimento com os documentos da empresa</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg><span>Lemi Flow: fluxos de automação desenhados visualmente <span class="bx-tag">conforme o plano</span></span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg><span>Disparos para listas de contatos e acompanhamento dos anúncios</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg><span>Vendas do CRM enviadas para a Meta, para os anúncios aprenderem com quem compra</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg><span>Passagem para uma pessoa a qualquer momento</span></li></ul><span class="stack bx-st"><img src="/lemify-assets/4288c321bd4e7cfab256b2c142fe2804.webp" alt="" style="width: 38px; height: 38px; border-radius: 50%; object-fit: cover; object-position: center top; background: #F1FECB; display: block; box-shadow: 0 0 0 3px #1C403B;"><img src="/lemify-assets/9588b6492fbcd05850e3b69009e61e4c.webp" alt="" style="width: 38px; height: 38px; border-radius: 50%; object-fit: cover; object-position: center top; background: #D8E7EF; display: block; box-shadow: 0 0 0 3px #1C403B;"><img src="/lemify-assets/81be5ebfeade9f0dc8be40ce139c5d29.webp" alt="" style="width: 38px; height: 38px; border-radius: 50%; object-fit: cover; object-position: center top; background: #F0DADE; display: block; box-shadow: 0 0 0 3px #1C403B;"><img src="/lemify-assets/bfcd2809ec95079e6151f8d7d08579fa.webp" alt="" style="width: 38px; height: 38px; border-radius: 50%; object-fit: cover; object-position: center top; background: #CAD9C2; display: block; box-shadow: 0 0 0 3px #1C403B;"><img src="/lemify-assets/939caed0768f159b15d48b7b63e34717.webp" alt="" style="width: 38px; height: 38px; border-radius: 50%; object-fit: cover; object-position: center top; background: #F3DCC7; display: block; box-shadow: 0 0 0 3px #1C403B;"><img src="/lemify-assets/ae93dbf37bf1171471288127cbe3828e.webp" alt="" style="width: 38px; height: 38px; border-radius: 50%; object-fit: cover; object-position: center top; background: #E4DDEB; display: block; box-shadow: 0 0 0 3px #1C403B;"></span></div>
+<div class="bx s3"><span class="bx-k"><i><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h16"></path><rect x="5.5" y="11" width="3" height="6.5" rx="1"></rect><rect x="10.5" y="6.5" width="3" height="11" rx="1"></rect><rect x="15.5" y="9" width="3" height="8.5" rx="1"></rect></svg></i>Gestão</span><h3>Os números da operação sem precisar perguntar</h3><ul><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg><span>Tempo de resposta, SLA, NPS e receita no painel</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg><span>Ganhos, perdas e motivos de perda por período</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg><span>Desempenho de cada pessoa da equipe</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg><span>Filiais, usuários e perfis de acesso</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg><span>Integração com Bling, Omie, Conta Azul, Tiny, Shopify, Nuvemshop, Mercado Livre e iFood</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg><span>API aberta para conectar o seu sistema</span></li></ul></div>
+</div>
+</section>
+
+<section aria-label="Agentes e equipe" style="padding: clamp(64px, 8vw, 112px) 16px 0;">
+<div class="pnl" style="position: relative; overflow: hidden; max-width: 1408px; margin: 0 auto; background: #1C403B; color: #F6F5EE; border-radius: 40px;">
+<div class="hbg" aria-hidden="true"><span class="depth"></span><span class="grain"></span></div>
+<div class="pnl-in" style="position: relative; max-width: 1240px; margin: 0 auto; padding: clamp(56px, 7vw, 104px) clamp(24px, 4vw, 48px); display: flex; flex-direction: column; gap: 44px;">
+<div class="sh" style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 14px;">
+<span class="eyebrow">IA e equipe juntas</span>
+<h2 style="margin: 0; font-weight: 500; font-size: clamp(28px, 2.8vw, 40px); line-height: 1.15; letter-spacing: -0.02em; max-width: 880px;">Sua equipe ganha tempo quando <strong style="font-weight: 700; color: #D8FE6A;">o trabalho repetitivo sai do caminho</strong></h2>
+<p style="margin: 0; font-size: 17px; color: #BCCDC7; max-width: 620px;">Os agentes cuidam do que se repete. As pessoas entram quando a conversa pede alguém.</p>
+</div>
+<div class="eq">
+<div class="eq-c eq-a"><header><h3>Os agentes cuidam</h3><span class="stack"><img src="/lemify-assets/4288c321bd4e7cfab256b2c142fe2804.webp" alt="" style="width: 34px; height: 34px; border-radius: 50%; object-fit: cover; object-position: center top; background: #F1FECB; display: block; box-shadow: 0 0 0 3px #163631;"><img src="/lemify-assets/9588b6492fbcd05850e3b69009e61e4c.webp" alt="" style="width: 34px; height: 34px; border-radius: 50%; object-fit: cover; object-position: center top; background: #D8E7EF; display: block; box-shadow: 0 0 0 3px #163631;"><img src="/lemify-assets/81be5ebfeade9f0dc8be40ce139c5d29.webp" alt="" style="width: 34px; height: 34px; border-radius: 50%; object-fit: cover; object-position: center top; background: #F0DADE; display: block; box-shadow: 0 0 0 3px #163631;"><img src="/lemify-assets/bfcd2809ec95079e6151f8d7d08579fa.webp" alt="" style="width: 34px; height: 34px; border-radius: 50%; object-fit: cover; object-position: center top; background: #CAD9C2; display: block; box-shadow: 0 0 0 3px #163631;"><img src="/lemify-assets/939caed0768f159b15d48b7b63e34717.webp" alt="" style="width: 34px; height: 34px; border-radius: 50%; object-fit: cover; object-position: center top; background: #F3DCC7; display: block; box-shadow: 0 0 0 3px #163631;"></span></header><ul><li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" style="stroke: var(--acc)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M8.5 12.2l2.4 2.4 4.6-5"></path></svg><span>Responder dúvidas de preço, prazo e horário</span></li><li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" style="stroke: var(--acc)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M8.5 12.2l2.4 2.4 4.6-5"></path></svg><span>Preencher a ficha do cliente</span></li><li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" style="stroke: var(--acc)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M8.5 12.2l2.4 2.4 4.6-5"></path></svg><span>Marcar, remarcar e lembrar horários</span></li><li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" style="stroke: var(--acc)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M8.5 12.2l2.4 2.4 4.6-5"></path></svg><span>Criar e atualizar as negociações</span></li><li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" style="stroke: var(--acc)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M8.5 12.2l2.4 2.4 4.6-5"></path></svg><span>Retomar contatos que pararam de responder</span></li></ul></div>
+<div class="eq-c eq-p"><header><h3>A sua equipe assume</h3><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0E2421" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8.5" r="3.5"></circle><path d="M5 20c.8-3.6 3.6-5.6 7-5.6s6.2 2 7 5.6"></path></svg></header><ul><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0E2421" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg><span>Quando o cliente pede para falar com uma pessoa</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0E2421" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg><span>Quando a situação foge das regras que você definiu</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0E2421" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg><span>Quando a negociação pede uma condição especial</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0E2421" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg><span>Na hora de fechar a venda</span></li></ul></div>
+</div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 10px;"><a href="https://app.lemify.com.br/signup" class="btn cta" style="background: #D8FE6A; color: #0E2421; text-decoration: none; font-size: 17px; font-weight: 700; padding: 17px 30px; border-radius: 999px; min-height: 56px; box-sizing: border-box; display: inline-flex; align-items: center; gap: 10px;">Testar grátis por 14 dias <span class="arr">→</span></a><span style="font-size: 14px; color: #BCCDC7; text-align: center;">Você define as regras de passagem para a equipe.</span></div>
+</div>
+</div>
+</section>
+
+<section id="configuracao" aria-label="Configuração" style="padding: clamp(64px, 8vw, 112px) 16px 0;">
+<div class="pnl" style="position: relative; overflow: clip; max-width: 1408px; margin: 0 auto; background: #E4ECE5; border-radius: 40px;">
+<div class="pnl-in" style="position: relative; max-width: 1240px; margin: 0 auto; padding: clamp(56px, 7vw, 104px) clamp(24px, 4vw, 48px); display: flex; flex-direction: column; gap: 44px;">
+<div class="sh" style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 14px;">
+<span class="eyebrow eb-w">Como começar</span>
+<h2 style="margin: 0; font-weight: 500; font-size: clamp(28px, 2.8vw, 40px); line-height: 1.15; letter-spacing: -0.02em; max-width: 900px;">Configure o atendimento com as informações <strong style="font-weight: 700;">e as regras da sua empresa</strong></h2>
+<p style="margin: 0; font-size: 17px; color: #56635F; max-width: 620px;">Você revisa o que os agentes vão dizer, testa com calma e só então libera para os clientes.</p>
+</div>
+<div class="stk"><article class="stk-c stk-1" style="--i: 0;"><span class="stk-n" aria-hidden="true">1</span><div><span class="stk-k">Etapa 1</span><h3>Parta do modelo do seu segmento</h3><p>Escolha o segmento, o nome e o tom de voz do agente.</p></div></article><article class="stk-c stk-2" style="--i: 1;"><span class="stk-n" aria-hidden="true">2</span><div><span class="stk-k">Etapa 2</span><h3>Revise as informações e as regras</h3><p>Produtos, serviços, preços, horários e quando a conversa deve passar para uma pessoa.</p></div></article><article class="stk-c stk-3" style="--i: 2;"><span class="stk-n" aria-hidden="true">3</span><div><span class="stk-k">Etapa 3</span><h3>Teste antes de liberar</h3><p>Converse com o agente na área de testes e com contatos da sua equipe, e ajuste o que precisar.</p></div></article><article class="stk-c stk-4" style="--i: 3;"><span class="stk-n" aria-hidden="true">4</span><div><span class="stk-k">Etapa 4</span><h3>Conecte os canais e ative</h3><p>Escolha em quais canais os agentes atuam e libere para os seus clientes.</p></div></article></div>
+<div class="sup">
+<div><strong>Suporte incluído em todos os planos</strong><p>Tire as suas dúvidas com a nossa equipe pelo WhatsApp.</p></div>
+<div><strong>Implantação guiada, opcional · R$ 850</strong><p>A nossa equipe configura o Lemify com você, treina a sua equipe e acompanha o primeiro mês.</p></div>
+</div>
+<div class="intg">
+<p class="intg-t">Conecta com os canais e os sistemas que você já usa</p>
+<div class="intg-rows">
+<div class="ir"><div class="ir-track r1"><span class="pl"><img src="/lemify-assets/9094c3e86ac8b864d5a00aefd32209b9.webp" alt="WhatsApp Business" style="height: 20px;"></span><span class="pl"><img src="/lemify-assets/0611a174fe3f06853e7178f76a6df68a.webp" alt="Instagram e Facebook (Meta)" style="height: 20px;"></span><span class="pl"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0E2421" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 4L3 11l6 2.2M21 4l-4 16-8-6.8M21 4L9 13.2V19l3-3.4"></path></svg>Telegram</span><span class="pl"><img src="/lemify-assets/427848b9eed3639c7c39b2ed06bfff32.webp" alt="TikTok" style="height: 20px;"></span><span class="pl"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0E2421" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 18.5l1.2-3.3A7.5 7.5 0 1 1 9 17.6z"></path></svg>Chat do site</span><span class="pl"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0E2421" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="12" rx="3"></rect><path d="M8 21l3-4M8 10h8M8 13h5"></path></svg>SMS</span><span aria-hidden="true" style="display: contents;"><span class="pl"><img src="/lemify-assets/9094c3e86ac8b864d5a00aefd32209b9.webp" alt="" style="height: 20px;"></span><span class="pl"><img src="/lemify-assets/0611a174fe3f06853e7178f76a6df68a.webp" alt="" style="height: 20px;"></span><span class="pl"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0E2421" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 4L3 11l6 2.2M21 4l-4 16-8-6.8M21 4L9 13.2V19l3-3.4"></path></svg>Telegram</span><span class="pl"><img src="/lemify-assets/427848b9eed3639c7c39b2ed06bfff32.webp" alt="" style="height: 20px;"></span><span class="pl"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0E2421" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 18.5l1.2-3.3A7.5 7.5 0 1 1 9 17.6z"></path></svg>Chat do site</span><span class="pl"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0E2421" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="12" rx="3"></rect><path d="M8 21l3-4M8 10h8M8 13h5"></path></svg>SMS</span><span class="pl"><img src="/lemify-assets/9094c3e86ac8b864d5a00aefd32209b9.webp" alt="" style="height: 20px;"></span><span class="pl"><img src="/lemify-assets/0611a174fe3f06853e7178f76a6df68a.webp" alt="" style="height: 20px;"></span><span class="pl"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0E2421" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 4L3 11l6 2.2M21 4l-4 16-8-6.8M21 4L9 13.2V19l3-3.4"></path></svg>Telegram</span><span class="pl"><img src="/lemify-assets/427848b9eed3639c7c39b2ed06bfff32.webp" alt="" style="height: 20px;"></span><span class="pl"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0E2421" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 18.5l1.2-3.3A7.5 7.5 0 1 1 9 17.6z"></path></svg>Chat do site</span><span class="pl"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0E2421" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="12" rx="3"></rect><path d="M8 21l3-4M8 10h8M8 13h5"></path></svg>SMS</span><span class="pl"><img src="/lemify-assets/9094c3e86ac8b864d5a00aefd32209b9.webp" alt="" style="height: 20px;"></span><span class="pl"><img src="/lemify-assets/0611a174fe3f06853e7178f76a6df68a.webp" alt="" style="height: 20px;"></span><span class="pl"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0E2421" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 4L3 11l6 2.2M21 4l-4 16-8-6.8M21 4L9 13.2V19l3-3.4"></path></svg>Telegram</span><span class="pl"><img src="/lemify-assets/427848b9eed3639c7c39b2ed06bfff32.webp" alt="" style="height: 20px;"></span><span class="pl"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0E2421" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 18.5l1.2-3.3A7.5 7.5 0 1 1 9 17.6z"></path></svg>Chat do site</span><span class="pl"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0E2421" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="12" rx="3"></rect><path d="M8 21l3-4M8 10h8M8 13h5"></path></svg>SMS</span><span class="pl"><img src="/lemify-assets/9094c3e86ac8b864d5a00aefd32209b9.webp" alt="" style="height: 20px;"></span><span class="pl"><img src="/lemify-assets/0611a174fe3f06853e7178f76a6df68a.webp" alt="" style="height: 20px;"></span><span class="pl"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0E2421" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 4L3 11l6 2.2M21 4l-4 16-8-6.8M21 4L9 13.2V19l3-3.4"></path></svg>Telegram</span><span class="pl"><img src="/lemify-assets/427848b9eed3639c7c39b2ed06bfff32.webp" alt="" style="height: 20px;"></span><span class="pl"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0E2421" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 18.5l1.2-3.3A7.5 7.5 0 1 1 9 17.6z"></path></svg>Chat do site</span><span class="pl"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0E2421" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="12" rx="3"></rect><path d="M8 21l3-4M8 10h8M8 13h5"></path></svg>SMS</span><span class="pl"><img src="/lemify-assets/9094c3e86ac8b864d5a00aefd32209b9.webp" alt="" style="height: 20px;"></span><span class="pl"><img src="/lemify-assets/0611a174fe3f06853e7178f76a6df68a.webp" alt="" style="height: 20px;"></span><span class="pl"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0E2421" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 4L3 11l6 2.2M21 4l-4 16-8-6.8M21 4L9 13.2V19l3-3.4"></path></svg>Telegram</span><span class="pl"><img src="/lemify-assets/427848b9eed3639c7c39b2ed06bfff32.webp" alt="" style="height: 20px;"></span><span class="pl"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0E2421" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 18.5l1.2-3.3A7.5 7.5 0 1 1 9 17.6z"></path></svg>Chat do site</span><span class="pl"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0E2421" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="12" rx="3"></rect><path d="M8 21l3-4M8 10h8M8 13h5"></path></svg>SMS</span></span></div></div>
+<div class="ir"><div class="ir-track r2"><span class="pl"><img src="/lemify-assets/a4ef1199f0b4beed914b177eac8af344.webp" alt="Mercado Livre" style="height: 26px;"></span><span class="pl"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0E2421" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="2.5"></rect><path d="M4 7l8 6 8-6"></path></svg>E-mail</span><span class="pl"><img src="/lemify-assets/20fa50eab4de078ed31bcf98f6d8b509.webp" alt="OLX" style="height: 22px;"></span><span class="pl"><img src="/lemify-assets/3d462e25d298e30548cef7c83abbdf83.webp" alt="Gmail" style="height: 21px;"></span><span class="pl"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0E2421" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2.5"></rect><path d="M4 10h16M9 3v4M15 3v4"></path></svg>Google Agenda</span><span aria-hidden="true" style="display: contents;"><span class="pl"><img src="/lemify-assets/a4ef1199f0b4beed914b177eac8af344.webp" alt="" style="height: 26px;"></span><span class="pl"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0E2421" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="2.5"></rect><path d="M4 7l8 6 8-6"></path></svg>E-mail</span><span class="pl"><img src="/lemify-assets/20fa50eab4de078ed31bcf98f6d8b509.webp" alt="" style="height: 22px;"></span><span class="pl"><img src="/lemify-assets/3d462e25d298e30548cef7c83abbdf83.webp" alt="" style="height: 21px;"></span><span class="pl"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0E2421" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2.5"></rect><path d="M4 10h16M9 3v4M15 3v4"></path></svg>Google Agenda</span><span class="pl"><img src="/lemify-assets/a4ef1199f0b4beed914b177eac8af344.webp" alt="" style="height: 26px;"></span><span class="pl"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0E2421" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="2.5"></rect><path d="M4 7l8 6 8-6"></path></svg>E-mail</span><span class="pl"><img src="/lemify-assets/20fa50eab4de078ed31bcf98f6d8b509.webp" alt="" style="height: 22px;"></span><span class="pl"><img src="/lemify-assets/3d462e25d298e30548cef7c83abbdf83.webp" alt="" style="height: 21px;"></span><span class="pl"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0E2421" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2.5"></rect><path d="M4 10h16M9 3v4M15 3v4"></path></svg>Google Agenda</span><span class="pl"><img src="/lemify-assets/a4ef1199f0b4beed914b177eac8af344.webp" alt="" style="height: 26px;"></span><span class="pl"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0E2421" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="2.5"></rect><path d="M4 7l8 6 8-6"></path></svg>E-mail</span><span class="pl"><img src="/lemify-assets/20fa50eab4de078ed31bcf98f6d8b509.webp" alt="" style="height: 22px;"></span><span class="pl"><img src="/lemify-assets/3d462e25d298e30548cef7c83abbdf83.webp" alt="" style="height: 21px;"></span><span class="pl"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0E2421" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2.5"></rect><path d="M4 10h16M9 3v4M15 3v4"></path></svg>Google Agenda</span><span class="pl"><img src="/lemify-assets/a4ef1199f0b4beed914b177eac8af344.webp" alt="" style="height: 26px;"></span><span class="pl"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0E2421" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="2.5"></rect><path d="M4 7l8 6 8-6"></path></svg>E-mail</span><span class="pl"><img src="/lemify-assets/20fa50eab4de078ed31bcf98f6d8b509.webp" alt="" style="height: 22px;"></span><span class="pl"><img src="/lemify-assets/3d462e25d298e30548cef7c83abbdf83.webp" alt="" style="height: 21px;"></span><span class="pl"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0E2421" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2.5"></rect><path d="M4 10h16M9 3v4M15 3v4"></path></svg>Google Agenda</span><span class="pl"><img src="/lemify-assets/a4ef1199f0b4beed914b177eac8af344.webp" alt="" style="height: 26px;"></span><span class="pl"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0E2421" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="2.5"></rect><path d="M4 7l8 6 8-6"></path></svg>E-mail</span><span class="pl"><img src="/lemify-assets/20fa50eab4de078ed31bcf98f6d8b509.webp" alt="" style="height: 22px;"></span><span class="pl"><img src="/lemify-assets/3d462e25d298e30548cef7c83abbdf83.webp" alt="" style="height: 21px;"></span><span class="pl"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0E2421" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2.5"></rect><path d="M4 10h16M9 3v4M15 3v4"></path></svg>Google Agenda</span></span></div></div>
+<div class="ir"><div class="ir-track r3"><span class="pl"><img src="/lemify-assets/52678d79709db130ada8d01f2425c2db.webp" alt="Bling" style="height: 20px;"></span><span class="pl"><img src="/lemify-assets/0971679a3899ec619020d25b1ffeee9f.webp" alt="Tiny" style="height: 20px;"></span><span class="pl"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0E2421" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4M13.5 6l-3 12"></path></svg>Integração aberta (API)</span><span class="pl"><img src="/lemify-assets/1507d2ae629c91b8ac36a69db1a1474a.webp" alt="Omie" style="height: 17px;"></span><span class="pl"><img src="/lemify-assets/8df3ebd1d44d2ec8930a392bc9d7a0de.webp" alt="Conta Azul" style="height: 16px;"></span><span aria-hidden="true" style="display: contents;"><span class="pl"><img src="/lemify-assets/52678d79709db130ada8d01f2425c2db.webp" alt="" style="height: 20px;"></span><span class="pl"><img src="/lemify-assets/0971679a3899ec619020d25b1ffeee9f.webp" alt="" style="height: 20px;"></span><span class="pl"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0E2421" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4M13.5 6l-3 12"></path></svg>Integração aberta (API)</span><span class="pl"><img src="/lemify-assets/1507d2ae629c91b8ac36a69db1a1474a.webp" alt="" style="height: 17px;"></span><span class="pl"><img src="/lemify-assets/8df3ebd1d44d2ec8930a392bc9d7a0de.webp" alt="" style="height: 16px;"></span><span class="pl"><img src="/lemify-assets/52678d79709db130ada8d01f2425c2db.webp" alt="" style="height: 20px;"></span><span class="pl"><img src="/lemify-assets/0971679a3899ec619020d25b1ffeee9f.webp" alt="" style="height: 20px;"></span><span class="pl"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0E2421" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4M13.5 6l-3 12"></path></svg>Integração aberta (API)</span><span class="pl"><img src="/lemify-assets/1507d2ae629c91b8ac36a69db1a1474a.webp" alt="" style="height: 17px;"></span><span class="pl"><img src="/lemify-assets/8df3ebd1d44d2ec8930a392bc9d7a0de.webp" alt="" style="height: 16px;"></span><span class="pl"><img src="/lemify-assets/52678d79709db130ada8d01f2425c2db.webp" alt="" style="height: 20px;"></span><span class="pl"><img src="/lemify-assets/0971679a3899ec619020d25b1ffeee9f.webp" alt="" style="height: 20px;"></span><span class="pl"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0E2421" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4M13.5 6l-3 12"></path></svg>Integração aberta (API)</span><span class="pl"><img src="/lemify-assets/1507d2ae629c91b8ac36a69db1a1474a.webp" alt="" style="height: 17px;"></span><span class="pl"><img src="/lemify-assets/8df3ebd1d44d2ec8930a392bc9d7a0de.webp" alt="" style="height: 16px;"></span><span class="pl"><img src="/lemify-assets/52678d79709db130ada8d01f2425c2db.webp" alt="" style="height: 20px;"></span><span class="pl"><img src="/lemify-assets/0971679a3899ec619020d25b1ffeee9f.webp" alt="" style="height: 20px;"></span><span class="pl"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0E2421" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4M13.5 6l-3 12"></path></svg>Integração aberta (API)</span><span class="pl"><img src="/lemify-assets/1507d2ae629c91b8ac36a69db1a1474a.webp" alt="" style="height: 17px;"></span><span class="pl"><img src="/lemify-assets/8df3ebd1d44d2ec8930a392bc9d7a0de.webp" alt="" style="height: 16px;"></span><span class="pl"><img src="/lemify-assets/52678d79709db130ada8d01f2425c2db.webp" alt="" style="height: 20px;"></span><span class="pl"><img src="/lemify-assets/0971679a3899ec619020d25b1ffeee9f.webp" alt="" style="height: 20px;"></span><span class="pl"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0E2421" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4M13.5 6l-3 12"></path></svg>Integração aberta (API)</span><span class="pl"><img src="/lemify-assets/1507d2ae629c91b8ac36a69db1a1474a.webp" alt="" style="height: 17px;"></span><span class="pl"><img src="/lemify-assets/8df3ebd1d44d2ec8930a392bc9d7a0de.webp" alt="" style="height: 16px;"></span></span></div></div>
+<span class="intg-orb"><img src="/lemify-assets/24c193b846e3f72fc4f2eec59f40b45b.svg" alt="Lemify"></span>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 10px;"><a href="https://app.lemify.com.br/signup" class="btn cta" style="background: #1C403B; color: #F6F5EE; text-decoration: none; font-size: 17px; font-weight: 700; padding: 17px 30px; border-radius: 999px; min-height: 56px; box-sizing: border-box; display: inline-flex; align-items: center; gap: 10px;">Testar grátis por 14 dias <span class="arr">→</span></a><span style="font-size: 14px; color: #56635F;">Sem cartão e sem falar com vendedor.</span></div>
+</div>
+</div>
+</section>
+
+<section id="cases" aria-label="Cases de clientes" style="max-width: 1280px; margin: 0 auto; padding: clamp(64px, 8vw, 112px) 24px 0; display: flex; flex-direction: column; gap: 40px;">
+<div class="sh" style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 16px;">
+<span class="eyebrow">Clientes</span>
+<h2 style="margin: 0; font-weight: 500; font-size: clamp(28px, 2.8vw, 40px); line-height: 1.15; letter-spacing: -0.02em;">Mais de 2 mil empresas <strong style="font-weight: 700;">já atendem assim</strong></h2>
+</div>
+<div class="tband">
+<h3 class="disp" style="margin: 0; font-size: 26px; font-weight: 500; line-height: 1.25; letter-spacing: -0.02em;">O tempo de resposta caiu de <span style="color: #56635F; text-decoration: line-through; text-decoration-thickness: 2px; white-space: nowrap;">2 horas</span> para <strong style="font-weight: 700; white-space: nowrap;">10 segundos</strong></h3>
+<div style="display: flex; flex-direction: column; gap: 18px;">
+<div style="display: flex; flex-direction: column; gap: 8px;"><span style="display: flex; justify-content: space-between; gap: 12px; font-size: 15px; font-weight: 600;"><span>Antes</span><span style="color: #56635F;">2 horas</span></span><span class="bar" style="background: #CAD2CC;"></span></div>
+<div style="display: flex; flex-direction: column; gap: 8px;"><span style="display: flex; justify-content: space-between; gap: 12px; font-size: 15px; font-weight: 600;"><span>Com o Lemify</span><span>10 segundos</span></span><span class="bar" style="width: 18px; background: #1C403B;"></span></div>
+</div>
+</div>
+<div class="cases-g">
+<figure class="case lift" style="margin: 0; background: #FFFFFF; border: 1px solid #E1E4DA;">
+<span class="cl-logo"><img src="/lemify-assets/0572fa0274db3c0c559291e102b0ec92.png" alt="Espazzo Móveis Conceito" style="height: 36px;"></span>
+<span style="display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;"><strong class="disp" style="font-size: 52px; line-height: 1; font-weight: 700; letter-spacing: -0.03em;">100%</strong><span style="font-size: 15px; font-weight: 600;">de taxa de resposta</span></span>
+<blockquote>“A gente achava que a conversão baixa era culpa dos leads. Com o Lemify, centralizamos o atendimento, chegamos a 100% de taxa de resposta e hoje vemos onde o atendimento falhava.”</blockquote>
+<figcaption class="who"><strong>Espazzo Móveis Conceito</strong><span style="color: #56635F;">Loja de móveis</span></figcaption>
+</figure>
+<figure class="case lift" style="margin: 0; background: #1C403B; color: #F6F5EE;">
+<span class="cl-logo"><img src="/lemify-assets/7c8f03dcfa1b6717587c941a4e17d132.png" alt="Instituto Guilherme Rocha" style="height: 30px;"></span>
+<strong class="disp" style="font-size: 26px; line-height: 1.2; font-weight: 600; color: #D8FE6A;">A triagem acontece antes de chegar na recepção</strong>
+<blockquote style="color: #F6F5EE;">“Hoje a IA do Lemify faz a triagem antes de o contato chegar à recepção. E o painel mostra quantos contatos viram agendamento, o que orienta o nosso marketing.”</blockquote>
+<figcaption class="who"><strong>Instituto Guilherme Rocha</strong><span style="color: #BCCDC7;">Saúde</span></figcaption>
+</figure>
+<figure class="vid vreal" style="background: #1C403B;"><video src="/lemify-assets/698494a07a686d7a314a323303cd17d8.mp4" poster="/lemify-assets/9561b131aa4982c626321015d659debc.webp" controls playsinline preload="none" aria-label="Depoimento em vídeo de uma cliente do Lemify"></video></figure>
+</div>
+</section>
+
+<section id="planos" aria-label="Planos" class="plans">
+<div class="sh" style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 14px;">
+<span class="eyebrow">Planos</span>
+<h2 style="margin: 0; max-width: 860px;">Escolha o plano pelo jeito que a sua empresa atende</h2>
+<p style="margin: 0; font-size: 17px; color: #56635F; max-width: 620px;">Todos começam com 14 dias grátis, sem cartão, para você ver a IA atendendo os seus clientes antes de decidir.</p>
+</div>
+<input type="radio" name="bill" id="bill-m" class="bill-r" checked aria-label="Preços mensais"><input type="radio" name="bill" id="bill-a" class="bill-r" aria-label="Preços do plano anual, com 30% de desconto">
+<div class="bill" aria-hidden="true"><label for="bill-m" class="bl-m">Mensal</label><label for="bill-a" class="bl-a">Anual <em>30% OFF</em></label></div>
+<div class="pg"><div class="pc" data-plan="START" data-list="sem-agentes"><h3>Start</h3><p class="pd">Para reunir o atendimento num lugar só, com IA que atende e agenda.</p><div class="pp"><small>R$</small><strong><span class="pm">397</span><span class="pa">277</span></strong><span>/mês</span></div><span class="pa-n">no plano anual, com 30% de desconto</span><a href="https://app.lemify.com.br/signup" class="btn pc-cta">Testar grátis por 14 dias <span class="arr">→</span></a><div class="pc-ag"><span class="stack"><img data-agent="atendimento" src="/lemify-assets/4288c321bd4e7cfab256b2c142fe2804.webp" alt="" style="width: 30px; height: 30px; border-radius: 50%; object-fit: cover; object-position: center top; background: #F1FECB; display: block; box-shadow: 0 0 0 3px #FFFFFF;"><img data-agent="agendamento" src="/lemify-assets/9588b6492fbcd05850e3b69009e61e4c.webp" alt="" style="width: 30px; height: 30px; border-radius: 50%; object-fit: cover; object-position: center top; background: #D8E7EF; display: block; box-shadow: 0 0 0 3px #FFFFFF;"><img data-agent="orcamentos" src="/lemify-assets/939caed0768f159b15d48b7b63e34717.webp" alt="" style="width: 30px; height: 30px; border-radius: 50%; object-fit: cover; object-position: center top; background: #F3DCC7; display: block; box-shadow: 0 0 0 3px #FFFFFF;"><img data-agent="insights" hidden src="/lemify-assets/ae93dbf37bf1171471288127cbe3828e.webp" alt="" style="width: 30px; height: 30px; border-radius: 50%; object-fit: cover; object-position: center top; background: #E4DDEB; display: block; box-shadow: 0 0 0 3px #FFFFFF;"><img data-agent="crm" hidden src="/lemify-assets/bfcd2809ec95079e6151f8d7d08579fa.webp" alt="" style="width: 30px; height: 30px; border-radius: 50%; object-fit: cover; object-position: center top; background: #CAD9C2; display: block; box-shadow: 0 0 0 3px #FFFFFF;"><img data-agent="enriquecimento" hidden src="/lemify-assets/81be5ebfeade9f0dc8be40ce139c5d29.webp" alt="" style="width: 30px; height: 30px; border-radius: 50%; object-fit: cover; object-position: center top; background: #F0DADE; display: block; box-shadow: 0 0 0 3px #FFFFFF;"></span><span data-f="agentes">Agentes de atendimento, agendamento e orçamentos</span></div><ul><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg><span>2 canais de atendimento</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg><span>Até 2 usuários simultâneos</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg><span>Até 10.000 créditos de IA</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg><span>CRM com funis, agenda, e-mail e comentários das redes</span></li></ul></div><div class="pc ft" data-plan="PLUS" data-list="sem-agentes"><span class="pc-b">Recomendado</span><h3>Plus</h3><p class="pd">Para equipes que querem vender mais com insights, campanhas e chat no site.</p><div class="pp"><small>R$</small><strong><span class="pm">497</span><span class="pa">347</span></strong><span>/mês</span></div><span class="pa-n">no plano anual, com 30% de desconto</span><a href="https://app.lemify.com.br/signup" class="btn pc-cta">Testar grátis por 14 dias <span class="arr">→</span></a><div class="pc-ag"><span class="stack"><img data-agent="atendimento" src="/lemify-assets/4288c321bd4e7cfab256b2c142fe2804.webp" alt="" style="width: 30px; height: 30px; border-radius: 50%; object-fit: cover; object-position: center top; background: #F1FECB; display: block; box-shadow: 0 0 0 3px #1C403B;"><img data-agent="agendamento" src="/lemify-assets/9588b6492fbcd05850e3b69009e61e4c.webp" alt="" style="width: 30px; height: 30px; border-radius: 50%; object-fit: cover; object-position: center top; background: #D8E7EF; display: block; box-shadow: 0 0 0 3px #1C403B;"><img data-agent="orcamentos" src="/lemify-assets/939caed0768f159b15d48b7b63e34717.webp" alt="" style="width: 30px; height: 30px; border-radius: 50%; object-fit: cover; object-position: center top; background: #F3DCC7; display: block; box-shadow: 0 0 0 3px #1C403B;"><img data-agent="insights" src="/lemify-assets/ae93dbf37bf1171471288127cbe3828e.webp" alt="" style="width: 30px; height: 30px; border-radius: 50%; object-fit: cover; object-position: center top; background: #E4DDEB; display: block; box-shadow: 0 0 0 3px #1C403B;"><img data-agent="crm" hidden src="/lemify-assets/bfcd2809ec95079e6151f8d7d08579fa.webp" alt="" style="width: 30px; height: 30px; border-radius: 50%; object-fit: cover; object-position: center top; background: #CAD9C2; display: block; box-shadow: 0 0 0 3px #1C403B;"><img data-agent="enriquecimento" hidden src="/lemify-assets/81be5ebfeade9f0dc8be40ce139c5d29.webp" alt="" style="width: 30px; height: 30px; border-radius: 50%; object-fit: cover; object-position: center top; background: #F0DADE; display: block; box-shadow: 0 0 0 3px #1C403B;"></span><span data-f="agentes">Agentes de atendimento, agendamento, orçamentos e insights</span></div><ul><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg><span>4 canais de atendimento</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg><span>Até 4 usuários simultâneos</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg><span>Até 15.000 créditos de IA</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg><span>Tudo do Start, mais orçamentos, chat interno, campanhas e chat no site</span></li></ul></div><div class="pc" data-plan="PRO" data-list="sem-agentes"><h3>Pro</h3><p class="pd">Para escalar o atendimento com automações, API e todos os agentes de IA.</p><div class="pp"><small>R$</small><strong><span class="pm">897</span><span class="pa">627</span></strong><span>/mês</span></div><span class="pa-n">no plano anual, com 30% de desconto</span><a href="https://app.lemify.com.br/signup" class="btn pc-cta">Testar grátis por 14 dias <span class="arr">→</span></a><div class="pc-ag"><span class="stack"><img data-agent="atendimento" src="/lemify-assets/4288c321bd4e7cfab256b2c142fe2804.webp" alt="" style="width: 30px; height: 30px; border-radius: 50%; object-fit: cover; object-position: center top; background: #F1FECB; display: block; box-shadow: 0 0 0 3px #FFFFFF;"><img data-agent="agendamento" src="/lemify-assets/9588b6492fbcd05850e3b69009e61e4c.webp" alt="" style="width: 30px; height: 30px; border-radius: 50%; object-fit: cover; object-position: center top; background: #D8E7EF; display: block; box-shadow: 0 0 0 3px #FFFFFF;"><img data-agent="orcamentos" src="/lemify-assets/939caed0768f159b15d48b7b63e34717.webp" alt="" style="width: 30px; height: 30px; border-radius: 50%; object-fit: cover; object-position: center top; background: #F3DCC7; display: block; box-shadow: 0 0 0 3px #FFFFFF;"><img data-agent="insights" src="/lemify-assets/ae93dbf37bf1171471288127cbe3828e.webp" alt="" style="width: 30px; height: 30px; border-radius: 50%; object-fit: cover; object-position: center top; background: #E4DDEB; display: block; box-shadow: 0 0 0 3px #FFFFFF;"><img data-agent="crm" src="/lemify-assets/bfcd2809ec95079e6151f8d7d08579fa.webp" alt="" style="width: 30px; height: 30px; border-radius: 50%; object-fit: cover; object-position: center top; background: #CAD9C2; display: block; box-shadow: 0 0 0 3px #FFFFFF;"><img data-agent="enriquecimento" src="/lemify-assets/81be5ebfeade9f0dc8be40ce139c5d29.webp" alt="" style="width: 30px; height: 30px; border-radius: 50%; object-fit: cover; object-position: center top; background: #F0DADE; display: block; box-shadow: 0 0 0 3px #FFFFFF;"></span><span data-f="agentes">Os seis agentes de IA</span></div><ul><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg><span>15 canais de atendimento</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg><span>Até 15 usuários simultâneos</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg><span>Até 50.000 créditos de IA</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg><span>Tudo do Plus, mais Lemi Flow, API e resumo de conversas</span></li></ul></div></div>
+<div class="nano" data-plan="NANO"><div class="nano-t"><span class="nano-k"><img src="/lemify-assets/4288c321bd4e7cfab256b2c142fe2804.webp" alt="" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; object-position: center top; background: #F1FECB; display: block; box-shadow: 0 0 0 3px #FFFFFF;"></span><p><strong>Não se encaixa em nenhum desses?</strong> O plano Nano é a alternativa para micro empresas: <span data-f="nano">1 canal, 1 usuário, 5.000 créditos de IA e o agente de atendimento, com agenda e orçamentos.</span></p></div><div class="nano-p"><span class="nano-v">R$ <b><span class="pm">97</span><span class="pa">67</span></b>/mês</span><a href="https://app.lemify.com.br/signup" class="tlink">Começar pelo Nano <span class="arr">→</span></a></div></div>
+<div class="p-all"><strong>Em todos os planos</strong><span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1C403B" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg>Teste de 14 dias sem cartão</span><span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1C403B" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg><span class="pa-t"><span data-plans-branches>1 filial</span> e até 1.000 atendimentos por mês</span></span><span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1C403B" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg>Suporte pelo WhatsApp</span><span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1C403B" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg>Dados protegidos pela LGPD</span><span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1C403B" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg>Cancelamento quando quiser, depois de assinar</span></div>
+<div class="p-impl"><div><strong>Implantação guiada, opcional · R$ 850</strong><p>A nossa equipe configura o Lemify com você, treina a sua equipe e acompanha o primeiro mês. Se preferir, você configura por conta própria.</p></div><a href="/lemify/planos" class="tlink">Comparar os planos lado a lado <span class="arr">→</span></a></div>
+</section>
+
+<section id="duvidas" style="max-width: 900px; margin: 0 auto; padding: clamp(64px, 8vw, 112px) 24px; display: flex; flex-direction: column; gap: 32px;">
+<div class="sh" style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 14px;"><span class="eyebrow">Dúvidas</span><h2 style="margin: 0; text-align: center;">Dúvidas antes de começar</h2></div>
+<div style="display: flex; flex-direction: column;">
+<details class="faq" style="border-bottom: 1px solid #E1E4DA;" open>
+<summary style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 20px 0; font-size: 17px; font-weight: 600;">O Lemify é uma agência? Vocês cuidam do meu tráfego pago?<span class="plus" aria-hidden="true" style="font-size: 26px; font-weight: 400; line-height: 1;">+</span></summary>
+<p style="margin: 0 0 22px; color: #56635F;">Não. O Lemify é um software de atendimento e CRM com IA. Você assina, conecta os canais da sua empresa e a sua equipe usa a plataforma no dia a dia. A gente não cria nem gerencia anúncios e não produz conteúdo: o Lemify cuida para que os contatos que chegam pelos seus canais e anúncios sejam atendidos, registrados e acompanhados até a venda.</p>
+</details>
+<details class="faq" style="border-bottom: 1px solid #E1E4DA;">
+<summary style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 20px 0; font-size: 17px; font-weight: 600;">Preciso instalar alguma coisa?<span class="plus" aria-hidden="true" style="font-size: 26px; font-weight: 400; line-height: 1;">+</span></summary>
+<p style="margin: 0 0 22px; color: #56635F;">Não. O Lemify funciona pelo navegador. Você cria a conta, conecta os seus canais e cadastra a equipe, cada pessoa com o próprio acesso.</p>
+</details>
+<details class="faq" style="border-bottom: 1px solid #E1E4DA;">
+<summary style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 20px 0; font-size: 17px; font-weight: 600;">Posso usar o número de WhatsApp que já tenho?<span class="plus" aria-hidden="true" style="font-size: 26px; font-weight: 400; line-height: 1;">+</span></summary>
+<p style="margin: 0 0 22px; color: #56635F;">Sim. Você conecta o seu número por QR Code ou pela API Oficial do WhatsApp, e pode ter um número para cada setor dentro do limite de canais do plano.</p>
+</details>
+<details class="faq" style="border-bottom: 1px solid #E1E4DA;">
+<summary style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 20px 0; font-size: 17px; font-weight: 600;">Quantas pessoas da equipe podem usar?<span class="plus" aria-hidden="true" style="font-size: 26px; font-weight: 400; line-height: 1;">+</span></summary>
+<p style="margin: 0 0 22px; color: #56635F;">Depende do plano: <span data-plans-users>1 usuário no Nano, até 2 no Start, 4 no Plus e 15 no Pro</span>. Se a sua operação precisar de mais, fale com a gente.</p>
+</details>
+<details class="faq" style="border-bottom: 1px solid #E1E4DA;">
+<summary style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 20px 0; font-size: 17px; font-weight: 600;">Como eu controlo o que a IA responde?<span class="plus" aria-hidden="true" style="font-size: 26px; font-weight: 400; line-height: 1;">+</span></summary>
+<p style="margin: 0 0 22px; color: #56635F;">Você define o que os agentes sabem e o que podem dizer: informações da empresa, produtos, serviços, horários e as suas regras. Antes de liberar, testa as respostas na área de testes e com contatos da sua equipe.</p>
+</details>
+<details class="faq" style="border-bottom: 1px solid #E1E4DA;">
+<summary style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 20px 0; font-size: 17px; font-weight: 600;">Quando a equipe assume a conversa?<span class="plus" aria-hidden="true" style="font-size: 26px; font-weight: 400; line-height: 1;">+</span></summary>
+<p style="margin: 0 0 22px; color: #56635F;">Quando o cliente pede uma pessoa ou o assunto sai das regras que você definiu, a conversa vai para o setor que você escolheu, com o histórico e o resumo. A equipe também pode assumir qualquer conversa quando quiser.</p>
+</details>
+<details class="faq" style="border-bottom: 1px solid #E1E4DA;">
+<summary style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 20px 0; font-size: 17px; font-weight: 600;">O que eu preciso configurar?<span class="plus" aria-hidden="true" style="font-size: 26px; font-weight: 400; line-height: 1;">+</span></summary>
+<p style="margin: 0 0 22px; color: #56635F;">As informações da empresa, os produtos ou serviços, o horário de atendimento, as regras de passagem para a equipe e os canais. Se preferir, a implantação guiada faz isso com você por R$ 850.</p>
+</details>
+<details class="faq" style="border-bottom: 1px solid #E1E4DA;">
+<summary style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 20px 0; font-size: 17px; font-weight: 600;">Quais recursos estão no meu plano?<span class="plus" aria-hidden="true" style="font-size: 26px; font-weight: 400; line-height: 1;">+</span></summary>
+<p style="margin: 0 0 22px; color: #56635F;">Todos os planos têm a caixa única com os seus canais e o agente de atendimento. Os outros agentes, os limites e os recursos aumentam de um plano para o outro, e a comparação mostra tudo lado a lado. <a href="/lemify/planos" class="tlink" style="font-weight: 700; text-decoration: none; color: #0E2421; white-space: nowrap;">Comparar os planos <span class="arr">→</span></a></p>
+</details>
+<details class="faq" style="border-bottom: 1px solid #E1E4DA;">
+<summary style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 20px 0; font-size: 17px; font-weight: 600;">O que acontece quando os créditos de IA acabam?<span class="plus" aria-hidden="true" style="font-size: 26px; font-weight: 400; line-height: 1;">+</span></summary>
+<p style="margin: 0 0 22px; color: #56635F;">Cada plano vem com créditos de IA para o mês. Se acabarem antes da renovação, os agentes pausam até o mês virar ou até você contratar créditos extras, dentro do próprio sistema. A sua equipe continua atendendo normalmente.</p>
+</details>
+<details class="faq" style="border-bottom: 1px solid #E1E4DA;">
+<summary style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 20px 0; font-size: 17px; font-weight: 600;">Meu número de WhatsApp corre risco de bloqueio?<span class="plus" aria-hidden="true" style="font-size: 26px; font-weight: 400; line-height: 1;">+</span></summary>
+<p style="margin: 0 0 22px; color: #56635F;">O Lemify é parceiro oficial da Meta e usa a conexão oficial do WhatsApp, o que deixa o risco de bloqueio muito baixo.</p>
+</details>
+</div>
+</section>
+
+<section id="comecar" style="max-width: 1360px; margin: 0 auto; padding: 0 16px clamp(56px, 7vw, 96px);">
+<div class="fin">
+<div class="fin-in">
+<span class="eyebrow">Comece hoje</span>
+<h2 style="margin: 0;">Teste o Lemify na rotina da sua empresa</h2>
+<p>14 dias grátis, sem cartão. Depois, planos a partir de R$ <span data-plans-min>97</span> por mês, e você cancela quando quiser.</p>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 12px;">
+<a href="https://app.lemify.com.br/signup" class="btn cta" style="background: #D8FE6A; color: #0E2421; text-decoration: none; font-size: 17px; font-weight: 600; padding: 17px 32px; border-radius: 999px; min-height: 56px; box-sizing: border-box; display: inline-flex; align-items: center; gap: 10px;">Testar grátis por 14 dias <span class="arr">→</span></a>
+<span style="font-size: 14px; color: #BCCDC7;">Mais de 2 mil empresas já atendem com o Lemify.</span>
+</div>
+</div>
+<img src="/lemify-assets/8763d3e9c75074301cf9659d2bc10a27.webp" alt="Os agentes de IA do Lemify reunidos: Maia, Theo, Lemi, Nico, Íris e Otto" class="fin-m">
+</div>
+</section>
+
+<div class="stick"><a href="https://app.lemify.com.br/signup"><span class="ic"><img src="/lemify-assets/24c193b846e3f72fc4f2eec59f40b45b.svg" alt="" style="width: 20px; height: auto; display: block;"></span><span>Testar grátis por 14 dias</span><small>sem cartão</small><span class="go" aria-hidden="true">→</span></a></div>
+
+<footer class="ft">
+<div class="ft-in">
+<div class="ft-b"><img src="/lemify-assets/04d289e00871671dd82abc8176788f8f.svg" alt="Lemify" style="height: 30px; width: auto; display: block;"><p>Software de atendimento e CRM com agentes de IA para empresas brasileiras.</p>
+<div class="ft-ct"><a href="https://wa.me/551148635054">WhatsApp (11) 4863-5054</a><a href="mailto:contato@lemify.com.br">contato@lemify.com.br</a><a href="https://instagram.com/lemifybr">@lemifybr</a></div></div>
+<nav aria-label="Produto"><h4>Produto</h4><a href="#o-que-e">O que é o Lemify</a><a href="#funcionalidades">Funcionalidades</a><a href="#agentes">Agentes de IA</a><a href="/lemify/planos">Planos e preços</a><a href="#duvidas">Dúvidas</a></nav>
+<nav aria-label="Lemify"><h4>Lemify</h4><a href="https://lemify.com.br/">Site institucional</a><a href="https://lemify.com.br/blog">Blog</a><a href="https://lemify.com.br/docs">Documentação</a><a href="https://app.lemify.com.br/login">Entrar</a></nav>
+<nav aria-label="Legal"><h4>Legal</h4><a href="https://lemify.com.br/termos">Termos de uso</a><a href="https://lemify.com.br/privacidade">Política de privacidade</a><a href="https://lemify.com.br/reembolso">Política de reembolso</a><a href="https://lemify.com.br/termos-ia">Termos de IA</a><a href="https://lemify.com.br/lgpd">Segurança e LGPD</a></nav>
+</div>
+<div class="ft-bot"><span>Lemify · 2026 · Todos os direitos reservados.</span><span>Lemify Tecnologia Ltda. · CNPJ 69.768.422/0001-08 · São Paulo, SP</span></div>
+</footer>
+
+</div>
+<script>document.querySelectorAll(".vbox-f video").forEach(function(v){var f=v.parentNode;v.controls=false;f.classList.add("vjs");v.addEventListener("click",function(){if(!v.controls){v.controls=true;v.play();}});v.addEventListener("play",function(){v.controls=true;f.classList.add("on")});v.addEventListener("ended",function(){f.classList.remove("on")});});</script>
+<script>document.querySelectorAll(".ag-i").forEach(function(l){l.addEventListener("click",function(){setTimeout(function(){var t=l.getBoundingClientRect().top;if(t<8||t>innerHeight-120){window.scrollBy({top:t-16,behavior:"smooth"});}},80);});});</script>
+<dialog class="vmodal" id="vmodal" aria-label="Vídeo: o que é o Lemify, em 2 minutos"><button class="vm-x" type="button" aria-label="Fechar o vídeo"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7l10 10M17 7L7 17"></path></svg></button><div class="vm-box"><video controls playsinline preload="none"></video></div></dialog>
+<script>(function(){var d=document.getElementById("vmodal");if(!d||!d.showModal)return;var mv=d.querySelector("video"),sv=document.querySelector("#video video");document.querySelectorAll("[data-vmodal]").forEach(function(a){a.addEventListener("click",function(e){e.preventDefault();if(!mv.getAttribute("src")){mv.src=sv.currentSrc||sv.getAttribute("src");mv.poster=sv.getAttribute("poster")||"";}if(!sv.paused)sv.pause();d.showModal();document.documentElement.classList.add("vm-on");var pr=mv.play();if(pr&&pr.catch)pr.catch(function(){});});});d.querySelector(".vm-x").addEventListener("click",function(){d.close();});d.addEventListener("click",function(e){if(e.target===d)d.close();});d.addEventListener("close",function(){mv.pause();document.documentElement.classList.remove("vm-on");});})();</script>
+<script>/* Planos do Lemify lidos da API (https://api.lemify.com.br/v1/plans).
+   A página já vem com os valores escritos; este script troca pelos da API
+   quando ela responde. Se a API falhar, nada muda na tela. */
+(function () {
+  var API = 'https://api.lemify.com.br/v1/plans';
+  var KEY = 'lemify-plans-v1', TTL = 15 * 60 * 1000;
+  var FEATURED = 'PLUS';          // plano com o selo "Recomendado"
+  var ATENDIMENTOS = '1.000';     // não vem na API; igual em todos os planos
+  var AGENTS = [
+    ['useLemiAI', 'atendimento', 'atendimento'],
+    ['useSpecialistAgenda', 'agendamento', 'agendamento'],
+    ['useBudgets', 'orçamentos', 'orcamentos'],
+    ['useAgentInsights', 'insights', 'insights'],
+    ['useSpecialistCrm', 'CRM', 'crm'],
+    ['useSpecialistEnrich', 'enriquecimento', 'enriquecimento']
+  ];
+  var MODS = [
+    ['usePipelines', 'CRM com funis'], ['useAgenda', 'agenda'], ['useBudgetsModule', 'orçamentos'],
+    ['useEmail', 'e-mail'], ['useInteractions', 'comentários das redes'], ['useInternalchat', 'chat interno'],
+    ['useCampaigns', 'campanhas'], ['useWebchat', 'chat no site'], ['useLemiflow', 'Lemi Flow'],
+    ['useApi', 'API'], ['useSpecialistSummary', 'resumo de conversas']
+  ];
+
+  function lst(a) { return a.length < 2 ? (a[0] || '') : a.slice(0, -1).join(', ') + ' e ' + a[a.length - 1]; }
+  function cap(t) { return t.charAt(0).toUpperCase() + t.slice(1); }
+  function num(n) { return Number(n).toLocaleString('pt-BR'); }
+  function money(v) { return v % 1 === 0 ? String(v) : v.toFixed(2).replace('.', ','); }
+  function annual(v) { return Math.floor(v * 0.7); }      // anual com 30% de desconto, como no sistema
+  function title(n) { return n.charAt(0) + n.slice(1).toLowerCase(); }
+  function agentsOf(p) { return AGENTS.filter(function (a) { return p[a[0]]; }); }
+  function modsOf(p) { return MODS.filter(function (m) { return p[m[0]]; }).map(function (m) { return m[1]; }); }
+  function credits(p) { return num(p.aiBudget * 1000); }
+
+  var T = {
+    canais: function (p) { return p.connections === 1 ? '1 canal de atendimento' : p.connections + ' canais de atendimento'; },
+    usuarios: function (p) { return p.users === 1 ? 'Até 1 usuário' : 'Até ' + p.users + ' usuários simultâneos'; },
+    creditos: function (p) { return 'Até ' + credits(p) + ' créditos de IA'; },
+    agentes: function (p) {
+      var a = agentsOf(p).map(function (x) { return x[1]; });
+      if (a.length === AGENTS.length) return 'Os seis agentes de IA';
+      return (a.length === 1 ? 'Agente de ' : 'Agentes de ') + lst(a);
+    },
+    recursos: function (p, prev) {
+      var m = modsOf(p);
+      if (prev) {
+        var pm = modsOf(prev);
+        if (pm.length && pm.every(function (x) { return m.indexOf(x) >= 0; })) {
+          var d = m.filter(function (x) { return pm.indexOf(x) < 0; });
+          if (d.length) return 'Tudo do ' + title(prev.name) + ', mais ' + lst(d);
+        }
+      }
+      return cap(lst(m));
+    },
+    nano: function (p) {
+      var a = agentsOf(p).map(function (x) { return x[1]; }), m = modsOf(p);
+      return (p.connections === 1 ? '1 canal' : p.connections + ' canais') + ', ' +
+        (p.users === 1 ? '1 usuário' : p.users + ' usuários') + ', ' + credits(p) + ' créditos de IA e ' +
+        (a.length === 1 ? 'o agente de ' : 'os agentes de ') + lst(a) + (m.length ? ', com ' + lst(m) : '') + '.';
+    },
+    usuariosFaq: function (plans) {
+      return lst(plans.map(function (p, i) {
+        if (i === 0) return p.users + (p.users === 1 ? ' usuário' : ' usuários') + ' no ' + title(p.name);
+        return (i === 1 ? 'até ' : '') + p.users + ' no ' + title(p.name);
+      }));
+    }
+  };
+
+  function setList(ul, items) {
+    var tpl = ul && ul.querySelector('li');
+    if (!tpl) return;
+    var out = items.map(function (t) {
+      var li = tpl.cloneNode(true), sp = li.querySelector('span');
+      if (sp) sp.textContent = t;
+      else { Array.prototype.slice.call(li.childNodes).forEach(function (n) { if (n.nodeType === 3) n.remove(); }); li.appendChild(document.createTextNode(t)); }
+      return li;
+    });
+    ul.textContent = '';
+    out.forEach(function (li) { ul.appendChild(li); });
+  }
+  function setPrice(root, p) {
+    var pm = root.querySelector('.pm'), pa = root.querySelector('.pa');
+    if (pm) pm.textContent = money(p.value);
+    if (pa) pa.textContent = String(annual(p.value));
+  }
+  function each(sel, fn) { Array.prototype.forEach.call(document.querySelectorAll(sel), fn); }
+
+  function tableHTML(plans) {
+    var yes = '<span aria-hidden="true">✓</span><span class="sr">Incluído</span>';
+    var no = '<span aria-hidden="true" class="no">–</span><span class="sr">Não incluído</span>';
+    function row(label, f) {
+      return '<tr><th scope="row">' + label + '</th>' + plans.map(function (p) {
+        var v = f(p); return '<td' + (p.name === FEATURED ? ' class="hl"' : '') + '>' + (v === true ? yes : v === false ? no : v) + '</td>';
+      }).join('') + '</tr>';
+    }
+    function group(label) { return '<tr class="grp"><th scope="rowgroup" colspan="' + (plans.length + 1) + '">' + label + '</th></tr>'; }
+    var h = '<thead><tr><th scope="col">Recurso</th>' + plans.map(function (p) { return '<th scope="col"' + (p.name === FEATURED ? ' class="hl"' : '') + '>' + title(p.name) + '</th>'; }).join('') + '</tr></thead><tbody>';
+    h += row('Preço por mês', function (p) { return 'R$ ' + money(p.value); });
+    h += row('No plano anual, por mês', function (p) { return 'R$ ' + annual(p.value); });
+    h += row('Canais de atendimento', function (p) { return String(p.connections); });
+    h += row('Usuários simultâneos', function (p) { return String(p.users); });
+    h += row('Filiais', function (p) { return String(p.branches); });
+    h += row('Atendimentos por mês', function () { return ATENDIMENTOS; });
+    h += row('Créditos de IA', function (p) { return credits(p); });
+    h += group('Agentes de IA');
+    AGENTS.forEach(function (a) { h += row(cap(a[1]), function (p) { return !!p[a[0]]; }); });
+    h += group('Recursos');
+    MODS.forEach(function (m) { h += row(cap(m[1]), function (p) { return !!p[m[0]]; }); });
+    return h + '</tbody>';
+  }
+
+  function render(all) {
+    var plans = all.filter(function (p) { return p && p.active !== false && typeof p.name === 'string' && isFinite(p.value) && p.value > 0; })
+      .sort(function (a, b) { return a.value - b.value; });
+    if (!plans.length) return;
+    var by = {}; plans.forEach(function (p, i) { by[p.name] = { p: p, prev: plans[i - 1] }; });
+
+    each('[data-plan]', function (el) {
+      var e = by[el.getAttribute('data-plan')];
+      var card = el.closest('.pg2 > *') || el;
+      if (!e) { if (el.matches('.pc, article, .nano')) card.hidden = true; return; }
+      card.hidden = false;
+      var p = e.p;
+      setPrice(el, p);
+      var h = el.querySelector('h2, h3'); if (h && !el.classList.contains('nano')) h.textContent = title(p.name);
+      var kind = el.getAttribute('data-list');
+      var items = [T.canais(p), T.usuarios(p), T.creditos(p)];
+      if (kind === 'com-agentes') items.push(T.agentes(p));
+      items.push(T.recursos(p, e.prev));
+      if (kind) setList(el.querySelector('ul'), items);
+      var ag = el.querySelector('[data-f="agentes"]'); if (ag) ag.textContent = T.agentes(p);
+      each('[data-plan="' + p.name + '"] [data-agent]', function (img) {
+        var a = AGENTS.filter(function (x) { return x[2] === img.getAttribute('data-agent'); })[0];
+        img.hidden = !(a && p[a[0]]);
+      });
+      var nd = el.querySelector('[data-f="nano"]'); if (nd) nd.textContent = T.nano(p);
+    });
+    each('[data-plans-min]', function (el) { el.textContent = money(plans[0].value); });
+    each('[data-plans-users]', function (el) { el.textContent = T.usuariosFaq(plans); });
+    each('[data-plans-branches]', function (el) {
+      var b = plans[0].branches, same = plans.every(function (p) { return p.branches === b; });
+      el.textContent = same ? (b === 1 ? '1 filial' : b + ' filiais') : 'Filiais conforme o plano';
+    });
+    each('table[data-plans-table]', function (t) { t.innerHTML = tableHTML(plans); });
+  }
+
+  function load() {
+    try {
+      var c = JSON.parse(sessionStorage.getItem(KEY) || 'null');
+      if (c && Date.now() - c.t < TTL && Array.isArray(c.d)) { render(c.d); return; }
+    } catch (e) {}
+    var ctl = window.AbortController ? new AbortController() : null;
+    var timer = ctl && setTimeout(function () { ctl.abort(); }, 10000);
+    fetch(API, ctl ? { signal: ctl.signal } : {}).then(function (r) { return r.ok ? r.json() : null; }).then(function (d) {
+      if (timer) clearTimeout(timer);
+      if (!Array.isArray(d)) return;
+      render(d);
+      try { sessionStorage.setItem(KEY, JSON.stringify({ t: Date.now(), d: d })); } catch (e) {}
+    }).catch(function () {});
+  }
+  window.LemifyPlans = { render: render };
+  if (document.querySelector('[data-plan], [data-plans-table]')) { try { load(); } catch (e) {} }
+})();
+</script>
+</body>
+</html>

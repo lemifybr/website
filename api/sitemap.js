@@ -5,6 +5,8 @@ const SITE = 'https://lemify.com.br'
 // Páginas fixas do site. Os posts do blog entram automaticamente.
 const STATIC = [
   ['/', 'weekly', '1.0'],
+  ['/lemify', 'weekly', '0.9'],
+  ['/lemify/planos', 'weekly', '0.8'],
   ['/blog', 'daily', '0.8'],
   ['/docs', 'monthly', '0.7'],
   ['/termos', 'yearly', '0.3'],
