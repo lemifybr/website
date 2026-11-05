@@ -179,11 +179,12 @@ export function Products() {
       setPinned(true)
       const el = track.current
       const view = el.parentElement
-      // O cartão em foco fica sempre no meio: a trilha anda do centro do primeiro ao centro do último.
+      // O cartão em foco fica sempre no mesmo ponto, perto do texto: a trilha anda do primeiro ao último cartão.
       const center = (i) => { const c = el.children[i]; return c ? c.offsetLeft + c.offsetWidth / 2 : 0 }
+      const focus = () => Math.min(view.clientWidth / 2, (el.children[0]?.offsetWidth || 0) / 2 + view.clientWidth * 0.14)
       const dist = () => center(N - 1) - center(0)
-      const tween = gsap.fromTo(el, { x: () => view.clientWidth / 2 - center(0) }, {
-        x: () => view.clientWidth / 2 - center(N - 1), ease: 'none',
+      const tween = gsap.fromTo(el, { x: () => focus() - center(0) }, {
+        x: () => focus() - center(N - 1), ease: 'none',
         scrollTrigger: {
           trigger: stage, pin: true, start: 'center center+=35', end: () => `+=${dist() * 1.15}`,
           scrub: 0.7, invalidateOnRefresh: true,
