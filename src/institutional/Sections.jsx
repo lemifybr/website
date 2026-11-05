@@ -13,8 +13,7 @@ import intMeta from './assets/integrations/meta.svg'
 import intGoogle from './assets/integrations/google.svg'
 import intTiktok from './assets/integrations/tiktok.svg'
 import intIfood from './assets/integrations/ifood.svg'
-import { STEPS, SITE, VALUES } from './siteConfig.js'
-import dashboard from './assets/product-dashboard.jpg'
+import { SITE, VALUES } from './siteConfig.js'
 import { FAQ } from './faq.js'
 import crew from './assets/crew.webp'
 import lemi from './assets/lemi.webp'
@@ -55,28 +54,6 @@ export function Principles() {
               <p>{v.d}</p>
             </Tilt>
           ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-/* ───────────── O que fazemos hoje: o produto ───────────── */
-export function Product() {
-  return (
-    <section className="product" id="produto" aria-labelledby="produto-titulo">
-      <div className="wrap product__card" data-reveal="scale">
-        <div className="product__text">
-          <span className="eyebrow">O que fazemos hoje</span>
-          <Words as="h2" id="produto-titulo" className="h2" text="Lemify, nosso primeiro produto." />
-          <p>Uma plataforma de atendimento e CRM que junta os canais de conversa da empresa numa caixa só, com agentes de IA trabalhando lado a lado com a equipe.</p>
-          <div className="product__cta">
-            <Magnetic><a className="btn btn--lime btn--lg" href={SITE.productPage}>Conhecer o Lemify <Arrow /></a></Magnetic>
-            <a className="btn btn--outline-light btn--lg" href={`${SITE.productPage}/planos`}>Ver planos</a>
-          </div>
-        </div>
-        <div className="product__shot">
-          <img src={dashboard} alt="Tela do Lemify mostrando a caixa de atendimento com as conversas dos clientes" loading="lazy" data-parallax="0.06" />
         </div>
       </div>
     </section>
@@ -326,52 +303,6 @@ export function Agents() {
             </li>
           ))}
         </ul>
-      </div>
-    </section>
-  )
-}
-
-/* ───────────── Suporte: cartões sticky empilhados (mesmo efeito de Produtos) ───────────── */
-const STEP_TONES = ['lime', 'cream', 'mint', 'dark']
-export function Support() {
-  const root = useRef(null)
-  useEffect(() => {
-    if (prefersReducedMotion()) return
-    const ctx = gsap.context(() => {
-      const cards = gsap.utils.toArray('.scard')
-      cards.forEach((card, k) => {
-        const next = cards[k + 1]
-        if (!next) return
-        gsap.to(card.querySelector('.scard__in'), {
-          scale: 0.92, opacity: 0.55, ease: 'none',
-          scrollTrigger: { trigger: next, start: 'top 85%', end: 'top 20%', scrub: true },
-        })
-      })
-    }, root)
-    return () => ctx.revert()
-  }, [])
-  return (
-    <section className="support" id="suporte" ref={root} aria-labelledby="suporte-titulo">
-      <div className="wrap">
-        <div className="head">
-          <span className="eyebrow" data-reveal>Nosso jeito de trabalhar</span>
-          <Words as="h2" id="suporte-titulo" className="h2" text="Do primeiro dia em diante, a gente está junto." />
-          <p className="head__p" data-reveal>Na implantação guiada, a gente acompanha cada etapa com você, e todo cliente conta com suporte de gente de verdade.</p>
-        </div>
-        <ol className="sstack">
-          {STEPS.map((s, k) => (
-            <li className={`scard scard--${STEP_TONES[k]}`} key={s.t} style={{ '--i': k }}>
-              <div className="scard__in">
-                <span className="scard__n">{k < 3 ? k + 1 : '✓'}</span>
-                <div>
-                  <small>{s.k}</small>
-                  <h3>{s.t}</h3>
-                  <p>{s.d}</p>
-                </div>
-              </div>
-            </li>
-          ))}
-        </ol>
       </div>
     </section>
   )

@@ -155,20 +155,6 @@ html.has-cursor .inst input { cursor: text; }
 .agent b { display: block; margin: 14px 0 6px; font-size: 18px; }
 .agent p { font-size: 20px; max-width: 360px; color: rgba(14, 36, 33, 0.78); line-height: 1.45; }
 
-/* ───── Suporte ───── */
-.support { padding: 140px 0; }
-.sstack { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 28px; }
-.scard { position: sticky; top: calc(96px + var(--i) * 26px); }
-.scard__in { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: clamp(24px, 5vw, 72px); min-height: 340px; padding: clamp(28px, 4vw, 56px); border-radius: 40px; transform-origin: 50% 0; will-change: transform; box-shadow: 0 30px 60px -30px rgba(14, 36, 33, 0.3), 0 0 0 1px var(--line); }
-.scard--lime .scard__in { background: var(--lime); }
-.scard--cream .scard__in { background: #fff; }
-.scard--mint .scard__in { background: var(--mint); }
-.scard--dark .scard__in { background: var(--brand); color: #fff; }
-.scard__n { font-size: clamp(120px, 18vw, 260px); line-height: 0.8; font-weight: 600; letter-spacing: -0.06em; opacity: 0.9; }
-.scard--dark .scard__n { color: var(--lime); }
-.scard small { font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.65; }
-.scard h3 { font-size: clamp(30px, 3.8vw, 54px); letter-spacing: -0.03em; font-weight: 600; line-height: 1.02; margin: 10px 0 14px; }
-.scard p { font-size: 19px; line-height: 1.5; max-width: 520px; opacity: 0.8; }
 
 /* ───── Carreiras / Parceiros ───── */
 .join__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
@@ -208,16 +194,13 @@ html.has-cursor .inst input { cursor: text; }
 }
 @media (max-width: 900px) {
   .values__side { position: static; height: auto; min-height: 0; }
-  .scard, .vitem { position: relative; top: 0; padding-bottom: 20px; }
-  .scard__in { grid-template-columns: 1fr; min-height: 0; }
-  .scard__n { font-size: 110px; }
   .agents__stick { position: static; height: auto; min-height: 0; }
+  .agents { padding: 90px 0; }
   .agent { min-height: 0; padding: 24px 0; opacity: 1; flex-wrap: nowrap; }
   .agent:last-child { min-height: 0; }
   .agent__img { width: 96px; }
   .agent__idx { display: none; }
   .agent h3 { font-size: 44px; }
-  .values, .support, .agents { padding: 90px 0; }
   .products { padding: 90px 0 70px; }
 }
 @media (max-width: 560px) {
