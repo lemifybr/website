@@ -146,13 +146,13 @@ const ICONS = { varejo: icVarejo, clinicas: icClinicas, restaurantes: icRestaura
 const PHOTOS = { varejo: phVarejo, clinicas: phClinicas, restaurantes: phRestaurantes, imobiliarias: phImobiliarias, beleza: phBeleza, atacado: phAtacado, servicos: phServicos }
 
 const SEGMENTS = [
-  { n: 'Varejo', ic: 'varejo', alt: 'Vendedora de avental verde atendendo numa floricultura', t: 'Responda na hora e feche mais vendas', d: 'A IA responde dúvidas de estoque, preço e entrega e leva o cliente até a compra, mesmo quando a loja está cheia ou fechada.', q: 'Oi! Tem esse buquê para hoje?', a: 'Tem sim! Separo um para você retirar ou prefere receber em casa?' },
-  { n: 'Clínicas', ic: 'clinicas', alt: 'Profissional de saúde com uniforme verde e estetoscópio', t: 'Agenda cheia sem a recepção parar', d: 'A IA agenda, confirma e remarca consultas pelo WhatsApp, e a sua equipe cuida de quem está na sala de espera.', q: 'Queria marcar uma consulta essa semana.', a: 'Tenho quinta às 10h ou sexta às 16h. Qual fica melhor para você?' },
-  { n: 'Restaurantes', ic: 'restaurantes', alt: 'Atendente de avental verde servindo no balcão de um café', t: 'Pedidos e dúvidas sem fila, no horário de pico', d: 'A IA atende dúvidas de cardápio, anota pedidos e avisa a cozinha, enquanto você cuida do balcão e das entregas.', q: 'Vocês entregam no Centro?', a: 'Entregamos sim, em até 40 minutos. Quer ver o cardápio de hoje?' },
-  { n: 'Imobiliárias', ic: 'imobiliarias', alt: 'Corretora de terno verde caminhando pela cidade', t: 'Cada interessado atendido, cada visita marcada', d: 'A IA responde quem pergunta sobre um imóvel, entende o que a pessoa procura e marca a visita na sua agenda.', q: 'O apartamento de 2 quartos ainda está disponível?', a: 'Está sim! Posso marcar uma visita para amanhã às 15h?' },
-  { n: 'Beleza e estética', ic: 'beleza', alt: 'Cabeleireira de blusa verde-clara arrumando o cabelo de um cliente', t: 'Agenda preenchida e clientes de volta', d: 'A IA preenche os horários, lembra o cliente do atendimento e chama de volta quem sumiu.', q: 'Tem horário para cortar no sábado?', a: 'Tenho às 10h e às 14h. Qual você prefere?' },
-  { n: 'Atacado', ic: 'atacado', alt: 'Funcionário de camiseta verde separando caixas no estoque', t: 'Pedidos recorrentes sem planilha', d: 'A IA mantém cadastros e tabelas em dia e repete pedidos de clientes antigos em poucas mensagens.', q: 'Quero repetir o pedido da semana passada.', a: 'Claro! Mesmos itens e quantidades. Confirmo para entrega na sexta?' },
-  { n: 'Serviços', ic: 'servicos', alt: 'Técnico de camiseta verde fazendo a manutenção de um ar-condicionado', t: 'Orçamentos e agenda em minutos', d: 'A IA recebe o pedido, pede as informações que faltam e já deixa o orçamento e a visita encaminhados.', q: 'Preciso de um orçamento de manutenção.', a: 'Claro! Me passa o endereço e o melhor horário que já te envio o orçamento.' },
+  { n: 'Varejo', ic: 'varejo', alt: 'Vendedora de avental verde atendendo numa floricultura', t: 'Responda na hora e feche mais vendas', d: 'A IA responde dúvidas de estoque, preço e entrega e leva o cliente até a compra, mesmo quando a loja está cheia ou fechada.' },
+  { n: 'Clínicas', ic: 'clinicas', alt: 'Profissional de saúde com uniforme verde e estetoscópio', t: 'Agenda cheia sem a recepção parar', d: 'A IA agenda, confirma e remarca consultas pelo WhatsApp, e a sua equipe cuida de quem está na sala de espera.' },
+  { n: 'Restaurantes', ic: 'restaurantes', alt: 'Atendente de avental verde servindo no balcão de um café', t: 'Pedidos e dúvidas sem fila, no horário de pico', d: 'A IA atende dúvidas de cardápio, anota pedidos e avisa a cozinha, enquanto você cuida do balcão e das entregas.' },
+  { n: 'Imobiliárias', ic: 'imobiliarias', alt: 'Corretora de terno verde caminhando pela cidade', t: 'Cada interessado atendido, cada visita marcada', d: 'A IA responde quem pergunta sobre um imóvel, entende o que a pessoa procura e marca a visita na sua agenda.' },
+  { n: 'Beleza e estética', ic: 'beleza', alt: 'Cabeleireira de blusa verde-clara arrumando o cabelo de um cliente', t: 'Agenda preenchida e clientes de volta', d: 'A IA preenche os horários, lembra o cliente do atendimento e chama de volta quem sumiu.' },
+  { n: 'Atacado', ic: 'atacado', alt: 'Funcionário de camiseta verde separando caixas no estoque', t: 'Pedidos recorrentes sem planilha', d: 'A IA mantém cadastros e tabelas em dia e repete pedidos de clientes antigos em poucas mensagens.' },
+  { n: 'Serviços', ic: 'servicos', alt: 'Técnico de camiseta verde fazendo a manutenção de um ar-condicionado', t: 'Orçamentos e agenda em minutos', d: 'A IA recebe o pedido, pede as informações que faltam e já deixa o orçamento e a visita encaminhados.' },
 ]
 
 const pad = (n) => String(n).padStart(2, '0')
@@ -254,10 +254,6 @@ export function Products() {
                 <div className="seg__media">
                   <img src={PHOTOS[x.ic]} alt={x.alt} loading="lazy" />
                   <span className="seg__chip"><img src={ICONS[x.ic]} alt="" />{x.n}</span>
-                  <div className="seg__chats" aria-hidden={k !== on}>
-                    <div className="seg__chat seg__chat--in"><small>Cliente</small>{x.q}</div>
-                    <div className="seg__chat seg__chat--out"><small>Resposta da IA</small>{x.a}</div>
-                  </div>
                 </div>
                 <div className="seg__cap">
                   <h3>{x.t}</h3>
