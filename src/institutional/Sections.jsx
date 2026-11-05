@@ -14,7 +14,6 @@ import intGoogle from './assets/integrations/google.svg'
 import intTiktok from './assets/integrations/tiktok.svg'
 import intIfood from './assets/integrations/ifood.svg'
 import { STEPS, SITE, VALUES } from './siteConfig.js'
-import metaPartner from './assets/meta-partner.png'
 import dashboard from './assets/product-dashboard.jpg'
 import { FAQ } from './faq.js'
 import crew from './assets/crew.webp'
@@ -38,68 +37,6 @@ import phImobiliarias from './assets/segments/photos/imobiliarias.jpg'
 import phBeleza from './assets/segments/photos/beleza.jpg'
 import phAtacado from './assets/segments/photos/atacado.jpg'
 import phServicos from './assets/segments/photos/servicos.jpg'
-
-/* ───────────── Faixa de palavras em movimento ───────────── */
-const BAND = ['Atender', 'Vender', 'Agendar', 'Organizar', 'Crescer']
-export function Band() {
-  const set = [...BAND, ...BAND]
-  return (
-    <div className="band" aria-hidden="true">
-      <div className="band__track">
-        {[0, 1].map((g) => (
-          <div className="band__set" key={g}>
-            {set.map((w, i) => <span key={`${g}-${i}`}>{w}<i /></span>)}
-          </div>
-        ))}
-      </div>
-    </div>
-  )
-}
-
-/* ───────────── Quem somos: manifesto que acende palavra por palavra + números ───────────── */
-const MANIFESTO = 'Acreditamos que tecnologia boa é a que termina o trabalho que começou. Que todo negócio, do balcão à clínica, merece usar inteligência artificial sem precisar de uma equipe de TI. Por isso criamos produtos simples, feitos no Brasil, e ficamos junto até funcionar.'
-const FACTS = [
-  { n: 7, l: 'segmentos de negócio atendidos' },
-  { n: 6, l: 'agentes de IA, cada um com nome e função' },
-  { n: 12, l: 'integrações com as ferramentas que você já usa' },
-]
-
-export function About() {
-  const root = useRef(null)
-  useEffect(() => {
-    if (prefersReducedMotion()) return
-    const ctx = gsap.context(() => {
-      gsap.fromTo('.manifesto__w', { opacity: 0.16 }, {
-        opacity: 1, ease: 'none', stagger: 0.12,
-        scrollTrigger: { trigger: '.manifesto', start: 'top 80%', end: 'bottom 55%', scrub: true },
-      })
-    }, root)
-    return () => ctx.revert()
-  }, [])
-  return (
-    <section className="about" id="empresa" ref={root} aria-labelledby="empresa-titulo">
-      <div className="wrap">
-        <span className="eyebrow" data-reveal>Quem somos</span>
-        <h2 id="empresa-titulo" className="sr">Quem somos</h2>
-        <p className="manifesto" aria-label={MANIFESTO}>
-          {MANIFESTO.split(' ').map((w, i) => <span className="manifesto__w" aria-hidden="true" key={i}>{w} </span>)}
-        </p>
-        <div className="facts" data-stagger>
-          {FACTS.map((f) => (
-            <div className="fact" key={f.l}>
-              <b><span data-count={f.n}>{f.n}</span></b>
-              <p>{f.l}</p>
-            </div>
-          ))}
-          <div className="fact fact--badge">
-            <img src={metaPartner} alt="Meta Business Partner" loading="lazy" />
-            <p>Parceira oficial da Meta para o atendimento pelo WhatsApp.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-  )
-}
 
 /* ───────────── Como pensamos: princípios ───────────── */
 export function Principles() {
@@ -189,7 +126,7 @@ export function Integrations() {
   const half = [...INTEGRATIONS, ...INTEGRATIONS]
   return (
     <section className="integ" aria-label="Integrações">
-      <p className="integ__label" data-reveal>Conectados às plataformas que o negócio brasileiro já usa</p>
+      <p className="integ__label" data-reveal>Conectado às plataformas que o seu negócio já usa</p>
       <div className="integ__view">
         <div className="integ__track">
           {[...half, ...half].map((l, i) => (
@@ -305,7 +242,7 @@ export function Agents() {
     <section className="agents" id="agentes" ref={root} aria-labelledby="agentes-titulo" style={{ '--ac': AGENTS[on].c }}>
       <div className="wrap agents__grid">
         <div className="agents__stick">
-          <span className="eyebrow" data-reveal>Nossa equipe digital</span>
+          <span className="eyebrow" data-reveal>Agentes de IA</span>
           <Words as="h2" id="agentes-titulo" className="h2" text="Cada agente de IA tem nome, jeito e função." />
           <p data-reveal>A gente trata a IA como parte do time: cada agente cuida de uma tarefa e, juntos, acompanham o cliente da primeira mensagem ao pós-venda.</p>
         </div>
