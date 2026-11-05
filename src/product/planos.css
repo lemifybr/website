@@ -1,6 +1,6 @@
 
 body{margin:0;background:#F6F5EE}
-h1,h2,h3,blockquote,.disp{font-family:'Bricolage Grotesque',sans-serif}
+h1,h2,h3,blockquote,.disp{font-family:'Bricolage Grotesque Variable',sans-serif}
 a{color:#1C403B}a:hover{color:#68716B}
 .btn{transition:transform .2s ease,box-shadow .2s ease,filter .2s ease}
 .btn:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(20,48,44,.22);filter:brightness(1.04)}
@@ -34,7 +34,7 @@ a{color:#1C403B}a:hover{color:#68716B}
 /* tabela comparativa */
 .cmp{width:100%;min-width:760px;border-collapse:collapse;font-size:15px}
 .cmp th,.cmp td{border-top:1px solid #DEE4D8}
-.cmp thead th{border-top:0;background:#DEE4D8;padding:18px 16px;font-family:'Bricolage Grotesque',sans-serif;font-size:18px;font-weight:700}
+.cmp thead th{border-top:0;background:#DEE4D8;padding:18px 16px;font-family:'Bricolage Grotesque Variable',sans-serif;font-size:18px;font-weight:700}
 .cmp thead th:first-child{text-align:left;padding:18px 24px;font-family:inherit;font-size:15px;font-weight:600;color:#68716B}
 .cmp tbody th{text-align:left;padding:14px 24px;font-weight:500}
 .cmp td{text-align:center;padding:14px 16px;font-weight:700}
@@ -69,5 +69,5 @@ html{scroll-behavior:smooth}
 .nano-t strong{color:#1C403B}
 .nano-p{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
 .nano-v{font-size:15px;color:#68716B;white-space:nowrap}
-.nano-v b{font-family:'Bricolage Grotesque',sans-serif;font-size:30px;font-weight:700;letter-spacing:-.02em;color:#1C403B}
+.nano-v b{font-family:'Bricolage Grotesque Variable',sans-serif;font-size:30px;font-weight:700;letter-spacing:-.02em;color:#1C403B}
 .nano-p a{font-weight:700;text-decoration:none;white-space:nowrap}

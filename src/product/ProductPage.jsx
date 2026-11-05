@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import '@fontsource-variable/bricolage-grotesque'
 import { gsap, ScrollTrigger, prefersReducedMotion, useSmoothScroll } from '../institutional/motion.jsx'
 import lemifyCss from './lemify.css?inline'
 import planosCss from './planos.css?inline'
@@ -18,20 +19,6 @@ export default function ProductPage({ page }) {
   const root = useRef(null)
   const { css, html, scripts } = PAGES[page]
   useSmoothScroll()
-
-  // Os estilos só existem enquanto a página está montada (usam seletores globais como `body`).
-  useEffect(() => {
-    const el = document.createElement('style')
-    el.dataset.product = page
-    el.textContent = css
-    document.head.appendChild(el)
-    // A página usa a família "Bricolage Grotesque" pelo nome; o site institucional a registra com outro nome.
-    const font = document.createElement('link')
-    font.rel = 'stylesheet'
-    font.href = 'https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&display=swap'
-    document.head.appendChild(font)
-    return () => { el.remove(); font.remove() }
-  }, [css, page])
 
   // Scripts originais da página (vídeo, modal, planos pela API). Rodam depois do HTML estar no DOM.
   useEffect(() => {
@@ -55,5 +42,12 @@ export default function ProductPage({ page }) {
     return () => { clearTimeout(t); ctx.revert() }
   }, [page])
 
-  return <div ref={root} dangerouslySetInnerHTML={{ __html: html }} />
+  // Os estilos vão dentro da própria árvore: chegam junto com o HTML (sem piscar sem estilo) e saem quando a
+  // rota desmonta, já que usam seletores globais como `body`.
+  return (
+    <>
+      <style data-product={page} dangerouslySetInnerHTML={{ __html: css }} />
+      <div ref={root} dangerouslySetInnerHTML={{ __html: html }} />
+    </>
+  )
 }
