@@ -4,6 +4,10 @@ import { SITE } from './siteConfig.js'
 
 export const FAQ = [
   {
+    q: 'Quem é a Lemify?',
+    a: 'A Lemify Tecnologia Ltda. (CNPJ 69.768.422/0001-08) é uma empresa brasileira de tecnologia, de São Paulo, que cria software com inteligência artificial para atendimento, vendas e gestão. Somos Meta Business Partner e acreditamos em produtos simples de usar, feitos para a realidade do negócio brasileiro, com gente do lado para ajudar a colocar para funcionar.',
+  },
+  {
     q: 'O que é o Lemify?',
     a: 'O Lemify é uma plataforma brasileira de atendimento e CRM com inteligência artificial, da Lemify Tecnologia Ltda. Ele reúne os canais de conversa (WhatsApp, Instagram, Facebook Messenger e e-mail) numa caixa só e conta com agentes de IA que respondem os clientes na hora e trabalham lado a lado com a equipe. É indicado para pequenas e médias empresas que vendem e atendem por conversa: varejo, clínicas, restaurantes, imobiliárias, beleza e estética, atacado e serviços.',
   },

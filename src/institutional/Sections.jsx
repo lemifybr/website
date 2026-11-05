@@ -13,7 +13,9 @@ import intMeta from './assets/integrations/meta.svg'
 import intGoogle from './assets/integrations/google.svg'
 import intTiktok from './assets/integrations/tiktok.svg'
 import intIfood from './assets/integrations/ifood.svg'
-import { STEPS, SITE } from './siteConfig.js'
+import { STEPS, SITE, VALUES } from './siteConfig.js'
+import metaPartner from './assets/meta-partner.png'
+import dashboard from './assets/product-dashboard.jpg'
 import { FAQ } from './faq.js'
 import crew from './assets/crew.webp'
 import lemi from './assets/lemi.webp'
@@ -37,6 +39,135 @@ import phBeleza from './assets/segments/photos/beleza.jpg'
 import phAtacado from './assets/segments/photos/atacado.jpg'
 import phServicos from './assets/segments/photos/servicos.jpg'
 
+/* ───────────── Faixa de palavras em movimento ───────────── */
+const BAND = ['Atender', 'Vender', 'Agendar', 'Organizar', 'Crescer']
+export function Band() {
+  const set = [...BAND, ...BAND]
+  return (
+    <div className="band" aria-hidden="true">
+      <div className="band__track">
+        {[0, 1].map((g) => (
+          <div className="band__set" key={g}>
+            {set.map((w, i) => <span key={`${g}-${i}`}>{w}<i /></span>)}
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+/* ───────────── Quem somos: manifesto que acende palavra por palavra + números ───────────── */
+const MANIFESTO = 'Acreditamos que tecnologia boa é a que termina o trabalho que começou. Que todo negócio, do balcão à clínica, merece usar inteligência artificial sem precisar de uma equipe de TI. Por isso criamos produtos simples, feitos no Brasil, e ficamos junto até funcionar.'
+const FACTS = [
+  { n: 7, l: 'segmentos de negócio atendidos' },
+  { n: 6, l: 'agentes de IA, cada um com nome e função' },
+  { n: 12, l: 'integrações com as ferramentas que você já usa' },
+]
+
+export function About() {
+  const root = useRef(null)
+  useEffect(() => {
+    if (prefersReducedMotion()) return
+    const ctx = gsap.context(() => {
+      gsap.fromTo('.manifesto__w', { opacity: 0.16 }, {
+        opacity: 1, ease: 'none', stagger: 0.12,
+        scrollTrigger: { trigger: '.manifesto', start: 'top 80%', end: 'bottom 55%', scrub: true },
+      })
+    }, root)
+    return () => ctx.revert()
+  }, [])
+  return (
+    <section className="about" id="empresa" ref={root} aria-labelledby="empresa-titulo">
+      <div className="wrap">
+        <span className="eyebrow" data-reveal>Quem somos</span>
+        <h2 id="empresa-titulo" className="sr">Quem somos</h2>
+        <p className="manifesto" aria-label={MANIFESTO}>
+          {MANIFESTO.split(' ').map((w, i) => <span className="manifesto__w" aria-hidden="true" key={i}>{w} </span>)}
+        </p>
+        <div className="facts" data-stagger>
+          {FACTS.map((f) => (
+            <div className="fact" key={f.l}>
+              <b><span data-count={f.n}>{f.n}</span></b>
+              <p>{f.l}</p>
+            </div>
+          ))}
+          <div className="fact fact--badge">
+            <img src={metaPartner} alt="Meta Business Partner" loading="lazy" />
+            <p>Parceira oficial da Meta para o atendimento pelo WhatsApp.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ───────────── Como pensamos: princípios ───────────── */
+export function Principles() {
+  return (
+    <section className="principles" id="principios" aria-labelledby="principios-titulo">
+      <div className="wrap">
+        <div className="head">
+          <span className="eyebrow" data-reveal>Como pensamos</span>
+          <Words as="h2" id="principios-titulo" className="h2" text="O que guia cada produto que a gente cria." />
+        </div>
+        <div className="pgrid" data-stagger>
+          {VALUES.map((v, k) => (
+            <Tilt key={v.n} max={5} className={`pcard pcard--${k + 1}`}>
+              <span className="pcard__n">{v.n}</span>
+              <h3>{v.t}</h3>
+              <p>{v.d}</p>
+            </Tilt>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ───────────── O que fazemos hoje: o produto ───────────── */
+export function Product() {
+  return (
+    <section className="product" id="produto" aria-labelledby="produto-titulo">
+      <div className="wrap product__card" data-reveal="scale">
+        <div className="product__text">
+          <span className="eyebrow">O que fazemos hoje</span>
+          <Words as="h2" id="produto-titulo" className="h2" text="Lemify, nosso primeiro produto." />
+          <p>Uma plataforma de atendimento e CRM que junta os canais de conversa da empresa numa caixa só, com agentes de IA trabalhando lado a lado com a equipe.</p>
+          <div className="product__cta">
+            <Magnetic><a className="btn btn--lime btn--lg" href={SITE.productPage}>Conhecer o Lemify <Arrow /></a></Magnetic>
+            <a className="btn btn--outline-light btn--lg" href={`${SITE.productPage}/planos`}>Ver planos</a>
+          </div>
+        </div>
+        <div className="product__shot">
+          <img src={dashboard} alt="Tela do Lemify mostrando a caixa de atendimento com as conversas dos clientes" loading="lazy" data-parallax="0.06" />
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ───────────── Confiança: parceria, segurança e documentação ───────────── */
+const TRUST = [
+  { t: 'Meta Business Partner', d: 'Reconhecida pela Meta para trabalhar com a API oficial do WhatsApp Business.', href: null },
+  { t: 'Segurança e LGPD', d: 'Dados tratados com responsabilidade desde a primeira conversa.', href: '/lgpd', cta: 'Como cuidamos dos dados' },
+  { t: 'Documentação aberta', d: 'Guias de cada módulo e uma API pública para integrar o seu sistema.', href: '/docs', cta: 'Ler a documentação' },
+]
+export function Trust() {
+  return (
+    <section className="trust" aria-label="Confiança">
+      <div className="wrap trust__grid" data-stagger>
+        {TRUST.map((x) => (
+          <article className="tcard" key={x.t}>
+            <h3>{x.t}</h3>
+            <p>{x.d}</p>
+            {x.href && <a href={x.href} className="tcard__link">{x.cta} <Arrow /></a>}
+          </article>
+        ))}
+      </div>
+    </section>
+  )
+}
+
 /* ───────────── Integrações: carrossel de logos ───────────── */
 const INTEGRATIONS = [
   { name: 'Meta', src: intMeta, w: 118 },
@@ -58,7 +189,7 @@ export function Integrations() {
   const half = [...INTEGRATIONS, ...INTEGRATIONS]
   return (
     <section className="integ" aria-label="Integrações">
-      <p className="integ__label" data-reveal>O Lemify conversa com as ferramentas que você já usa</p>
+      <p className="integ__label" data-reveal>Conectados às plataformas que o negócio brasileiro já usa</p>
       <div className="integ__view">
         <div className="integ__track">
           {[...half, ...half].map((l, i) => (
@@ -109,11 +240,12 @@ export function Products() {
   }
 
   return (
-    <section className="products" id="produtos" aria-labelledby="produtos-titulo">
+    <section className="products" id="segmentos" aria-labelledby="produtos-titulo">
       <div className="wrap">
         <div className="head">
-          <span className="eyebrow" data-reveal>Segmentos</span>
-          <Words as="h2" id="produtos-titulo" className="h2" text="Uma solução com IA para cada tipo de negócio" />
+          <span className="eyebrow" data-reveal>Para quem trabalhamos</span>
+          <Words as="h2" id="produtos-titulo" className="h2" text="Do balcão da loja à agenda da clínica." />
+          <p className="head__p" data-reveal>Cada negócio tem o seu ritmo. A gente adapta a tecnologia a ele, e não o contrário.</p>
         </div>
 
         <div className="segtabs" data-reveal>
@@ -173,9 +305,9 @@ export function Agents() {
     <section className="agents" id="agentes" ref={root} aria-labelledby="agentes-titulo" style={{ '--ac': AGENTS[on].c }}>
       <div className="wrap agents__grid">
         <div className="agents__stick">
-          <span className="eyebrow" data-reveal>Agentes</span>
-          <Words as="h2" id="agentes-titulo" className="h2" text="Soluções em IA com nome, personalidade e função" />
-          <p data-reveal>Cada agente cuida de uma parte do trabalho e, juntos, acompanham o cliente da primeira mensagem ao pós-venda.</p>
+          <span className="eyebrow" data-reveal>Nossa equipe digital</span>
+          <Words as="h2" id="agentes-titulo" className="h2" text="Cada agente de IA tem nome, jeito e função." />
+          <p data-reveal>A gente trata a IA como parte do time: cada agente cuida de uma tarefa e, juntos, acompanham o cliente da primeira mensagem ao pós-venda.</p>
         </div>
         <ul className="agents__list">
           {AGENTS.map((a, k) => (
@@ -248,7 +380,7 @@ export function Faq() {
       <div className="wrap faq__in">
         <div className="head">
           <span className="eyebrow" data-reveal>Perguntas frequentes</span>
-          <Words as="h2" id="faq-titulo" className="h2" text="Tudo o que você precisa saber sobre o Lemify" />
+          <Words as="h2" id="faq-titulo" className="h2" text="Dúvidas comuns sobre a Lemify e o nosso produto" />
         </div>
         <div className="faq__list">
           {FAQ.map((f) => (
@@ -280,7 +412,7 @@ export function Contact() {
     <section className="contact" id="contato" ref={root} aria-labelledby="contato-titulo">
       <div className="wrap contact__in">
         <Words as="h2" id="contato-titulo" className="display display--light" text="Vamos conversar?" />
-        <p data-reveal>Conte o que a sua empresa precisa. A gente indica o produto certo e responde rapidinho.</p>
+        <p data-reveal>Quer conhecer a Lemify, tirar uma dúvida ou contar o que o seu negócio precisa? A gente responde rapidinho.</p>
         <div className="contact__cta" data-reveal>
           <Magnetic><a className="btn btn--lime btn--lg" href={`${SITE.whatsappUrl}?text=${encodeURIComponent('Olá! Vim pelo site e quero conhecer o Lemify.')}`} target="_blank" rel="noopener noreferrer">Fale com a gente <Arrow /></a></Magnetic>
           <a className="btn btn--outline-light btn--lg" href={SITE.productPage}>Conhecer o Lemify</a>

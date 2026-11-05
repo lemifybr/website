@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import { Magnetic } from './motion.jsx'
 import { SITE } from './siteConfig.js'
 import logo from './assets/logo-dark.svg'
-import retail from './assets/retail.jpg'
 
 const Arrow = () => (
   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -10,14 +9,6 @@ const Arrow = () => (
   </svg>
 )
 export { Arrow }
-
-const COMPANY = [
-  ['Nosso jeito de trabalhar', 'Implantação, treinamento e suporte.', '/#suporte'],
-]
-
-const PRODUCTS = [
-  ['Lemify', 'Atendimento e CRM', 'Para empresas que vendem e atendem por conversa.', 'Disponível', retail, SITE.productPage],
-]
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false)
@@ -50,32 +41,10 @@ export default function Header() {
           </a>
 
           <nav className="nav__links" aria-label="Principal">
-            <a href="/#inicio">Início</a>
-            <div className="dd">
-              <button type="button" className="dd__btn">Empresa <i /></button>
-              <div className="dd__panel dd__panel--list">
-                {COMPANY.map(([t, d, h]) => (
-                  <a key={t} href={h} className="dd__item"><strong>{t}</strong><span>{d}</span></a>
-                ))}
-              </div>
-            </div>
-            <div className="dd">
-              <button type="button" className="dd__btn">Produtos <i /></button>
-              <div className="dd__panel dd__panel--products">
-                {PRODUCTS.map(([n, sub, d, s, img, href]) => (
-                  <a key={n} href={href} className="dd__prod">
-                    <img src={img} alt="" />
-                    <div>
-                      <strong>{n}{sub && <em> · {sub}</em>}</strong>
-                      <span>{d}</span>
-                      <b className={s === 'Disponível' ? 'ok' : ''}>{s}</b>
-                    </div>
-                  </a>
-                ))}
-                <a className="dd__all" href="/#produtos">Ver todos os produtos <Arrow /></a>
-              </div>
-            </div>
-            <a href="/#agentes">Agentes</a>
+            <a href="/#empresa">Empresa</a>
+            <a href="/#produto">Produto</a>
+            <a href="/#segmentos">Segmentos</a>
+            <a href="/#agentes">Equipe digital</a>
             <a href="/blog">Blog</a>
             <a href="/#contato">Contato</a>
           </nav>
@@ -92,8 +61,8 @@ export default function Header() {
 
       <div data-lenis-prevent className={`drawer ${open ? 'is-open' : ''}`} aria-hidden={!open}>
         {[
-          ['Início', '/#inicio'], ['Produtos', '/#produtos'],
-          ['Agentes', '/#agentes'], ['Como trabalhamos', '/#suporte'], ['Blog', '/blog'], ['Contato', '/#contato'],
+          ['Início', '/#inicio'], ['Empresa', '/#empresa'], ['Produto', '/#produto'], ['Segmentos', '/#segmentos'],
+          ['Equipe digital', '/#agentes'], ['Como trabalhamos', '/#suporte'], ['Blog', '/blog'], ['Contato', '/#contato'],
         ].map(([t, h]) => <a key={t} href={h} onClick={close}>{t}</a>)}
         <div className="drawer__auth">
           <a className="btn btn--outline-light" href={SITE.signup}>Cadastre-se</a>

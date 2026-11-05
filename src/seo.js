@@ -12,8 +12,8 @@ export const SITE_URL = 'https://lemify.com.br'
 
 export const SEO = {
   '/': {
-    title: 'Lemify · IA que atende, agenda e vende pelo WhatsApp',
-    description: 'Família de softwares com IA para empresas brasileiras. Os agentes de IA do Lemify respondem seus clientes na hora, em qualquer canal, e trabalham lado a lado com a sua equipe.',
+    title: 'Lemify · Tecnologia com IA para o negócio brasileiro',
+    description: 'A Lemify é uma empresa brasileira de tecnologia, de São Paulo, que cria software com inteligência artificial para quem vende e atende todo dia. Conheça nossos princípios e o Lemify, nosso primeiro produto.',
   },
   ...Object.fromEntries(LEGAL.map((d) => [d.path, { title: d.title, description: d.description }])),
   '/blog': {

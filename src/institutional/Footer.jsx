@@ -25,7 +25,7 @@ export default function Footer() {
       <div className="wrap foot__grid">
         <div className="foot__brand">
           <img src={logo} alt="Lemify" />
-          <p>Família de softwares com IA para empresas brasileiras</p>
+          <p>Tecnologia com inteligência artificial para o negócio brasileiro vender, atender e crescer.</p>
           <div className="foot__social">
             {SOCIAL.map(([k, label, href, title]) => (
               <a key={k} href={href} aria-label={label} title={title} {...(k === 'email' ? {} : { target: '_blank', rel: 'noopener noreferrer' })}>{ICONS[k]}</a>
@@ -33,16 +33,19 @@ export default function Footer() {
           </div>
           <img className="foot__badge" src={metaPartner} alt="Meta Business Partner" loading="lazy" />
         </div>
-        <nav aria-label="Lemify">
-          <h4>Lemify</h4>
-          <a href="/docs">Documentação</a>
+        <nav aria-label="Empresa">
+          <h4>Empresa</h4>
+          <a href="/#empresa">Quem somos</a>
+          <a href="/#segmentos">Segmentos</a>
+          <a href="/#agentes">Equipe digital</a>
           <a href="/blog">Blog</a>
-          <a href="/#agentes">Agentes</a>
           <a href="/#contato">Contato</a>
         </nav>
-        <nav aria-label="Produtos">
-          <h4>Produtos</h4>
+        <nav aria-label="Produto">
+          <h4>Produto</h4>
           <a href={SITE.productPage}>Lemify · Atendimento e CRM</a>
+          <a href={`${SITE.productPage}/planos`}>Planos e preços</a>
+          <a href="/docs">Documentação</a>
         </nav>
         <nav aria-label="Legal">
           <h4>Legal</h4>

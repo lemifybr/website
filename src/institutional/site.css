@@ -1,6 +1,7 @@
 @import './hero.css';
 @import './mock.css';
 @import './integrations.css';
+@import './company.css';
 /* Site institucional Lemify — escopo .inst para não colidir com a landing do produto (/lemify) */
 .inst {
   --brand: #1c403b;
