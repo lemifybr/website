@@ -2,10 +2,10 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { gsap, ScrollTrigger, canHover, prefersReducedMotion, Magnetic, Words } from './motion.jsx'
 import { Arrow } from './Header.jsx'
 import { SITE } from './siteConfig.js'
-import heroLoja from './assets/hero-loja.jpg'
+import heroLoja from './assets/hero.jpg'
 
 const SCENES = [
-  { tab: 'Varejo', h: 'Inteligência artificial feita para o dia a dia do seu negócio.', img: heroLoja, alt: 'Dona de uma loja de tênis fotografando um produto ao lado do notebook, entre caixas de pedidos', q: 'Oi! Tem esse tênis no 39?', a: 'Tem sim! Separo um para você retirar hoje ou prefere receber em casa?', ok: 'Pedido encaminhado para a equipe' },
+  { tab: 'Varejo', h: 'Inteligência artificial feita para o dia a dia do seu negócio.', img: heroLoja, alt: 'Dona de uma loja de tênis, de camisa verde, fotografando um produto ao lado do notebook, entre caixas de pedidos', q: 'Oi! Tem esse tênis no 39?', a: 'Tem sim! Separo um para você retirar hoje ou prefere receber em casa?', ok: 'Pedido encaminhado para a equipe' },
 ]
 
 export default function Hero() {
