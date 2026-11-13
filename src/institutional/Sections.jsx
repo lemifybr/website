@@ -165,7 +165,7 @@ export function Products() {
         scrollTrigger: {
           trigger: stage, pin: true, start: 'center center+=35', end: () => `+=${dist() * 1.15}`,
           // Remede antes das animações abaixo dela, que dependem do espaço extra que o pin cria.
-          scrub: 0.25, invalidateOnRefresh: true, refreshPriority: 1,
+          scrub: 0.12, invalidateOnRefresh: true, refreshPriority: 1,
           onUpdate: (self) => {
             const i = Math.round(self.progress * (N - 1))
             if (i !== onRef.current) { onRef.current = i; setOn(i) }

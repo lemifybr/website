@@ -210,7 +210,7 @@ export function Words({ text, as: Tag = 'span', className = '', id }) {
 export function useSmoothScroll() {
   useEffect(() => {
     if (prefersReducedMotion()) return
-    const lenis = new Lenis({ duration: 1.15, anchors: { offset: -90 } })
+    const lenis = new Lenis({ duration: 0.6, anchors: { offset: -90 } })
     lenis.on('scroll', ScrollTrigger.update)
     const tick = (time) => lenis.raf(time * 1000)
     gsap.ticker.add(tick)
@@ -225,7 +225,7 @@ export function useSmoothScroll() {
       const target = document.getElementById(decodeURIComponent(url.hash.slice(1)))
       if (!target) return
       e.preventDefault()
-      lenis.scrollTo(target, { offset: -90, duration: 1.4 })
+      lenis.scrollTo(target, { offset: -90, duration: 0.9 })
       history.pushState(null, '', url.hash)
     }
     document.addEventListener('click', onClick)
