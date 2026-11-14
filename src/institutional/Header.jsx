@@ -50,8 +50,8 @@ export default function Header() {
           </nav>
 
           <div className="nav__actions">
-            <Magnetic strength={0.25}><a className="btn btn--sm btn--outline" href={SITE.signup}>Cadastre-se</a></Magnetic>
-            <Magnetic strength={0.25}><a className="btn btn--sm btn--dark" href={SITE.customerArea}>Login</a></Magnetic>
+            <Magnetic strength={0.1}><a className="btn btn--sm btn--outline" href={SITE.signup}>Cadastre-se</a></Magnetic>
+            <Magnetic strength={0.1}><a className="btn btn--sm btn--dark" href={SITE.customerArea}>Login</a></Magnetic>
             <button type="button" className={`burger ${open ? 'is-open' : ''}`} aria-label="Menu" aria-expanded={open} onClick={() => setOpen(!open)}>
               <span /><span />
             </button>

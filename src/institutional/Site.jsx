@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import '@fontsource-variable/bricolage-grotesque'
 import './site.css'
-import { Cursor, useScrollMotion, useSmoothScroll, ScrollTrigger } from './motion.jsx'
+import { useScrollMotion, useSmoothScroll, ScrollTrigger } from './motion.jsx'
 import Header from './Header.jsx'
 import Hero from './Hero.jsx'
 import { Principles, Trust, Integrations, Products, Agents, Faq, Contact } from './Sections.jsx'
@@ -21,7 +21,6 @@ export default function Site() {
   return (
     <div className="inst" ref={root}>
       <a className="skip" href="#conteudo">Ir para o conteúdo</a>
-      <Cursor />
       <Header />
       <main id="conteudo">
         <Hero />

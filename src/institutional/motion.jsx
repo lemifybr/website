@@ -14,68 +14,14 @@ export const canHover = () =>
 export const prefersReducedMotion = () =>
   typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
-/** Custom cursor: dot + ring. The ring grows on interactive elements and shows a label for [data-cursor]. */
-export function Cursor() {
-  const ring = useRef(null)
-  const dot = useRef(null)
-  const label = useRef(null)
-
-  useEffect(() => {
-    if (!canHover() || prefersReducedMotion()) return
-    document.documentElement.classList.add('has-cursor')
-    const rx = gsap.quickTo(ring.current, 'x', { duration: 0.45, ease: 'power3.out' })
-    const ry = gsap.quickTo(ring.current, 'y', { duration: 0.45, ease: 'power3.out' })
-    const dx = gsap.quickTo(dot.current, 'x', { duration: 0.08 })
-    const dy = gsap.quickTo(dot.current, 'y', { duration: 0.08 })
-
-    const move = (e) => {
-      rx(e.clientX); ry(e.clientY); dx(e.clientX); dy(e.clientY)
-      ring.current.style.opacity = 1
-      dot.current.style.opacity = 1
-    }
-    const over = (e) => {
-      const t = e.target.closest?.('a, button, input, [data-cursor], [data-hover]')
-      const r = ring.current
-      if (!t) { r.className = 'cursor-ring'; label.current.textContent = ''; return }
-      const text = t.getAttribute('data-cursor')
-      r.className = 'cursor-ring ' + (text ? 'is-label' : 'is-hover')
-      label.current.textContent = text || ''
-    }
-    const leave = () => { ring.current.style.opacity = 0; dot.current.style.opacity = 0 }
-    const down = () => ring.current.classList.add('is-down')
-    const up = () => ring.current.classList.remove('is-down')
-
-    window.addEventListener('mousemove', move)
-    document.addEventListener('mouseover', over)
-    document.addEventListener('mouseleave', leave)
-    window.addEventListener('mousedown', down)
-    window.addEventListener('mouseup', up)
-    return () => {
-      document.documentElement.classList.remove('has-cursor')
-      window.removeEventListener('mousemove', move)
-      document.removeEventListener('mouseover', over)
-      document.removeEventListener('mouseleave', leave)
-      window.removeEventListener('mousedown', down)
-      window.removeEventListener('mouseup', up)
-    }
-  }, [])
-
-  return (
-    <>
-      <div ref={ring} className="cursor-ring" aria-hidden="true"><span ref={label} /></div>
-      <div ref={dot} className="cursor-dot" aria-hidden="true" />
-    </>
-  )
-}
-
 /** Magnetic wrapper: the child is pulled toward the pointer when it gets close. */
-export function Magnetic({ children, strength = 0.35, as: Tag = 'span', className = '', ...rest }) {
+export function Magnetic({ children, strength = 0.15, as: Tag = 'span', className = '', ...rest }) {
   const el = useRef(null)
   useEffect(() => {
     if (!canHover() || prefersReducedMotion()) return
     const node = el.current
-    const xTo = gsap.quickTo(node, 'x', { duration: 0.6, ease: 'elastic.out(1, 0.5)' })
-    const yTo = gsap.quickTo(node, 'y', { duration: 0.6, ease: 'elastic.out(1, 0.5)' })
+    const xTo = gsap.quickTo(node, 'x', { duration: 0.2, ease: 'power3.out' })
+    const yTo = gsap.quickTo(node, 'y', { duration: 0.2, ease: 'power3.out' })
     const move = (e) => {
       const r = node.getBoundingClientRect()
       xTo((e.clientX - (r.left + r.width / 2)) * strength)
