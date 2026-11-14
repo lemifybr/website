@@ -133,7 +133,7 @@ export default function DocsPage() {
           <nav className="docs__links" aria-label="Atalhos">
             <a href={API_FULL_REFERENCE} target="_blank" rel="noopener noreferrer">API completa</a>
             <a href={SITE.customerArea}>Login</a>
-            <a className="btn btn--sm btn--dark" href={SITE.signup}>Cadastre-se</a>
+            <a className="btn btn--sm btn--dark" href={SITE.demo} target="_blank" rel="noopener noreferrer">Cadastre-se</a>
           </nav>
         </div>
         <nav className="docs__tabs" aria-label="Seções da documentação">

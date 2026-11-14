@@ -50,7 +50,7 @@ export default function Header() {
           </nav>
 
           <div className="nav__actions">
-            <Magnetic strength={0.1}><a className="btn btn--sm btn--outline" href={SITE.signup}>Cadastre-se</a></Magnetic>
+            <a className="btn btn--sm btn--outline btn--still" href={SITE.demo} target="_blank" rel="noopener noreferrer">Cadastre-se</a>
             <Magnetic strength={0.1}><a className="btn btn--sm btn--dark" href={SITE.customerArea}>Login</a></Magnetic>
             <button type="button" className={`burger ${open ? 'is-open' : ''}`} aria-label="Menu" aria-expanded={open} onClick={() => setOpen(!open)}>
               <span /><span />
@@ -65,7 +65,7 @@ export default function Header() {
           ['Agentes de IA', '/#agentes'], ['Blog', '/blog'], ['Contato', '/#contato'],
         ].map(([t, h]) => <a key={t} href={h} onClick={close}>{t}</a>)}
         <div className="drawer__auth">
-          <a className="btn btn--outline-light" href={SITE.signup}>Cadastre-se</a>
+          <a className="btn btn--outline-light" href={SITE.demo} target="_blank" rel="noopener noreferrer">Cadastre-se</a>
           <a className="btn btn--lime" href={SITE.customerArea}>Login</a>
         </div>
       </div>

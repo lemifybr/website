@@ -56,6 +56,8 @@ html.lenis:has(.inst) { scroll-behavior: auto !important; }
 .inst .btn--ghost:hover { border-color: var(--brand); background: rgba(28, 64, 59, 0.05); }
 .inst .btn--outline { color: var(--brand); border-color: var(--brand); }
 .inst .btn--outline:hover { background: var(--brand); color: #fff; }
+/* Botão sem efeito no hover (Cadastre-se do topo) */
+.inst .btn--still, .inst .btn--still:hover { background: transparent; color: var(--brand); transform: none; transition: none; }
 .inst .btn--outline-light { color: #fff; border-color: rgba(255, 255, 255, 0.4); }
 .inst .btn--outline-light:hover { background: #fff; color: var(--brand); }
 
