@@ -22,7 +22,7 @@ export const SEO = {
   },
   '/lemify': {
     title: 'Lemify · Plataforma de atendimento e CRM com agentes de IA',
-    description: 'O Lemify é o software que reúne WhatsApp, Instagram, Messenger e e-mail numa caixa só, com vários atendentes, CRM, agenda e agentes de IA. Teste grátis por 14 dias, sem cartão.',
+    description: 'O Lemify é o software que reúne WhatsApp, Instagram, Messenger e e-mail numa caixa só, com vários atendentes, CRM, agenda e agentes de IA. Agende uma demonstração.',
   },
   '/lemify/planos': {
     title: 'Planos e preços · Lemify',
