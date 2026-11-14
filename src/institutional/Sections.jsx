@@ -235,7 +235,7 @@ export function Products() {
                 <div className="seg__media">
                   <img src={PHOTOS[x.ic]} alt={x.alt} loading="lazy" />
                   <span className="seg__chip"><img src={ICONS[x.ic]} alt="" />{x.n}</span>
-                  <a className="seg__cta" href={SITE.signup} tabIndex={pinned && k !== on ? -1 : 0} aria-label={`Testar grátis para ${x.n.toLowerCase()}`}>Testar grátis <Arrow /></a>
+                  <a className="seg__cta" href={SITE.demoFor(`Meu negócio é do segmento ${x.n.toLowerCase()}.`)} target="_blank" rel="noopener noreferrer" tabIndex={pinned && k !== on ? -1 : 0} aria-label={`Agendar demonstração para ${x.n.toLowerCase()}`}>Agendar demonstração <Arrow /></a>
                 </div>
                 <div className="seg__cap">
                   <h3>{x.t}</h3>

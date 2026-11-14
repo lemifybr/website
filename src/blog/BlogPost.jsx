@@ -103,9 +103,9 @@ export default function BlogPost({ slug }) {
               <aside className="bpost__cta">
                 <div>
                   <strong>Quer ver o Lemify na prática?</strong>
-                  <p>Teste grátis e coloque os agentes de IA para atender os seus clientes.</p>
+                  <p>Agende uma demonstração e veja os agentes de IA atendendo os seus clientes.</p>
                 </div>
-                <a className="btn btn--lime btn--sm" href={SITE.signup}>Começar agora</a>
+                <a className="btn btn--lime btn--sm" href={SITE.demo} target="_blank" rel="noopener noreferrer">Agendar demonstração</a>
               </aside>
 
               {post.related?.length > 0 && (

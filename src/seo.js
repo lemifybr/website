@@ -26,7 +26,7 @@ export const SEO = {
   },
   '/lemify/planos': {
     title: 'Planos e preços · Lemify',
-    description: 'Planos do Lemify a partir de R$ 97 por mês, com agentes de IA para atendimento e vendas. Teste grátis por 14 dias, sem cartão.',
+    description: 'Planos do Lemify a partir de R$ 97 por mês, com agentes de IA para atendimento e vendas. Agende uma demonstração.',
   },
   '/docs': {
     title: 'Documentação do Lemify · Módulos e API',

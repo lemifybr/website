@@ -71,3 +71,7 @@ html{scroll-behavior:smooth}
 .nano-v{font-size:15px;color:#68716B;white-space:nowrap}
 .nano-v b{font-family:'Bricolage Grotesque Variable',sans-serif;font-size:30px;font-weight:700;letter-spacing:-.02em;color:#1C403B}
 .nano-p a{font-weight:700;text-decoration:none;white-space:nowrap}
+
+/* Botão de demonstração do topo: rótulo curto em telas estreitas */
+.cta-s{display:none}
+@media (max-width: 420px){.cta-l{display:none}.cta-s{display:inline}}

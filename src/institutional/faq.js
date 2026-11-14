@@ -24,8 +24,8 @@ export const FAQ = [
     a: 'Meta, Google, TikTok, iFood, Mercado Livre, Shopify, Nuvemshop, Bling, Omie, Conta Azul, Asaas e Tiny ERP. Para conectar o seu próprio sistema, existe uma API com documentação pública em lemify.com.br/docs.',
   },
   {
-    q: 'Posso testar o Lemify antes de contratar?',
-    a: `Sim. Você pode testar grátis por 14 dias, sem cartão de crédito, criando a conta em ${SITE.signup}.`,
+    q: 'Posso ver o Lemify funcionando antes de contratar?',
+    a: `Sim. Você agenda uma demonstração ao vivo pelo WhatsApp (${SITE.whatsappLabel.replace('WhatsApp ', '')}) e vê o Lemify funcionando no cenário da sua empresa antes de assinar.`,
   },
   {
     q: 'Como funcionam a implantação e o suporte?',

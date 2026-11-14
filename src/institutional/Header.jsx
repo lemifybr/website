@@ -31,8 +31,8 @@ export default function Header() {
   return (
     <>
       <div className="topbar">
-        <span>Teste o Lemify grátis por 14 dias, sem cartão de crédito.</span>
-        <a href={SITE.signup}>Começar agora <Arrow /></a>
+        <span>Veja o Lemify funcionando no cenário da sua empresa.</span>
+        <a href={SITE.demo} target="_blank" rel="noopener noreferrer">Agendar demonstração <Arrow /></a>
       </div>
       <header className={`nav ${scrolled ? 'is-scrolled' : ''}`}>
         <div className="nav__inner">

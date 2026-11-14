@@ -8,6 +8,8 @@ export const SITE = {
   linkedinUrl: 'https://www.linkedin.com/company/lemify',
   facebookUrl: 'https://www.facebook.com/lemify',
   signup: 'https://app.lemify.com.br/signup',
+  demo: 'https://wa.me/551148635054?text=Ol%C3%A1!%20Quero%20agendar%20uma%20demonstra%C3%A7%C3%A3o%20do%20Lemify.', // demonstração pelo WhatsApp
+  demoFor: (extra) => `https://wa.me/551148635054?text=${encodeURIComponent('Olá! Quero agendar uma demonstração do Lemify. ' + extra)}`,
   customerArea: 'https://app.lemify.com.br/login',
   cnpj: '69.768.422/0001-08',
   productPage: '/lemify',
