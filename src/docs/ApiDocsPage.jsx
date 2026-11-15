@@ -4,7 +4,7 @@ import './docs.css'
 import Footer from '../institutional/Footer.jsx'
 import { API_BASE, API_FULL_REFERENCE, SERVERS, AUTH, ENDPOINTS, STATUS, LIMITS, LLMS } from './api.js'
 import { Code, DocsHeader } from './DocsShared.jsx'
-import { norm, useSearchShortcut } from './docsUtils.js'
+import { norm, useDocsTheme, useSearchShortcut } from './docsUtils.js'
 
 const TABS = [
   ['inicio', 'Comece aqui', '/docs'],
@@ -38,8 +38,17 @@ export default function ApiDocsPage() {
   const lock = useRef(0)
   const search = useRef(null)
   const q = norm(query.trim())
-  // Clique no menu: marca o item na hora e ignora o scroll-spy até a rolagem terminar.
-  const pick = (id) => { lock.current = Date.now() + 1200; setCurrent(id) }
+  const [theme, toggleTheme] = useDocsTheme()
+  // Endpoints abertos no accordion; começa com o da âncora da URL (link direto para um endpoint).
+  const [open, setOpen] = useState(() => new Set(window.location.hash ? [window.location.hash.slice(1)] : []))
+  const setEndpointOpen = (id, isOpen) => setOpen((prev) => {
+    if (prev.has(id) === isOpen) return prev
+    const next = new Set(prev)
+    if (isOpen) next.add(id); else next.delete(id)
+    return next
+  })
+  // Clique no menu: marca o item na hora, abre o endpoint e ignora o scroll-spy até a rolagem terminar.
+  const pick = (id) => { lock.current = Date.now() + 1200; setCurrent(id); setEndpointOpen(id, true) }
 
   useSearchShortcut(search)
 
@@ -47,6 +56,20 @@ export default function ApiDocsPage() {
     () => ENDPOINTS.map((g) => ({ ...g, items: g.items.filter((e) => !q || norm(`${g.group} ${e.title} ${e.path} ${e.text} ${e.method}`).includes(q)) })).filter((g) => g.items.length),
     [q],
   )
+  const visibleIds = useMemo(() => endpoints.flatMap((g) => g.items.map((e) => e.id)), [endpoints])
+  const allOpen = visibleIds.length > 0 && visibleIds.every((id) => open.has(id))
+
+  // Buscando, os resultados já aparecem abertos.
+  useEffect(() => {
+    if (q) setOpen(new Set(visibleIds))
+  }, [q, visibleIds])
+
+  // Âncora alterada depois do carregamento (link interno, voltar do navegador) também abre o endpoint.
+  useEffect(() => {
+    const onHash = () => { const id = window.location.hash.slice(1); if (id) setEndpointOpen(id, true) }
+    window.addEventListener('hashchange', onHash)
+    return () => window.removeEventListener('hashchange', onHash)
+  }, [])
 
   // Destaca no menu lateral a seção que está na tela.
   useEffect(() => {
@@ -80,8 +103,8 @@ export default function ApiDocsPage() {
   )
 
   return (
-    <div className="inst docs">
-      <DocsHeader query={query} setQuery={setQuery} searchRef={search} placeholder="Buscar endpoints…" tabs={TABS} active="api" />
+    <div className="inst docs" data-theme={theme}>
+      <DocsHeader query={query} setQuery={setQuery} searchRef={search} placeholder="Buscar endpoints…" tabs={TABS} active="api" theme={theme} onToggleTheme={toggleTheme} />
 
       <main>
         <section className="docs__hero" aria-labelledby="api-titulo">
@@ -152,28 +175,45 @@ export default function ApiDocsPage() {
 
             {endpoints.length === 0 && <p className="docs__empty">Nenhum endpoint encontrado para “{query}”.</p>}
 
+            {endpoints.length > 0 && (
+              <div className="dacc__bar">
+                <button type="button" className="dacc__all" onClick={() => setOpen(allOpen ? new Set() : new Set(visibleIds))}>
+                  {allOpen ? 'Recolher todos' : 'Expandir todos'}
+                </button>
+              </div>
+            )}
+
             {endpoints.map((g) => (
               <section key={g.group} aria-label={g.group}>
                 <h3 className="dapi__h3">{g.group}</h3>
                 <p className="dapi__note">{g.note}</p>
                 {g.items.map((e) => (
-                  <article className="dep" id={e.id} key={e.id} aria-labelledby={`${e.id}-t`}>
-                    <header>
+                  <details
+                    className="dep"
+                    id={e.id}
+                    key={e.id}
+                    open={open.has(e.id)}
+                    onToggle={(ev) => setEndpointOpen(e.id, ev.currentTarget.open)}
+                  >
+                    <summary>
                       <span className={`method method--${e.method.toLowerCase()}`}>{e.method}</span>
                       <code className="dep__path">{e.path}</code>
-                    </header>
-                    <h4 id={`${e.id}-t`}>{e.title}</h4>
-                    <p>{e.text}</p>
-                    <p className="dep__auth">Autenticação: <strong>{e.auth}</strong></p>
-                    {e.fields.length > 0 && (
-                      <div className="dfields">
-                        {e.fields.map(([n, t, r, d]) => (
-                          <div key={n}><code>{n}</code><span>{t} · {r}</span><p>{d}</p></div>
-                        ))}
-                      </div>
-                    )}
-                    <Code>{e.sample}</Code>
-                  </article>
+                      <h4 id={`${e.id}-t`}>{e.title}</h4>
+                      <svg className="dep__chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6" /></svg>
+                    </summary>
+                    <div className="dep__body">
+                      <p>{e.text}</p>
+                      <p className="dep__auth">Autenticação: <strong>{e.auth}</strong></p>
+                      {e.fields.length > 0 && (
+                        <div className="dfields">
+                          {e.fields.map(([n, t, r, d]) => (
+                            <div key={n}><code>{n}</code><span>{t} · {r}</span><p>{d}</p></div>
+                          ))}
+                        </div>
+                      )}
+                      <Code>{e.sample}</Code>
+                    </div>
+                  </details>
                 ))}
               </section>
             ))}
