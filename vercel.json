@@ -37,6 +37,10 @@
       "destination": "/index.html"
     },
     {
+      "source": "/docs/api",
+      "destination": "/index.html"
+    },
+    {
       "source": "/termos",
       "destination": "/index.html"
     },

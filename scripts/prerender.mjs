@@ -12,6 +12,7 @@ import termosIa from '../src/legal/termosIa.js'
 import google from '../src/legal/google.js'
 import lgpd from '../src/legal/lgpd.js'
 import { MODULES, GROUPS } from '../src/docs/modules.js'
+import { AUTH, ENDPOINTS, LIMITS, LLMS, STATUS } from '../src/docs/api.js'
 import { FAQ } from '../src/institutional/faq.js'
 import { SITE, esc, setHead, jsonLd, addToHead, setRoot } from '../api/_html.js'
 
@@ -37,7 +38,18 @@ function docsBody() {
       .map((m) => `<article><h3>${esc(m.title)}</h3>${p(m.summary)}${p(m.description)}<ul>${m.features.map((f) => `<li>${esc(f)}</li>`).join('')}</ul></article>`)
       .join('')}</section>`
   }).join('')
-  return `${nav}<main><article><h1>Documentação do Lemify</h1>${p(SEO['/docs'].description)}${groups}<section><h2>API</h2>${p('Referência completa da API do Lemify (OpenAPI):')}<a href="https://docs.lemify.com.br/api-docs/">docs.lemify.com.br/api-docs</a></section></article></main>`
+  return `${nav}<main><article><h1>Documentação do Lemify</h1>${p(SEO['/docs'].description)}${groups}<section><h2>API</h2>${p('Mensagens, Agenda e CRM: autenticação, endpoints e exemplos.')}<a href="/docs/api">Documentação da API</a></section></article></main>`
+}
+
+function apiBody() {
+  const auth = AUTH.map((a) => `<li><strong>${esc(a.name)}</strong> (${esc(a.where)}): ${esc(a.how)}</li>`).join('')
+  const limits = LIMITS.map(([n, d]) => `<li>${esc(n)}: ${esc(d)}</li>`).join('')
+  const llms = LLMS.map((l) => `<li><a href="${esc(l.url)}">${esc(l.title)}</a>: ${esc(l.text)}</li>`).join('')
+  const groups = ENDPOINTS.map((g) => `<section><h2>${esc(g.group)}</h2>${p(g.note)}${g.items
+    .map((e) => `<article><h3>${esc(e.method)} ${esc(e.path)} · ${esc(e.title)}</h3>${p(e.text)}${p(`Autenticação: ${e.auth}`)}${e.fields.length ? `<ul>${e.fields.map(([n, t, r, d]) => `<li><code>${esc(n)}</code> (${esc(t)}, ${esc(r)}): ${esc(d)}</li>`).join('')}</ul>` : ''}<pre><code>${esc(e.sample)}</code></pre></article>`)
+    .join('')}</section>`).join('')
+  const status = STATUS.map(([c, d]) => `<li><code>${esc(c)}</code>: ${esc(d)}</li>`).join('')
+  return `${nav}<main><article><h1>API do Lemify</h1>${p(SEO['/docs/api'].description)}<section><h2>Autenticação</h2><ul>${auth}</ul></section><section><h2>Limites de uso</h2><ul>${limits}</ul></section><section><h2>Para IA (llms.txt)</h2><ul>${llms}</ul></section>${groups}<section><h2>Códigos de resposta</h2><ul>${status}</ul></section>${p('Referência completa (OpenAPI):')}<a href="https://docs.lemify.com.br/api-docs/">docs.lemify.com.br/api-docs</a></article></main>`
 }
 
 function blingBody() {
@@ -52,6 +64,7 @@ const pages = [
   { route: '/lemify', body: prod('lemify'), name: 'Lemify · Atendimento e CRM' },
   { route: '/lemify/planos', body: prod('planos'), name: 'Planos e preços do Lemify' },
   { route: '/docs', body: docsBody(), name: 'Documentação do Lemify' },
+  { route: '/docs/api', body: apiBody(), name: 'API do Lemify' },
   { route: '/manual/bling', body: blingBody(), name: 'Manual de integração com o Bling' },
 ]
 

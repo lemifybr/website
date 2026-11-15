@@ -9,6 +9,7 @@ const STATIC = [
   ['/lemify/planos', 'weekly', '0.8'],
   ['/blog', 'daily', '0.8'],
   ['/docs', 'monthly', '0.7'],
+  ['/docs/api', 'monthly', '0.7'],
   ['/termos', 'yearly', '0.3'],
   ['/privacidade', 'yearly', '0.3'],
   ['/lgpd', 'yearly', '0.3'],

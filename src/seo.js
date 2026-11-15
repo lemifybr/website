@@ -32,6 +32,10 @@ export const SEO = {
     title: 'Documentação do Lemify · Módulos e API',
     description: 'Aprenda a usar cada módulo do Lemify (atendimento, CRM, agenda, agentes de IA e mais) e integre seu sistema com a API.',
   },
+  '/docs/api': {
+    title: 'API do Lemify · Mensagens, Agenda e CRM',
+    description: 'Integre seu sistema ao Lemify: envie mensagens pelo WhatsApp, gerencie a agenda e alimente o CRM com chaves de API, exemplos em curl e llms.txt para agentes de IA.',
+  },
   '/manual/bling': {
     title: 'Manual de integração com o Bling · Lemify',
     description: 'Passo a passo para conectar sua conta do Bling ao Lemify e alimentar os agentes de IA com dados reais.',

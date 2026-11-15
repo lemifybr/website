@@ -52,7 +52,9 @@ Resolver de verdade; simples de usar; ninguém começa sozinho; dados com respon
 
 - [Início](${SITE}/)
 - [Blog](${SITE}/blog)
-- [Documentação: módulos e API](${SITE}/docs)
+- [Documentação: módulos](${SITE}/docs)
+- [Documentação da API: mensagens, agenda e CRM](${SITE}/docs/api)
+- [API para LLMs (llms.txt da API)](https://docs.lemify.com.br/llms.txt)
 - [Referência completa da API (OpenAPI)](https://docs.lemify.com.br/api-docs/)
 - [Termos de uso](${SITE}/termos)
 - [Política de privacidade](${SITE}/privacidade)

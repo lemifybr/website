@@ -89,6 +89,18 @@ html:has(.docs) { scroll-padding-top: 130px; }
 .method--post { background: #1f9d55; }
 .method--put { background: #d98a1a; }
 .method--delete { background: #d64545; }
+.method--patch { background: #8a5cd6; }
+
+/* Página /docs/api */
+.dapi.dapi--page { padding-top: 0 !important; border-top: 0; margin-top: 0; }
+.dsteps { margin: 0 0 20px; padding-left: 22px; list-style: decimal; display: grid; gap: 10px; color: #3b4d49; font-size: 16px; line-height: 1.6; }
+.dsteps li::marker { color: var(--brand); font-weight: 700; }
+.dllms { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 12px; }
+.docs__content a.dllms__item { display: grid; gap: 6px; padding: 16px 18px; border-radius: 16px; box-shadow: inset 0 0 0 1px var(--line); text-decoration: none; color: var(--ink); transition: box-shadow 0.2s, background 0.2s, transform 0.3s var(--ease); }
+.docs__content a.dllms__item:hover { box-shadow: inset 0 0 0 1.5px var(--brand); background: var(--cream); transform: translateY(-2px); }
+.dllms__item strong { font-size: 16px; }
+.dllms__item span { font-size: 14px; color: var(--muted); line-height: 1.45; }
+.dllms__item code { justify-self: start; font-size: 12px !important; overflow-wrap: anywhere; }
 .dfields { display: grid; margin: 14px 0 16px; border-radius: 12px; box-shadow: inset 0 0 0 1px var(--line); overflow: hidden; }
 .dfields > div { display: grid; grid-template-columns: 1.1fr 1fr 2fr; gap: 10px 14px; padding: 10px 14px; font-size: 14px; align-items: baseline; }
 .dfields > div + div { border-top: 1px solid var(--line); }

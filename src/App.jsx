@@ -4,6 +4,7 @@ import Site from './institutional/Site.jsx'
 import BlingManual from './components/Terms/BlingManual.jsx'
 import LegalPage from './legal/LegalPage.jsx'
 import DocsPage from './docs/DocsPage.jsx'
+import ApiDocsPage from './docs/ApiDocsPage.jsx'
 import BlogList from './blog/BlogList.jsx'
 import BlogPost from './blog/BlogPost.jsx'
 import termos from './legal/termos.js'
@@ -21,7 +22,7 @@ function App() {
   const path = window.location.pathname.replace(/\/+$/, '') || '/'
   const doc = LEGAL_DOCS.find((d) => d.path === path)
   const post = path.match(/^\/blog\/([^/]+)$/)
-  const known = !!doc || path === '/manual/bling' || path === '/docs' || path === '/blog' || path === '/lemify' || path === '/lemify/planos' || !!post
+  const known = !!doc || path === '/manual/bling' || path === '/docs' || path === '/docs/api' || path === '/blog' || path === '/lemify' || path === '/lemify/planos' || !!post
 
   useEffect(() => {
     applySeo(known ? SEO[path.startsWith('/blog/') ? '/blog' : path] : SEO['/'], known ? path : '/')
@@ -32,6 +33,7 @@ function App() {
   if (doc) return <LegalPage doc={doc} />
   if (path === '/manual/bling') return <BlingManual />
   if (path === '/docs') return <DocsPage />
+  if (path === '/docs/api') return <ApiDocsPage />
   if (path === '/lemify') return <ProductPage page="lemify" />
   if (path === '/lemify/planos') return <ProductPage page="planos" />
   if (path === '/blog') return <BlogList />

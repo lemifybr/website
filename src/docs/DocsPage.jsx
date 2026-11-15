@@ -2,12 +2,26 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import '../institutional/site.css'
 import './docs.css'
 import Footer from '../institutional/Footer.jsx'
-import logo from '../institutional/assets/logo-dark.svg'
-import { SITE } from '../institutional/siteConfig.js'
 import { MODULES, GROUPS } from './modules.js'
-import { API_FULL_REFERENCE, SERVERS, AUTH, ENDPOINTS, STATUS } from './api.js'
+import { ENDPOINTS } from './api.js'
+import { DocsHeader } from './DocsShared.jsx'
+import { norm, useSearchShortcut } from './docsUtils.js'
 
-const norm = (s) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
+const TABS = [
+  ['comece', 'Comece aqui', '#comece'],
+  ['modulos', 'Módulos', '#modulos'],
+  ['api', 'API', '/docs/api'],
+]
+
+// A API ganhou página própria: âncoras antigas (/docs#api, #api-autenticacao, #agenda-create...) vão para /docs/api.
+const LEGACY_API_HASHES = new Set(['api', ...ENDPOINTS.flatMap((g) => g.items.map((e) => e.id))])
+const legacyApiTarget = () => {
+  const hash = window.location.hash.slice(1)
+  if (!hash) return null
+  if (hash === 'api') return '/docs/api'
+  if (hash.startsWith('api-') || LEGACY_API_HASHES.has(hash)) return `/docs/api#${hash}`
+  return null
+}
 
 /** Vídeo do módulo: aceita YouTube, Vimeo, Loom ou arquivo .mp4/.webm; sem link, mostra o espaço reservado. */
 function VideoSlot({ url, title }) {
@@ -35,19 +49,6 @@ function VideoSlot({ url, title }) {
   )
 }
 
-function Code({ children }) {
-  const [copied, setCopied] = useState(false)
-  const copy = async () => {
-    try { await navigator.clipboard.writeText(children); setCopied(true); setTimeout(() => setCopied(false), 1600) } catch { /* sem permissão de área de transferência */ }
-  }
-  return (
-    <div className="code">
-      <button type="button" onClick={copy} aria-label="Copiar código">{copied ? 'Copiado' : 'Copiar'}</button>
-      <pre><code>{children}</code></pre>
-    </div>
-  )
-}
-
 export default function DocsPage() {
   const [query, setQuery] = useState('')
   const [active, setActive] = useState('comece')
@@ -59,17 +60,18 @@ export default function DocsPage() {
   const search = useRef(null)
   const q = norm(query.trim())
 
+  useSearchShortcut(search)
+
   useEffect(() => {
-    const onKey = (e) => {
-      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); search.current?.focus() }
-    }
-    window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
+    const go = () => { const target = legacyApiTarget(); if (target) window.location.replace(target) }
+    go()
+    window.addEventListener('hashchange', go)
+    return () => window.removeEventListener('hashchange', go)
   }, [])
 
   // Aba ativa conforme a seção que está na tela.
   useEffect(() => {
-    const ids = ['comece', 'modulos', 'api']
+    const ids = ['comece', 'modulos']
     const onScroll = () => {
       let cur = ids[0]
       for (const id of ids) {
@@ -87,14 +89,10 @@ export default function DocsPage() {
     () => MODULES.filter((m) => !q || norm(`${m.title} ${m.summary} ${m.description} ${m.features.join(' ')}`).includes(q)),
     [q],
   )
-  const endpoints = useMemo(
-    () => ENDPOINTS.map((g) => ({ ...g, items: g.items.filter((e) => !q || norm(`${e.title} ${e.path} ${e.text} ${e.method}`).includes(q)) })).filter((g) => g.items.length),
-    [q],
-  )
 
   // Destaca no menu lateral o item da seção que está na tela e mantém o item visível na lista.
   useEffect(() => {
-    const ids = [...modules.map((m) => m.id), ...(endpoints.length ? ['api-autenticacao', ...endpoints.flatMap((g) => g.items.map((e) => e.id))] : [])]
+    const ids = modules.map((m) => m.id)
     const onScroll = () => {
       if (Date.now() < lock.current) return
       let cur = ''
@@ -109,7 +107,7 @@ export default function DocsPage() {
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
-  }, [modules, endpoints])
+  }, [modules])
 
   useEffect(() => {
     const box = side.current
@@ -121,27 +119,7 @@ export default function DocsPage() {
 
   return (
     <div className="inst docs">
-      <header className="docs__top">
-        <div className="docs__bar">
-          <a href="/" className="docs__logo" aria-label="Lemify, ir para o site"><img src={logo} alt="Lemify" /><span>Docs</span></a>
-          <label className="docs__search">
-            <span className="sr">Buscar na documentação</span>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="M20 20l-3.5-3.5" /></svg>
-            <input ref={search} value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Buscar módulos e endpoints…" />
-            <kbd>Ctrl K</kbd>
-          </label>
-          <nav className="docs__links" aria-label="Atalhos">
-            <a href={API_FULL_REFERENCE} target="_blank" rel="noopener noreferrer">API completa</a>
-            <a href={SITE.customerArea}>Login</a>
-            <a className="btn btn--sm btn--dark" href={SITE.demo} target="_blank" rel="noopener noreferrer">Cadastre-se</a>
-          </nav>
-        </div>
-        <nav className="docs__tabs" aria-label="Seções da documentação">
-          {[['comece', 'Comece aqui'], ['modulos', 'Módulos'], ['api', 'API']].map(([id, label]) => (
-            <a key={id} href={`#${id}`} className={active === id ? 'is-on' : ''}>{label}</a>
-          ))}
-        </nav>
-      </header>
+      <DocsHeader query={query} setQuery={setQuery} searchRef={search} placeholder="Buscar módulos…" tabs={TABS} active={active} />
 
       <main>
         <section className="docs__hero" id="comece" aria-labelledby="docs-titulo">
@@ -160,12 +138,12 @@ export default function DocsPage() {
               <p>Quero entender o que cada módulo faz e ver como usar, com vídeos e passo a passo.</p>
               <span className="dcard__go">Ver módulos →</span>
             </a>
-            <a className="dcard" href="#api">
+            <a className="dcard" href="/docs/api">
               <span className="dcard__ico" aria-hidden="true">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16" /></svg>
               </span>
               <strong>Sou desenvolvedor</strong>
-              <p>Quero integrar com a API do Lemify: autenticação, envio de mensagens e agenda.</p>
+              <p>Quero integrar com a API do Lemify: autenticação, mensagens, agenda e CRM.</p>
               <span className="dcard__go">Ver a API →</span>
             </a>
           </div>
@@ -183,13 +161,10 @@ export default function DocsPage() {
                 </div>
               )
             })}
-            {endpoints.length > 0 && (
-              <div className="docs__group">
-                <h3>API</h3>
-                <a href="#api-autenticacao" onClick={() => pick('api-autenticacao')} className={current === 'api-autenticacao' ? 'is-on' : ''}>Autenticação</a>
-                {endpoints.flatMap((g) => g.items).map((e) => <a key={e.id} href={`#${e.id}`} onClick={() => pick(e.id)} className={current === e.id ? 'is-on' : ''} aria-current={current === e.id ? 'true' : undefined}>{e.title}</a>)}
-              </div>
-            )}
+            <div className="docs__group">
+              <h3>API</h3>
+              <a href="/docs/api">Documentação da API →</a>
+            </div>
           </aside>
 
           <div className="docs__content">
@@ -211,61 +186,6 @@ export default function DocsPage() {
                   <ul>{m.features.map((f) => <li key={f}>{f}</li>)}</ul>
                 </article>
               ))}
-            </section>
-
-            <section id="api" className="dapi" aria-labelledby="api-titulo">
-              <span className="eyebrow">API</span>
-              <h2 id="api-titulo" className="docs__h2">API do Lemify</h2>
-              <p className="docs__lead">Envie mensagens e gerencie a agenda direto do seu sistema. A referência completa (OpenAPI) fica em <a href={API_FULL_REFERENCE} target="_blank" rel="noopener noreferrer">docs.lemify.com.br/api-docs</a>.</p>
-
-              <h3 id="api-servidores" className="dapi__h3">Servidores</h3>
-              <div className="dtable">
-                {SERVERS.map(([n, u]) => <div key={u}><span>{n}</span><code>{u}</code></div>)}
-              </div>
-
-              <h3 id="api-autenticacao" className="dapi__h3">Autenticação</h3>
-              <p>Todas as requisições usam o cabeçalho <code>Authorization: Bearer</code>. O tipo de credencial depende do recurso:</p>
-              <div className="dauth">
-                {AUTH.map((a) => (
-                  <div className="dauth__item" key={a.name}>
-                    <strong>{a.name}</strong><span className="tag">{a.where}</span>
-                    <p>{a.how}</p>
-                    <Code>{a.sample}</Code>
-                  </div>
-                ))}
-              </div>
-
-              {endpoints.length === 0 && <p className="docs__empty">Nenhum endpoint encontrado para “{query}”.</p>}
-
-              {endpoints.map((g) => (
-                <div key={g.group}>
-                  <h3 className="dapi__h3">{g.group}</h3>
-                  <p className="dapi__note">{g.note}</p>
-                  {g.items.map((e) => (
-                    <article className="dep" id={e.id} key={e.id} aria-labelledby={`${e.id}-t`}>
-                      <header>
-                        <span className={`method method--${e.method.toLowerCase()}`}>{e.method}</span>
-                        <code className="dep__path">{e.path}</code>
-                      </header>
-                      <h4 id={`${e.id}-t`}>{e.title}</h4>
-                      <p>{e.text}</p>
-                      <p className="dep__auth">Autenticação: <strong>{e.auth}</strong></p>
-                      <div className="dfields">
-                        {e.fields.map(([n, t, r, d]) => (
-                          <div key={n}><code>{n}</code><span>{t} · {r}</span><p>{d}</p></div>
-                        ))}
-                      </div>
-                      <Code>{e.sample}</Code>
-                    </article>
-                  ))}
-                </div>
-              ))}
-
-              <h3 className="dapi__h3">Códigos de resposta</h3>
-              <div className="dtable">
-                {STATUS.map(([c, d]) => <div key={c}><code>{c}</code><span>{d}</span></div>)}
-              </div>
-              <p className="dapi__foot">Os endpoints de métricas (<code>/v1/metrics/*</code>) são de uso interno do painel administrativo e estão apenas na <a href={API_FULL_REFERENCE} target="_blank" rel="noopener noreferrer">referência completa</a>.</p>
             </section>
           </div>
         </div>
