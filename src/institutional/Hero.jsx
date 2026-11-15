@@ -5,7 +5,7 @@ import { SITE } from './siteConfig.js'
 import heroLoja from './assets/hero.jpg'
 
 const SCENES = [
-  { tab: 'Varejo', h: 'Inteligência artificial feita para o dia a dia do seu negócio.', img: heroLoja, alt: 'Dona de uma loja de tênis, de camisa verde, fotografando um produto ao lado do notebook, entre caixas de pedidos', q: 'Oi! Tem esse tênis no 39?', a: 'Tem sim! Separo um para você retirar hoje ou prefere receber em casa?', ok: 'Pedido encaminhado para a equipe' },
+  { tab: 'Varejo', h: 'Reunimos soluções de IA para atendimento, vendas, agenda e gestão, prontas para o seu negócio.', img: heroLoja, alt: 'Dona de uma loja de tênis, de camisa verde, fotografando um produto ao lado do notebook, entre caixas de pedidos', q: 'Oi! Tem esse tênis no 39?', a: 'Tem sim! Separo um para você retirar hoje ou prefere receber em casa?', ok: 'Pedido encaminhado para a equipe' },
 ]
 
 export default function Hero() {
@@ -105,7 +105,7 @@ export default function Hero() {
           </h1>
           <div className="hero__row">
             <p className="hero__lead">
-              Somos a Lemify, empresa brasileira de tecnologia. Reunimos soluções de IA para atendimento, vendas, agenda e gestão, prontas para o seu negócio.
+              Somos a Lemify, empresa brasileira de tecnologia. Tudo conectado aos canais e sistemas que você já usa, com suporte de gente de verdade.
             </p>
             <div className="hero__cta">
               <Magnetic><a className="btn btn--lime btn--sm" href={SITE.productPage}>Conheça o Lemify <Arrow /></a></Magnetic>
