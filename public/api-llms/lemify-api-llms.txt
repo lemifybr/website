@@ -1,0 +1,17 @@
+# Lemify API
+
+> API pública da Lemify, plataforma de atendimento multicanal e CRM: envio de mensagens pelo WhatsApp, agenda e negociações.
+
+API REST em JSON. Base URL: https://api.lemify.com.br. Limites: por IP, por credencial e 300 requisições/minuto por empresa na API com chave.
+Especificação OpenAPI completa: https://docs.lemify.com.br/api-docs.json
+
+## Módulos
+
+- [Mensagens (WhatsApp)](https://lemify.com.br/api-llms/lemify-api-mensagens.md): Envio de mensagens de texto e mídia pelo WhatsApp para qualquer número.
+- [Agenda](https://lemify.com.br/api-llms/lemify-api-agenda.md): Agendamentos: listar, consultar, criar, alterar, excluir, horários disponíveis e conflito de horário.
+- [CRM (negociações)](https://lemify.com.br/api-llms/lemify-api-crm.md): Negociações (deals), pipelines, etapas e motivos de ganho/perda; criação idempotente por externalId e sincronização por updatedSince.
+
+## Opcional
+
+- [Documentação completa em um arquivo](https://lemify.com.br/api-llms/lemify-api-llms-full.txt)
+- [Swagger UI](https://docs.lemify.com.br/api-docs/)

@@ -165,9 +165,8 @@ export default function ApiDocsPage() {
             <p>Vai integrar com a ajuda de um assistente de IA ou de um agente? Baixe um destes arquivos e passe para ele. São textos em Markdown, gerados da mesma especificação da API, com parâmetros, respostas e exemplos.</p>
             <div className="dllms">
               {LLMS.map((l) => (
-                // ?download=1 faz o servidor responder como anexo: baixa sem abrir aba (o atributo download
-                // sozinho não vale para outro domínio, mas fica para quando o arquivo for do mesmo domínio)
-                <a key={l.id} className="dllms__item" href={`${l.url}?download=1`} download={l.file} aria-label={`Baixar ${l.title} (${l.file})`}>
+                // Arquivo do próprio site: o atributo download salva direto, sem abrir aba nem sair da página
+                <a key={l.id} className="dllms__item" href={l.url} download={l.file} aria-label={`Baixar ${l.title} (${l.file})`}>
                   <strong>{l.title}</strong>
                   <span>{l.text}</span>
                   <span className="dllms__file">

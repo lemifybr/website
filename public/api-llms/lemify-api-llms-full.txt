@@ -1,0 +1,832 @@
+# Lemify API — Mensagens (WhatsApp)
+
+> Envio de mensagens de texto e mídia pelo WhatsApp para qualquer número.
+
+Base URL: https://api.lemify.com.br
+
+## Autenticação
+
+Token do canal WhatsApp em `Authorization: Bearer <TOKEN_DO_CANAL>` (Canais > WhatsApp > Token da API).
+
+Erros vêm como JSON `{ "error": "mensagem" }`. 401 = credencial ausente/inválida, 403 = sem permissão/escopo ou plano sem acesso à API, 429 = limite de requisições (respeite `Retry-After`).
+
+## Endpoints
+
+### POST /v1/messages/send
+
+**Envia mensagem via API externa**
+
+Endpoint para integração externa. Permite enviar mensagens de texto ou mídia
+para qualquer número de WhatsApp sem necessidade de um ticket existente.
+
+**Autenticação:** Clique em "Authorize" e insira o token do canal WhatsApp.
+O token pode ser obtido na seção "Canais > WhatsApp > Token da API" do sistema Lemify.
+
+**Importante:** O número deve ter WhatsApp ativo e a conexão deve estar CONNECTED.
+
+Corpo (application/json):
+- `number` (string, obrigatório): Número do WhatsApp com DDD (apenas números); ex.: "5511999999999"
+- `body` (string): Texto da mensagem; ex.: "Olá! Esta é uma mensagem de teste via API."
+- `createTicket` (boolean): Se true, cria um ticket e salva a mensagem no histórico do chat. Se false (padrão), apenas envia a notificação sem criar ticket.; padrão: false
+
+Também aceita multipart/form-data:
+- `number` (string, obrigatório): Número do WhatsApp com DDD (apenas números, sem formatação); ex.: "5511999999999"
+- `body` (string): Texto da mensagem; ex.: "Olá! Esta é uma mensagem de teste via API."
+- `medias` (string (binary)[]): Arquivos de mídia para envio (imagens, vídeos, documentos, áudios)
+- `createTicket` (boolean): Se true, cria um ticket e salva a mensagem no histórico do chat. Se false (padrão), apenas envia a notificação sem criar ticket.; padrão: false
+
+Respostas:
+- 200: Mensagem enviada com sucesso
+- 400: Erro de validação ou envio
+- 401: Token de autenticação ausente ou inválido
+- 404: Conexão WhatsApp não encontrada
+- 429: Limite de envio excedido (rate limit)
+- 500: Erro interno no envio
+
+Resposta 200 (objeto com):
+- `mensagem` (string): ex.: "Mensagem enviada com sucesso"
+
+```bash
+curl -X POST "https://api.lemify.com.br/v1/messages/send" \
+  -H "Authorization: Bearer $LEMIFY_CHANNEL_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"number":"5511999999999"}'
+```
+
+
+---
+
+# Lemify API — Agenda
+
+> Agendamentos: listar, consultar, criar, alterar, excluir, horários disponíveis e conflito de horário.
+
+Base URL: https://api.lemify.com.br
+
+## Autenticação
+
+Chave de API da empresa em `Authorization: Bearer lmf_...` (ou `X-API-Key`), escopos `agenda:read` / `agenda:write`. Gere em Configurações > Chaves de API.
+
+Erros vêm como JSON `{ "error": "mensagem" }`. 401 = credencial ausente/inválida, 403 = sem permissão/escopo ou plano sem acesso à API, 429 = limite de requisições (respeite `Retry-After`).
+
+## Endpoints
+
+### GET /v1/agenda
+
+**Lista agendamentos**
+
+Lista agendamentos com paginação (100 por página). A chave é da empresa e enxerga todas as filiais;
+use `branchIds` para filtrar. Escopo exigido: `agenda:read`.
+
+Parâmetros:
+- `date` (query, string (date)): Data (YYYY-MM-DD)
+- `status` (query, string): valores: pending, confirmed, cancelled, completed
+- `professionalId` (query, integer)
+- `userId` (query, integer)
+- `searchParam` (query, string): Busca por nome/telefone do cliente
+- `pageNumber` (query, integer): padrão: 1
+- `branchIds` (query, string): Filiais separadas por vírgula, ex. 1,2
+
+Respostas:
+- 200: Lista de agendamentos
+- 401: Token de autenticação ausente ou inválido
+- 403: Acesso negado - permissões insuficientes
+
+Resposta 200 (objeto com):
+- `agendas` (object[])
+  - `id` (integer): ex.: 123
+  - `title` (string)
+  - `customerName` (string): ex.: "Maria Silva"
+  - `customerPhone` (string): ex.: "5511999999999"
+  - `customerEmail` (string)
+  - `date` (string (date)): ex.: "2026-10-20"
+  - `time` (string): ex.: "14:00:00"
+  - `endTime` (string): ex.: "14:30:00"
+  - `duration` (integer): Duração em minutos
+  - `service` (string)
+  - `status` (string): valores: pending, confirmed, cancelled, completed
+  - `notes` (string)
+  - `location` (string)
+  - `meetLink` (string)
+  - `recurrence` (string): valores: none, daily, weekly, monthly
+  - `professionalId` (integer)
+  - `userId` (integer)
+  - `contactId` (integer)
+  - `branchId` (integer)
+  - `createdAt` (string (date-time))
+  - `updatedAt` (string (date-time))
+- `count` (integer)
+- `hasMore` (boolean)
+
+```bash
+curl -X GET "https://api.lemify.com.br/v1/agenda" \
+  -H "Authorization: Bearer $LEMIFY_API_KEY"
+```
+
+### POST /v1/agenda
+
+**Cria um agendamento**
+
+Cria um agendamento validando disponibilidade e conflitos. Sem `branchId`, usa a filial padrão
+da empresa. Escopo exigido: `agenda:write`.
+
+Corpo (application/json):
+- `customerName` (string, obrigatório): ex.: "Maria Silva"
+- `customerPhone` (string): ex.: "5511999999999"
+- `customerEmail` (string)
+- `date` (string (date), obrigatório): ex.: "2026-10-20"
+- `time` (string, obrigatório): ex.: "14:00"
+- `endTime` (string): ex.: "14:30"
+- `duration` (integer): Minutos (alternativa a endTime)
+- `title` (string)
+- `service` (string)
+- `notes` (string)
+- `location` (string)
+- `professionalId` (integer)
+- `userId` (integer)
+- `contactId` (integer)
+- `branchId` (integer): Filial. Sem ele, usa a filial padrão da empresa.
+- `recurrence` (string): valores: none, daily, weekly, monthly; padrão: "none"
+- `meetLink` (string)
+- `addGoogleMeet` (boolean)
+- `force` (boolean): Ignora o aviso de conflito de horário
+
+Respostas:
+- 201: Agendamento criado
+- 400: Dados inválidos, filial inválida ou horário indisponível/em conflito
+- 401: Token de autenticação ausente ou inválido
+- 403: Acesso negado - permissões insuficientes
+
+Resposta 201 (objeto com):
+- `id` (integer): ex.: 123
+- `title` (string)
+- `customerName` (string): ex.: "Maria Silva"
+- `customerPhone` (string): ex.: "5511999999999"
+- `customerEmail` (string)
+- `date` (string (date)): ex.: "2026-10-20"
+- `time` (string): ex.: "14:00:00"
+- `endTime` (string): ex.: "14:30:00"
+- `duration` (integer): Duração em minutos
+- `service` (string)
+- `status` (string): valores: pending, confirmed, cancelled, completed
+- `notes` (string)
+- `location` (string)
+- `meetLink` (string)
+- `recurrence` (string): valores: none, daily, weekly, monthly
+- `professionalId` (integer)
+- `userId` (integer)
+- `contactId` (integer)
+- `branchId` (integer)
+- `createdAt` (string (date-time))
+- `updatedAt` (string (date-time))
+
+```bash
+curl -X POST "https://api.lemify.com.br/v1/agenda" \
+  -H "Authorization: Bearer $LEMIFY_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"customerName":"Maria Silva","date":"2026-10-20","time":"14:00"}'
+```
+
+### GET /v1/agenda/available-slots
+
+**Horários disponíveis**
+
+Horários livres de um dia, opcionalmente por profissional. Escopo exigido: `agenda:read`.
+
+Parâmetros:
+- `date` (query, string (date), obrigatório): Data (YYYY-MM-DD)
+- `professionalId` (query, integer)
+- `excludeAgendaId` (query, integer): Ignora este agendamento (útil ao remarcar)
+
+Respostas:
+- 200: Horários disponíveis
+- 400: Parâmetro date ausente
+- 401: Token de autenticação ausente ou inválido
+- 403: Acesso negado - permissões insuficientes
+
+```bash
+curl -X GET "https://api.lemify.com.br/v1/agenda/available-slots" \
+  -H "Authorization: Bearer $LEMIFY_API_KEY"
+```
+
+### GET /v1/agenda/{agendaId}
+
+**Consulta um agendamento**
+
+Escopo exigido: `agenda:read`.
+
+Parâmetros:
+- `agendaId` (path, integer, obrigatório)
+
+Respostas:
+- 200: Agendamento
+- 401: Token de autenticação ausente ou inválido
+- 403: Acesso negado - permissões insuficientes
+- 404: Agendamento não encontrado
+
+Resposta 200 (objeto com):
+- `id` (integer): ex.: 123
+- `title` (string)
+- `customerName` (string): ex.: "Maria Silva"
+- `customerPhone` (string): ex.: "5511999999999"
+- `customerEmail` (string)
+- `date` (string (date)): ex.: "2026-10-20"
+- `time` (string): ex.: "14:00:00"
+- `endTime` (string): ex.: "14:30:00"
+- `duration` (integer): Duração em minutos
+- `service` (string)
+- `status` (string): valores: pending, confirmed, cancelled, completed
+- `notes` (string)
+- `location` (string)
+- `meetLink` (string)
+- `recurrence` (string): valores: none, daily, weekly, monthly
+- `professionalId` (integer)
+- `userId` (integer)
+- `contactId` (integer)
+- `branchId` (integer)
+- `createdAt` (string (date-time))
+- `updatedAt` (string (date-time))
+
+```bash
+curl -X GET "https://api.lemify.com.br/v1/agenda/<agendaId>" \
+  -H "Authorization: Bearer $LEMIFY_API_KEY"
+```
+
+### PUT /v1/agenda/{agendaId}
+
+**Atualiza um agendamento**
+
+Atualiza campos de um agendamento. Use `updateRecurrence` para aplicar à série.
+Escopo exigido: `agenda:write`.
+
+Parâmetros:
+- `agendaId` (path, integer, obrigatório)
+
+Corpo (application/json):
+- `customerName` (string, obrigatório): ex.: "Maria Silva"
+- `customerPhone` (string): ex.: "5511999999999"
+- `customerEmail` (string)
+- `date` (string (date), obrigatório): ex.: "2026-10-20"
+- `time` (string, obrigatório): ex.: "14:00"
+- `endTime` (string): ex.: "14:30"
+- `duration` (integer): Minutos (alternativa a endTime)
+- `title` (string)
+- `service` (string)
+- `notes` (string)
+- `location` (string)
+- `professionalId` (integer)
+- `userId` (integer)
+- `contactId` (integer)
+- `branchId` (integer): Filial. Sem ele, usa a filial padrão da empresa.
+- `recurrence` (string): valores: none, daily, weekly, monthly; padrão: "none"
+- `meetLink` (string)
+- `addGoogleMeet` (boolean)
+- `force` (boolean): Ignora o aviso de conflito de horário
+- `status` (string): valores: pending, confirmed, cancelled, completed
+- `updateRecurrence` (boolean)
+
+Respostas:
+- 200: Agendamento atualizado
+- 401: Token de autenticação ausente ou inválido
+- 403: Acesso negado - permissões insuficientes
+- 404: Agendamento não encontrado
+
+Resposta 200 (objeto com):
+- `id` (integer): ex.: 123
+- `title` (string)
+- `customerName` (string): ex.: "Maria Silva"
+- `customerPhone` (string): ex.: "5511999999999"
+- `customerEmail` (string)
+- `date` (string (date)): ex.: "2026-10-20"
+- `time` (string): ex.: "14:00:00"
+- `endTime` (string): ex.: "14:30:00"
+- `duration` (integer): Duração em minutos
+- `service` (string)
+- `status` (string): valores: pending, confirmed, cancelled, completed
+- `notes` (string)
+- `location` (string)
+- `meetLink` (string)
+- `recurrence` (string): valores: none, daily, weekly, monthly
+- `professionalId` (integer)
+- `userId` (integer)
+- `contactId` (integer)
+- `branchId` (integer)
+- `createdAt` (string (date-time))
+- `updatedAt` (string (date-time))
+
+```bash
+curl -X PUT "https://api.lemify.com.br/v1/agenda/<agendaId>" \
+  -H "Authorization: Bearer $LEMIFY_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"customerName":"Maria Silva","date":"2026-10-20","time":"14:00"}'
+```
+
+### DELETE /v1/agenda/{agendaId}
+
+**Exclui um agendamento**
+
+Com `cancelRecurrence` informado, cancela também a série. Escopo exigido: `agenda:write`.
+
+Parâmetros:
+- `agendaId` (path, integer, obrigatório)
+- `cancelRecurrence` (query, string)
+
+Respostas:
+- 204: Excluído
+- 401: Token de autenticação ausente ou inválido
+- 403: Acesso negado - permissões insuficientes
+- 404: Agendamento não encontrado
+
+```bash
+curl -X DELETE "https://api.lemify.com.br/v1/agenda/<agendaId>" \
+  -H "Authorization: Bearer $LEMIFY_API_KEY"
+```
+
+### POST /v1/agenda/check-conflict
+
+**Verifica conflito de horário**
+
+Informa se o intervalo conflita com outro agendamento do profissional/usuário. Escopo exigido: `agenda:read`.
+
+Corpo (application/json):
+- `date` (string (date), obrigatório)
+- `startTime` (string, obrigatório): ex.: "14:00"
+- `endTime` (string, obrigatório): ex.: "14:30"
+- `professionalId` (integer)
+- `userId` (integer)
+- `excludeAgendaId` (integer)
+
+Respostas:
+- 200: Resultado da verificação
+- 401: Token de autenticação ausente ou inválido
+- 403: Acesso negado - permissões insuficientes
+
+```bash
+curl -X POST "https://api.lemify.com.br/v1/agenda/check-conflict" \
+  -H "Authorization: Bearer $LEMIFY_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"date":"2026-12-01","startTime":"14:00","endTime":"14:30"}'
+```
+
+
+---
+
+# Lemify API — CRM (negociações)
+
+> Negociações (deals), pipelines, etapas e motivos de ganho/perda; criação idempotente por externalId e sincronização por updatedSince.
+
+Base URL: https://api.lemify.com.br
+
+## Autenticação
+
+Chave de API da empresa em `Authorization: Bearer lmf_...` (ou `X-API-Key`), escopos `crm:read` / `crm:write`. Gere em Configurações > Chaves de API.
+
+Erros vêm como JSON `{ "error": "mensagem" }`. 401 = credencial ausente/inválida, 403 = sem permissão/escopo ou plano sem acesso à API, 429 = limite de requisições (respeite `Retry-After`).
+
+## Endpoints
+
+### GET /v1/pipelines
+
+**Lista pipelines e etapas**
+
+Use para descobrir os ids de pipeline e etapa (`stageId`). Etapas ocultas não aparecem. Escopo exigido: `crm:read`.
+
+Respostas:
+- 200: Pipelines com suas etapas
+- 401: Token de autenticação ausente ou inválido
+- 403: Acesso negado - permissões insuficientes
+
+Resposta 200 (lista de objetos com):
+- `id` (integer)
+- `name` (string)
+- `position` (integer)
+- `isDefault` (boolean)
+- `stages` (object[])
+  - `id` (integer)
+  - `name` (string)
+  - `position` (integer)
+  - `closureType` (string): valores: won, lost
+
+```bash
+curl -X GET "https://api.lemify.com.br/v1/pipelines" \
+  -H "Authorization: Bearer $LEMIFY_API_KEY"
+```
+
+### GET /v1/deal-reasons
+
+**Lista motivos de ganho/perda**
+
+Ids para `dealReasonId`. Escopo exigido: `crm:read`.
+
+Respostas:
+- 200: Motivos
+- 401: Token de autenticação ausente ou inválido
+
+Resposta 200 (lista de objetos com):
+- `id` (integer)
+- `name` (string)
+- `type` (string): valores: won, lost
+
+```bash
+curl -X GET "https://api.lemify.com.br/v1/deal-reasons" \
+  -H "Authorization: Bearer $LEMIFY_API_KEY"
+```
+
+### GET /v1/deals
+
+**Lista negociações**
+
+Lista paginada (até 100 por página). Para sincronizar, envie `updatedSince` com o maior
+`updatedAt` já recebido: a ordem passa a ser por `updatedAt` crescente. Sem `status`, a
+lixeira fica de fora. Escopo exigido: `crm:read`.
+
+Parâmetros:
+- `updatedSince` (query, string (date-time))
+- `status` (query, string): valores: open, won, lost
+- `pipelineId` (query, integer)
+- `stageId` (query, integer)
+- `contactId` (query, integer)
+- `source` (query, string): Plataforma de origem (whatsapp, instagram, manual, lead_form, api...)
+- `externalSource` (query, string)
+- `externalId` (query, string)
+- `pageNumber` (query, integer): padrão: 1
+- `limit` (query, integer): padrão: 50; máx.: 100
+
+Respostas:
+- 200: Negociações
+- 400: Parâmetro inválido
+- 401: Token de autenticação ausente ou inválido
+- 403: Acesso negado - permissões insuficientes
+
+Resposta 200 (objeto com):
+- `deals` (object[])
+  - `id` (integer)
+  - `name` (string)
+  - `amount` (number)
+  - `status` (string): valores: open, won, lost, trashed
+  - `description` (string)
+  - `items` (object[])
+  - `lostReason` (string)
+  - `nextStep` (string)
+  - `leadSource` (string): Origem de marketing em texto livre
+  - `source` (string): Plataforma de origem: whatsapp, instagram, facebook, webchat, manual, lead_form, api...
+  - `externalSource` (string)
+  - `externalId` (string)
+  - `score` (integer)
+  - `scoreLabel` (string)
+  - `closingDate` (string (date-time))
+  - `deliveryDate` (string (date-time))
+  - `wonAt` (string (date-time))
+  - `lostAt` (string (date-time))
+  - `contact` (object)
+  - `user` (object)
+  - `pipeline` (object)
+  - `stage` (object)
+  - `dealReason` (object)
+  - `createdAt` (string (date-time))
+  - `updatedAt` (string (date-time))
+- `count` (integer)
+- `hasMore` (boolean)
+
+```bash
+curl -X GET "https://api.lemify.com.br/v1/deals" \
+  -H "Authorization: Bearer $LEMIFY_API_KEY"
+```
+
+### POST /v1/deals
+
+**Cria uma negociação**
+
+Cria o deal na etapa informada; automações da etapa e eventos de conversão do Meta disparam
+como no painel. Com `externalId`, a chamada é idempotente: se já existir um deal com o mesmo
+`externalSource` + `externalId`, ele é devolvido com status 200. Escopo exigido: `crm:write`.
+
+Corpo (application/json):
+- `name` (string): até 255 caracteres
+- `stageId` (integer)
+- `pipelineId` (integer): Opcional; se vier, precisa ser o pipeline da etapa
+- `amount` (number): Ignorado quando o deal tem items: o valor passa a ser a soma de price × quantity
+- `status` (string): valores: open, won, lost
+- `contactId` (integer)
+- `userId` (integer): Responsável (usuário da empresa)
+- `dealReasonId` (integer)
+- `description` (string): até 10000 caracteres
+- `items` (object[])
+  - `type` (string, obrigatório): valores: product, service
+  - `id` (integer): Produto/serviço cadastrado na empresa
+  - `name` (string, obrigatório)
+  - `price` (number): padrão: 0
+  - `quantity` (number): padrão: 1
+- `lostReason` (string)
+- `closingDate` (string (date))
+- `deliveryDate` (string (date))
+- `nextStep` (string)
+- `leadSource` (string)
+- `externalSource` (string): Sistema de origem (padrão "api"); até 64 caracteres
+- `externalId` (string): Id no sistema de origem; torna o POST idempotente; até 128 caracteres
+
+Respostas:
+- 200: Já existia (mesmo externalSource + externalId)
+- 201: Criado
+- 400: Dados inválidos, id de outra empresa ou etapa oculta
+- 401: Token de autenticação ausente ou inválido
+- 403: Acesso negado - permissões insuficientes
+
+Resposta 200 (objeto com):
+- `id` (integer)
+- `name` (string)
+- `amount` (number)
+- `status` (string): valores: open, won, lost, trashed
+- `description` (string)
+- `items` (object[])
+  - `type` (string, obrigatório): valores: product, service
+  - `id` (integer): Produto/serviço cadastrado na empresa
+  - `name` (string, obrigatório)
+  - `price` (number): padrão: 0
+  - `quantity` (number): padrão: 1
+- `lostReason` (string)
+- `nextStep` (string)
+- `leadSource` (string): Origem de marketing em texto livre
+- `source` (string): Plataforma de origem: whatsapp, instagram, facebook, webchat, manual, lead_form, api...
+- `externalSource` (string)
+- `externalId` (string)
+- `score` (integer)
+- `scoreLabel` (string)
+- `closingDate` (string (date-time))
+- `deliveryDate` (string (date-time))
+- `wonAt` (string (date-time))
+- `lostAt` (string (date-time))
+- `contact` (object)
+  - `id` (integer)
+  - `name` (string)
+  - `number` (string)
+  - `email` (string)
+- `user` (object)
+  - `id` (integer)
+  - `name` (string)
+- `pipeline` (object)
+  - `id` (integer)
+  - `name` (string)
+- `stage` (object)
+  - `id` (integer)
+  - `name` (string)
+  - `closureType` (string)
+- `dealReason` (object)
+  - `id` (integer)
+  - `name` (string)
+  - `type` (string)
+- `createdAt` (string (date-time))
+- `updatedAt` (string (date-time))
+
+```bash
+curl -X POST "https://api.lemify.com.br/v1/deals" \
+  -H "Authorization: Bearer $LEMIFY_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{}'
+```
+
+### GET /v1/deals/{dealId}
+
+**Consulta uma negociação**
+
+Escopo exigido: `crm:read`.
+
+Parâmetros:
+- `dealId` (path, integer, obrigatório)
+
+Respostas:
+- 200: Negociação
+- 401: Token de autenticação ausente ou inválido
+- 404: Não encontrada
+
+Resposta 200 (objeto com):
+- `id` (integer)
+- `name` (string)
+- `amount` (number)
+- `status` (string): valores: open, won, lost, trashed
+- `description` (string)
+- `items` (object[])
+  - `type` (string, obrigatório): valores: product, service
+  - `id` (integer): Produto/serviço cadastrado na empresa
+  - `name` (string, obrigatório)
+  - `price` (number): padrão: 0
+  - `quantity` (number): padrão: 1
+- `lostReason` (string)
+- `nextStep` (string)
+- `leadSource` (string): Origem de marketing em texto livre
+- `source` (string): Plataforma de origem: whatsapp, instagram, facebook, webchat, manual, lead_form, api...
+- `externalSource` (string)
+- `externalId` (string)
+- `score` (integer)
+- `scoreLabel` (string)
+- `closingDate` (string (date-time))
+- `deliveryDate` (string (date-time))
+- `wonAt` (string (date-time))
+- `lostAt` (string (date-time))
+- `contact` (object)
+  - `id` (integer)
+  - `name` (string)
+  - `number` (string)
+  - `email` (string)
+- `user` (object)
+  - `id` (integer)
+  - `name` (string)
+- `pipeline` (object)
+  - `id` (integer)
+  - `name` (string)
+- `stage` (object)
+  - `id` (integer)
+  - `name` (string)
+  - `closureType` (string)
+- `dealReason` (object)
+  - `id` (integer)
+  - `name` (string)
+  - `type` (string)
+- `createdAt` (string (date-time))
+- `updatedAt` (string (date-time))
+
+```bash
+curl -X GET "https://api.lemify.com.br/v1/deals/<dealId>" \
+  -H "Authorization: Bearer $LEMIFY_API_KEY"
+```
+
+### PUT /v1/deals/{dealId}
+
+**Atualiza uma negociação**
+
+Envie só os campos a alterar. Escopo exigido: `crm:write`.
+
+Parâmetros:
+- `dealId` (path, integer, obrigatório)
+
+Corpo (application/json):
+- `name` (string): até 255 caracteres
+- `stageId` (integer)
+- `pipelineId` (integer): Opcional; se vier, precisa ser o pipeline da etapa
+- `amount` (number): Ignorado quando o deal tem items: o valor passa a ser a soma de price × quantity
+- `status` (string): valores: open, won, lost
+- `contactId` (integer)
+- `userId` (integer): Responsável (usuário da empresa)
+- `dealReasonId` (integer)
+- `description` (string): até 10000 caracteres
+- `items` (object[])
+  - `type` (string, obrigatório): valores: product, service
+  - `id` (integer): Produto/serviço cadastrado na empresa
+  - `name` (string, obrigatório)
+  - `price` (number): padrão: 0
+  - `quantity` (number): padrão: 1
+- `lostReason` (string)
+- `closingDate` (string (date))
+- `deliveryDate` (string (date))
+- `nextStep` (string)
+- `leadSource` (string)
+- `externalSource` (string): Sistema de origem (padrão "api"); até 64 caracteres
+- `externalId` (string): Id no sistema de origem; torna o POST idempotente; até 128 caracteres
+
+Respostas:
+- 200: Atualizada
+- 400: Dados inválidos
+- 404: Não encontrada
+- 409: externalSource/externalId já usado por outro deal
+
+Resposta 200 (objeto com):
+- `id` (integer)
+- `name` (string)
+- `amount` (number)
+- `status` (string): valores: open, won, lost, trashed
+- `description` (string)
+- `items` (object[])
+  - `type` (string, obrigatório): valores: product, service
+  - `id` (integer): Produto/serviço cadastrado na empresa
+  - `name` (string, obrigatório)
+  - `price` (number): padrão: 0
+  - `quantity` (number): padrão: 1
+- `lostReason` (string)
+- `nextStep` (string)
+- `leadSource` (string): Origem de marketing em texto livre
+- `source` (string): Plataforma de origem: whatsapp, instagram, facebook, webchat, manual, lead_form, api...
+- `externalSource` (string)
+- `externalId` (string)
+- `score` (integer)
+- `scoreLabel` (string)
+- `closingDate` (string (date-time))
+- `deliveryDate` (string (date-time))
+- `wonAt` (string (date-time))
+- `lostAt` (string (date-time))
+- `contact` (object)
+  - `id` (integer)
+  - `name` (string)
+  - `number` (string)
+  - `email` (string)
+- `user` (object)
+  - `id` (integer)
+  - `name` (string)
+- `pipeline` (object)
+  - `id` (integer)
+  - `name` (string)
+- `stage` (object)
+  - `id` (integer)
+  - `name` (string)
+  - `closureType` (string)
+- `dealReason` (object)
+  - `id` (integer)
+  - `name` (string)
+  - `type` (string)
+- `createdAt` (string (date-time))
+- `updatedAt` (string (date-time))
+
+```bash
+curl -X PUT "https://api.lemify.com.br/v1/deals/<dealId>" \
+  -H "Authorization: Bearer $LEMIFY_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{}'
+```
+
+### DELETE /v1/deals/{dealId}
+
+**Envia uma negociação para a lixeira**
+
+Mesmo comportamento do painel (status trashed). Escopo exigido: `crm:write`.
+
+Parâmetros:
+- `dealId` (path, integer, obrigatório)
+
+Respostas:
+- 204: Enviada para a lixeira
+- 404: Não encontrada
+
+```bash
+curl -X DELETE "https://api.lemify.com.br/v1/deals/<dealId>" \
+  -H "Authorization: Bearer $LEMIFY_API_KEY"
+```
+
+### PATCH /v1/deals/{dealId}/stage
+
+**Move a negociação de etapa**
+
+Move para a etapa (e o pipeline dela). Etapas de fechamento marcam o deal como ganho/perdido;
+automações da etapa disparam. Escopo exigido: `crm:write`.
+
+Parâmetros:
+- `dealId` (path, integer, obrigatório)
+
+Corpo (application/json):
+- `stageId` (integer, obrigatório)
+
+Respostas:
+- 200: Movida
+- 400: Etapa oculta ou inválida
+- 404: Negociação ou etapa não encontrada
+
+Resposta 200 (objeto com):
+- `id` (integer)
+- `name` (string)
+- `amount` (number)
+- `status` (string): valores: open, won, lost, trashed
+- `description` (string)
+- `items` (object[])
+  - `type` (string, obrigatório): valores: product, service
+  - `id` (integer): Produto/serviço cadastrado na empresa
+  - `name` (string, obrigatório)
+  - `price` (number): padrão: 0
+  - `quantity` (number): padrão: 1
+- `lostReason` (string)
+- `nextStep` (string)
+- `leadSource` (string): Origem de marketing em texto livre
+- `source` (string): Plataforma de origem: whatsapp, instagram, facebook, webchat, manual, lead_form, api...
+- `externalSource` (string)
+- `externalId` (string)
+- `score` (integer)
+- `scoreLabel` (string)
+- `closingDate` (string (date-time))
+- `deliveryDate` (string (date-time))
+- `wonAt` (string (date-time))
+- `lostAt` (string (date-time))
+- `contact` (object)
+  - `id` (integer)
+  - `name` (string)
+  - `number` (string)
+  - `email` (string)
+- `user` (object)
+  - `id` (integer)
+  - `name` (string)
+- `pipeline` (object)
+  - `id` (integer)
+  - `name` (string)
+- `stage` (object)
+  - `id` (integer)
+  - `name` (string)
+  - `closureType` (string)
+- `dealReason` (object)
+  - `id` (integer)
+  - `name` (string)
+  - `type` (string)
+- `createdAt` (string (date-time))
+- `updatedAt` (string (date-time))
+
+```bash
+curl -X PATCH "https://api.lemify.com.br/v1/deals/<dealId>/stage" \
+  -H "Authorization: Bearer $LEMIFY_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"stageId":1}'
+```
+

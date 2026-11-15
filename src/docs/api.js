@@ -7,16 +7,19 @@ export const SERVERS = [
   ['Produção', 'https://api.lemify.com.br'],
 ]
 
-// Documentação em texto para LLMs e agentes de IA (formato llms.txt), gerada da mesma especificação OpenAPI.
-// Fica sob /api-docs: o proxy de docs.lemify.com.br só repassa esse caminho ao backend.
-const LLMS_BASE = `${API_DOCS_BASE}/api-docs`
+// Documentação em texto para LLMs e agentes de IA (formato llms.txt), gerada da mesma especificação OpenAPI
+// do backend e publicada como arquivo estático do próprio site (public/api-llms/), para o download
+// acontecer no mesmo domínio, direto pelo atributo download, sem passar por docs.lemify.com.br.
+// Para atualizar após mudar a API, na pasta backend do lemify:
+//   npx ts-node --transpile-only src/scripts/exportLlms.ts <site>/public/api-llms https://lemify.com.br/api-llms
+const LLMS_BASE = '/api-llms'
 export const LLMS = [
-  { id: 'index', title: 'Índice (llms.txt)', text: 'Visão geral, autenticação, limites e links para cada módulo.', url: `${LLMS_BASE}/llms.txt`, file: 'lemify-api-llms.txt' },
-  { id: 'mensagens', title: 'Mensagens', text: 'Envio de texto e mídia pelo WhatsApp.', url: `${LLMS_BASE}/llms/mensagens.md`, file: 'lemify-api-mensagens.md' },
-  { id: 'agenda', title: 'Agenda', text: 'Agendamentos, horários livres e conflitos.', url: `${LLMS_BASE}/llms/agenda.md`, file: 'lemify-api-agenda.md' },
-  { id: 'crm', title: 'CRM', text: 'Negociações, pipelines, etapas e motivos.', url: `${LLMS_BASE}/llms/crm.md`, file: 'lemify-api-crm.md' },
-  { id: 'full', title: 'Tudo em um arquivo', text: 'Os três módulos completos (llms-full.txt).', url: `${LLMS_BASE}/llms-full.txt`, file: 'lemify-api-llms-full.txt' },
-]
+  { id: 'index', title: 'Índice (llms.txt)', text: 'Visão geral, autenticação, limites e links para cada módulo.', file: 'lemify-api-llms.txt' },
+  { id: 'mensagens', title: 'Mensagens', text: 'Envio de texto e mídia pelo WhatsApp.', file: 'lemify-api-mensagens.md' },
+  { id: 'agenda', title: 'Agenda', text: 'Agendamentos, horários livres e conflitos.', file: 'lemify-api-agenda.md' },
+  { id: 'crm', title: 'CRM', text: 'Negociações, pipelines, etapas e motivos.', file: 'lemify-api-crm.md' },
+  { id: 'full', title: 'Tudo em um arquivo', text: 'Os três módulos completos (llms-full.txt).', file: 'lemify-api-llms-full.txt' },
+].map((l) => ({ ...l, url: `${LLMS_BASE}/${l.file}` }))
 
 export const LIMITS = [
   ['Por empresa', '300 requisições por minuto, somando todas as chaves da empresa.'],
