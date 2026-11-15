@@ -162,13 +162,18 @@ export default function ApiDocsPage() {
             </div>
 
             <h3 id="api-llms" className="dapi__h3">Para IA (llms.txt)</h3>
-            <p>Vai integrar com a ajuda de um assistente de IA ou de um agente? Passe um destes arquivos para ele. São textos em Markdown, gerados da mesma especificação da API, com parâmetros, respostas e exemplos.</p>
+            <p>Vai integrar com a ajuda de um assistente de IA ou de um agente? Baixe um destes arquivos e passe para ele. São textos em Markdown, gerados da mesma especificação da API, com parâmetros, respostas e exemplos.</p>
             <div className="dllms">
               {LLMS.map((l) => (
-                <a key={l.id} className="dllms__item" href={l.url} target="_blank" rel="noopener noreferrer">
+                // ?download=1 faz o servidor responder como anexo: baixa sem abrir aba (o atributo download
+                // sozinho não vale para outro domínio, mas fica para quando o arquivo for do mesmo domínio)
+                <a key={l.id} className="dllms__item" href={`${l.url}?download=1`} download={l.file} aria-label={`Baixar ${l.title} (${l.file})`}>
                   <strong>{l.title}</strong>
                   <span>{l.text}</span>
-                  <code>{l.url.replace('https://', '')}</code>
+                  <span className="dllms__file">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14" /></svg>
+                    <code>{l.file}</code>
+                  </span>
                 </a>
               ))}
             </div>

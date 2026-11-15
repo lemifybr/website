@@ -11,11 +11,11 @@ export const SERVERS = [
 // Fica sob /api-docs: o proxy de docs.lemify.com.br só repassa esse caminho ao backend.
 const LLMS_BASE = `${API_DOCS_BASE}/api-docs`
 export const LLMS = [
-  { id: 'index', title: 'Índice (llms.txt)', text: 'Visão geral, autenticação, limites e links para cada módulo.', url: `${LLMS_BASE}/llms.txt` },
-  { id: 'mensagens', title: 'Mensagens', text: 'Envio de texto e mídia pelo WhatsApp.', url: `${LLMS_BASE}/llms/mensagens.md` },
-  { id: 'agenda', title: 'Agenda', text: 'Agendamentos, horários livres e conflitos.', url: `${LLMS_BASE}/llms/agenda.md` },
-  { id: 'crm', title: 'CRM', text: 'Negociações, pipelines, etapas e motivos.', url: `${LLMS_BASE}/llms/crm.md` },
-  { id: 'full', title: 'Tudo em um arquivo', text: 'Os três módulos completos (llms-full.txt).', url: `${LLMS_BASE}/llms-full.txt` },
+  { id: 'index', title: 'Índice (llms.txt)', text: 'Visão geral, autenticação, limites e links para cada módulo.', url: `${LLMS_BASE}/llms.txt`, file: 'lemify-api-llms.txt' },
+  { id: 'mensagens', title: 'Mensagens', text: 'Envio de texto e mídia pelo WhatsApp.', url: `${LLMS_BASE}/llms/mensagens.md`, file: 'lemify-api-mensagens.md' },
+  { id: 'agenda', title: 'Agenda', text: 'Agendamentos, horários livres e conflitos.', url: `${LLMS_BASE}/llms/agenda.md`, file: 'lemify-api-agenda.md' },
+  { id: 'crm', title: 'CRM', text: 'Negociações, pipelines, etapas e motivos.', url: `${LLMS_BASE}/llms/crm.md`, file: 'lemify-api-crm.md' },
+  { id: 'full', title: 'Tudo em um arquivo', text: 'Os três módulos completos (llms-full.txt).', url: `${LLMS_BASE}/llms-full.txt`, file: 'lemify-api-llms-full.txt' },
 ]
 
 export const LIMITS = [
