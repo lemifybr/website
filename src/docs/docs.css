@@ -161,9 +161,11 @@ html:has(.docs) { scroll-padding-top: 130px; }
 .dacc__bar { display: flex; justify-content: flex-end; margin: 32px 0 -16px; }
 .dacc__all { font: inherit; font-size: 14px; font-weight: 600; padding: 7px 14px; border-radius: 99px; border: 0; cursor: pointer; background: var(--cream); color: var(--brand); box-shadow: inset 0 0 0 1px var(--line); transition: background 0.2s, box-shadow 0.2s; }
 .dacc__all:hover { box-shadow: inset 0 0 0 1.5px var(--brand); }
-details.dep { padding: 0; margin-bottom: 12px; overflow: hidden; transition: box-shadow 0.2s; }
-details.dep[open] { box-shadow: inset 0 0 0 1.5px var(--brand); }
-details.dep > summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: auto auto minmax(0, 1fr) auto; align-items: center; gap: 12px; padding: 16px 20px; border-radius: 18px; transition: background 0.2s; }
+/* Borda de verdade (não sombra interna): o fundo do resumo no hover não pode cobrir o contorno.
+   Os cantos ficam por conta do overflow: hidden do card, então o resumo não tem raio próprio. */
+details.dep { padding: 0; margin-bottom: 12px; overflow: hidden; box-shadow: none; border: 1px solid var(--line); transition: border-color 0.2s; }
+details.dep[open] { border-color: var(--brand); }
+details.dep > summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: auto auto minmax(0, 1fr) auto; align-items: center; gap: 12px; padding: 16px 20px; border-radius: 0; transition: background 0.2s; }
 details.dep > summary::-webkit-details-marker { display: none; }
 details.dep > summary:hover { background: var(--cream); }
 details.dep > summary:focus-visible { outline: 2px solid var(--brand); outline-offset: -2px; }

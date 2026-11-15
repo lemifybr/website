@@ -223,7 +223,6 @@ export default function ApiDocsPage() {
             <div className="dtable">
               {STATUS.map(([c, d]) => <div key={c}><code>{c}</code><span>{d}</span></div>)}
             </div>
-            <p className="dapi__foot">Os endpoints de métricas (<code>/v1/metrics/*</code>) são de uso interno do painel administrativo e estão apenas na <a href={API_FULL_REFERENCE} target="_blank" rel="noopener noreferrer">referência completa</a>.</p>
           </div>
         </div>
       </main>
