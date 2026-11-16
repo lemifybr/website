@@ -24,15 +24,15 @@ Respostas:
 - 403: Acesso negado - permissões insuficientes
 
 Resposta 200 (lista de objetos com):
-- `id` (integer)
-- `name` (string)
-- `position` (integer)
-- `isDefault` (boolean)
+- `id` (integer): ex.: 1
+- `name` (string): ex.: "Funil Comercial"
+- `position` (integer): ex.: 0
+- `isDefault` (boolean): ex.: true
 - `stages` (object[])
-  - `id` (integer)
-  - `name` (string)
-  - `position` (integer)
-  - `closureType` (string): valores: won, lost
+  - `id` (integer): ex.: 12
+  - `name` (string): ex.: "Qualificação"
+  - `position` (integer): ex.: 0
+  - `closureType` (string): valores: won, lost; ex.: null
 
 ```bash
 curl -X GET "https://api.lemify.com.br/v1/pipelines" \
@@ -48,11 +48,12 @@ Ids para `dealReasonId`. Escopo exigido: `crm:read`.
 Respostas:
 - 200: Motivos
 - 401: Token de autenticação ausente ou inválido
+- 403: Acesso negado - permissões insuficientes
 
 Resposta 200 (lista de objetos com):
-- `id` (integer)
-- `name` (string)
-- `type` (string): valores: won, lost
+- `id` (integer): ex.: 4
+- `name` (string): ex.: "Condição comercial"
+- `type` (string): valores: won, lost; ex.: "won"
 
 ```bash
 curl -X GET "https://api.lemify.com.br/v1/deal-reasons" \
@@ -87,20 +88,20 @@ Respostas:
 
 Resposta 200 (objeto com):
 - `deals` (object[])
-  - `id` (integer)
-  - `name` (string)
-  - `amount` (number)
-  - `status` (string): valores: open, won, lost, trashed
-  - `description` (string)
+  - `id` (integer): ex.: 456
+  - `name` (string): ex.: "Pedido 1042"
+  - `amount` (number): ex.: 1500
+  - `status` (string): valores: open, won, lost, trashed; ex.: "open"
+  - `description` (string): ex.: "Cliente interessado no plano anual"
   - `items` (object[])
   - `lostReason` (string)
-  - `nextStep` (string)
-  - `leadSource` (string): Origem de marketing em texto livre
-  - `source` (string): Plataforma de origem: whatsapp, instagram, facebook, webchat, manual, lead_form, api...
-  - `externalSource` (string)
-  - `externalId` (string)
-  - `score` (integer)
-  - `scoreLabel` (string)
+  - `nextStep` (string): ex.: "Enviar proposta comercial"
+  - `leadSource` (string): Origem de marketing em texto livre; ex.: "Google Ads"
+  - `source` (string): Plataforma de origem: whatsapp, instagram, facebook, webchat, manual, lead_form, api...; ex.: "api"
+  - `externalSource` (string): ex.: "erp"
+  - `externalId` (string): ex.: "1042"
+  - `score` (integer): ex.: 85
+  - `scoreLabel` (string): ex.: "hot"
   - `closingDate` (string (date-time))
   - `deliveryDate` (string (date-time))
   - `wonAt` (string (date-time))
@@ -129,28 +130,28 @@ como no painel. Com `externalId`, a chamada é idempotente: se já existir um de
 `externalSource` + `externalId`, ele é devolvido com status 200. Escopo exigido: `crm:write`.
 
 Corpo (application/json):
-- `name` (string): até 255 caracteres
-- `stageId` (integer)
-- `pipelineId` (integer): Opcional; se vier, precisa ser o pipeline da etapa
-- `amount` (number): Ignorado quando o deal tem items: o valor passa a ser a soma de price × quantity
-- `status` (string): valores: open, won, lost
-- `contactId` (integer)
-- `userId` (integer): Responsável (usuário da empresa)
-- `dealReasonId` (integer)
-- `description` (string): até 10000 caracteres
+- `name` (string, obrigatório): até 255 caracteres; ex.: "Pedido 1042"
+- `stageId` (integer, obrigatório): ex.: 12
+- `pipelineId` (integer): Opcional; se vier, precisa ser o pipeline da etapa; ex.: 1
+- `amount` (number): Ignorado quando o deal tem items: o valor passa a ser a soma de price × quantity; ex.: 1500
+- `status` (string): valores: open, won, lost; ex.: "open"
+- `contactId` (integer): ex.: 345
+- `userId` (integer): Responsável (usuário da empresa); ex.: 7
+- `dealReasonId` (integer): Motivo de ganho/perda (veja /v1/deal-reasons)
+- `description` (string): até 10000 caracteres; ex.: "Cliente interessado no plano anual"
 - `items` (object[])
-  - `type` (string, obrigatório): valores: product, service
-  - `id` (integer): Produto/serviço cadastrado na empresa
-  - `name` (string, obrigatório)
-  - `price` (number): padrão: 0
-  - `quantity` (number): padrão: 1
-- `lostReason` (string)
-- `closingDate` (string (date))
+  - `type` (string, obrigatório): valores: product, service; ex.: "product"
+  - `id` (integer): Produto/serviço cadastrado na empresa; ex.: 10
+  - `name` (string, obrigatório): ex.: "Plano Anual"
+  - `price` (number): padrão: 0; ex.: 1500
+  - `quantity` (number): padrão: 1; ex.: 1
+- `lostReason` (string): até 2000 caracteres
+- `closingDate` (string (date)): ex.: "2026-12-01"
 - `deliveryDate` (string (date))
-- `nextStep` (string)
-- `leadSource` (string)
-- `externalSource` (string): Sistema de origem (padrão "api"); até 64 caracteres
-- `externalId` (string): Id no sistema de origem; torna o POST idempotente; até 128 caracteres
+- `nextStep` (string): até 255 caracteres; ex.: "Enviar proposta comercial"
+- `leadSource` (string): até 255 caracteres; ex.: "Google Ads"
+- `externalSource` (string): Sistema de origem (padrão "api"); até 64 caracteres; ex.: "erp"
+- `externalId` (string): Id no sistema de origem; torna o POST idempotente; até 128 caracteres; ex.: "1042"
 
 Respostas:
 - 200: Já existia (mesmo externalSource + externalId)
@@ -160,48 +161,48 @@ Respostas:
 - 403: Acesso negado - permissões insuficientes
 
 Resposta 200 (objeto com):
-- `id` (integer)
-- `name` (string)
-- `amount` (number)
-- `status` (string): valores: open, won, lost, trashed
-- `description` (string)
+- `id` (integer): ex.: 456
+- `name` (string): ex.: "Pedido 1042"
+- `amount` (number): ex.: 1500
+- `status` (string): valores: open, won, lost, trashed; ex.: "open"
+- `description` (string): ex.: "Cliente interessado no plano anual"
 - `items` (object[])
-  - `type` (string, obrigatório): valores: product, service
-  - `id` (integer): Produto/serviço cadastrado na empresa
-  - `name` (string, obrigatório)
-  - `price` (number): padrão: 0
-  - `quantity` (number): padrão: 1
+  - `type` (string, obrigatório): valores: product, service; ex.: "product"
+  - `id` (integer): Produto/serviço cadastrado na empresa; ex.: 10
+  - `name` (string, obrigatório): ex.: "Plano Anual"
+  - `price` (number): padrão: 0; ex.: 1500
+  - `quantity` (number): padrão: 1; ex.: 1
 - `lostReason` (string)
-- `nextStep` (string)
-- `leadSource` (string): Origem de marketing em texto livre
-- `source` (string): Plataforma de origem: whatsapp, instagram, facebook, webchat, manual, lead_form, api...
-- `externalSource` (string)
-- `externalId` (string)
-- `score` (integer)
-- `scoreLabel` (string)
+- `nextStep` (string): ex.: "Enviar proposta comercial"
+- `leadSource` (string): Origem de marketing em texto livre; ex.: "Google Ads"
+- `source` (string): Plataforma de origem: whatsapp, instagram, facebook, webchat, manual, lead_form, api...; ex.: "api"
+- `externalSource` (string): ex.: "erp"
+- `externalId` (string): ex.: "1042"
+- `score` (integer): ex.: 85
+- `scoreLabel` (string): ex.: "hot"
 - `closingDate` (string (date-time))
 - `deliveryDate` (string (date-time))
 - `wonAt` (string (date-time))
 - `lostAt` (string (date-time))
 - `contact` (object)
-  - `id` (integer)
-  - `name` (string)
-  - `number` (string)
-  - `email` (string)
+  - `id` (integer): ex.: 345
+  - `name` (string): ex.: "Maria Silva"
+  - `number` (string): ex.: "5511999999999"
+  - `email` (string): ex.: "maria@empresa.com.br"
 - `user` (object)
-  - `id` (integer)
-  - `name` (string)
+  - `id` (integer): ex.: 7
+  - `name` (string): ex.: "João Vendedor"
 - `pipeline` (object)
-  - `id` (integer)
-  - `name` (string)
+  - `id` (integer): ex.: 1
+  - `name` (string): ex.: "Funil Comercial"
 - `stage` (object)
-  - `id` (integer)
-  - `name` (string)
-  - `closureType` (string)
+  - `id` (integer): ex.: 12
+  - `name` (string): ex.: "Qualificação"
+  - `closureType` (string): ex.: null
 - `dealReason` (object)
-  - `id` (integer)
-  - `name` (string)
-  - `type` (string)
+  - `id` (integer): ex.: 4
+  - `name` (string): ex.: "Condição comercial"
+  - `type` (string): ex.: "won"
 - `createdAt` (string (date-time))
 - `updatedAt` (string (date-time))
 
@@ -209,7 +210,7 @@ Resposta 200 (objeto com):
 curl -X POST "https://api.lemify.com.br/v1/deals" \
   -H "Authorization: Bearer $LEMIFY_API_KEY" \
   -H "Content-Type: application/json" \
-  -d '{}'
+  -d '{"name":"Pedido 1042","stageId":12}'
 ```
 
 ### GET /v1/deals/{dealId}
@@ -224,51 +225,52 @@ Parâmetros:
 Respostas:
 - 200: Negociação
 - 401: Token de autenticação ausente ou inválido
+- 403: Acesso negado - permissões insuficientes
 - 404: Não encontrada
 
 Resposta 200 (objeto com):
-- `id` (integer)
-- `name` (string)
-- `amount` (number)
-- `status` (string): valores: open, won, lost, trashed
-- `description` (string)
+- `id` (integer): ex.: 456
+- `name` (string): ex.: "Pedido 1042"
+- `amount` (number): ex.: 1500
+- `status` (string): valores: open, won, lost, trashed; ex.: "open"
+- `description` (string): ex.: "Cliente interessado no plano anual"
 - `items` (object[])
-  - `type` (string, obrigatório): valores: product, service
-  - `id` (integer): Produto/serviço cadastrado na empresa
-  - `name` (string, obrigatório)
-  - `price` (number): padrão: 0
-  - `quantity` (number): padrão: 1
+  - `type` (string, obrigatório): valores: product, service; ex.: "product"
+  - `id` (integer): Produto/serviço cadastrado na empresa; ex.: 10
+  - `name` (string, obrigatório): ex.: "Plano Anual"
+  - `price` (number): padrão: 0; ex.: 1500
+  - `quantity` (number): padrão: 1; ex.: 1
 - `lostReason` (string)
-- `nextStep` (string)
-- `leadSource` (string): Origem de marketing em texto livre
-- `source` (string): Plataforma de origem: whatsapp, instagram, facebook, webchat, manual, lead_form, api...
-- `externalSource` (string)
-- `externalId` (string)
-- `score` (integer)
-- `scoreLabel` (string)
+- `nextStep` (string): ex.: "Enviar proposta comercial"
+- `leadSource` (string): Origem de marketing em texto livre; ex.: "Google Ads"
+- `source` (string): Plataforma de origem: whatsapp, instagram, facebook, webchat, manual, lead_form, api...; ex.: "api"
+- `externalSource` (string): ex.: "erp"
+- `externalId` (string): ex.: "1042"
+- `score` (integer): ex.: 85
+- `scoreLabel` (string): ex.: "hot"
 - `closingDate` (string (date-time))
 - `deliveryDate` (string (date-time))
 - `wonAt` (string (date-time))
 - `lostAt` (string (date-time))
 - `contact` (object)
-  - `id` (integer)
-  - `name` (string)
-  - `number` (string)
-  - `email` (string)
+  - `id` (integer): ex.: 345
+  - `name` (string): ex.: "Maria Silva"
+  - `number` (string): ex.: "5511999999999"
+  - `email` (string): ex.: "maria@empresa.com.br"
 - `user` (object)
-  - `id` (integer)
-  - `name` (string)
+  - `id` (integer): ex.: 7
+  - `name` (string): ex.: "João Vendedor"
 - `pipeline` (object)
-  - `id` (integer)
-  - `name` (string)
+  - `id` (integer): ex.: 1
+  - `name` (string): ex.: "Funil Comercial"
 - `stage` (object)
-  - `id` (integer)
-  - `name` (string)
-  - `closureType` (string)
+  - `id` (integer): ex.: 12
+  - `name` (string): ex.: "Qualificação"
+  - `closureType` (string): ex.: null
 - `dealReason` (object)
-  - `id` (integer)
-  - `name` (string)
-  - `type` (string)
+  - `id` (integer): ex.: 4
+  - `name` (string): ex.: "Condição comercial"
+  - `type` (string): ex.: "won"
 - `createdAt` (string (date-time))
 - `updatedAt` (string (date-time))
 
@@ -287,78 +289,80 @@ Parâmetros:
 - `dealId` (path, integer, obrigatório)
 
 Corpo (application/json):
-- `name` (string): até 255 caracteres
-- `stageId` (integer)
-- `pipelineId` (integer): Opcional; se vier, precisa ser o pipeline da etapa
-- `amount` (number): Ignorado quando o deal tem items: o valor passa a ser a soma de price × quantity
-- `status` (string): valores: open, won, lost
-- `contactId` (integer)
-- `userId` (integer): Responsável (usuário da empresa)
-- `dealReasonId` (integer)
-- `description` (string): até 10000 caracteres
+- `name` (string, obrigatório): até 255 caracteres; ex.: "Pedido 1042"
+- `stageId` (integer, obrigatório): ex.: 12
+- `pipelineId` (integer): Opcional; se vier, precisa ser o pipeline da etapa; ex.: 1
+- `amount` (number): Ignorado quando o deal tem items: o valor passa a ser a soma de price × quantity; ex.: 1500
+- `status` (string): valores: open, won, lost; ex.: "open"
+- `contactId` (integer): ex.: 345
+- `userId` (integer): Responsável (usuário da empresa); ex.: 7
+- `dealReasonId` (integer): Motivo de ganho/perda (veja /v1/deal-reasons)
+- `description` (string): até 10000 caracteres; ex.: "Cliente interessado no plano anual"
 - `items` (object[])
-  - `type` (string, obrigatório): valores: product, service
-  - `id` (integer): Produto/serviço cadastrado na empresa
-  - `name` (string, obrigatório)
-  - `price` (number): padrão: 0
-  - `quantity` (number): padrão: 1
-- `lostReason` (string)
-- `closingDate` (string (date))
+  - `type` (string, obrigatório): valores: product, service; ex.: "product"
+  - `id` (integer): Produto/serviço cadastrado na empresa; ex.: 10
+  - `name` (string, obrigatório): ex.: "Plano Anual"
+  - `price` (number): padrão: 0; ex.: 1500
+  - `quantity` (number): padrão: 1; ex.: 1
+- `lostReason` (string): até 2000 caracteres
+- `closingDate` (string (date)): ex.: "2026-12-01"
 - `deliveryDate` (string (date))
-- `nextStep` (string)
-- `leadSource` (string)
-- `externalSource` (string): Sistema de origem (padrão "api"); até 64 caracteres
-- `externalId` (string): Id no sistema de origem; torna o POST idempotente; até 128 caracteres
+- `nextStep` (string): até 255 caracteres; ex.: "Enviar proposta comercial"
+- `leadSource` (string): até 255 caracteres; ex.: "Google Ads"
+- `externalSource` (string): Sistema de origem (padrão "api"); até 64 caracteres; ex.: "erp"
+- `externalId` (string): Id no sistema de origem; torna o POST idempotente; até 128 caracteres; ex.: "1042"
 
 Respostas:
 - 200: Atualizada
 - 400: Dados inválidos
+- 401: Token de autenticação ausente ou inválido
+- 403: Acesso negado - permissões insuficientes
 - 404: Não encontrada
 - 409: externalSource/externalId já usado por outro deal
 
 Resposta 200 (objeto com):
-- `id` (integer)
-- `name` (string)
-- `amount` (number)
-- `status` (string): valores: open, won, lost, trashed
-- `description` (string)
+- `id` (integer): ex.: 456
+- `name` (string): ex.: "Pedido 1042"
+- `amount` (number): ex.: 1500
+- `status` (string): valores: open, won, lost, trashed; ex.: "open"
+- `description` (string): ex.: "Cliente interessado no plano anual"
 - `items` (object[])
-  - `type` (string, obrigatório): valores: product, service
-  - `id` (integer): Produto/serviço cadastrado na empresa
-  - `name` (string, obrigatório)
-  - `price` (number): padrão: 0
-  - `quantity` (number): padrão: 1
+  - `type` (string, obrigatório): valores: product, service; ex.: "product"
+  - `id` (integer): Produto/serviço cadastrado na empresa; ex.: 10
+  - `name` (string, obrigatório): ex.: "Plano Anual"
+  - `price` (number): padrão: 0; ex.: 1500
+  - `quantity` (number): padrão: 1; ex.: 1
 - `lostReason` (string)
-- `nextStep` (string)
-- `leadSource` (string): Origem de marketing em texto livre
-- `source` (string): Plataforma de origem: whatsapp, instagram, facebook, webchat, manual, lead_form, api...
-- `externalSource` (string)
-- `externalId` (string)
-- `score` (integer)
-- `scoreLabel` (string)
+- `nextStep` (string): ex.: "Enviar proposta comercial"
+- `leadSource` (string): Origem de marketing em texto livre; ex.: "Google Ads"
+- `source` (string): Plataforma de origem: whatsapp, instagram, facebook, webchat, manual, lead_form, api...; ex.: "api"
+- `externalSource` (string): ex.: "erp"
+- `externalId` (string): ex.: "1042"
+- `score` (integer): ex.: 85
+- `scoreLabel` (string): ex.: "hot"
 - `closingDate` (string (date-time))
 - `deliveryDate` (string (date-time))
 - `wonAt` (string (date-time))
 - `lostAt` (string (date-time))
 - `contact` (object)
-  - `id` (integer)
-  - `name` (string)
-  - `number` (string)
-  - `email` (string)
+  - `id` (integer): ex.: 345
+  - `name` (string): ex.: "Maria Silva"
+  - `number` (string): ex.: "5511999999999"
+  - `email` (string): ex.: "maria@empresa.com.br"
 - `user` (object)
-  - `id` (integer)
-  - `name` (string)
+  - `id` (integer): ex.: 7
+  - `name` (string): ex.: "João Vendedor"
 - `pipeline` (object)
-  - `id` (integer)
-  - `name` (string)
+  - `id` (integer): ex.: 1
+  - `name` (string): ex.: "Funil Comercial"
 - `stage` (object)
-  - `id` (integer)
-  - `name` (string)
-  - `closureType` (string)
+  - `id` (integer): ex.: 12
+  - `name` (string): ex.: "Qualificação"
+  - `closureType` (string): ex.: null
 - `dealReason` (object)
-  - `id` (integer)
-  - `name` (string)
-  - `type` (string)
+  - `id` (integer): ex.: 4
+  - `name` (string): ex.: "Condição comercial"
+  - `type` (string): ex.: "won"
 - `createdAt` (string (date-time))
 - `updatedAt` (string (date-time))
 
@@ -366,7 +370,7 @@ Resposta 200 (objeto com):
 curl -X PUT "https://api.lemify.com.br/v1/deals/<dealId>" \
   -H "Authorization: Bearer $LEMIFY_API_KEY" \
   -H "Content-Type: application/json" \
-  -d '{}'
+  -d '{"name":"Pedido 1042","stageId":12}'
 ```
 
 ### DELETE /v1/deals/{dealId}
@@ -380,6 +384,8 @@ Parâmetros:
 
 Respostas:
 - 204: Enviada para a lixeira
+- 401: Token de autenticação ausente ou inválido
+- 403: Acesso negado - permissões insuficientes
 - 404: Não encontrada
 
 ```bash
@@ -398,56 +404,58 @@ Parâmetros:
 - `dealId` (path, integer, obrigatório)
 
 Corpo (application/json):
-- `stageId` (integer, obrigatório)
+- `stageId` (integer, obrigatório): ex.: 13
 
 Respostas:
 - 200: Movida
 - 400: Etapa oculta ou inválida
+- 401: Token de autenticação ausente ou inválido
+- 403: Acesso negado - permissões insuficientes
 - 404: Negociação ou etapa não encontrada
 
 Resposta 200 (objeto com):
-- `id` (integer)
-- `name` (string)
-- `amount` (number)
-- `status` (string): valores: open, won, lost, trashed
-- `description` (string)
+- `id` (integer): ex.: 456
+- `name` (string): ex.: "Pedido 1042"
+- `amount` (number): ex.: 1500
+- `status` (string): valores: open, won, lost, trashed; ex.: "open"
+- `description` (string): ex.: "Cliente interessado no plano anual"
 - `items` (object[])
-  - `type` (string, obrigatório): valores: product, service
-  - `id` (integer): Produto/serviço cadastrado na empresa
-  - `name` (string, obrigatório)
-  - `price` (number): padrão: 0
-  - `quantity` (number): padrão: 1
+  - `type` (string, obrigatório): valores: product, service; ex.: "product"
+  - `id` (integer): Produto/serviço cadastrado na empresa; ex.: 10
+  - `name` (string, obrigatório): ex.: "Plano Anual"
+  - `price` (number): padrão: 0; ex.: 1500
+  - `quantity` (number): padrão: 1; ex.: 1
 - `lostReason` (string)
-- `nextStep` (string)
-- `leadSource` (string): Origem de marketing em texto livre
-- `source` (string): Plataforma de origem: whatsapp, instagram, facebook, webchat, manual, lead_form, api...
-- `externalSource` (string)
-- `externalId` (string)
-- `score` (integer)
-- `scoreLabel` (string)
+- `nextStep` (string): ex.: "Enviar proposta comercial"
+- `leadSource` (string): Origem de marketing em texto livre; ex.: "Google Ads"
+- `source` (string): Plataforma de origem: whatsapp, instagram, facebook, webchat, manual, lead_form, api...; ex.: "api"
+- `externalSource` (string): ex.: "erp"
+- `externalId` (string): ex.: "1042"
+- `score` (integer): ex.: 85
+- `scoreLabel` (string): ex.: "hot"
 - `closingDate` (string (date-time))
 - `deliveryDate` (string (date-time))
 - `wonAt` (string (date-time))
 - `lostAt` (string (date-time))
 - `contact` (object)
-  - `id` (integer)
-  - `name` (string)
-  - `number` (string)
-  - `email` (string)
+  - `id` (integer): ex.: 345
+  - `name` (string): ex.: "Maria Silva"
+  - `number` (string): ex.: "5511999999999"
+  - `email` (string): ex.: "maria@empresa.com.br"
 - `user` (object)
-  - `id` (integer)
-  - `name` (string)
+  - `id` (integer): ex.: 7
+  - `name` (string): ex.: "João Vendedor"
 - `pipeline` (object)
-  - `id` (integer)
-  - `name` (string)
+  - `id` (integer): ex.: 1
+  - `name` (string): ex.: "Funil Comercial"
 - `stage` (object)
-  - `id` (integer)
-  - `name` (string)
-  - `closureType` (string)
+  - `id` (integer): ex.: 12
+  - `name` (string): ex.: "Qualificação"
+  - `closureType` (string): ex.: null
 - `dealReason` (object)
-  - `id` (integer)
-  - `name` (string)
-  - `type` (string)
+  - `id` (integer): ex.: 4
+  - `name` (string): ex.: "Condição comercial"
+  - `type` (string): ex.: "won"
 - `createdAt` (string (date-time))
 - `updatedAt` (string (date-time))
 
@@ -455,6 +463,6 @@ Resposta 200 (objeto com):
 curl -X PATCH "https://api.lemify.com.br/v1/deals/<dealId>/stage" \
   -H "Authorization: Bearer $LEMIFY_API_KEY" \
   -H "Content-Type: application/json" \
-  -d '{"stageId":1}'
+  -d '{"stageId":13}'
 ```
 

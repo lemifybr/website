@@ -5,7 +5,7 @@ import { SITE } from './siteConfig.js'
 import heroLoja from './assets/hero.jpg'
 
 const SCENES = [
-  { tab: 'Varejo', h: 'Reunimos soluções de IA para atendimento, vendas, agenda e gestão, prontas para o seu negócio.', img: heroLoja, alt: 'Dona de uma loja de tênis, de camisa verde, fotografando um produto ao lado do notebook, entre caixas de pedidos', q: 'Oi! Tem esse tênis no 39?', a: 'Tem sim! Separo um para você retirar hoje ou prefere receber em casa?', ok: 'Pedido encaminhado para a equipe' },
+  { tab: 'Varejo', h: 'Soluções de IA para atendimento, vendas, agenda e gestão, prontas para o seu negócio.', img: heroLoja, alt: 'Dona de uma loja de tênis, de camisa verde, fotografando um produto ao lado do notebook, entre caixas de pedidos', q: 'Oi! Tem esse tênis no 39?', a: 'Tem sim! Separo um para você retirar hoje ou prefere receber em casa?', ok: 'Pedido encaminhado para a equipe' },
 ]
 
 export default function Hero() {
