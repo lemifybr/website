@@ -45,7 +45,7 @@ export function DocsHeader({ query, setQuery, searchRef, placeholder, tabs, acti
           <kbd>Ctrl K</kbd>
         </label>
         <nav className="docs__links" aria-label="Atalhos">
-          <a href={API_FULL_REFERENCE} target="_blank" rel="noopener noreferrer">API completa</a>
+          <a href={API_FULL_REFERENCE} target="_blank" rel="noopener noreferrer">Swagger</a>
           <a href={SITE.customerArea}>Login</a>
           {onToggleTheme && <ThemeToggle theme={theme} onToggle={onToggleTheme} />}
           <a className="btn btn--sm btn--dark" href={SITE.demo} target="_blank" rel="noopener noreferrer">Cadastre-se</a>
