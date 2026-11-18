@@ -10,6 +10,7 @@ const TABS = [
   ['inicio', 'Comece aqui', '/docs'],
   ['modulos', 'Módulos', '/docs#modulos'],
   ['api', 'API', '/docs/api'],
+  ['mensageria', 'WhatsApp Web & WABA', '/api'],
 ]
 
 const BASICS = [

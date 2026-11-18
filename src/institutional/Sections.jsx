@@ -62,7 +62,7 @@ export function Principles() {
 
 /* ───────────── Confiança: parceria, segurança e documentação ───────────── */
 const TRUST = [
-  { t: 'Meta Business Partner', d: 'Reconhecida pela Meta para trabalhar com a API oficial do WhatsApp Business.', href: null },
+  { t: 'Meta Business Partner · API', d: 'Homologada pela Meta para fornecer a API oficial do WhatsApp (WABA), além de conexão via WhatsApp Web na mesma API.', href: '/api', cta: 'Conhecer a API de mensageria' },
   { t: 'Segurança e LGPD', d: 'Dados tratados com responsabilidade desde a primeira conversa.', href: '/lgpd', cta: 'Como cuidamos dos dados' },
   { t: 'Documentação aberta', d: 'Guias de cada módulo e uma API pública para integrar o seu sistema.', href: '/docs', cta: 'Ler a documentação' },
 ]

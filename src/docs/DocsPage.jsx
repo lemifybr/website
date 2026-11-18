@@ -11,6 +11,7 @@ const TABS = [
   ['comece', 'Comece aqui', '#comece'],
   ['modulos', 'Módulos', '#modulos'],
   ['api', 'API', '/docs/api'],
+  ['mensageria', 'WhatsApp Web & WABA', '/api'],
 ]
 
 // A API ganhou página própria: âncoras antigas (/docs#api, #api-autenticacao, #agenda-create...) vão para /docs/api.

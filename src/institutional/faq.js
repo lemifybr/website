@@ -17,7 +17,11 @@ export const FAQ = [
   },
   {
     q: 'O Lemify atende pelo WhatsApp?',
-    a: 'Sim. O WhatsApp é um dos canais da plataforma, junto com Instagram, Facebook Messenger e e-mail, todos na mesma caixa de entrada. O Lemify é Meta Business Partner.',
+    a: 'Sim. O WhatsApp é um dos canais da plataforma, junto com Instagram, Facebook Messenger e e-mail, todos na mesma caixa de entrada. A Lemify é Meta Business Partner homologada pela Meta para operar diretamente com a API oficial do WhatsApp Business (WABA) e também oferece conexão via WhatsApp Web.',
+  },
+  {
+    q: 'A Lemify fornece API de mensageria para WhatsApp Web e WABA?',
+    a: 'Sim. Pela API de mensageria do Lemify (lemify.com.br/api) você conecta canais via WhatsApp Web (QR Code) ou WABA — a API oficial da Meta (Meta Cloud API), fornecida diretamente pela Lemify como parceira homologada, na mesma categoria de Twilio e 360dialog — com faturamento em reais e suporte técnico no Brasil. Você pode usar apenas a API ou combiná-la com o CRM e os agentes de IA.',
   },
   {
     q: 'Com quais sistemas o Lemify se integra?',

@@ -27,6 +27,7 @@ export default function Header() {
   }, [open])
 
   const close = () => setOpen(false)
+  const pathname = typeof window !== 'undefined' ? window.location.pathname.replace(/\/+$/, '') || '/' : '/'
 
   return (
     <>
@@ -43,9 +44,10 @@ export default function Header() {
           <nav className="nav__links" aria-label="Principal">
             <a href="/#principios">Empresa</a>
             <a href={SITE.productPage}>Produto</a>
+            <a href={SITE.apiPage} aria-current={pathname === SITE.apiPage ? 'page' : undefined}>API</a>
             <a href="/#segmentos">Segmentos</a>
             <a href="/#agentes">Agentes de IA</a>
-            <a href="/blog">Blog</a>
+            <a href="/blog" aria-current={pathname === '/blog' || pathname.startsWith('/blog/') ? 'page' : undefined}>Blog</a>
             <a href="/#contato">Contato</a>
           </nav>
 
@@ -61,7 +63,7 @@ export default function Header() {
 
       <div data-lenis-prevent className={`drawer ${open ? 'is-open' : ''}`} aria-hidden={!open}>
         {[
-          ['Início', '/#inicio'], ['Empresa', '/#principios'], ['Produto', SITE.productPage], ['Segmentos', '/#segmentos'],
+          ['Início', '/#inicio'], ['Empresa', '/#principios'], ['Produto', SITE.productPage], ['API', SITE.apiPage], ['Segmentos', '/#segmentos'],
           ['Agentes de IA', '/#agentes'], ['Blog', '/blog'], ['Contato', '/#contato'],
         ].map(([t, h]) => <a key={t} href={h} onClick={close}>{t}</a>)}
         <div className="drawer__auth">

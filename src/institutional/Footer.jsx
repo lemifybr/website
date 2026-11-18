@@ -31,7 +31,9 @@ export default function Footer() {
               <a key={k} href={href} aria-label={label} title={title} {...(k === 'email' ? {} : { target: '_blank', rel: 'noopener noreferrer' })}>{ICONS[k]}</a>
             ))}
           </div>
-          <img className="foot__badge" src={metaPartner} alt="Meta Business Partner" loading="lazy" />
+            <a href={SITE.apiPage} className="foot__badge-link" aria-label="Lemify é Meta Business Partner — conheça a API de mensageria (WhatsApp Web e WABA)">
+              <img className="foot__badge" src={metaPartner} alt="Meta Business Partner" loading="lazy" />
+            </a>
         </div>
         <nav aria-label="Empresa">
           <h4>Empresa</h4>
@@ -44,8 +46,10 @@ export default function Footer() {
         <nav aria-label="Produto">
           <h4>Produto</h4>
           <a href={SITE.productPage}>Lemify · Atendimento e CRM</a>
+          <a href={SITE.apiPage}>API de Mensageria (WhatsApp)</a>
           <a href={`${SITE.productPage}/planos`}>Planos e preços</a>
           <a href="/docs">Documentação</a>
+          <a href="/docs/api">Documentação da API</a>
         </nav>
         <nav aria-label="Legal">
           <h4>Legal</h4>

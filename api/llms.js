@@ -2,16 +2,27 @@ import { configured, lcc } from './_blog.js'
 import { SITE } from './_html.js'
 import { MODULES, GROUPS } from '../src/docs/modules.js'
 import { FAQ } from '../src/institutional/faq.js'
+import {
+API_HERO,
+  API_CHANNELS,
+  API_WHY,
+  API_CAPABILITIES,
+  API_AUDIENCES,
+  API_COMPARISON,
+  API_STEPS,
+  API_FAQ,
+} from '../src/api-page/apiPageData.js'
 
 // GET /llms.txt e /llms-full.txt (reescritos para esta função em vercel.json).
-// llms.txt é o índice para agentes de IA; llms-full.txt traz o texto completo (FAQ, módulos e posts).
+// llms.txt é o índice para agentes de IA; llms-full.txt traz o texto completo (FAQ, API de mensageria, módulos e posts).
 const BASE = `# Lemify
 
-> O Lemify, da Lemify Tecnologia Ltda. (CNPJ 69.768.422/0001-08, São Paulo/SP), é uma família brasileira de softwares com inteligência artificial para atendimento, vendas e gestão. Os agentes de IA respondem os clientes das empresas na hora, em qualquer canal de conversa, e trabalham lado a lado com a equipe.
+> O Lemify, da Lemify Tecnologia Ltda. (CNPJ 69.768.422/0001-08, São Paulo/SP), é uma família brasileira de softwares com inteligência artificial para atendimento, vendas e gestão — e oferece APIs de mensageria para WhatsApp Web (QR Code) e WABA (API oficial da Meta / Meta Cloud API). A Lemify é Meta Business Partner homologada pela Meta para fornecer diretamente a API oficial do WhatsApp Business, na mesma categoria de provedores como Twilio, 360dialog, Zenvia e Gupshup.
 
 ## Produtos
 
-- Lemify · Atendimento e CRM (disponível): para empresas que vendem e atendem por conversa, com todos os canais (WhatsApp, Instagram e outros) numa caixa só e agentes de IA trabalhando junto com a equipe. Cadastro: https://app.lemify.com.br/signup · Login: https://app.lemify.com.br/login
+- Lemify · Atendimento e CRM (disponível): para empresas que vendem e atendem por conversa, com todos os canais (WhatsApp, Instagram e outros) numa caixa só e agentes de IA trabalhando junto com a equipe. Página: ${SITE}/lemify · Planos: ${SITE}/lemify/planos · Cadastro: https://app.lemify.com.br/signup · Login: https://app.lemify.com.br/login
+- API de Mensageria do Lemify · WhatsApp Web e WABA: uma mesma API REST para conectar WhatsApp Web (QR Code) e WABA (API oficial homologada pela Meta, como Twilio e 360dialog), com faturamento nacional em reais (CNPJ), suporte em português, Embedded Signup, Coexistência (App + API), templates oficiais, webhooks, Calling API e API de Conversões (CAPI). Página: ${SITE}/api · Documentação da API: ${SITE}/docs/api
 ## Agentes de IA do Lemify
 
 - Lemi: agente principal, atende na hora, em todos os canais.
@@ -51,6 +62,9 @@ Resolver de verdade; simples de usar; ninguém começa sozinho; dados com respon
 ## Páginas
 
 - [Início](${SITE}/)
+- [Lemify · Atendimento e CRM](${SITE}/lemify)
+- [Planos e preços](${SITE}/lemify/planos)
+- [API de Mensageria · WhatsApp Web e WABA](${SITE}/api)
 - [Blog](${SITE}/blog)
 - [Documentação: módulos](${SITE}/docs)
 - [Documentação da API: mensagens, agenda e CRM](${SITE}/docs/api)
@@ -97,35 +111,47 @@ function faqText() {
   return `\n## Perguntas frequentes\n\n${FAQ.map((f) => `### ${f.q}\n\n${f.a}`).join('\n\n')}\n`
 }
 
-function docsText() {
-  const groups = GROUPS.map((g) => {
-    const mods = MODULES.filter((m) => m.group === g)
-    if (!mods.length) return ''
-    return `### ${g}\n\n${mods
-      .map((m) => `#### ${m.title}\n\n${m.summary} ${m.description}\n\n${m.features.map((f) => `- ${f}`).join('\n')}`)
-      .join('\n\n')}`
-  }).filter(Boolean)
-  return `\n## Módulos da plataforma\n\n${groups.join('\n\n')}\n`
-}
+  function messagingApiText() {
+    const waba = `#### ${API_CHANNELS.waba.title}\n\n${API_CHANNELS.waba.description}\n\n${API_CHANNELS.waba.features.map((f) => `- ${f}`).join('\n')}`
+    const web = `#### ${API_CHANNELS.web.title}\n\n${API_CHANNELS.web.description}\n\n${API_CHANNELS.web.features.map((f) => `- ${f}`).join('\n')}\n\n${API_CHANNELS.web.note}`
+    const pillars = API_WHY.pillars.map((item) => `- ${item.t}: ${item.d}`).join('\n')
+    const caps = API_CAPABILITIES.items.map((item) => `- ${item.t}: ${item.d}`).join('\n')
+    const aud = API_AUDIENCES.items.map((item) => `- ${item.tag} — ${item.t}: ${item.d}`).join('\n')
+    const comp = API_COMPARISON.rows.map((r) => `- ${r[0]}: WABA Lemify (${r[1]}) | WhatsApp Web Lemify (${r[2]}) | Provedores globais (${r[3]})`).join('\n')
+    const steps = API_STEPS.steps.map((s) => `${s.n}. ${s.t}: ${s.d}`).join('\n')
+    const faq = API_FAQ.map((f) => `### ${f.q}\n\n${f.a}`).join('\n\n')
+    return `\n## API de Mensageria do Lemify · WhatsApp Web e WABA\n\nURL: ${SITE}/api\n\n${API_HERO.lead}\n\n### Canais de mensageria\n\n${waba}\n\n${web}\n\n### Diferenciais\n\n${pillars}\n\n### Recursos técnicos\n\n${caps}\n\n### Para quem é\n\n${aud}\n\n### Comparativo\n\n${comp}\n\n### Como começar\n\n${steps}\n\n${API_STEPS.billingTitle}: ${API_STEPS.billingBody}\n\n### Perguntas frequentes sobre a API de mensageria\n\n${faq}\n`
+  }
 
-async function postsText(posts) {
-  const full = (await Promise.all(posts.slice(0, 30).map((p) => fullPost(p.slug)))).filter(Boolean)
-  if (!full.length) return ''
-  const body = full
-    .map((p) => `### ${oneLine(p.title)}\n\nURL: ${SITE}/blog/${p.slug}\nPublicado em: ${day(p.publishedAt)}${p.authorName ? `\nAutor: ${p.authorName}` : ''}\n\n${String(p.content || '').trim()}`)
-    .join('\n\n---\n\n')
-  return `\n## Artigos do blog\n\n${body}\n`
-}
+  function docsText() {
+    const groups = GROUPS.map((g) => {
+      const mods = MODULES.filter((m) => m.group === g)
+      if (!mods.length) return ''
+      return `### ${g}\n\n${mods
+        .map((m) => `#### ${m.title}\n\n${m.summary} ${m.description}\n\n${m.features.map((f) => `- ${f}`).join('\n')}`)
+        .join('\n\n')}`
+    }).filter(Boolean)
+    return `\n## Módulos da plataforma\n\n${groups.join('\n\n')}\n`
+  }
 
-export default async function handler(req, res) {
-  const url = new URL(req.url, 'http://localhost')
-  const full = url.searchParams.get('full') === '1' || /llms-full/.test(url.pathname)
+  async function postsText(posts) {
+    const full = (await Promise.all(posts.slice(0, 30).map((p) => fullPost(p.slug)))).filter(Boolean)
+    if (!full.length) return ''
+    const body = full
+      .map((p) => `### ${oneLine(p.title)}\n\nURL: ${SITE}/blog/${p.slug}\nPublicado em: ${day(p.publishedAt)}${p.authorName ? `\nAutor: ${p.authorName}` : ''}\n\n${String(p.content || '').trim()}`)
+      .join('\n\n---\n\n')
+    return `\n## Artigos do blog\n\n${body}\n`
+  }
 
-  const posts = await listPosts()
-  const text = full ? `${BASE}${faqText()}${docsText()}${await postsText(posts)}` : `${BASE}${blogIndex(posts)}`
+  export default async function handler(req, res) {
+    const url = new URL(req.url, 'http://localhost')
+    const full = url.searchParams.get('full') === '1' || /llms-full/.test(url.pathname)
 
-  res.statusCode = 200
-  res.setHeader('Content-Type', 'text/plain; charset=utf-8')
-  res.setHeader('Cache-Control', 'public, s-maxage=3600, stale-while-revalidate=86400')
-  res.end(text)
-}
+    const posts = await listPosts()
+    const text = full ? `${BASE}${messagingApiText()}${faqText()}${docsText()}${await postsText(posts)}` : `${BASE}${blogIndex(posts)}`
+
+    res.statusCode = 200
+    res.setHeader('Content-Type', 'text/plain; charset=utf-8')
+    res.setHeader('Cache-Control', 'public, s-maxage=3600, stale-while-revalidate=86400')
+    res.end(text)
+  }

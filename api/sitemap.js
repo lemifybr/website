@@ -6,6 +6,7 @@ const SITE = 'https://lemify.com.br'
 const STATIC = [
   ['/', 'weekly', '1.0'],
   ['/lemify', 'weekly', '0.9'],
+  ['/api', 'weekly', '0.9'],
   ['/lemify/planos', 'weekly', '0.8'],
   ['/blog', 'daily', '0.8'],
   ['/docs', 'monthly', '0.7'],

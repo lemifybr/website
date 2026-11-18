@@ -28,34 +28,38 @@ export const SEO = {
     title: 'Planos e preços · Lemify',
     description: 'Planos do Lemify a partir de R$ 97 por mês, com agentes de IA para atendimento e vendas. Agende uma demonstração.',
   },
-  '/docs': {
-    title: 'Documentação do Lemify · Módulos e API',
-    description: 'Aprenda a usar cada módulo do Lemify (atendimento, CRM, agenda, agentes de IA e mais) e integre seu sistema com a API.',
-  },
-  '/docs/api': {
-    title: 'API do Lemify · Mensagens, Agenda e CRM',
-    description: 'Integre seu sistema ao Lemify: envie mensagens pelo WhatsApp, gerencie a agenda e alimente o CRM com chaves de API, exemplos em curl e llms.txt para agentes de IA.',
-  },
-  '/manual/bling': {
-    title: 'Manual de integração com o Bling · Lemify',
-    description: 'Passo a passo para conectar sua conta do Bling ao Lemify e alimentar os agentes de IA com dados reais.',
-  },
-}
+    '/api': {
+      title: 'API de Mensageria · WhatsApp Web e WABA Oficial · Lemify',
+      description: 'Conecte WhatsApp Web e WABA (API oficial da Meta) pela mesma API REST. A Lemify é homologada pela Meta como Twilio e 360dialog, com suporte e operação no Brasil.',
+    },
+    '/docs': {
+      title: 'Documentação do Lemify · Módulos e API',
+      description: 'Aprenda a usar cada módulo do Lemify (atendimento, CRM, agenda, agentes de IA e mais) e integre seu sistema com a API.',
+    },
+    '/docs/api': {
+      title: 'API do Lemify · Mensagens, Agenda e CRM',
+      description: 'Integre seu sistema ao Lemify: envie mensagens pelo WhatsApp, gerencie a agenda e alimente o CRM com chaves de API, exemplos em curl e llms.txt para agentes de IA.',
+    },
+    '/manual/bling': {
+      title: 'Manual de integração com o Bling · Lemify',
+      description: 'Passo a passo para conectar sua conta do Bling ao Lemify e alimentar os agentes de IA com dados reais.',
+    },
+  }
 
 const setMeta = (selector, attr, value) => {
-  const el = document.head.querySelector(selector)
-  if (el) el.setAttribute(attr, value)
-}
+    const el = document.head.querySelector(selector)
+    if (el) el.setAttribute(attr, value)
+  }
 
 /** Atualiza título, descrição, canonical e Open Graph ao trocar de página (SPA). */
 export function applySeo({ title, description }, path) {
-  const url = `${SITE_URL}${path === '/' ? '/' : path}`
+    const url = `${SITE_URL}${path === '/' ? '/' : path}`
   document.title = title
   setMeta('meta[name="description"]', 'content', description)
-  setMeta('link[rel="canonical"]', 'href', url)
-  setMeta('meta[property="og:url"]', 'content', url)
-  setMeta('meta[property="og:title"]', 'content', title)
-  setMeta('meta[property="og:description"]', 'content', description)
-  setMeta('meta[name="twitter:title"]', 'content', title)
-  setMeta('meta[name="twitter:description"]', 'content', description)
+setMeta('link[rel="canonical"]', 'href', url)
+setMeta('meta[property="og:url"]', 'content', url)
+setMeta('meta[property="og:title"]', 'content', title)
+setMeta('meta[property="og:description"]', 'content', description)
+setMeta('meta[name="twitter:title"]', 'content', title)
+setMeta('meta[name="twitter:description"]', 'content', description)
 }
