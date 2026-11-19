@@ -13,13 +13,6 @@
       "destination": "/index.html"
     },
     {
-      "destination": "/_prerender/api.html"
-    },
-    {
-      "source": "/api/",
-      "destination": "/_prerender/api.html"
-    },
-    {
       "source": "/llms.txt",
       "destination": "/api/llms"
     },
