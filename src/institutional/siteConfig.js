@@ -14,7 +14,7 @@ export const SITE = {
   cnpj: '69.768.422/0001-08',
   productPage: '/lemify',
   apiPage: '/api',
-  apiContact: 'https://wa.me/551148635054?text=Ol%C3%A1!%20Quero%20falar%20com%20o%20time%20sobre%20a%20API%20de%20mensageria%20do%20Lemify%20(WhatsApp%20Web%20e%20WABA).',
+  apiContact: 'https://wa.me/551148635054?text=Ol%C3%A1!%20Quero%20falar%20com%20o%20time%20sobre%20a%20API%20de%20mensageria%20do%20Lemify%20(WhatsApp%20Web%20e%20API%20Oficial%20Waba).',
   apiFor: (extra) => `https://wa.me/551148635054?text=${encodeURIComponent('Olá! Quero falar sobre a API de mensageria do Lemify. ' + extra)}`,
 }
 

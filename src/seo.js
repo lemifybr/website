@@ -13,7 +13,7 @@ export const SITE_URL = 'https://lemify.com.br'
 export const SEO = {
   '/': {
     title: 'Lemify - Atendimento e CRM com IA para o negócio brasileiro',
-    description: 'A Lemify é uma empresa brasileira de tecnologia, de São Paulo, que cria software com inteligência artificial para quem vende e atende todo dia. Conheça nossos princípios e o Lemify, nosso primeiro produto.',
+    description: 'O Lemify é uma empresa brasileira de tecnologia, de São Paulo, que cria software com inteligência artificial e API de mensageria para conectar WhatsApp, API Oficial (Waba), Instagram, TikTok e Telegram.',
   },
   ...Object.fromEntries(LEGAL.map((d) => [d.path, { title: d.title, description: d.description }])),
   '/blog': {
@@ -28,10 +28,10 @@ export const SEO = {
     title: 'Planos e preços · Lemify',
     description: 'Planos do Lemify a partir de R$ 97 por mês, com agentes de IA para atendimento e vendas. Agende uma demonstração.',
   },
-    '/api': {
-      title: 'API de Mensageria · WhatsApp Web e WABA Oficial · Lemify',
-      description: 'Conecte WhatsApp Web e WABA (API oficial da Meta) pela mesma API REST. A Lemify é homologada pela Meta como Twilio e 360dialog, com suporte e operação no Brasil.',
-    },
+  '/api': {
+    title: 'API Oficial (Waba), WhatsApp, Instagram, TikTok e Telegram · Lemify',
+    description: 'Conecte API Oficial (Waba), WhatsApp Web, Instagram, TikTok e Telegram pelo Lemify. Parceiro homologado pela Meta como Twilio e 360dialog, com operação no Brasil.',
+  },
     '/docs': {
       title: 'Documentação do Lemify · Módulos e API',
       description: 'Aprenda a usar cada módulo do Lemify (atendimento, CRM, agenda, agentes de IA e mais) e integre seu sistema com a API.',

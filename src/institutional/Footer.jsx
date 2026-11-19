@@ -31,7 +31,7 @@ export default function Footer() {
               <a key={k} href={href} aria-label={label} title={title} {...(k === 'email' ? {} : { target: '_blank', rel: 'noopener noreferrer' })}>{ICONS[k]}</a>
             ))}
           </div>
-            <a href={SITE.apiPage} className="foot__badge-link" aria-label="Lemify é Meta Business Partner — conheça a API de mensageria (WhatsApp Web e WABA)">
+            <a href={SITE.apiPage} className="foot__badge-link" aria-label="O Lemify é Meta Business Partner. Conheça a API de mensageria para API Oficial (Waba), WhatsApp Web, Instagram, TikTok e Telegram">
               <img className="foot__badge" src={metaPartner} alt="Meta Business Partner" loading="lazy" />
             </a>
         </div>

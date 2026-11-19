@@ -17,6 +17,12 @@ function apiDev(env) {
       Object.assign(process.env, env)
       server.middlewares.use(async (req, res, next) => {
         const pathname = (req.url || '').split('?')[0]
+        // Em dev, o Vite resolve /api para o arquivo físico api/index.js (função da Vercel) e devolve o código JS.
+        // Reescrevemos para /index.html para o React montar a página /api normalmente com HMR.
+        if (pathname === '/api' || pathname === '/api/') {
+          req.url = '/index.html'
+          return next()
+        }
         const target = pathname === '/sitemap.xml' ? '/api/sitemap.js' : routes.find(([re]) => re.test(pathname))?.[1]
         if (!target) return next()
         try {

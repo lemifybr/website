@@ -5,16 +5,13 @@ import {
   API_CODE_SAMPLE,
   API_CHANNELS,
   API_WHY,
-  API_CAPABILITIES,
   API_COMPARISON,
-  API_AUDIENCES,
-  API_STEPS,
   API_FAQ,
 } from '../src/api-page/apiPageData.js'
 
 // GET /api e /api/ (rota nativa da pasta api/ na Vercel).
 // Devolve o index.html do site já com título, meta tags, JSON-LD e o texto da página de API de
-// mensageria (WhatsApp Web e WABA) para buscadores e agentes de IA. O React assume por cima ao carregar.
+// mensageria (API Oficial (Waba), WhatsApp Web, Instagram, TikTok e Telegram) para buscadores e LLMs (AIO).
 async function shell(req) {
   const proto = (req.headers['x-forwarded-proto'] || 'https').split(',')[0]
   const host = req.headers['x-forwarded-host'] || req.headers.host
@@ -28,18 +25,15 @@ const p = (t) => `<p>${esc(t)}</p>`
 const nav = '<nav aria-label="Principal"><a href="/">Início</a> · <a href="/lemify">Lemify</a> · <a href="/api">API</a> · <a href="/blog">Blog</a> · <a href="/docs">Documentação</a></nav>'
 
 function apiLandingBody() {
-  const highlights = `<ul>${API_HERO.highlights.map((h) => `<li>${esc(h)}</li>`).join('')}</ul>`
   const channel = (c) =>
     `<article><h3>${esc(c.title)}</h3>${p(c.description)}<ul>${c.features.map((f) => `<li>${esc(f)}</li>`).join('')}</ul>${c.note ? p(c.note) : ''}</article>`
+  const omni = `<ul>${API_CHANNELS.omnichannel.map((c) => `<li><strong>${esc(c.name)}</strong>: ${esc(c.detail)}</li>`).join('')}</ul>`
   const pillars = API_WHY.pillars.map((item) => `<article><h3>${esc(item.n)} · ${esc(item.t)}</h3>${p(item.d)}</article>`).join('')
-  const caps = API_CAPABILITIES.items.map((item) => `<article><h3>${esc(item.t)}</h3>${p(item.d)}</article>`).join('')
-  const audiences = API_AUDIENCES.items.map((item) => `<article><h3>${esc(item.tag)} · ${esc(item.t)}</h3>${p(item.d)}</article>`).join('')
   const compHead = `<thead><tr>${API_COMPARISON.headers.map((h) => `<th>${esc(h)}</th>`).join('')}</tr></thead>`
   const compRows = `<tbody>${API_COMPARISON.rows.map((row) => `<tr>${row.map((c) => `<td>${esc(c)}</td>`).join('')}</tr>`).join('')}</tbody>`
-  const steps = `<ol>${API_STEPS.steps.map((s) => `<li><strong>${esc(s.t)}</strong>: ${esc(s.d)}</li>`).join('')}</ol>`
   const faq = API_FAQ.map((f) => `<h3>${esc(f.q)}</h3>${p(f.a)}`).join('')
 
-  return `${nav}<main><article><h1>${esc(API_HERO.h1)}</h1>${p(API_HERO.lead)}${highlights}<pre><code>${esc(API_CODE_SAMPLE)}</code></pre><section><h2>${esc(API_CHANNELS.title)}</h2>${p(API_CHANNELS.lead)}${channel(API_CHANNELS.waba)}${channel(API_CHANNELS.web)}</section><section><h2>${esc(API_WHY.title)}</h2>${p(API_WHY.intro)}${p(API_WHY.body)}${pillars}</section><section><h2>${esc(API_CAPABILITIES.title)}</h2>${p(API_CAPABILITIES.lead)}${caps}<p><a href="/docs/api">Documentação da API do Lemify</a> · <a href="https://docs.lemify.com.br/api-docs/">Referência OpenAPI</a></p></section><section><h2>${esc(API_AUDIENCES.title)}</h2>${p(API_AUDIENCES.lead)}${audiences}</section><section><h2>${esc(API_COMPARISON.title)}</h2>${p(API_COMPARISON.lead)}<table>${compHead}${compRows}</table>${p(API_COMPARISON.footnote)}</section><section><h2>${esc(API_STEPS.title)}</h2>${steps}<h3>${esc(API_STEPS.billingTitle)}</h3>${p(API_STEPS.billingBody)}</section><section><h2>Perguntas frequentes sobre a API de mensageria do Lemify</h2>${faq}</section></article></main>`
+  return `${nav}<main><article><h1>${esc(API_HERO.h1)}</h1>${p(API_HERO.lead)}<section><h2>${esc(API_CHANNELS.title)}</h2>${channel(API_CHANNELS.waba)}${channel(API_CHANNELS.web)}<h3>${esc(API_CHANNELS.omnichannelLabel)}</h3>${omni}</section><section><h2>${esc(API_WHY.title)}</h2>${p(API_WHY.lead)}${pillars}<pre><code>${esc(API_CODE_SAMPLE)}</code></pre><p><a href="/docs/api">Documentação da API do Lemify</a> · <a href="https://docs.lemify.com.br/api-docs/">Referência OpenAPI</a></p></section><section><h2>${esc(API_COMPARISON.title)}</h2>${p(API_COMPARISON.lead)}<table>${compHead}${compRows}</table>${p(API_COMPARISON.footnote)}</section><section><h2>Perguntas frequentes sobre a API Oficial (Waba) e canais</h2>${faq}</section></article></main>`
 }
 
 const SCHEMAS = [
@@ -66,14 +60,25 @@ const SCHEMAS = [
     '@context': 'https://schema.org',
     '@type': 'Service',
     '@id': `${SITE}/api#service`,
-    name: 'API de Mensageria do Lemify · WhatsApp Web e WABA',
-    serviceType: 'API de Mensageria WhatsApp (WhatsApp Web e WABA / Meta Cloud API)',
-    category: 'WhatsApp Business API (WABA) & WhatsApp Web API',
+    name: 'API de Mensageria do Lemify · API Oficial (Waba), WhatsApp, Instagram, TikTok e Telegram',
+    serviceType: 'API de Mensageria (API Oficial (Waba) do WhatsApp, WhatsApp Web, Instagram, TikTok e Telegram)',
+    category: 'WhatsApp Business API (Waba), Instagram API, TikTok e Telegram',
     description: SEO['/api'].description,
     url: `${SITE}/api`,
     inLanguage: 'pt-BR',
     areaServed: { '@type': 'Country', name: 'BR' },
     provider: { '@id': `${SITE}/#organization` },
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Canais de Mensageria do Lemify',
+      itemListElement: [
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'API Oficial (Waba) do WhatsApp Business (Meta Cloud API)' } },
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'API de WhatsApp Web (QR Code)' } },
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Integração API Oficial do Instagram' } },
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Integração de Mensagens TikTok' } },
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Integração de Mensagens Telegram' } },
+      ],
+    },
   }),
   jsonLd({
     '@context': 'https://schema.org',
@@ -116,4 +121,3 @@ export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'public, s-maxage=3600, stale-while-revalidate=86400')
   res.end(req.method === 'HEAD' ? '' : out)
 }
-
