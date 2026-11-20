@@ -1,46 +1,196 @@
 /* ───── Como pensamos ───── */
-.principles { padding: 70px 0 110px; }
-.pgrid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 16px; }
-.pcard { position: relative; overflow: hidden; padding: 34px 32px; border-radius: var(--r); background: #fff; box-shadow: 0 0 0 1px var(--line); min-height: 280px; display: flex; flex-direction: column; justify-content: flex-end; transition: background 0.5s var(--ease), color 0.5s; grid-column: span 2; }
-.pcard--1 { grid-column: span 3; background: var(--brand); color: #fff; }
-.pcard--2 { grid-column: span 3; background: var(--lime); }
-.pcard--4 { background: var(--mint); }
-.pcard::after { content: ''; position: absolute; width: 220px; height: 220px; right: -60px; top: -60px; border-radius: 50%; background: radial-gradient(circle, rgba(216, 254, 106, 0.55), transparent 70%); opacity: 0; transition: opacity 0.5s; }
-.pcard:hover::after { opacity: 1; }
-.pcard__n { position: absolute; top: 28px; left: 32px; font-size: 14px; font-weight: 700; padding: 5px 12px; border-radius: 99px; background: rgba(255, 255, 255, 0.5); color: var(--brand); }
-.pcard--1 .pcard__n { background: var(--lime); }
-.inst .pcard h3 { font-size: clamp(26px, 2.4vw, 36px); letter-spacing: -0.03em; font-weight: 600; line-height: 1.05; margin-bottom: 10px; }
-.inst .pcard p { font-size: 17px; line-height: 1.5; color: var(--muted); max-width: 420px; }
-.inst .pcard--1 p { color: rgba(255, 255, 255, 0.78); }
-.inst .pcard--2 p { color: rgba(14, 36, 33, 0.75); }
+.principles {
+  padding: 70px 0 110px;
+}
+
+.pgrid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 16px;
+}
+
+
+.pcard {
+  position: relative;
+  overflow: hidden;
+  padding: 34px 32px;
+  border-radius: var(--r);
+  background: #fff;
+  box-shadow: 0 0 0 1px var(--line);
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  grid-column: span 2;
+}
+
+.pcard--1 {
+  grid-column: span 3;
+  background: var(--brand);
+  color: #fff;
+}
+
+.pcard--2 {
+  grid-column: span 3;
+  background: var(--lime);
+}
+
+.pcard--4 {
+  background: var(--mint);
+}
+
+
+.pcard__n {
+  position: absolute;
+  top: 28px;
+  left: 32px;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.5);
+  color: var(--brand);
+}
+
+.pcard--1 .pcard__n {
+  background: var(--lime);
+}
+
+.inst .pcard h3 {
+  font-size: clamp(26px, 2.4vw, 36px);
+  letter-spacing: -0.03em;
+  font-weight: 600;
+  line-height: 1.05;
+  margin-bottom: 10px;
+}
+
+.inst .pcard p {
+  font-size: 17px;
+  line-height: 1.5;
+  color: var(--muted);
+  max-width: 420px;
+}
+
+.inst .pcard--1 p {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.inst .pcard--2 p {
+  color: rgba(14, 36, 33, 0.75);
+}
 
 /* ───── Confiança ───── */
-.trust { padding: 90px 0; }
-.trust__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
-.tcard { padding: 32px; border-radius: var(--r); background: #fff; box-shadow: 0 0 0 1px var(--line); display: grid; gap: 12px; align-content: center; justify-items: center; text-align: center; transition: transform 0.4s var(--ease), box-shadow 0.4s; }
-.tcard:hover { transform: translateY(-6px); box-shadow: 0 0 0 1px var(--line), 0 26px 40px -24px rgba(14, 36, 33, 0.35); }
-.inst .tcard h3 { font-size: 24px; letter-spacing: -0.025em; font-weight: 600; }
-.inst .tcard p { color: var(--muted); font-size: 16.5px; line-height: 1.5; }
-.tcard__link { display: inline-flex; align-items: center; gap: 8px; margin-top: 6px; font-weight: 600; color: var(--brand); border-bottom: 1.5px solid currentColor; width: fit-content; padding-bottom: 2px; }
-.tcard__link svg { transition: transform 0.3s var(--ease); }
-.tcard__link:hover svg { transform: translateX(4px); }
+.trust {
+  padding: 90px 0;
+}
+
+.trust__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.tcard {
+  padding: 32px;
+  border-radius: var(--r);
+  background: #fff;
+  box-shadow: 0 0 0 1px var(--line);
+  display: grid;
+  gap: 12px;
+  align-content: center;
+  justify-items: center;
+  text-align: center;
+  transition: box-shadow 0.2s ease;
+}
+
+.tcard:hover {
+  box-shadow: 0 0 0 1px var(--line), 0 16px 32px -22px rgba(14, 36, 33, 0.28);
+}
+
+.inst .tcard h3 {
+  font-size: 24px;
+  letter-spacing: -0.025em;
+  font-weight: 600;
+}
+
+.inst .tcard p {
+  color: var(--muted);
+  font-size: 16.5px;
+  line-height: 1.5;
+}
+
+.tcard__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+  font-weight: 600;
+  color: var(--brand);
+  border-bottom: 1.5px solid currentColor;
+  width: fit-content;
+  padding-bottom: 2px;
+  transition: opacity 0.15s ease;
+}
+
+.tcard__link:hover {
+  opacity: 0.72;
+}
 
 @media (max-width: 1000px) {
-  .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .pgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .pcard, .pcard--1, .pcard--2 { grid-column: span 1; min-height: 240px; }
-  .trust__grid { grid-template-columns: minmax(0, 1fr); }
+  .facts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .pgrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .pcard,
+  .pcard--1,
+  .pcard--2 {
+    grid-column: span 1;
+    min-height: 240px;
+  }
+
+  .trust__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
+
 @media (max-width: 900px) {
-  .about { padding: 80px 0 60px; }
+  .about {
+    padding: 80px 0 60px;
+  }
 }
+
 @media (max-width: 560px) {
-  .facts, .pgrid { grid-template-columns: minmax(0, 1fr); }
-  .fact { padding: 22px; }
-  .pcard { min-height: 210px; padding: 28px 24px; }
-  .pcard__n { left: 24px; top: 22px; }
+
+  .facts,
+  .pgrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .fact {
+    padding: 22px;
+  }
+
+  .pcard {
+    min-height: 210px;
+    padding: 28px 24px;
+  }
+
+  .pcard__n {
+    left: 24px;
+    top: 22px;
+  }
 }
+
 @media (prefers-reduced-motion: reduce) {
-  .band__track { animation: none; }
-  .manifesto__w { opacity: 1 !important; }
+  .band__track {
+    animation: none;
+  }
+
+  .manifesto__w {
+    opacity: 1 !important;
+  }
 }

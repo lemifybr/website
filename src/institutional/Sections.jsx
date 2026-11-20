@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { gsap, ScrollTrigger, Magnetic, Tilt, Words, prefersReducedMotion } from './motion.jsx'
+import { gsap, ScrollTrigger, prefersReducedMotion } from './motion.jsx'
 import { Arrow } from './Header.jsx'
 import intMeli from './assets/integrations/meli.png'
 import intOmie from './assets/integrations/omie.png'
@@ -43,20 +43,20 @@ export function Principles() {
     <section className="principles" id="principios" aria-labelledby="principios-titulo">
       <div className="wrap">
         <div className="head">
-          <span className="eyebrow" data-reveal>Como pensamos</span>
-          <Words as="h2" id="principios-titulo" className="h2" text="O que guia cada produto que a gente cria." />
+          <span className="eyebrow">Como pensamos</span>
+          <h2 id="principios-titulo" className="h2">O que guia cada produto que a gente cria.</h2>
         </div>
         <div className="pgrid" data-stagger>
           {VALUES.map((v, k) => (
-            <Tilt key={v.n} max={5} className={`pcard pcard--${k + 1}`}>
-              <span className="pcard__n">{v.n}</span>
-              <h3>{v.t}</h3>
-              <p>{v.d}</p>
-            </Tilt>
+              <article key={v.n} className={`pcard pcard--${k + 1}`}>
+                <span className="pcard__n">{v.n}</span>
+                <h3>{v.t}</h3>
+                <p>{v.d}</p>
+            </article>
           ))}
-        </div>
       </div>
-    </section>
+    </div>
+    </section >
   )
 }
 
@@ -103,7 +103,7 @@ export function Integrations() {
   const half = [...INTEGRATIONS, ...INTEGRATIONS]
   return (
     <section className="integ" aria-label="Integrações">
-      <p className="integ__label" data-reveal>Conectado às plataformas que o seu negócio já usa</p>
+      <p className="integ__label">Conectado às plataformas que o seu negócio já usa</p>
       <div className="integ__view">
         <div className="integ__track">
           {[...half, ...half].map((l, i) => (
@@ -206,9 +206,9 @@ export function Products() {
     <section className="segs" id="segmentos" ref={root} aria-labelledby="produtos-titulo">
       <div className="wrap">
         <div className="head segs__head">
-          <span className="eyebrow" data-reveal>Para quem trabalhamos</span>
-          <Words as="h2" id="produtos-titulo" className="h2" text="Do balcão da loja à agenda da clínica." />
-          <p className="head__p" data-reveal>Cada negócio tem o seu ritmo. A gente adapta a tecnologia a ele, e não o contrário.</p>
+          <span className="eyebrow">Para quem trabalhamos</span>
+          <h2 id="produtos-titulo" className="h2">Do balcão da loja à agenda da clínica.</h2>
+          <p className="head__p">Cada negócio tem o seu ritmo. A gente adapta a tecnologia a ele, e não o contrário.</p>
         </div>
       </div>
 
@@ -286,9 +286,9 @@ export function Agents() {
     <section className="agents" id="agentes" ref={root} aria-labelledby="agentes-titulo" style={{ '--ac': AGENTS[on].c }}>
       <div className="wrap agents__grid">
         <div className="agents__stick">
-          <span className="eyebrow" data-reveal>Agentes de IA</span>
-          <Words as="h2" id="agentes-titulo" className="h2" text="Cada agente de IA tem nome, jeito e função." />
-          <p data-reveal>A gente trata a IA como parte do time: cada agente cuida de uma tarefa e, juntos, acompanham o cliente da primeira mensagem ao pós-venda.</p>
+          <span className="eyebrow">Agentes de IA</span>
+          <h2 id="agentes-titulo" className="h2">Cada agente de IA tem nome, jeito e função.</h2>
+          <p>A gente trata a IA como parte do time: cada agente cuida de uma tarefa e, juntos, acompanham o cliente da primeira mensagem ao pós-venda.</p>
         </div>
         <ul className="agents__list">
           {AGENTS.map((a, k) => (
@@ -314,8 +314,8 @@ export function Faq() {
     <section className="faq" id="perguntas" aria-labelledby="faq-titulo">
       <div className="wrap faq__in">
         <div className="head">
-          <span className="eyebrow" data-reveal>Perguntas frequentes</span>
-          <Words as="h2" id="faq-titulo" className="h2" text="Dúvidas comuns sobre a Lemify e o nosso produto" />
+          <span className="eyebrow">Perguntas frequentes</span>
+          <h2 id="faq-titulo" className="h2">Dúvidas comuns sobre a Lemify e o nosso produto</h2>
         </div>
         <div className="faq__list">
           {FAQ.map((f) => (
@@ -332,28 +332,17 @@ export function Faq() {
 
 /* ───────────── Contato ───────────── */
 export function Contact() {
-  const root = useRef(null)
-  useEffect(() => {
-    if (prefersReducedMotion()) return
-    const ctx = gsap.context(() => {
-      gsap.from('.contact__crew', {
-        yPercent: 35, ease: 'none',
-        scrollTrigger: { trigger: root.current, start: 'top 80%', end: 'bottom bottom', scrub: true },
-      })
-    }, root)
-    return () => ctx.revert()
-  }, [])
   return (
-    <section className="contact" id="contato" ref={root} aria-labelledby="contato-titulo">
-      <div className="wrap contact__in">
-        <Words as="h2" id="contato-titulo" className="display display--light" text="Vamos conversar?" />
-        <p data-reveal>Quer conhecer a Lemify, tirar uma dúvida ou contar o que o seu negócio precisa? A gente responde rapidinho.</p>
-        <div className="contact__cta" data-reveal>
-          <Magnetic><a className="btn btn--lime btn--lg" href={`${SITE.whatsappUrl}?text=${encodeURIComponent('Olá! Vim pelo site e quero conhecer o Lemify.')}`} target="_blank" rel="noopener noreferrer">Fale com a gente <Arrow /></a></Magnetic>
-          <a className="btn btn--outline-light btn--lg" href={SITE.productPage}>Conhecer o Lemify</a>
-        </div>
-      </div>
-      <img className="contact__crew" src={crew} alt="Os agentes do Lemify reunidos, em pé, aguardando o contato" loading="lazy" />
-    </section>
-  )
+      <section className="contact" id="contato" aria-labelledby="contato-titulo">
+        <div className="wrap contact__in">
+            <h2 id="contato-titulo" className="display display--light">Vamos conversar?</h2>
+            <p>Quer conhecer a Lemify, tirar uma dúvida ou contar o que o seu negócio precisa? A gente responde rapidinho.</p>
+            <div className="contact__cta">
+              <a className="btn btn--lime btn--lg" href={`${SITE.whatsappUrl}?text=${encodeURIComponent('Olá! Vim pelo site e quero conhecer o Lemify.')}`} target="_blank" rel="noopener noreferrer">Fale com a gente <Arrow /></a>
+              <a className="btn btn--outline-light btn--lg" href={SITE.productPage}>Conhecer o Lemify</a>
+            </div>
+          </div>
+          <img className="contact__crew" src={crew} alt="Os agentes do Lemify reunidos, em pé, aguardando o contato" loading="lazy" />
+      </section>
+      )
 }

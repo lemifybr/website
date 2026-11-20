@@ -123,11 +123,6 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.7s var(--ease);
-}
-
-.ap-chan:hover .ap-chan__media img {
-  transform: scale(1.04);
 }
 
 .ap-chan__badge {
@@ -319,7 +314,7 @@
   background: rgba(255, 255, 255, 0.08);
   color: #fff;
   cursor: pointer;
-  transition: background 0.2s, color 0.2s;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
 }
 
 .ap-code__copy:hover {
@@ -544,15 +539,18 @@
   .ap-hero {
     padding: 6px 12px 16px;
   }
+
   .ap-hero__stage {
     height: auto;
     min-height: 460px;
     border-radius: 32px;
   }
+
   .ap-section,
   .inst.apipage .faq {
     padding: 68px 0;
   }
+
   .ap-channels,
   .ap-more__grid {
     grid-template-columns: minmax(0, 1fr);
@@ -563,14 +561,17 @@
   .ap-hero {
     padding-inline: 8px;
   }
+
   .ap-hero__stage {
     border-radius: 26px;
     min-height: 420px;
     padding: 32px 20px;
   }
+
   .ap-chan__body {
     padding: 24px 22px 26px;
   }
+
   .ap-cta {
     padding: 72px 0;
   }

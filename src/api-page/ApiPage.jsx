@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import '@fontsource-variable/bricolage-grotesque'
 import '../institutional/site.css'
 import './apiPage.css'
-import { useScrollMotion, useSmoothScroll, ScrollTrigger, Magnetic, Words } from '../institutional/motion.jsx'
+import { useScrollMotion, useSmoothScroll, ScrollTrigger } from '../institutional/motion.jsx'
 import Header, { Arrow } from '../institutional/Header.jsx'
 import Footer from '../institutional/Footer.jsx'
 import { SITE } from '../institutional/siteConfig.js'
@@ -67,16 +67,12 @@ export default function ApiPage() {
 
             <div className="ap-hero__copy">
               <span className="eyebrow">{API_HERO.eyebrow}</span>
-              <h1 id="api-page-titulo" className="ap-hero__title">
-                <Words text={API_HERO.h1} />
-              </h1>
+              <h1 id="api-page-titulo" className="ap-hero__title">{API_HERO.h1}</h1>
               <p className="ap-hero__lead">{API_HERO.lead}</p>
               <div className="ap-hero__cta">
-                <Magnetic>
-                  <a className="btn btn--lime" href={SITE.apiContact} target="_blank" rel="noopener noreferrer">
-                    Falar sobre a API <Arrow />
-                  </a>
-                </Magnetic>
+                <a className="btn btn--lime" href={SITE.apiContact} target="_blank" rel="noopener noreferrer">
+                  Falar sobre a API <Arrow />
+                </a>
                 <a className="btn btn--glass" href="/docs/api">
                   Documentação da API
                 </a>
@@ -89,8 +85,8 @@ export default function ApiPage() {
         <section className="ap-section ap-section--white" id="canais" aria-labelledby="ap-canais-titulo">
           <div className="wrap">
             <div className="head">
-              <span className="eyebrow" data-reveal>{API_CHANNELS.eyebrow}</span>
-              <Words as="h2" id="ap-canais-titulo" className="h2" text={API_CHANNELS.title} />
+              <span className="eyebrow">{API_CHANNELS.eyebrow}</span>
+              <h2 id="ap-canais-titulo" className="h2">{API_CHANNELS.title}</h2>
             </div>
 
             <div className="ap-channels" data-stagger>
@@ -114,11 +110,9 @@ export default function ApiPage() {
                     </ul>
                   </div>
                   <div className="ap-chan__foot">
-                    <Magnetic>
-                      <a className="btn btn--lime" href={SITE.apiFor(API_CHANNELS.waba.extra)} target="_blank" rel="noopener noreferrer">
-                        {API_CHANNELS.waba.cta} <Arrow />
-                      </a>
-                    </Magnetic>
+                    <a className="btn btn--lime" href={SITE.apiFor(API_CHANNELS.waba.extra)} target="_blank" rel="noopener noreferrer">
+                      {API_CHANNELS.waba.cta} <Arrow />
+                    </a>
                   </div>
                 </div>
               </article>
@@ -144,11 +138,9 @@ export default function ApiPage() {
                   </div>
                   <div className="ap-chan__foot">
                     <p className="ap-chan__note">{API_CHANNELS.web.note}</p>
-                    <Magnetic>
-                      <a className="btn btn--dark" href={SITE.apiFor(API_CHANNELS.web.extra)} target="_blank" rel="noopener noreferrer">
-                        {API_CHANNELS.web.cta} <Arrow />
-                      </a>
-                    </Magnetic>
+                    <a className="btn btn--dark" href={SITE.apiFor(API_CHANNELS.web.extra)} target="_blank" rel="noopener noreferrer">
+                      {API_CHANNELS.web.cta} <Arrow />
+                    </a>
                   </div>
                 </div>
               </article>
@@ -191,9 +183,9 @@ export default function ApiPage() {
             </div>
 
             <div className="ap-dev__copy">
-              <span className="eyebrow" data-reveal>{API_WHY.eyebrow}</span>
-              <Words as="h2" id="ap-why-titulo" className="h2" text={API_WHY.title} />
-              <p className="ap-dev__lead" data-reveal>{API_WHY.lead}</p>
+              <span className="eyebrow">{API_WHY.eyebrow}</span>
+              <h2 id="ap-why-titulo" className="h2">{API_WHY.title}</h2>
+              <p className="ap-dev__lead">{API_WHY.lead}</p>
 
               <div className="ap-points" data-stagger>
                 {API_WHY.pillars.map((item) => (
@@ -207,22 +199,22 @@ export default function ApiPage() {
                 ))}
               </div>
 
-              <div className="ap-dev__links" data-reveal>
-                <a className="btn btn--dark btn--sm" href="/docs/api">Docs da API <Arrow /></a>
-                <a className="btn btn--ghost btn--sm" href={API_FULL_REFERENCE} target="_blank" rel="noopener noreferrer">OpenAPI / Swagger</a>
-                <a className="btn btn--ghost btn--sm" href="/api-llms/lemify-api-llms.txt" download="lemify-api-llms.txt">llms.txt</a>
+                <div className="ap-dev__links">
+                  <a className="btn btn--dark btn--sm" href="/docs/api">Docs da API <Arrow /></a>
+                  <a className="btn btn--ghost btn--sm" href={API_FULL_REFERENCE} target="_blank" rel="noopener noreferrer">OpenAPI / Swagger</a>
+                  <a className="btn btn--ghost btn--sm" href="/api-llms/lemify-api-llms.txt" download="lemify-api-llms.txt">llms.txt</a>
+                </div>
               </div>
             </div>
-          </div>
         </section>
 
         {/* Comparativo rápido */}
         <section className="ap-section ap-section--white" id="comparativo" aria-labelledby="ap-comp-titulo">
           <div className="wrap">
             <div className="head">
-              <span className="eyebrow" data-reveal>{API_COMPARISON.eyebrow}</span>
-              <Words as="h2" id="ap-comp-titulo" className="h2" text={API_COMPARISON.title} />
-              <p className="head__p" data-reveal>{API_COMPARISON.lead}</p>
+              <span className="eyebrow">{API_COMPARISON.eyebrow}</span>
+              <h2 id="ap-comp-titulo" className="h2">{API_COMPARISON.title}</h2>
+              <p className="head__p">{API_COMPARISON.lead}</p>
             </div>
 
             <div className="ap-table-wrap" data-reveal>
@@ -253,8 +245,8 @@ export default function ApiPage() {
         <section className="faq" id="perguntas-api" aria-labelledby="ap-faq-titulo">
           <div className="wrap faq__in">
             <div className="head">
-              <span className="eyebrow" data-reveal>Perguntas frequentes</span>
-              <Words as="h2" id="ap-faq-titulo" className="h2" text="Dúvidas sobre a API Oficial (Waba) e canais" />
+              <span className="eyebrow">Perguntas frequentes</span>
+              <h2 id="ap-faq-titulo" className="h2">Dúvidas sobre a API Oficial (Waba) e canais</h2>
             </div>
             <div className="faq__list">
               {API_FAQ.map((f) => (
@@ -270,25 +262,23 @@ export default function ApiPage() {
         {/* CTA Final */}
         <section className="ap-cta" aria-labelledby="ap-cta-titulo">
           <div className="wrap ap-cta__in">
-            <Words as="h2" id="ap-cta-titulo" text="Conecte WhatsApp, Instagram, TikTok e Telegram pelo Lemify." />
-            <p data-reveal>
-              Fale com a nossa equipe para escolher entre WhatsApp Web e API Oficial (Waba) ou migrar seu número para o Lemify.
-            </p>
-            <div className="ap-cta__actions" data-reveal>
-              <Magnetic>
-                <a className="btn btn--lime btn--lg" href={SITE.apiContact} target="_blank" rel="noopener noreferrer">
-                  Falar sobre a API <Arrow />
-                </a>
-              </Magnetic>
-              <a className="btn btn--outline-light btn--lg" href="/docs/api">
-                Ver documentação
-              </a>
-            </div>
-          </div>
-        </section>
-      </main>
+              <h2 id="ap-cta-titulo">Conecte WhatsApp, Instagram, TikTok e Telegram pelo Lemify.</h2>
+              <p>
+                Fale com a nossa equipe para escolher entre WhatsApp Web e API Oficial (Waba) ou migrar seu número para o Lemify.
+              </p>
+                <div className="ap-cta__actions">
+                  <a className="btn btn--lime btn--lg" href={SITE.apiContact} target="_blank" rel="noopener noreferrer">
+                    Falar sobre a API <Arrow />
+                  </a>
+                  <a className="btn btn--outline-light btn--lg" href="/docs/api">
+                    Ver documentação
+                  </a>
+                </div>
+              </div>
+            </section>
+          </main>
 
-      <Footer />
-    </div>
-  )
+          <Footer />
+        </div>
+        )
 }

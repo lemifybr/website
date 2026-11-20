@@ -12,7 +12,7 @@ export default function LatestPosts() {
     let alive = true
     fetchPosts({ limit: 3 })
       .then((d) => alive && setPosts(d.data || []))
-      .catch(() => {})
+      .catch(() => { })
     return () => { alive = false }
   }, [])
 
@@ -23,7 +23,7 @@ export default function LatestPosts() {
       <div className="wrap">
         <div className="latest__head">
           <div>
-            <span className="eyebrow" data-reveal>Blog</span>
+            <span className="eyebrow">Blog</span>
             <h2 id="blog-titulo" className="h2">Novidades e ideias do Lemify</h2>
           </div>
           <a className="btn btn--outline btn--sm" href="/blog">Ver todos os posts <Arrow /></a>

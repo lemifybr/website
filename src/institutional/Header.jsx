@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { Magnetic } from './motion.jsx'
 import { SITE } from './siteConfig.js'
 import logo from './assets/logo-dark.svg'
 
@@ -53,7 +52,7 @@ export default function Header() {
 
           <div className="nav__actions">
             <a className="btn btn--sm btn--outline btn--still" href={SITE.demo} target="_blank" rel="noopener noreferrer">Cadastre-se</a>
-            <Magnetic strength={0.1}><a className="btn btn--sm btn--dark" href={SITE.customerArea}>Login</a></Magnetic>
+            <a className="btn btn--sm btn--dark" href={SITE.customerArea}>Login</a>
             <button type="button" className={`burger ${open ? 'is-open' : ''}`} aria-label="Menu" aria-expanded={open} onClick={() => setOpen(!open)}>
               <span /><span />
             </button>
