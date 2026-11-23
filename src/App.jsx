@@ -14,7 +14,9 @@ import termosIa from './legal/termosIa.js'
 import google from './legal/google.js'
 import lgpd from './legal/lgpd.js'
 import ProductPage from './product/ProductPage.jsx'
+import LemifyPage from './product/LemifyPage.jsx'
 import ApiPage from './api-page/ApiPage.jsx'
+import DemoModal from './institutional/DemoModal.jsx'
 import { applySeo, SEO } from './seo.js'
 
 const LEGAL_DOCS = [termos, privacidade, reembolso, termosIa, google, lgpd]
@@ -31,16 +33,23 @@ function App() {
     if (!window.location.hash) window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
   }, [known, path])
 
-  if (doc) return <LegalPage doc={doc} />
-  if (path === '/manual/bling') return <BlingManual />
-  if (path === '/docs') return <DocsPage />
-  if (path === '/docs/api') return <ApiDocsPage />
-  if (path === '/lemify') return <ProductPage page="lemify" />
-  if (path === '/lemify/planos') return <ProductPage page="planos" />
-  if (path === '/api') return <ApiPage />
-  if (path === '/blog') return <BlogList />
-  if (post) return <BlogPost slug={decodeURIComponent(post[1])} />
-  return <Site />
+  let view = <Site />
+  if (doc) view = <LegalPage doc={doc} />
+  else if (path === '/manual/bling') view = <BlingManual />
+  else if (path === '/docs') view = <DocsPage />
+  else if (path === '/docs/api') view = <ApiDocsPage />
+  else if (path === '/lemify') view = <LemifyPage />
+  else if (path === '/lemify/planos') view = <ProductPage page="planos" />
+  else if (path === '/api') view = <ApiPage />
+  else if (path === '/blog') view = <BlogList />
+  else if (post) view = <BlogPost slug={decodeURIComponent(post[1])} />
+
+  return (
+    <>
+      {view}
+      <DemoModal />
+    </>
+  )
 }
 
 export default App

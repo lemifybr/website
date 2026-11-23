@@ -1,20 +1,15 @@
 import { useEffect, useRef } from 'react'
 import '@fontsource-variable/bricolage-grotesque'
 import { gsap, ScrollTrigger, prefersReducedMotion, useSmoothScroll } from '../institutional/motion.jsx'
-import lemifyCss from './lemify.css?inline'
 import planosCss from './planos.css?inline'
-import lemifyHtml from './lemify.body.html?raw'
 import planosHtml from './planos.body.html?raw'
-import lemifyScripts from './lemify.scripts.js'
 import planosScripts from './planos.scripts.js'
 
 const PAGES = {
-  lemify: { css: lemifyCss, html: lemifyHtml, scripts: lemifyScripts },
   planos: { css: planosCss, html: planosHtml, scripts: planosScripts },
 }
 
-// Páginas do produto (/lemify e /lemify/planos): conteúdo e estilos feitos pela agência, montados aqui
-// com o mesmo scroll suave e as mesmas entradas animadas do site institucional.
+// Página de comparação completa de planos (/lemify/planos), montada com scroll suave e entradas animadas.
 export default function ProductPage({ page }) {
   const root = useRef(null)
   const { css, html, scripts } = PAGES[page]

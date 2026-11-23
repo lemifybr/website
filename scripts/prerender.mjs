@@ -14,6 +14,15 @@ import lgpd from '../src/legal/lgpd.js'
 import { MODULES, GROUPS } from '../src/docs/modules.js'
 import { AUTH, ENDPOINTS, LIMITS, LLMS, STATUS } from '../src/docs/api.js'
 import { FAQ } from '../src/institutional/faq.js'
+import {
+  LEMIFY_HERO,
+  PRODUCT_SHOWCASE,
+  AI_AGENTS_SECTION,
+  CASES_SECTION,
+  DEFAULT_RAW_PLANS,
+  buildPlansView,
+  getLemifyFaq,
+} from '../src/product/lemifyPageData.js'
 import { SITE, esc, setHead, jsonLd, addToHead, setRoot } from '../api/_html.js'
 
 const prod = (n) => fs.readFileSync(path.resolve(path.dirname(fileURLToPath(import.meta.url)), `../src/product/${n}.body.html`), 'utf8')
@@ -57,11 +66,40 @@ function blingBody() {
   return `${nav}<main><article><h1>Manual de integração Lemify e Bling</h1>${p(SEO['/manual/bling'].description)}<ol>${steps.map((s) => `<li>${esc(s)}</li>`).join('')}</ol></article></main>`
 }
 
+const lemifyPlans = buildPlansView(DEFAULT_RAW_PLANS)
+const lemifyFaq = getLemifyFaq(lemifyPlans.usersSummary)
+
+function lemifyBody() {
+  const tabs = PRODUCT_SHOWCASE.tabs
+    .map((t) => `<article><h3>${esc(t.label)} · ${esc(t.title)}</h3>${p(t.description)}<ul>${t.bullets.map((b) => `<li>${esc(b)}</li>`).join('')}</ul></article>`)
+    .join('')
+  const agents = AI_AGENTS_SECTION.agents
+    .map((a) => `<li><strong>${esc(a.name)} (${esc(a.role)})</strong>: ${esc(a.task)}. ${esc(a.description)}</li>`)
+    .join('')
+  const cases = CASES_SECTION.cards
+    .map((c) => `<blockquote>${esc(c.quote)} · ${esc(c.company)} (${esc(c.segment)})</blockquote>`)
+    .join('')
+  const plans = lemifyPlans.mainPlans
+    .map((pl) => `<article><h3>${esc(pl.title)} · R$ ${esc(pl.monthly)}/mês (ou R$ ${esc(pl.annual)}/mês no anual)</h3>${p(pl.description)}<ul>${pl.bullets.map((b) => `<li>${esc(b)}</li>`).join('')}</ul></article>`)
+    .join('')
+  const faq = lemifyFaq.map((f) => `<h3>${esc(f.q)}</h3>${p(f.a)}`).join('')
+
+  return `${nav}<main><article><h1>${esc(LEMIFY_HERO.h1)}</h1>${p(LEMIFY_HERO.lead)}<section><h2>${esc(PRODUCT_SHOWCASE.title)}</h2>${p(PRODUCT_SHOWCASE.lead)}${tabs}</section><section><h2>${esc(AI_AGENTS_SECTION.title)}</h2>${p(AI_AGENTS_SECTION.lead)}<ul>${agents}</ul></section><section><h2>${esc(CASES_SECTION.title)}</h2>${p(CASES_SECTION.lead)}${cases}</section><section><h2>Planos do Lemify</h2>${plans}<p><a href="/lemify/planos">Comparar planos lado a lado</a></p></section><section><h2>Dúvidas antes de começar</h2>${faq}</section></article></main>`
+}
+
 const faqBody = `<section><h2>Perguntas frequentes sobre o Lemify</h2>${FAQ.map((f) => `<h3>${esc(f.q)}</h3>${p(f.a)}`).join('')}</section>`
+
+const lemifyFaqSchema = jsonLd({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  '@id': `${SITE}/lemify#faq`,
+  inLanguage: 'pt-BR',
+  mainEntity: lemifyFaq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+})
 
 const pages = [
   ...[termos, privacidade, reembolso, termosIa, google, lgpd].map((d) => ({ route: d.path, body: legalBody(d), name: d.h1 })),
-  { route: '/lemify', body: prod('lemify'), name: 'Lemify · Atendimento e CRM' },
+  { route: '/lemify', body: lemifyBody(), name: 'Lemify · Atendimento e CRM', extraHead: [lemifyFaqSchema] },
   { route: '/lemify/planos', body: prod('planos'), name: 'Planos e preços do Lemify' },
   { route: '/docs', body: docsBody(), name: 'Documentação do Lemify' },
   { route: '/docs/api', body: apiBody(), name: 'API do Lemify' },
@@ -81,10 +119,11 @@ const webPage = (route, name, description) =>
     publisher: { '@id': `${SITE}/#organization` },
   })
 
-for (const { route, body, name } of pages) {
+for (const { route, body, name, extraHead = [] } of pages) {
   const meta = SEO[route]
   let html = setHead(template, { title: meta.title, description: meta.description, url: `${SITE}${route}` })
   html = addToHead(html, webPage(route, name, meta.description))
+  for (const tag of extraHead) html = addToHead(html, tag)
   html = setRoot(html, body)
   const dir = path.join(dist, route)
   fs.mkdirSync(dir, { recursive: true })

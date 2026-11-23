@@ -41,7 +41,8 @@ export default function Header() {
           </a>
 
           <nav className="nav__links" aria-label="Principal">
-            <a href={SITE.productPage}>Produto</a>
+            <a href="/#inicio" aria-current={pathname === '/' ? 'page' : undefined}>Início</a>
+            <a href={SITE.productPage} aria-current={pathname === SITE.productPage || pathname.startsWith(`${SITE.productPage}/`) ? 'page' : undefined}>Produto</a>
             <a href={SITE.apiPage} aria-current={pathname === SITE.apiPage ? 'page' : undefined}>API</a>
             <a href="/#segmentos">Segmentos</a>
             <a href="/#agentes">Agentes de IA</a>

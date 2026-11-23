@@ -1,0 +1,248 @@
+/* Modal institucional para agendamento de demonstração (formulário embutido do Lemify) */
+.demo-modal {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  width: min(500px, calc(100vw - 24px));
+  max-width: 100%;
+  max-height: calc(100dvh - 32px);
+  overflow: visible;
+  font-family: 'Bricolage Grotesque Variable', 'Poppins', system-ui, sans-serif;
+  color: #0e2421;
+}
+
+.demo-modal::backdrop {
+  background: rgba(14, 36, 33, 0.74);
+  backdrop-filter: blur(8px);
+}
+
+.demo-modal__box {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 32px 72px -20px rgba(8, 22, 20, 0.6), 0 0 0 1px rgba(28, 64, 59, 0.16);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100dvh - 32px);
+}
+
+.demo-modal__head {
+  position: relative;
+  padding: 24px 24px 20px;
+  background: #1c403b;
+  color: #ffffff;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.demo-modal__head::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 86% 18%, rgba(216, 254, 106, 0.16), transparent 58%);
+  pointer-events: none;
+}
+
+.demo-modal__head > * {
+  position: relative;
+  z-index: 1;
+}
+
+.demo-modal__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #1c403b;
+  background: #d8fe6a;
+  padding: 5px 10px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+.demo-modal__title {
+  margin: 0;
+  font-size: 24px;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.demo-modal__sub {
+  margin: 8px 0 0;
+  font-size: 14.5px;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.demo-modal__close {
+  flex: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.demo-modal__close:hover {
+  background: #d8fe6a;
+  color: #1c403b;
+  border-color: #d8fe6a;
+}
+
+.demo-modal__close:focus-visible {
+  outline: 2px solid #d8fe6a;
+  outline-offset: 2px;
+}
+
+.demo-modal__body {
+  padding: 22px 24px 24px;
+  overflow-y: auto;
+  background: #ffffff;
+}
+
+.demo-modal__status {
+  margin: 18px 0;
+  text-align: center;
+  font-size: 14.5px;
+  color: #5d6d69;
+}
+
+.demo-modal__fallback {
+  display: grid;
+  gap: 12px;
+  justify-items: start;
+  padding: 16px;
+  border-radius: 10px;
+  background: #f6f5ee;
+  font-size: 14.5px;
+  color: #5d6d69;
+}
+
+.demo-modal__fallback p {
+  margin: 0;
+}
+
+.demo-modal__wa-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 18px;
+  border-radius: 8px;
+  background: #1c403b;
+  color: #d8fe6a;
+  font-weight: 600;
+  font-size: 14.5px;
+  text-decoration: none;
+}
+
+/* Estilos do formulário inline (.lfy-*) para modo Light DOM na identidade Lemify */
+.lfy-form {
+  max-width: 100%;
+  width: 100%;
+  font-family: inherit;
+}
+
+.lfy-title {
+  display: none;
+}
+
+.lfy-group {
+  margin-bottom: 14px;
+}
+
+.lfy-label {
+  display: block;
+  font-size: 13.5px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #0e2421;
+  letter-spacing: -0.01em;
+}
+
+.lfy-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 14px;
+  border: 1.5px solid rgba(28, 64, 59, 0.18);
+  border-radius: 8px;
+  font: inherit;
+  font-size: 15px;
+  color: #0e2421;
+  background: #f6f5ee;
+  transition: border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.lfy-input:hover {
+  border-color: rgba(28, 64, 59, 0.36);
+}
+
+.lfy-input:focus {
+  outline: none;
+  background: #ffffff;
+  border-color: #1c403b;
+  box-shadow: 0 0 0 3px rgba(28, 64, 59, 0.14);
+}
+
+.lfy-submit {
+  width: 100%;
+  padding: 14px 20px;
+  margin-top: 8px;
+  border: 0;
+  border-radius: 10px;
+  background: #1c403b;
+  color: #d8fe6a;
+  font: inherit;
+  font-weight: 600;
+  font-size: 15.5px;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  transition: background-color 0.15s ease, opacity 0.15s ease;
+}
+
+.lfy-submit:hover:not(:disabled) {
+  background: #0e2421;
+}
+
+.lfy-submit:focus-visible {
+  outline: 2px solid #1c403b;
+  outline-offset: 2px;
+}
+
+.lfy-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.lfy-error {
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 13.5px;
+  background: #fef2f2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+}
+
+.lfy-form [hidden] {
+  display: none !important;
+}
+
+@media (max-width: 560px) {
+  .demo-modal__head {
+    padding: 20px 18px 18px;
+  }
+
+  .demo-modal__body {
+    padding: 18px 18px 20px;
+  }
+}
