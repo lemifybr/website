@@ -58,7 +58,7 @@ export default function ApiPage() {
           <div className="ap-hero__stage">
             <img
               src={heroApi}
-              alt="Desenvolvedora trabalhando em estação com dois monitores de código"
+              alt="Desenvolvedor de jaqueta verde-floresta e colega trabalhando em notebooks no escritório"
               className="ap-hero__img"
               fetchPriority="high"
               decoding="async"

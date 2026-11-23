@@ -4,7 +4,7 @@ import './site.css'
 import { useScrollMotion, useSmoothScroll, ScrollTrigger } from './motion.jsx'
 import Header from './Header.jsx'
 import Hero from './Hero.jsx'
-import { Principles, Trust, Integrations, Products, Agents, Faq, Contact } from './Sections.jsx'
+import { Trust, Integrations, Products, Agents, Faq, Contact } from './Sections.jsx'
 import Footer from './Footer.jsx'
 import LatestPosts from '../blog/LatestPosts.jsx'
 
@@ -25,7 +25,6 @@ export default function Site() {
       <main id="conteudo">
         <Hero />
         <Integrations />
-        <Principles />
         <Products />
         <Agents />
         <Trust />

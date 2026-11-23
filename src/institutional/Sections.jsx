@@ -13,7 +13,7 @@ import intMeta from './assets/integrations/meta.svg'
 import intGoogle from './assets/integrations/google.svg'
 import intTiktok from './assets/integrations/tiktok.svg'
 import intIfood from './assets/integrations/ifood.svg'
-import { SITE, VALUES } from './siteConfig.js'
+import { SITE } from './siteConfig.js'
 import { FAQ } from './faq.js'
 import crew from './assets/crew.webp'
 import lemi from './assets/lemi.webp'
@@ -36,29 +36,6 @@ import phImobiliarias from './assets/segments/photos/imobiliarias.jpg'
 import phBeleza from './assets/segments/photos/beleza.jpg'
 import phAtacado from './assets/segments/photos/atacado.jpg'
 import phServicos from './assets/segments/photos/servicos.jpg'
-
-/* ───────────── Como pensamos: princípios ───────────── */
-export function Principles() {
-  return (
-    <section className="principles" id="principios" aria-labelledby="principios-titulo">
-      <div className="wrap">
-        <div className="head">
-          <span className="eyebrow">Como pensamos</span>
-          <h2 id="principios-titulo" className="h2">O que guia cada produto que a gente cria.</h2>
-        </div>
-        <div className="pgrid" data-stagger>
-          {VALUES.map((v, k) => (
-              <article key={v.n} className={`pcard pcard--${k + 1}`}>
-                <span className="pcard__n">{v.n}</span>
-                <h3>{v.t}</h3>
-                <p>{v.d}</p>
-            </article>
-          ))}
-      </div>
-    </div>
-    </section >
-  )
-}
 
 /* ───────────── Confiança: parceria, segurança e documentação ───────────── */
 const TRUST = [
@@ -234,7 +211,6 @@ export function Products() {
               <article className={`seg ${k === on ? 'is-on' : ''}`} key={x.n} aria-label={x.n}>
                 <div className="seg__media">
                   <img src={PHOTOS[x.ic]} alt={x.alt} loading="lazy" />
-                  <span className="seg__chip"><img src={ICONS[x.ic]} alt="" />{x.n}</span>
                   <a className="seg__cta" href={SITE.demoFor(`Meu negócio é do segmento ${x.n.toLowerCase()}.`)} target="_blank" rel="noopener noreferrer" tabIndex={pinned && k !== on ? -1 : 0} aria-label={`Agendar demonstração para ${x.n.toLowerCase()}`}>Agendar demonstração <Arrow /></a>
                 </div>
                 <div className="seg__cap">

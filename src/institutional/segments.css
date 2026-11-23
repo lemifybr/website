@@ -9,14 +9,12 @@
 
 /* Cartão */
 .seg { flex: none; width: clamp(280px, 24vw, 380px); transform-origin: 50% 70%; transition: transform 0.8s var(--ease), opacity 0.8s var(--ease), filter 0.8s var(--ease); }
-.seg__media { position: relative; aspect-ratio: 4 / 5; border-radius: 30px; overflow: hidden; background: #e7ebe2; box-shadow: 0 30px 60px -36px rgba(14, 36, 33, 0.55); }
+.seg__media { position: relative; aspect-ratio: 4 / 5; border-radius: 14px; overflow: hidden; background: #e7ebe2; box-shadow: 0 30px 60px -36px rgba(14, 36, 33, 0.55); }
 .inst .seg__media > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: scale(1.08); transition: transform 1.4s var(--ease); }
 .seg__media::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(14, 36, 33, 0) 45%, rgba(14, 36, 33, 0.55) 100%); pointer-events: none; }
-.seg__chip { position: absolute; z-index: 2; top: 16px; left: 16px; display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px 7px 8px; border-radius: 99px; background: rgba(255, 255, 255, 0.86); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); font-size: 14px; font-weight: 600; color: var(--brand); }
-.inst .seg__chip img { width: 22px; height: 22px; object-fit: contain; }
 .seg__cap { display: none; }
 /* Botão dentro do cartão */
-.seg__cta { position: absolute; z-index: 2; left: 16px; bottom: 16px; display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; border-radius: 99px; background: var(--lime); color: var(--brand); font-size: 15px; font-weight: 600; box-shadow: 0 14px 28px -14px rgba(0, 0, 0, 0.55); transition: transform 0.35s var(--ease), background 0.3s, opacity 0.5s var(--ease); }
+.seg__cta { position: absolute; z-index: 2; left: 16px; bottom: 16px; display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; border-radius: 10px; background: var(--lime); color: var(--brand); font-size: 15px; font-weight: 600; box-shadow: 0 14px 28px -14px rgba(0, 0, 0, 0.55); transition: transform 0.35s var(--ease), background 0.3s, opacity 0.5s var(--ease); }
 .seg__cta svg { transition: transform 0.3s var(--ease); }
 .seg__cta:hover { background: #e6ff93; transform: translateY(-2px); }
 .seg__cta:hover svg { transform: translateX(4px); }
@@ -30,13 +28,13 @@
 .segs__copy > :nth-child(3) { animation-delay: 0.12s; }
 .segs__copy > :nth-child(4) { animation-delay: 0.18s; }
 @keyframes segCopy { from { opacity: 0; transform: translateY(18px); filter: blur(4px); } to { opacity: 1; transform: none; filter: none; } }
-.segs__tag { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px 6px 8px; border-radius: 99px; background: var(--lime); font-size: 14px; font-weight: 700; color: var(--brand); }
+.segs__tag { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px 6px 8px; border-radius: 6px; background: var(--lime); font-size: 14px; font-weight: 700; color: var(--brand); }
 .inst .segs__tag img { width: 22px; height: 22px; object-fit: contain; }
 .inst .segs__copy h3 { font-size: clamp(30px, 2.8vw, 44px); line-height: 1.05; letter-spacing: -0.035em; font-weight: 600; color: var(--brand); }
 .inst .segs__copy p { font-size: 18px; line-height: 1.55; color: var(--muted); max-width: 440px; }
 .segs__nav { display: grid; gap: 16px; }
 .segs__dots { display: flex; gap: 8px; }
-.segs__dots button { width: 10px; height: 10px; padding: 0; border: 0; border-radius: 99px; background: rgba(28, 64, 59, 0.2); cursor: pointer; transition: width 0.4s var(--ease), background 0.3s; }
+.segs__dots button { width: 10px; height: 10px; padding: 0; border: 0; border-radius: 4px; background: rgba(28, 64, 59, 0.2); cursor: pointer; transition: width 0.4s var(--ease), background 0.3s; }
 .segs__dots button.is-on { width: 30px; background: var(--brand); }
 .segs__dots button:hover:not(.is-on) { background: rgba(28, 64, 59, 0.45); }
 

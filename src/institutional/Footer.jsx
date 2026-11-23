@@ -37,7 +37,6 @@ export default function Footer() {
         </div>
         <nav aria-label="Empresa">
           <h4>Empresa</h4>
-          <a href="/#principios">Como pensamos</a>
           <a href="/#segmentos">Segmentos</a>
           <a href="/#agentes">Agentes de IA</a>
           <a href="/blog">Blog</a>

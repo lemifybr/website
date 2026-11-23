@@ -18,14 +18,6 @@ export const SITE = {
   apiFor: (extra) => `https://wa.me/551148635054?text=${encodeURIComponent('Olá! Quero falar sobre a API de mensageria do Lemify. ' + extra)}`,
 }
 
-export const VALUES = [
-  { n: '01', t: 'Resolver de verdade', d: 'Tecnologia boa é aquela que termina o trabalho que começou.' },
-  { n: '02', t: 'Simples de usar', d: 'Se a equipe precisa de manual para começar, ainda não está pronto.' },
-  { n: '03', t: 'Ninguém começa sozinho', d: 'Tecnologia nova só dá resultado quando tem gente do lado para ajudar.' },
-  { n: '04', t: 'Dados com responsabilidade', d: 'Segurança e LGPD desde a primeira conversa.' },
-  { n: '05', t: 'Feito no Brasil', d: 'Pensado para a realidade, os canais e o jeito de vender daqui.' },
-]
-
 export const STEPS = [
   { k: 'Etapa 1', t: 'Implantação guiada', d: 'A gente configura junto com você, a partir de modelos prontos para o seu segmento.' },
   { k: 'Etapa 2', t: 'Treinamento da equipe', d: 'Todo mundo aprende a usar dentro da própria rotina, sem depender de manual.' },

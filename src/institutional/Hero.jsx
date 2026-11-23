@@ -4,7 +4,7 @@ import { SITE } from './siteConfig.js'
 import heroLoja from './assets/hero.jpg'
 
 const SCENES = [
-  { tab: 'Varejo', h: 'Soluções de IA para atendimento, vendas, agenda e gestão, prontas para o seu negócio.', img: heroLoja, alt: 'Dona de uma loja de tênis, de camisa verde, fotografando um produto ao lado do notebook, entre caixas de pedidos', q: 'Oi! Tem esse tênis no 39?', a: 'Tem sim! Separo um para você retirar hoje ou prefere receber em casa?', ok: 'Pedido encaminhado para a equipe' },
+  { tab: 'Varejo', h: 'Soluções de IA para atendimento, vendas, agenda e gestão, prontas para o seu negócio.', img: heroLoja, alt: 'Dupla trabalhando e conversando diante de um notebook em um escritório moderno com planta verde', q: 'Oi! Tem esse tênis no 39?', a: 'Tem sim! Separo um para você retirar hoje ou prefere receber em casa?', ok: 'Pedido encaminhado para a equipe' },
 ]
 
 export default function Hero() {
@@ -39,35 +39,35 @@ export default function Hero() {
   }, [])
 
   return (
-      <section className="hero" id="inicio">
-        <div className="hero__stage"
-          onMouseEnter={() => { paused.current = true }} onMouseLeave={() => { paused.current = false }}>
-          <div className="hero__media">
+    <section className="hero" id="inicio">
+      <div className="hero__stage"
+        onMouseEnter={() => { paused.current = true }} onMouseLeave={() => { paused.current = false }}>
+        <div className="hero__media">
+          {SCENES.map((x, k) => (
+            <img key={x.tab} src={x.img} alt={k === i ? x.alt : ''} className={`hero__img ${k === i ? 'is-on' : ''}`} fetchPriority={k === 0 ? 'high' : 'low'} decoding="async" />
+          ))}
+        </div>
+        <div className="hero__shade" />
+
+        <div className="hero__copy">
+          <div className="hero__tabs" hidden={SCENES.length < 2} role="tablist" aria-label="Segmentos" ref={tabsRef}>
+            {pill && <span className="hero__pill" aria-hidden="true" style={{ transform: `translate(${pill.x}px, ${pill.y}px)`, width: pill.w, height: pill.h }} />}
             {SCENES.map((x, k) => (
-              <img key={x.tab} src={x.img} alt={k === i ? x.alt : ''} className={`hero__img ${k === i ? 'is-on' : ''}`} fetchPriority={k === 0 ? 'high' : 'low'} decoding="async" />
+              <button key={x.tab} role="tab" aria-selected={k === i} className={k === i ? 'is-on' : ''} onClick={() => { interacted.current = true; setI(k) }}>{x.tab}</button>
             ))}
           </div>
-          <div className="hero__shade" />
-
-          <div className="hero__copy">
-            <div className="hero__tabs" hidden={SCENES.length < 2} role="tablist" aria-label="Segmentos" ref={tabsRef}>
-              {pill && <span className="hero__pill" aria-hidden="true" style={{ transform: `translate(${pill.x}px, ${pill.y}px)`, width: pill.w, height: pill.h }} />}
-              {SCENES.map((x, k) => (
-                <button key={x.tab} role="tab" aria-selected={k === i} className={k === i ? 'is-on' : ''} onClick={() => { interacted.current = true; setI(k) }}>{x.tab}</button>
-              ))}
-            </div>
-            <h1 className="display">{SCENES[i].h}</h1>
-            <div className="hero__row">
-              <p className="hero__lead">
-                Somos a Lemify, empresa brasileira de tecnologia. Tudo conectado aos canais e sistemas que você já usa, com suporte de gente de verdade.
-              </p>
-              <div className="hero__cta">
-                <a className="btn btn--lime btn--sm" href={SITE.productPage}>Conheça o Lemify <Arrow /></a>
-                <a className="btn btn--glass btn--sm" href="#contato">Fale com a gente</a>
-              </div>
+          <h1 className="display">{SCENES[i].h}</h1>
+          <div className="hero__row">
+            <p className="hero__lead">
+              Conecte WhatsApp, Instagram e os sistemas que sua empresa já usa. Agentes de IA entram na rotina do time, com suporte humano de perto.
+            </p>
+            <div className="hero__cta">
+              <a className="btn btn--lime btn--sm" href={SITE.productPage}>Conheça o Lemify <Arrow /></a>
+              <a className="btn btn--glass btn--sm" href="#contato">Fale com a gente</a>
             </div>
           </div>
         </div>
-      </section>
-      )
+      </div>
+    </section>
+  )
 }
