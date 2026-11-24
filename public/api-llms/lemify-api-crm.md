@@ -16,7 +16,7 @@ Erros vêm como JSON `{ "error": "mensagem" }`. 401 = credencial ausente/inváli
 
 **Lista pipelines e etapas**
 
-Use para descobrir os ids de pipeline e etapa (`stageId`). Etapas ocultas não aparecem. Escopo exigido: `crm:read`.
+Use para descobrir os ids de pipeline e etapa (`stageId`) e a instrução (`description`) configurada em cada etapa para o agente de IA. Etapas ocultas não aparecem. Escopo exigido: `crm:read`.
 
 Respostas:
 - 200: Pipelines com suas etapas
@@ -33,6 +33,7 @@ Resposta 200 (lista de objetos com):
   - `name` (string): ex.: "Qualificação"
   - `position` (integer): ex.: 0
   - `closureType` (string): valores: won, lost; ex.: null
+  - `description` (string): Instrução da etapa para o agente de IA; ex.: "Avançar quando o cliente informar interesse e orçamento"
 
 ```bash
 curl -X GET "https://api.lemify.com.br/v1/pipelines" \
@@ -130,14 +131,18 @@ como no painel. Com `externalId`, a chamada é idempotente: se já existir um de
 `externalSource` + `externalId`, ele é devolvido com status 200. Escopo exigido: `crm:write`.
 
 Corpo (application/json):
+- `contact` (object): Dados do contato. O Lemify procura pelo telefone (com e sem o 9º dígito) e depois pelo e-mail, dentro da empresa; se não achar, cria. De um contato existente, só preenche nome e e-mail que estejam vazios.
+  - `name` (string): Obrigatório para criar um contato novo; até 255 caracteres; ex.: "Maria Souza"
+  - `number` (string): Telefone com DDD; sem DDI, assume Brasil (55). Obrigatório para criar um contato novo; ex.: "5511999999999"
+  - `email` (string (email)): ex.: "maria@exemplo.com"
 - `name` (string, obrigatório): até 255 caracteres; ex.: "Pedido 1042"
 - `stageId` (integer, obrigatório): ex.: 12
 - `pipelineId` (integer): Opcional; se vier, precisa ser o pipeline da etapa; ex.: 1
 - `amount` (number): Ignorado quando o deal tem items: o valor passa a ser a soma de price × quantity; ex.: 1500
 - `status` (string): valores: open, won, lost; ex.: "open"
-- `contactId` (integer): ex.: 345
+- `contactId` (integer): Contato já cadastrado. Use isto ou contact; ex.: 345
 - `userId` (integer): Responsável (usuário da empresa); ex.: 7
-- `dealReasonId` (integer): Motivo de ganho/perda (veja /v1/deal-reasons)
+- `dealReasonId` (integer): Motivo de ganho/perda (veja /v1/deal-reasons). Omita em negócios abertos; ex.: 4
 - `description` (string): até 10000 caracteres; ex.: "Cliente interessado no plano anual"
 - `items` (object[])
   - `type` (string, obrigatório): valores: product, service; ex.: "product"
@@ -289,14 +294,18 @@ Parâmetros:
 - `dealId` (path, integer, obrigatório)
 
 Corpo (application/json):
+- `contact` (object): Dados do contato. O Lemify procura pelo telefone (com e sem o 9º dígito) e depois pelo e-mail, dentro da empresa; se não achar, cria. De um contato existente, só preenche nome e e-mail que estejam vazios.
+  - `name` (string): Obrigatório para criar um contato novo; até 255 caracteres; ex.: "Maria Souza"
+  - `number` (string): Telefone com DDD; sem DDI, assume Brasil (55). Obrigatório para criar um contato novo; ex.: "5511999999999"
+  - `email` (string (email)): ex.: "maria@exemplo.com"
 - `name` (string, obrigatório): até 255 caracteres; ex.: "Pedido 1042"
 - `stageId` (integer, obrigatório): ex.: 12
 - `pipelineId` (integer): Opcional; se vier, precisa ser o pipeline da etapa; ex.: 1
 - `amount` (number): Ignorado quando o deal tem items: o valor passa a ser a soma de price × quantity; ex.: 1500
 - `status` (string): valores: open, won, lost; ex.: "open"
-- `contactId` (integer): ex.: 345
+- `contactId` (integer): Contato já cadastrado. Use isto ou contact; ex.: 345
 - `userId` (integer): Responsável (usuário da empresa); ex.: 7
-- `dealReasonId` (integer): Motivo de ganho/perda (veja /v1/deal-reasons)
+- `dealReasonId` (integer): Motivo de ganho/perda (veja /v1/deal-reasons). Omita em negócios abertos; ex.: 4
 - `description` (string): até 10000 caracteres; ex.: "Cliente interessado no plano anual"
 - `items` (object[])
   - `type` (string, obrigatório): valores: product, service; ex.: "product"
@@ -464,5 +473,69 @@ curl -X PATCH "https://api.lemify.com.br/v1/deals/<dealId>/stage" \
   -H "Authorization: Bearer $LEMIFY_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"stageId":13}'
+```
+
+### GET /v1/contacts
+
+**Busca contatos por telefone ou e-mail**
+
+Procura na empresa da chave. O telefone casa com e sem o 9º dígito. Escopo exigido: `crm:read`.
+
+Parâmetros:
+- `number` (query, string): ex.: "5511999999999"
+- `email` (query, string): ex.: "maria@exemplo.com"
+
+Respostas:
+- 200: Contatos encontrados (lista vazia se nenhum)
+- 400: Informe number ou email
+- 401: Token de autenticação ausente ou inválido
+- 403: Acesso negado - permissões insuficientes
+
+Resposta 200 (lista de objetos com):
+- `id` (integer): ex.: 345
+- `name` (string): ex.: "Maria Souza"
+- `number` (string): ex.: "5511999999999"
+- `email` (string): ex.: "maria@exemplo.com"
+- `createdAt` (string (date-time))
+- `updatedAt` (string (date-time))
+
+```bash
+curl -X GET "https://api.lemify.com.br/v1/contacts" \
+  -H "Authorization: Bearer $LEMIFY_API_KEY"
+```
+
+### POST /v1/contacts
+
+**Cria ou atualiza um contato**
+
+Para formulários de site e integrações: procura o contato pelo telefone e depois pelo e-mail.
+Se existir, devolve com 200 (e só preenche nome/e-mail vazios); se não, cria e devolve 201.
+Para criar, name e number são obrigatórios. Escopo exigido: `crm:write`.
+
+Corpo (application/json):
+- `name` (string): Obrigatório para criar um contato novo; até 255 caracteres; ex.: "Maria Souza"
+- `number` (string): Telefone com DDD; sem DDI, assume Brasil (55). Obrigatório para criar um contato novo; ex.: "5511999999999"
+- `email` (string (email)): ex.: "maria@exemplo.com"
+
+Respostas:
+- 200: Contato já existia
+- 201: Contato criado
+- 400: Dados inválidos ou insuficientes para criar o contato
+- 401: Token de autenticação ausente ou inválido
+- 403: Acesso negado - permissões insuficientes
+
+Resposta 200 (objeto com):
+- `id` (integer): ex.: 345
+- `name` (string): ex.: "Maria Souza"
+- `number` (string): ex.: "5511999999999"
+- `email` (string): ex.: "maria@exemplo.com"
+- `createdAt` (string (date-time))
+- `updatedAt` (string (date-time))
+
+```bash
+curl -X POST "https://api.lemify.com.br/v1/contacts" \
+  -H "Authorization: Bearer $LEMIFY_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{}'
 ```
 

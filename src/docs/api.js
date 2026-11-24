@@ -251,13 +251,15 @@ export const ENDPOINTS = [
         method: 'POST',
         path: '/v1/deals',
         title: 'Criar negociação',
-        text: 'Cria o negócio na etapa informada. Com externalId, a chamada é idempotente: repetir a criação devolve o negócio que já existe, com status 200.',
+        text: 'Cria o negócio na etapa informada. Para o contato, envie contactId (já cadastrado) ou contact com nome, telefone e e-mail: o Lemify procura pelo telefone e pelo e-mail e, se não achar, cria. Ideal para formulários de site. Com externalId, a chamada é idempotente: repetir a criação devolve o negócio que já existe, com status 200.',
         auth: 'Chave de API (crm:write)',
         fields: [
           ['name', 'string', 'obrigatório', 'Nome do negócio.'],
           ['stageId', 'integer', 'obrigatório', 'Etapa onde o negócio entra (veja /v1/pipelines).'],
+          ['contact', 'objeto', 'opcional', 'name, number (com DDD; sem DDI assume Brasil) e email. Busca ou cria o contato. Use isto ou contactId.'],
+          ['contactId', 'integer', 'opcional', 'Contato já cadastrado na empresa.'],
+          ['userId', 'integer', 'opcional', 'Responsável, usuário da empresa.'],
           ['amount', 'number', 'opcional', 'Valor. Com items, vira a soma dos itens.'],
-          ['contactId / userId', 'integer', 'opcional', 'Contato e responsável, da mesma empresa.'],
           ['items', 'objeto[]', 'opcional', 'Produtos ou serviços: type (product ou service), id, name, price e quantity.'],
           ['status', 'string', 'opcional', 'open, won ou lost.'],
           ['closingDate / deliveryDate', 'string', 'opcional', 'Datas ISO 8601.'],
@@ -268,13 +270,48 @@ export const ENDPOINTS = [
   -H "Authorization: Bearer lmf_SUA_CHAVE" \\
   -H "Content-Type: application/json" \\
   -d '{
-    "name": "Pedido 1042",
+    "name": "Lead do site - Maria",
     "stageId": 12,
-    "contactId": 345,
-    "amount": 1500,
-    "externalSource": "erp",
-    "externalId": "1042"
+    "leadSource": "Formulário do site",
+    "contact": {
+      "name": "Maria Souza",
+      "number": "5511999999999",
+      "email": "maria@exemplo.com"
+    },
+    "externalSource": "site",
+    "externalId": "form-8f3a2c"
   }'`,
+      },
+      {
+        id: 'crm-contact-upsert',
+        method: 'POST',
+        path: '/v1/contacts',
+        title: 'Criar ou atualizar contato',
+        text: 'Procura o contato pelo telefone (com e sem o 9º dígito) e depois pelo e-mail. Se existir, devolve com 200 e só preenche nome e e-mail que estejam vazios; se não, cria e devolve 201.',
+        auth: 'Chave de API (crm:write)',
+        fields: [
+          ['name', 'string', 'obrigatório para criar', 'Nome do contato.'],
+          ['number', 'string', 'obrigatório para criar', 'Telefone com DDD. Sem DDI, assume Brasil (55).'],
+          ['email', 'string', 'opcional', 'E-mail. Sozinho, só encontra contatos que já existem.'],
+        ],
+        sample: `curl -X POST ${'https://api.lemify.com.br'}/v1/contacts \\
+  -H "Authorization: Bearer lmf_SUA_CHAVE" \\
+  -H "Content-Type: application/json" \\
+  -d '{ "name": "Maria Souza", "number": "11999999999", "email": "maria@exemplo.com" }'`,
+      },
+      {
+        id: 'crm-contact-find',
+        method: 'GET',
+        path: '/v1/contacts',
+        title: 'Buscar contato',
+        text: 'Busca contatos da empresa por telefone ou e-mail. Devolve uma lista, vazia se não houver nenhum.',
+        auth: 'Chave de API (crm:read)',
+        fields: [
+          ['number', 'query', 'opcional', 'Telefone com DDD.'],
+          ['email', 'query', 'opcional', 'E-mail.'],
+        ],
+        sample: `curl "${'https://api.lemify.com.br'}/v1/contacts?number=5511999999999" \\
+  -H "Authorization: Bearer lmf_SUA_CHAVE"`,
       },
       {
         id: 'crm-get',
