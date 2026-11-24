@@ -1,8 +1,8 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { Fragment, useEffect, useMemo, useRef, useState } from 'react'
 import '@fontsource-variable/bricolage-grotesque'
 import '../institutional/site.css'
 import './lemifyPage.css'
-import { useScrollMotion, useSmoothScroll, ScrollTrigger, prefersReducedMotion } from '../institutional/motion.jsx'
+import { useScrollMotion, useSmoothScroll, ScrollTrigger, scrollToY } from '../institutional/motion.jsx'
 import Header, { Arrow } from '../institutional/Header.jsx'
 import Footer from '../institutional/Footer.jsx'
 import { SITE } from '../institutional/siteConfig.js'
@@ -53,11 +53,16 @@ export default function LemifyPage() {
   const modalVideoRef = useRef(null)
   const caseVideoRef = useRef(null)
   const markRefs = useRef([])
+  const scrollingToAgentRef = useRef(false)
 
   const [activeTabId, setActiveTabId] = useState(PRODUCT_SHOWCASE.tabs[0].id)
   const [activeAgentIdx, setActiveAgentIdx] = useState(0)
   const [billing, setBilling] = useState('annual')
+  const [compareOpen, setCompareOpen] = useState(
+    () => typeof window !== 'undefined' && window.location.hash === '#comparar-planos',
+  )
   const [caseVideoPlaying, setCaseVideoPlaying] = useState(false)
+  const [openFaq, setOpenFaq] = useState(0)
   const [rawPlans, setRawPlans] = useState(() => readCachedPlans().data)
 
   useScrollMotion(root)
@@ -73,7 +78,7 @@ export default function LemifyPage() {
     let raf = 0
     const sync = () => {
       raf = 0
-      if (window.innerWidth <= 900) return
+      if (window.innerWidth <= 900 || scrollingToAgentRef.current) return
       let next = 0
       for (let i = AI_AGENTS_SECTION.agents.length - 1; i >= 0; i -= 1) {
         const el = markRefs.current[i]
@@ -88,13 +93,20 @@ export default function LemifyPage() {
     const onScroll = () => {
       if (!raf) raf = requestAnimationFrame(sync)
     }
+    const unlock = () => {
+      scrollingToAgentRef.current = false
+    }
     window.addEventListener('scroll', onScroll, { passive: true })
     window.addEventListener('resize', onScroll)
+    window.addEventListener('wheel', unlock, { passive: true })
+    window.addEventListener('touchstart', unlock, { passive: true })
     sync()
     return () => {
       cancelAnimationFrame(raf)
       window.removeEventListener('scroll', onScroll)
       window.removeEventListener('resize', onScroll)
+      window.removeEventListener('wheel', unlock)
+      window.removeEventListener('touchstart', unlock)
     }
   }, [])
 
@@ -138,7 +150,25 @@ export default function LemifyPage() {
     const mark = markRefs.current[index]
     if (!mark) return
     const targetY = mark.getBoundingClientRect().top + window.scrollY - (STACK_BASE + index * STACK_STEP) + 2
-    window.scrollTo({ top: Math.max(0, targetY), behavior: prefersReducedMotion() ? 'auto' : 'smooth' })
+    scrollingToAgentRef.current = true
+    scrollToY(targetY, {
+      duration: 0.72,
+      onComplete: () => {
+        scrollingToAgentRef.current = false
+      },
+    })
+  }
+
+  const openCompare = (e) => {
+    e?.preventDefault()
+    setCompareOpen(true)
+    requestAnimationFrame(() => {
+      const el = document.getElementById('comparar-planos')
+      if (el) {
+        const y = el.getBoundingClientRect().top + window.scrollY - 96
+        scrollToY(y, { duration: 0.75 })
+      }
+    })
   }
 
   const openDemoVideo = () => {
@@ -182,7 +212,7 @@ export default function LemifyPage() {
               <p className="lp-hero__lead">{LEMIFY_HERO.lead}</p>
               <div className="lp-hero__cta">
                 <a className="btn btn--lime" href={SITE.demo} target="_blank" rel="noopener noreferrer">
-                  Agendar demonstração <Arrow />
+                  Ver como ficaria no meu WhatsApp <Arrow />
                 </a>
               </div>
             </div>
@@ -305,7 +335,12 @@ export default function LemifyPage() {
             </div>
 
             <div className="lp-stack">
-              <nav className="lp-stack__rail" aria-label="Navegar pelos agentes de IA">
+              <nav
+                className="lp-stack__rail"
+                aria-label="Navegar pelos agentes de IA"
+                style={{ '--active': activeAgentIdx }}
+              >
+                <span className="lp-stack__pill" aria-hidden="true" />
                 {AI_AGENTS_SECTION.agents.map((agent, idx) => {
                   const selected = idx === activeAgentIdx
                   return (
@@ -350,7 +385,6 @@ export default function LemifyPage() {
                         className={`lp-scard ${isActive ? 'is-active' : ''} ${isCovered ? 'is-covered' : ''}`}
                         style={{
                           '--depth': depth,
-                          '--accent': agent.accent,
                           background: agent.gradient,
                         }}
                       >
@@ -363,7 +397,7 @@ export default function LemifyPage() {
                           <span className="lp-scard__peek-task">{agent.task}</span>
                           <span className="lp-scard__peek-id">
                             <strong>{agent.name}</strong>
-                            <img src={agent.avatar} alt="" style={{ background: agent.bg }} loading="lazy" />
+                            <img src={agent.avatar} alt="" loading="lazy" />
                           </span>
                         </button>
 
@@ -372,7 +406,7 @@ export default function LemifyPage() {
                             <h3>{agent.task}</h3>
                             <p>{agent.description}</p>
                             <a
-                              className="btn btn--lime btn--sm lp-scard__cta"
+                              className="btn btn--dark btn--sm lp-scard__cta"
                               href={SITE.demo}
                               target="_blank"
                               rel="noopener noreferrer"
@@ -390,7 +424,6 @@ export default function LemifyPage() {
                               src={agent.avatar}
                               alt={agent.name}
                               className="lp-scard__av"
-                              style={{ background: agent.bg }}
                               loading="lazy"
                             />
                           </div>
@@ -468,8 +501,8 @@ export default function LemifyPage() {
             <div className="lp-plans-head">
               <div className="head">
                 <span className="eyebrow">Planos</span>
-                <h2 id="lp-planos-titulo" className="h2">Escolha o plano pelo ritmo da sua equipe.</h2>
-                <p className="head__p">Antes de decidir, agende uma demonstração e veja a IA atendendo no cenário da sua empresa.</p>
+                <h2 id="lp-planos-titulo" className="h2">Escolha o plano pelo volume do seu atendimento.</h2>
+                <p className="head__p">Quer ver como o agente de IA atenderia na sua empresa antes de decidir? A gente mostra ao vivo.</p>
               </div>
 
               <div className="lp-bill" role="group" aria-label="Periodicidade de cobrança">
@@ -535,6 +568,77 @@ export default function LemifyPage() {
                 </article>
               ))}
             </div>
+
+            <div className={`lp-compare ${compareOpen ? 'is-open' : ''}`} id="comparar-planos">
+              <button
+                type="button"
+                className="lp-compare__toggle"
+                aria-expanded={compareOpen}
+                aria-controls="lp-compare-panel"
+                onClick={() => setCompareOpen((v) => !v)}
+              >
+                <span className="lp-compare__label">
+                  <strong>Comparar todos os recursos lado a lado</strong>
+                  <span>Veja limites, agentes de IA e módulos incluídos em cada plano</span>
+                </span>
+                <span className="lp-compare__icon" aria-hidden="true">+</span>
+              </button>
+
+              {compareOpen && (
+                <div className="lp-compare__panel" id="lp-compare-panel">
+                  <div className="lp-cmp-wrap">
+                    <table className="lp-cmp-table">
+                      <thead>
+                        <tr>
+                          <th scope="col">Recurso</th>
+                          {plans.mainPlans.map((p) => (
+                            <th key={p.code} scope="col" className={p.featured ? 'is-featured' : undefined}>
+                              {p.title}
+                            </th>
+                          ))}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {plans.comparisonGroups.map((section, sIdx) => (
+                          <Fragment key={section.group || sIdx}>
+                            {section.group && (
+                              <tr className="lp-cmp-group">
+                                <th scope="rowgroup" colSpan={plans.mainPlans.length + 1}>
+                                  {section.group}
+                                </th>
+                              </tr>
+                            )}
+                            {section.rows.map((row) => (
+                              <tr key={`${section.group || 'base'}-${row.label}`}>
+                                <th scope="row">{row.label}</th>
+                                {row.values.map((val, cIdx) => {
+                                  const featured = plans.mainPlans[cIdx]?.featured
+                                  return (
+                                    <td key={cIdx} className={featured ? 'is-featured' : undefined}>
+                                      {typeof val === 'boolean' ? (
+                                        val ? (
+                                          <span className="lp-cmp-yes" aria-label="Incluído">
+                                            <Check />
+                                          </span>
+                                        ) : (
+                                          <span className="lp-cmp-no" aria-label="Não incluído">–</span>
+                                        )
+                                      ) : (
+                                        val
+                                      )}
+                                    </td>
+                                  )
+                                })}
+                              </tr>
+                            ))}
+                          </Fragment>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </section>
 
@@ -547,12 +651,30 @@ export default function LemifyPage() {
             </div>
             <div className="faq__list">
               {faqItems.map((item, idx) => (
-                <details className="faq__item" key={item.q} open={idx === 0 || undefined}>
-                  <summary>{item.q}</summary>
+                <details
+                  className="faq__item"
+                  key={item.q}
+                  open={openFaq === idx}
+                  onToggle={(e) => {
+                    if (e.currentTarget.open && openFaq !== idx) setOpenFaq(idx)
+                  }}
+                >
+                  <summary
+                    onClick={(e) => {
+                      e.preventDefault()
+                      setOpenFaq((cur) => (cur === idx ? null : idx))
+                    }}
+                  >
+                    {item.q}
+                  </summary>
                   <p>
                     {item.a}
                     {item.link && (
-                      <a className="lp-faq-link" href={item.link.href}>
+                      <a
+                        className="lp-faq-link"
+                        href={item.link.href}
+                        onClick={item.link.href === '#comparar-planos' ? openCompare : undefined}
+                      >
                         {item.link.label} <Arrow />
                       </a>
                     )}
@@ -565,15 +687,15 @@ export default function LemifyPage() {
 
         <section className="lp-cta" aria-labelledby="lp-cta-titulo">
           <div className="wrap lp-cta__in">
-            <h2 id="lp-cta-titulo">Veja o Lemify na rotina da sua empresa.</h2>
+            <h2 id="lp-cta-titulo">Quer que a gente mostre como ficaria aí?</h2>
             <p>
-              Agende uma demonstração ao vivo com a nossa equipe. Planos a partir de R$ {billing === 'annual' ? plans.minAnnualPrice : plans.minPrice} por mês{billing === 'annual' ? ' no plano anual' : ''}, e você cancela quando quiser.
+              Agende uma demonstração rápida e veja um agente de IA respondendo no cenário da sua empresa. Planos a partir de R$ {billing === 'annual' ? plans.minAnnualPrice : plans.minPrice} por mês{billing === 'annual' ? ' no plano anual' : ''}, sem fidelidade.
             </p>
             <div className="lp-cta__actions">
               <a className="btn btn--lime btn--lg" href={SITE.demo} target="_blank" rel="noopener noreferrer">
-                Agendar demonstração <Arrow />
+                Ver como ficaria no meu WhatsApp <Arrow />
               </a>
-              <a className="btn btn--outline-light btn--lg" href="/lemify/planos">
+              <a className="btn btn--outline-light btn--lg" href="#comparar-planos" onClick={openCompare}>
                 Comparar planos
               </a>
             </div>

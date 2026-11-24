@@ -13,10 +13,8 @@ import reembolso from './legal/reembolso.js'
 import termosIa from './legal/termosIa.js'
 import google from './legal/google.js'
 import lgpd from './legal/lgpd.js'
-import ProductPage from './product/ProductPage.jsx'
 import LemifyPage from './product/LemifyPage.jsx'
 import ApiPage from './api-page/ApiPage.jsx'
-import DemoModal from './institutional/DemoModal.jsx'
 import { applySeo, SEO } from './seo.js'
 
 const LEGAL_DOCS = [termos, privacidade, reembolso, termosIa, google, lgpd]
@@ -25,31 +23,28 @@ function App() {
   const path = window.location.pathname.replace(/\/+$/, '') || '/'
   const doc = LEGAL_DOCS.find((d) => d.path === path)
   const post = path.match(/^\/blog\/([^/]+)$/)
-  const known = !!doc || path === '/manual/bling' || path === '/docs' || path === '/docs/api' || path === '/blog' || path === '/lemify' || path === '/lemify/planos' || path === '/api' || !!post
+  const isLegacyPlans = path === '/lemify/planos'
+  const known = !!doc || path === '/manual/bling' || path === '/docs' || path === '/docs/api' || path === '/blog' || path === '/lemify' || path === '/api' || !!post
 
   useEffect(() => {
+    if (isLegacyPlans) {
+      window.location.replace('/lemify#planos')
+      return
+    }
     applySeo(known ? SEO[path.startsWith('/blog/') ? '/blog' : path] : SEO['/'], known ? path : '/')
     // Só força o topo em páginas sem âncora; com #hash o navegador cuida do scroll.
     if (!window.location.hash) window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
-  }, [known, path])
+  }, [isLegacyPlans, known, path])
 
-  let view = <Site />
-  if (doc) view = <LegalPage doc={doc} />
-  else if (path === '/manual/bling') view = <BlingManual />
-  else if (path === '/docs') view = <DocsPage />
-  else if (path === '/docs/api') view = <ApiDocsPage />
-  else if (path === '/lemify') view = <LemifyPage />
-  else if (path === '/lemify/planos') view = <ProductPage page="planos" />
-  else if (path === '/api') view = <ApiPage />
-  else if (path === '/blog') view = <BlogList />
-  else if (post) view = <BlogPost slug={decodeURIComponent(post[1])} />
-
-  return (
-    <>
-      {view}
-      <DemoModal />
-    </>
-  )
+  if (doc) return <LegalPage doc={doc} />
+  if (path === '/manual/bling') return <BlingManual />
+  if (path === '/docs') return <DocsPage />
+  if (path === '/docs/api') return <ApiDocsPage />
+  if (path === '/lemify' || isLegacyPlans) return <LemifyPage />
+  if (path === '/api') return <ApiPage />
+  if (path === '/blog') return <BlogList />
+  if (post) return <BlogPost slug={decodeURIComponent(post[1])} />
+  return <Site />
 }
 
 export default App

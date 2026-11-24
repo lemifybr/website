@@ -3,10 +3,10 @@
 // Mantém apenas caminhos públicos (/lemify-assets/...) para rodar sem bundler no Node.
 
 export const LEMIFY_HERO = {
-  eyebrow: 'Software de atendimento e CRM com IA',
-  h1: 'Venda mais com as conversas que sua empresa já recebe.',
+  eyebrow: 'Agente de IA no WhatsApp + CRM',
+  h1: 'Coloque um agente de IA no seu WhatsApp.',
   lead:
-    'Reúna WhatsApp, Instagram, Messenger e e-mail numa caixa só, com CRM, agenda e agentes de IA trabalhando junto com a sua equipe.',
+    'Ele responde na hora, faz as perguntas certas e já deixa a conversa pronta pro seu time fechar. Com CRM, agenda e todos os seus canais no mesmo lugar.',
   video: {
     src: '/lemify-assets/177ac1bb33c9823159cc32191995a59b.mp4',
     poster: '/lemify-assets/ce808e779a4c2c542dc0448fa3378b4c.webp',
@@ -16,7 +16,7 @@ export const LEMIFY_HERO = {
   screen: {
     desktop: '/lemify-assets/5e12f30514564db0389fa8fe9d16f723.webp',
     mobile: '/lemify-assets/00391a45c4c5b1f9bdf770f9167aface.webp',
-    alt: 'Tela real do Lemify: caixa de conversas com setores, responsáveis e a ficha do cliente ao lado',
+    alt: 'Tela real do Lemify: agente de IA no WhatsApp atendendo junto com a equipe na caixa de conversas e CRM',
   },
 }
 
@@ -33,15 +33,15 @@ export const CLIENT_LOGOS = [
 
 export const PRODUCT_SHOWCASE = {
   eyebrow: 'Por dentro do Lemify',
-  title: 'Atendimento, CRM, agenda e painel no mesmo lugar.',
+  title: 'A IA atende e qualifica. O seu time entra só para fechar.',
   lead:
-    'Sem celular compartilhado, sem planilha solta e sem perder o histórico quando o cliente troca de canal ou de atendente.',
+    'WhatsApp, Instagram, CRM, agenda e painel no mesmo lugar. Sem celular compartilhado, sem planilha solta e sem lead esfriando sem resposta.',
   note: 'Telas reais do Lemify. Nomes e contatos foram trocados por fictícios.',
   tabs: [
     {
       id: 'conversas',
       label: 'Conversas',
-      title: 'Veja quem está sendo atendido e quem precisa de atenção',
+      title: 'A IA responde na hora e passa a conversa pronta para o vendedor',
       description:
         'WhatsApp, Instagram, Messenger e e-mail numa caixa única, com setores, filas e a ficha completa do cliente ao lado.',
       bullets: [
@@ -56,7 +56,7 @@ export const PRODUCT_SHOWCASE = {
     {
       id: 'crm',
       label: 'CRM',
-      title: 'Acompanhe cada oportunidade no funil certo',
+      title: 'Cada conversa vira oportunidade organizada no funil',
       description:
         'Funis em quadro com as etapas da sua empresa, orçamentos prontos e visibilidade de receita sem depender de planilha.',
       bullets: [
@@ -71,7 +71,7 @@ export const PRODUCT_SHOWCASE = {
     {
       id: 'agenda',
       label: 'Agenda',
-      title: 'Organize os agendamentos da equipe numa visão só',
+      title: 'Horários marcados pelo WhatsApp sem ninguém no telefone',
       description:
         'Os horários marcados pela equipe e pelos agentes de IA, filtrados por profissional, unidade e status.',
       bullets: [
@@ -86,7 +86,7 @@ export const PRODUCT_SHOWCASE = {
     {
       id: 'painel',
       label: 'Painel',
-      title: 'Os números da operação sem perguntar a cada vendedor',
+      title: 'Saiba quantas conversas viraram agenda e venda',
       description:
         'Acompanhe tempo de resposta, funil, receita e onde as vendas estão travando em poucos cliques.',
       bullets: [
@@ -102,10 +102,10 @@ export const PRODUCT_SHOWCASE = {
 }
 
 export const AI_AGENTS_SECTION = {
-  eyebrow: 'Agentes de IA + equipe',
-  title: 'Seis agentes na rotina, com passagem simples para a sua equipe.',
+  eyebrow: 'Seis agentes de IA',
+  title: 'Do primeiro "oi" no WhatsApp ao fechamento da venda.',
   lead:
-    'Os agentes cuidam do atendimento repetitivo 24 horas por dia, dentro da mesma ficha que o seu time usa. Quando o cliente pede uma pessoa ou foge da regra, a equipe assume com o resumo pronto.',
+    'Cada agente assume uma parte da rotina comercial 24 horas por dia, dentro da mesma ficha que o seu time usa. Quando o cliente pede uma pessoa ou está pronto para fechar, a equipe assume com o resumo pronto.',
   agents: [
     {
       id: 'lemi',
@@ -116,8 +116,7 @@ export const AI_AGENTS_SECTION = {
         'Consulta as informações e regras da sua empresa, responde na hora e chama a equipe quando precisa.',
       avatar: '/lemify-assets/4288c321bd4e7cfab256b2c142fe2804.webp',
       bg: '#F1FECB',
-      accent: '#D8FE6A',
-      gradient: 'linear-gradient(125deg, #0d2421 0%, #1c403b 54%, #356940 100%)',
+      gradient: 'linear-gradient(125deg, #d8fe6a 0%, #e9ffa3 100%)',
     },
     {
       id: 'maia',
@@ -128,8 +127,7 @@ export const AI_AGENTS_SECTION = {
         'Oferece os horários livres da agenda, marca, remarca e envia lembrete antes do compromisso.',
       avatar: '/lemify-assets/9588b6492fbcd05850e3b69009e61e4c.webp',
       bg: '#D8E7EF',
-      accent: '#BCD8FF',
-      gradient: 'linear-gradient(125deg, #0c2240 0%, #16487f 54%, #2272ba 100%)',
+      gradient: 'linear-gradient(125deg, #bcd8ff 0%, #dcebff 100%)',
     },
     {
       id: 'otto',
@@ -140,8 +138,7 @@ export const AI_AGENTS_SECTION = {
         'Anota nome, cidade, e-mail, interesse e origem direto da conversa. Ninguém digita cadastro.',
       avatar: '/lemify-assets/81be5ebfeade9f0dc8be40ce139c5d29.webp',
       bg: '#F0DADE',
-      accent: '#FFC9D6',
-      gradient: 'linear-gradient(125deg, #3b1326 0%, #6d2345 54%, #a13a67 100%)',
+      gradient: 'linear-gradient(125deg, #ffc9d6 0%, #ffe2e9 100%)',
     },
     {
       id: 'theo',
@@ -152,8 +149,7 @@ export const AI_AGENTS_SECTION = {
         'Cria a negociação no funil, atualiza o valor e avisa o vendedor responsável conforme a conversa avança.',
       avatar: '/lemify-assets/bfcd2809ec95079e6151f8d7d08579fa.webp',
       bg: '#CAD9C2',
-      accent: '#C9DBB8',
-      gradient: 'linear-gradient(125deg, #13281d 0%, #265239 54%, #3f7c58 100%)',
+      gradient: 'linear-gradient(125deg, #c9dbb8 0%, #e1edd6 100%)',
     },
     {
       id: 'nico',
@@ -164,8 +160,7 @@ export const AI_AGENTS_SECTION = {
         'Chama de novo no tempo certo com contexto real da conversa e devolve o cliente quente para o time.',
       avatar: '/lemify-assets/939caed0768f159b15d48b7b63e34717.webp',
       bg: '#F3DCC7',
-      accent: '#FFCFA8',
-      gradient: 'linear-gradient(125deg, #3c1e0e 0%, #753a19 54%, #b05a28 100%)',
+      gradient: 'linear-gradient(125deg, #ffcfa8 0%, #ffe4ce 100%)',
     },
     {
       id: 'iris',
@@ -176,16 +171,15 @@ export const AI_AGENTS_SECTION = {
         'Entrega resumos semanais com volume, velocidade de resposta, canais que mais fecham e principais dúvidas.',
       avatar: '/lemify-assets/ae93dbf37bf1171471288127cbe3828e.webp',
       bg: '#E4DDEB',
-      accent: '#DCC8FF',
-      gradient: 'linear-gradient(125deg, #241442 0%, #47277e 54%, #6e41b6 100%)',
+      gradient: 'linear-gradient(125deg, #dcc8ff 0%, #efe5ff 100%)',
     },
   ],
 }
 
 export const CASES_SECTION = {
   eyebrow: 'Resultados reais',
-  title: 'O tempo de resposta caiu de 2 horas para 10 segundos.',
-  lead: 'Mais de 2 mil empresas brasileiras centralizam o atendimento e acompanham cada venda no Lemify.',
+  title: 'O tempo de resposta no WhatsApp caiu de 2 horas para 10 segundos.',
+  lead: 'Mais de 2 mil empresas brasileiras usam agentes de IA do Lemify para responder na hora e não perder vendas por demora.',
   cards: [
     {
       id: 'espazzo',
@@ -421,8 +415,38 @@ export function buildPlansView(rawList) {
     }),
   )
 
+  const comparisonGroups = [
+    {
+      group: null,
+      rows: [
+        { label: 'Preço mensal', values: plans.map((p) => `R$ ${formatMoney(p.value)}`) },
+        { label: 'No plano anual (30% OFF)', values: plans.map((p) => `R$ ${annualPrice(p.value)}/mês`) },
+        { label: 'Canais de atendimento', values: plans.map((p) => String(p.connections)) },
+        { label: 'Usuários simultâneos', values: plans.map((p) => String(p.users)) },
+        { label: 'Filiais', values: plans.map((p) => String(p.branches)) },
+        { label: 'Atendimentos por mês', values: plans.map(() => '1.000') },
+        { label: 'Créditos de IA por mês', values: plans.map((p) => formatNum(p.aiBudget * 1000)) },
+      ],
+    },
+    {
+      group: 'Agentes de IA',
+      rows: PLAN_AGENTS_META.map((a) => ({
+        label: cap(a.label),
+        values: plans.map((p) => Boolean(p[a.key])),
+      })),
+    },
+    {
+      group: 'Recursos incluídos',
+      rows: PLAN_MODS_META.map(([key, label]) => ({
+        label: cap(label),
+        values: plans.map((p) => Boolean(p[key])),
+      })),
+    },
+  ]
+
   return {
     mainPlans,
+    comparisonGroups,
     minPrice: formatMoney(plans[0].value),
     minAnnualPrice: String(annualPrice(plans[0].value)),
     usersSummary,
@@ -454,6 +478,6 @@ export const getLemifyFaq = (usersSummary) => [
   {
     q: 'O que acontece quando os créditos de IA acabam?',
     a: 'Cada plano traz créditos mensais de IA. Se acabarem antes da renovação, os agentes pausam até o mês virar ou até você contratar créditos extras no próprio sistema, enquanto a sua equipe continua atendendo normalmente.',
-    link: { href: '/lemify/planos', label: 'Comparar todos os planos' },
+    link: { href: '#comparar-planos', label: 'Comparar todos os planos' },
   },
 ]

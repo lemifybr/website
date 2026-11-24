@@ -29,6 +29,7 @@ const Check = () => (
 export default function ApiPage() {
   const root = useRef(null)
   const [copied, setCopied] = useState(false)
+  const [openFaq, setOpenFaq] = useState(null)
   useScrollMotion(root)
   useSmoothScroll()
 
@@ -249,9 +250,23 @@ export default function ApiPage() {
               <h2 id="ap-faq-titulo" className="h2">Dúvidas sobre a API Oficial (Waba) e canais</h2>
             </div>
             <div className="faq__list">
-              {API_FAQ.map((f) => (
-                <details className="faq__item" key={f.q}>
-                  <summary>{f.q}</summary>
+              {API_FAQ.map((f, idx) => (
+                <details
+                  className="faq__item"
+                  key={f.q}
+                  open={openFaq === idx}
+                  onToggle={(e) => {
+                    if (e.currentTarget.open && openFaq !== idx) setOpenFaq(idx)
+                  }}
+                >
+                  <summary
+                    onClick={(e) => {
+                      e.preventDefault()
+                      setOpenFaq((cur) => (cur === idx ? null : idx))
+                    }}
+                  >
+                    {f.q}
+                  </summary>
                   <p>{f.a}</p>
                 </details>
               ))}

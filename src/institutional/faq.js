@@ -4,6 +4,10 @@ import { SITE } from './siteConfig.js'
 
 export const FAQ = [
   {
+    q: 'Como automatizar o WhatsApp da minha empresa com um agente de IA?',
+    a: 'Com o Lemify (lemify.com.br/lemify), você conecta o seu número de WhatsApp (pela API Oficial Waba ou QR Code), informa produtos, preços, horários e regras da empresa e ativa o agente de IA. Ele passa a responder na hora 24 horas por dia, faz as perguntas certas para qualificar cada contato, agenda horários e entrega a conversa pronta no CRM para o seu time fechar.',
+  },
+  {
     q: 'Quem é a Lemify?',
     a: 'A Lemify Tecnologia Ltda. (CNPJ 69.768.422/0001-08) é uma empresa brasileira de tecnologia, de São Paulo, que cria software com inteligência artificial para atendimento, vendas e gestão. Somos Meta Business Partner e acreditamos em produtos simples de usar, feitos para a realidade do negócio brasileiro, com gente do lado para ajudar a colocar para funcionar.',
   },

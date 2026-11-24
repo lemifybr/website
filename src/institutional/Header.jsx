@@ -42,7 +42,7 @@ export default function Header() {
 
           <nav className="nav__links" aria-label="Principal">
             <a href="/#inicio" aria-current={pathname === '/' ? 'page' : undefined}>Início</a>
-            <a href={SITE.productPage} aria-current={pathname === SITE.productPage || pathname.startsWith(`${SITE.productPage}/`) ? 'page' : undefined}>Produto</a>
+            <a href={SITE.productPage} aria-current={pathname === SITE.productPage || pathname.startsWith(`${SITE.productPage}/`) ? 'page' : undefined}>Sobre</a>
             <a href={SITE.apiPage} aria-current={pathname === SITE.apiPage ? 'page' : undefined}>API</a>
             <a href="/#segmentos">Segmentos</a>
             <a href="/#agentes">Agentes de IA</a>
@@ -62,7 +62,7 @@ export default function Header() {
 
       <div data-lenis-prevent className={`drawer ${open ? 'is-open' : ''}`} aria-hidden={!open}>
         {[
-          ['Início', '/#inicio'], ['Produto', SITE.productPage], ['API', SITE.apiPage], ['Segmentos', '/#segmentos'],
+          ['Início', '/#inicio'], ['Sobre', SITE.productPage], ['API', SITE.apiPage], ['Segmentos', '/#segmentos'],
           ['Agentes de IA', '/#agentes'], ['Blog', '/blog'], ['Contato', '/#contato'],
         ].map(([t, h]) => <a key={t} href={h} onClick={close}>{t}</a>)}
         <div className="drawer__auth">

@@ -3,13 +3,16 @@
   "framework": "vite",
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
+  "redirects": [
+    {
+      "source": "/lemify/planos",
+      "destination": "/lemify#planos",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/lemify",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/lemify/planos",
       "destination": "/index.html"
     },
     {

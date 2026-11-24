@@ -51,11 +51,29 @@ export function useScrollMotion(rootRef) {
   }, [rootRef])
 }
 
+let activeLenis = null
+
+/** Rola suavemente até uma posição Y usando a instância ativa do Lenis (sem conflitar com scroll-behavior). */
+export function scrollToY(top, { duration = 0.72, onComplete } = {}) {
+  const y = Math.max(0, top)
+  if (activeLenis && !prefersReducedMotion()) {
+    activeLenis.scrollTo(y, {
+      duration,
+      easing: (t) => 1 - Math.pow(1 - t, 3),
+      onComplete,
+    })
+  } else {
+    window.scrollTo({ top: y, behavior: prefersReducedMotion() ? 'auto' : 'smooth' })
+    if (onComplete) setTimeout(onComplete, prefersReducedMotion() ? 0 : 420)
+  }
+}
+
 /** Scroll suavizado (Lenis) sincronizado com o ScrollTrigger. Âncoras (#id) também rolam suave. */
 export function useSmoothScroll() {
   useEffect(() => {
     if (prefersReducedMotion()) return
     const lenis = new Lenis({ duration: 0.6, anchors: { offset: -90 } })
+    activeLenis = lenis
     lenis.on('scroll', ScrollTrigger.update)
     const tick = (time) => lenis.raf(time * 1000)
     gsap.ticker.add(tick)
@@ -76,6 +94,7 @@ export function useSmoothScroll() {
     document.addEventListener('click', onClick)
 
     return () => {
+      if (activeLenis === lenis) activeLenis = null
       document.removeEventListener('click', onClick)
       gsap.ticker.remove(tick)
       lenis.destroy()

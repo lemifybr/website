@@ -252,16 +252,28 @@
   margin-bottom: 40px;
 }
 
-/* ───── Dobra 2 · Por dentro do Lemify (abas + tela real + integrações) ───── */
+.inst.lemifypage .lp-section .head {
+  margin-inline: auto;
+  text-align: center;
+}
+
+.inst.lemifypage .lp-section .head__p {
+  margin-inline: auto;
+  max-width: 58ch;
+}
+
+/* ───── Dobra 2 · Por dentro do Lemify (abas + tela real) ───── */
 .lp-tabs {
-  display: inline-flex;
+  display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+  width: fit-content;
   gap: 6px;
   padding: 6px;
   border-radius: 10px;
   background: var(--cream);
   box-shadow: inset 0 0 0 1px var(--line);
-  margin-bottom: 28px;
+  margin: 0 auto 32px;
 }
 
 .lp-tabs button {
@@ -384,14 +396,34 @@
 }
 
 .lp-stack__rail {
+  --rail-h: 48px;
+  --rail-gap: 4px;
   position: sticky;
   top: 108px;
   display: grid;
-  gap: 6px;
-  padding-top: 8px;
+  gap: var(--rail-gap);
+  padding: 0;
+}
+
+.lp-stack__pill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--rail-h);
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 12px 28px -14px rgba(14, 36, 33, 0.28), 0 0 0 1px var(--line);
+  transform: translate3d(0, calc(var(--active, 0) * (var(--rail-h) + var(--rail-gap))), 0);
+  transition: transform 0.36s var(--ease);
+  pointer-events: none;
+  z-index: 0;
 }
 
 .lp-stack__nav {
+  position: relative;
+  z-index: 1;
+  height: var(--rail-h);
   font: inherit;
   font-size: 15px;
   font-weight: 600;
@@ -400,13 +432,13 @@
   background: transparent;
   border: 0;
   border-radius: 10px;
-  padding: 10px 14px;
+  padding: 0 14px;
   display: flex;
   align-items: center;
   gap: 10px;
   text-align: left;
   cursor: pointer;
-  transition: opacity 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s var(--ease);
+  transition: opacity 0.22s ease, color 0.22s ease;
 }
 
 .lp-stack__nav:hover {
@@ -420,21 +452,21 @@
   object-fit: cover;
   object-position: center top;
   opacity: 0;
+  transform: scale(0.75);
   margin-right: -10px;
   flex: none;
-  transition: width 0.25s var(--ease), opacity 0.2s ease, margin-right 0.25s var(--ease);
+  transition: width 0.3s var(--ease), opacity 0.22s ease, transform 0.3s var(--ease), margin-right 0.3s var(--ease);
 }
 
 .lp-stack__nav.is-on {
   opacity: 1;
-  background: #fff;
   color: var(--brand);
-  box-shadow: 0 12px 28px -14px rgba(14, 36, 33, 0.28), 0 0 0 1px var(--line);
 }
 
 .lp-stack__nav.is-on .lp-stack__nav-av {
   width: 28px;
   opacity: 1;
+  transform: scale(1);
   margin-right: 0;
 }
 
@@ -457,20 +489,21 @@
   top: calc(var(--stack-base) + var(--i, 0) * var(--stack-step));
   height: var(--card-h);
   border-radius: 16px;
-  color: #fff;
+  color: var(--ink);
   overflow: hidden;
   pointer-events: auto;
   transform-origin: top center;
   transform: scale(calc(1 - var(--depth, 0) * 0.024));
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.16),
-    0 -14px 32px -18px rgba(8, 22, 20, 0.55),
-    0 24px 48px -28px rgba(8, 22, 20, 0.5);
+    inset 0 1px 0 rgba(255, 255, 255, 0.72),
+    inset 0 0 0 1px rgba(14, 36, 33, 0.12),
+    0 -10px 26px -18px rgba(14, 36, 33, 0.28),
+    0 20px 40px -28px rgba(14, 36, 33, 0.26);
   transition: transform 0.35s var(--ease), filter 0.35s ease;
 }
 
 .lp-scard.is-covered {
-  filter: brightness(0.92);
+  filter: brightness(0.96);
 }
 
 .lp-scard__peek {
@@ -483,7 +516,7 @@
   padding: 0 24px;
   border: 0;
   background: transparent;
-  color: #fff;
+  color: var(--ink);
   font: inherit;
   display: flex;
   align-items: center;
@@ -503,8 +536,8 @@
 
 .lp-scard__peek-task {
   font-size: 14.5px;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.92);
+  font-weight: 600;
+  color: rgba(14, 36, 33, 0.88);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -516,6 +549,7 @@
   gap: 10px;
   flex: none;
   font-size: 14px;
+  color: var(--ink);
 }
 
 .lp-scard__peek-id img {
@@ -524,13 +558,15 @@
   border-radius: 6px;
   object-fit: cover;
   object-position: center top;
+  background: rgba(255, 255, 255, 0.65);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.8);
 }
 
 .lp-scard::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 86% 24%, color-mix(in srgb, var(--accent, #d8fe6a) 20%, transparent), transparent 56%);
+  background: radial-gradient(circle at 86% 24%, rgba(255, 255, 255, 0.45), transparent 56%);
   pointer-events: none;
 }
 
@@ -563,14 +599,14 @@
   line-height: 1.06;
   letter-spacing: -0.03em;
   font-weight: 600;
-  color: #fff;
+  color: var(--ink);
   max-width: 22ch;
 }
 
 .inst .lp-scard__copy p {
   font-size: 16.5px;
   line-height: 1.55;
-  color: rgba(255, 255, 255, 0.84);
+  color: rgba(14, 36, 33, 0.78);
   max-width: 48ch;
 }
 
@@ -587,13 +623,13 @@
   font-size: 20px;
   line-height: 1.15;
   font-weight: 600;
-  color: #fff;
+  color: var(--ink);
 }
 
 .lp-scard__identity span {
   display: block;
   font-size: 14px;
-  color: var(--accent, var(--lime));
+  color: rgba(14, 36, 33, 0.72);
   margin-top: 4px;
 }
 
@@ -608,7 +644,8 @@
   object-fit: cover;
   object-position: center top;
   flex: none;
-  box-shadow: 0 16px 34px -14px rgba(0, 0, 0, 0.45);
+  background: rgba(255, 255, 255, 0.58);
+  box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0.8), 0 14px 28px -16px rgba(14, 36, 33, 0.3);
 }
 
 /* ───── Dobra 4 · Resultados reais ───── */
@@ -761,10 +798,9 @@
 /* ───── Dobra 5 · Planos ───── */
 .lp-plans-head {
   display: flex;
-  flex-wrap: wrap;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 20px 32px;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
   margin-bottom: 36px;
 }
 
@@ -953,6 +989,177 @@
   color: var(--lime);
 }
 
+/* ───── Acordeão comparativo de planos ───── */
+.lp-compare {
+  margin-top: 24px;
+  border-radius: var(--r);
+  background: #fff;
+  box-shadow: 0 0 0 1px var(--line);
+  overflow: hidden;
+  transition: box-shadow 0.2s ease;
+}
+
+.lp-compare.is-open {
+  box-shadow: 0 0 0 1px rgba(28, 64, 59, 0.24), 0 18px 40px -28px rgba(14, 36, 33, 0.22);
+}
+
+.lp-compare__toggle {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.lp-compare__toggle:hover {
+  background: rgba(28, 64, 59, 0.03);
+}
+
+.lp-compare__toggle:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: -2px;
+}
+
+.lp-compare__label {
+  display: grid;
+  gap: 3px;
+}
+
+.lp-compare__label strong {
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--brand);
+}
+
+.lp-compare__label span {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.lp-compare__icon {
+  flex: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: var(--cream);
+  color: var(--brand);
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1;
+  transition: transform 0.2s ease, background-color 0.15s ease, color 0.15s ease;
+}
+
+.lp-compare.is-open .lp-compare__icon {
+  transform: rotate(45deg);
+  background: var(--brand);
+  color: var(--lime);
+}
+
+.lp-compare__panel {
+  border-top: 1px solid var(--line);
+}
+
+.lp-cmp-wrap {
+  overflow-x: auto;
+}
+
+.lp-cmp-table {
+  width: 100%;
+  min-width: 640px;
+  border-collapse: collapse;
+  text-align: center;
+  font-size: 14.5px;
+}
+
+.lp-cmp-table th,
+.lp-cmp-table td {
+  padding: 13px 16px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: middle;
+}
+
+.lp-cmp-table tbody tr:last-child th,
+.lp-cmp-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.lp-cmp-table thead th {
+  font-size: 14.5px;
+  font-weight: 700;
+  background: var(--cream);
+  color: var(--ink);
+}
+
+.lp-cmp-table thead th:first-child,
+.lp-cmp-table tbody th {
+  text-align: left;
+  padding-left: 24px;
+}
+
+.lp-cmp-table thead th.is-featured {
+  background: var(--brand);
+  color: var(--lime);
+}
+
+.lp-cmp-table tbody th {
+  font-weight: 500;
+  color: var(--ink);
+  width: 34%;
+}
+
+.lp-cmp-table tbody td {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.lp-cmp-table tbody td.is-featured {
+  background: rgba(227, 239, 228, 0.52);
+  color: var(--brand);
+}
+
+.lp-cmp-group th {
+  background: var(--cream);
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--brand);
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+.lp-cmp-yes {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  background: var(--mint);
+  color: var(--brand);
+}
+
+.lp-cmp-table td.is-featured .lp-cmp-yes {
+  background: var(--brand);
+  color: var(--lime);
+}
+
+.lp-cmp-no {
+  color: rgba(93, 109, 105, 0.5);
+  font-weight: 400;
+}
+
 /* ───── Dobra 6 · FAQ e CTA Final ───── */
 .inst.lemifypage .faq {
   padding: 84px 0;
@@ -1087,7 +1294,6 @@
   outline-offset: 2px;
 }
 
-.lp-scard__peek:focus-visible,
 .lp-video__play:focus-visible,
 .lp-modal__close:focus-visible {
   outline-color: var(--lime);
@@ -1145,9 +1351,20 @@
     display: none;
   }
 
+  .lp-stack__pill {
+    display: none;
+  }
+
   .lp-stack__nav {
     flex: none;
+    height: auto;
+    padding: 10px 14px;
     white-space: nowrap;
+  }
+
+  .lp-stack__nav.is-on {
+    background: #fff;
+    box-shadow: 0 12px 28px -14px rgba(14, 36, 33, 0.28), 0 0 0 1px var(--line);
   }
 
   .lp-stack__deck {

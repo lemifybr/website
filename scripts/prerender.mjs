@@ -25,7 +25,6 @@ import {
 } from '../src/product/lemifyPageData.js'
 import { SITE, esc, setHead, jsonLd, addToHead, setRoot } from '../api/_html.js'
 
-const prod = (n) => fs.readFileSync(path.resolve(path.dirname(fileURLToPath(import.meta.url)), `../src/product/${n}.body.html`), 'utf8')
 const dist = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../dist')
 const template = fs.readFileSync(path.join(dist, 'index.html'), 'utf8')
 
@@ -80,11 +79,16 @@ function lemifyBody() {
     .map((c) => `<blockquote>${esc(c.quote)} · ${esc(c.company)} (${esc(c.segment)})</blockquote>`)
     .join('')
   const plans = lemifyPlans.mainPlans
-    .map((pl) => `<article><h3>${esc(pl.title)} · R$ ${esc(pl.monthly)}/mês (ou R$ ${esc(pl.annual)}/mês no anual)</h3>${p(pl.description)}<ul>${pl.bullets.map((b) => `<li>${esc(b)}</li>`).join('')}</ul></article>`)
+    .map((pl) => `<article><h3>${esc(pl.title)} · R$ ${esc(pl.annual)}/mês no anual (ou R$ ${esc(pl.monthly)}/mês no mensal)</h3>${p(pl.description)}<ul>${pl.bullets.map((b) => `<li>${esc(b)}</li>`).join('')}</ul></article>`)
     .join('')
+  const compareRows = lemifyPlans.comparisonGroups
+    .flatMap((g) => g.rows)
+    .map((r) => `<tr><th scope="row">${esc(r.label)}</th>${r.values.map((v) => `<td>${typeof v === 'boolean' ? (v ? 'Incluído' : 'Não incluído') : esc(v)}</td>`).join('')}</tr>`)
+    .join('')
+  const compareTable = `<table><thead><tr><th>Recurso</th>${lemifyPlans.mainPlans.map((pl) => `<th>${esc(pl.title)}</th>`).join('')}</tr></thead><tbody>${compareRows}</tbody></table>`
   const faq = lemifyFaq.map((f) => `<h3>${esc(f.q)}</h3>${p(f.a)}`).join('')
 
-  return `${nav}<main><article><h1>${esc(LEMIFY_HERO.h1)}</h1>${p(LEMIFY_HERO.lead)}<section><h2>${esc(PRODUCT_SHOWCASE.title)}</h2>${p(PRODUCT_SHOWCASE.lead)}${tabs}</section><section><h2>${esc(AI_AGENTS_SECTION.title)}</h2>${p(AI_AGENTS_SECTION.lead)}<ul>${agents}</ul></section><section><h2>${esc(CASES_SECTION.title)}</h2>${p(CASES_SECTION.lead)}${cases}</section><section><h2>Planos do Lemify</h2>${plans}<p><a href="/lemify/planos">Comparar planos lado a lado</a></p></section><section><h2>Dúvidas antes de começar</h2>${faq}</section></article></main>`
+  return `${nav}<main><article><h1>${esc(LEMIFY_HERO.h1)}</h1>${p(LEMIFY_HERO.lead)}<section><h2>${esc(PRODUCT_SHOWCASE.title)}</h2>${p(PRODUCT_SHOWCASE.lead)}${tabs}</section><section><h2>${esc(AI_AGENTS_SECTION.title)}</h2>${p(AI_AGENTS_SECTION.lead)}<ul>${agents}</ul></section><section><h2>${esc(CASES_SECTION.title)}</h2>${p(CASES_SECTION.lead)}${cases}</section><section><h2>Planos do Lemify</h2>${plans}<h3>Comparativo completo dos planos</h3>${compareTable}</section><section><h2>Dúvidas antes de começar</h2>${faq}</section></article></main>`
 }
 
 const faqBody = `<section><h2>Perguntas frequentes sobre o Lemify</h2>${FAQ.map((f) => `<h3>${esc(f.q)}</h3>${p(f.a)}`).join('')}</section>`
@@ -99,8 +103,7 @@ const lemifyFaqSchema = jsonLd({
 
 const pages = [
   ...[termos, privacidade, reembolso, termosIa, google, lgpd].map((d) => ({ route: d.path, body: legalBody(d), name: d.h1 })),
-  { route: '/lemify', body: lemifyBody(), name: 'Lemify · Atendimento e CRM', extraHead: [lemifyFaqSchema] },
-  { route: '/lemify/planos', body: prod('planos'), name: 'Planos e preços do Lemify' },
+  { route: '/lemify', body: lemifyBody(), name: 'Automatizar WhatsApp com IA · Agente de IA e CRM | Lemify', extraHead: [lemifyFaqSchema] },
   { route: '/docs', body: docsBody(), name: 'Documentação do Lemify' },
   { route: '/docs/api', body: apiBody(), name: 'API do Lemify' },
   { route: '/manual/bling', body: blingBody(), name: 'Manual de integração com o Bling' },

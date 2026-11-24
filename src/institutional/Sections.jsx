@@ -286,6 +286,8 @@ export function Agents() {
 
 /* ───────────── Perguntas frequentes ───────────── */
 export function Faq() {
+  const [openFaq, setOpenFaq] = useState(null)
+
   return (
     <section className="faq" id="perguntas" aria-labelledby="faq-titulo">
       <div className="wrap faq__in">
@@ -294,9 +296,23 @@ export function Faq() {
           <h2 id="faq-titulo" className="h2">Dúvidas comuns sobre a Lemify e o nosso produto</h2>
         </div>
         <div className="faq__list">
-          {FAQ.map((f) => (
-            <details className="faq__item" key={f.q}>
-              <summary>{f.q}</summary>
+          {FAQ.map((f, idx) => (
+            <details
+              className="faq__item"
+              key={f.q}
+              open={openFaq === idx}
+              onToggle={(e) => {
+                if (e.currentTarget.open && openFaq !== idx) setOpenFaq(idx)
+              }}
+            >
+              <summary
+                onClick={(e) => {
+                  e.preventDefault()
+                  setOpenFaq((cur) => (cur === idx ? null : idx))
+                }}
+              >
+                {f.q}
+              </summary>
               <p>{f.a}</p>
             </details>
           ))}
