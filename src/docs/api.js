@@ -18,6 +18,7 @@ export const LLMS = [
   { id: 'mensagens', title: 'Mensagens', text: 'Envio de texto e mídia pelo WhatsApp.', file: 'lemify-api-mensagens.md' },
   { id: 'agenda', title: 'Agenda', text: 'Agendamentos, horários livres e conflitos.', file: 'lemify-api-agenda.md' },
   { id: 'crm', title: 'CRM', text: 'Negociações, pipelines, etapas e motivos.', file: 'lemify-api-crm.md' },
+  { id: 'catalogo', title: 'Catálogo', text: 'Produtos com variações, fotos e estoque por filial.', file: 'lemify-api-catalogo.md' },
   { id: 'full', title: 'Tudo em um arquivo', text: 'Os três módulos completos (llms-full.txt).', file: 'lemify-api-llms-full.txt' },
 ].map((l) => ({ ...l, url: `${LLMS_BASE}/${l.file}` }))
 
@@ -31,8 +32,8 @@ export const LIMITS = [
 export const AUTH = [
   {
     name: 'Chave de API da empresa',
-    where: 'Agenda e CRM',
-    how: 'Gere em Configurações > Chaves de API (começa com lmf_) e escolha as permissões: agenda:read, agenda:write, crm:read e crm:write. Envie em Authorization: Bearer ou no cabeçalho X-API-Key. A chave vale para toda a empresa, em todas as filiais, e só é exibida uma vez.',
+    where: 'Agenda, CRM e Catálogo',
+    how: 'Gere em Configurações > Chaves de API (começa com lmf_) e escolha as permissões: agenda:read, agenda:write, crm:read, crm:write, catalog:read e catalog:write. Envie em Authorization: Bearer ou no cabeçalho X-API-Key. A chave vale para toda a empresa, em todas as filiais, e só é exibida uma vez.',
     sample: 'Authorization: Bearer lmf_SUA_CHAVE',
   },
   {
@@ -365,6 +366,92 @@ export const ENDPOINTS = [
         auth: 'Chave de API (crm:write)',
         fields: [['dealId', 'path', 'obrigatório', 'Identificador do negócio.']],
         sample: `curl -X DELETE ${'https://api.lemify.com.br'}/v1/deals/123 \\
+  -H "Authorization: Bearer lmf_SUA_CHAVE"`,
+      },
+    ],
+  },
+  {
+    group: 'Catálogo',
+    note: 'Produtos com variações (grade de cor, tamanho...), ficha técnica, categorias, fotos e estoque por filial. Categorias, características e opções são criadas pelo nome quando não existem.',
+    items: [
+      {
+        id: 'catalog-upsert',
+        method: 'PUT',
+        path: '/v1/products/external/{externalId}',
+        title: 'Criar ou atualizar produto',
+        text: 'Envia o produto inteiro, identificado pelo id dele no seu sistema. Reenviar o mesmo corpo não duplica nada. Produto simples tem uma variação sem options; com grade, uma variação por combinação. Fotos por URL https são baixadas e guardadas pelo Lemify.',
+        auth: 'Chave de API (catalog:write)',
+        fields: [
+          ['externalId', 'path', 'obrigatório', 'Id do produto no seu sistema.'],
+          ['name', 'string', 'obrigatório', 'Nome do produto.'],
+          ['variants', 'objeto[]', 'obrigatório', 'sku, price, promoPrice, gtin, peso e medidas, options ({ "Cor": "Azul" }), stock por filial e images.'],
+          ['category', 'string', 'opcional', 'Caminho da categoria, ex.: Roupas > Camisetas.'],
+          ['specs', 'objeto[]', 'opcional', 'Ficha técnica: name e value.'],
+          ['images', 'objeto[]', 'opcional', 'Fotos do produto: url e alt.'],
+          ['description / brand / unit / ncm / status', 'string', 'opcional', 'Dados gerais e fiscais.'],
+        ],
+        sample: `curl -X PUT ${'https://api.lemify.com.br'}/v1/products/external/CAM-001 \\
+  -H "Authorization: Bearer lmf_SUA_CHAVE" \\
+  -H "Content-Type: application/json" \\
+  -d '{
+    "name": "Camiseta Básica",
+    "category": "Roupas > Camisetas",
+    "specs": [{ "name": "Material", "value": "Algodão" }],
+    "images": [{ "url": "https://cdn.seusite.com/camiseta.jpg" }],
+    "variants": [
+      { "sku": "CAM-001-AZ-M", "price": 79.9, "options": { "Cor": "Azul", "Tamanho": "M" }, "stock": [{ "quantity": 12 }] },
+      { "sku": "CAM-001-AZ-G", "price": 79.9, "options": { "Cor": "Azul", "Tamanho": "G" }, "stock": [{ "quantity": 5 }] }
+    ]
+  }'`,
+      },
+      {
+        id: 'catalog-stock',
+        method: 'PUT',
+        path: '/v1/stock',
+        title: 'Atualizar estoque em lote',
+        text: 'Define o saldo de até 500 variações por chamada, pelo SKU e filial. Cada item volta com seu resultado: ok, not_found, ambiguous ou invalid_branch.',
+        auth: 'Chave de API (catalog:write)',
+        fields: [['items', 'objeto[]', 'obrigatório', 'sku, quantity e branchId (opcional; veja /v1/branches).']],
+        sample: `curl -X PUT ${'https://api.lemify.com.br'}/v1/stock \\
+  -H "Authorization: Bearer lmf_SUA_CHAVE" \\
+  -H "Content-Type: application/json" \\
+  -d '{ "items": [{ "sku": "CAM-001-AZ-M", "quantity": 40 }] }'`,
+      },
+      {
+        id: 'catalog-list',
+        method: 'GET',
+        path: '/v1/products',
+        title: 'Listar produtos',
+        text: 'Produtos com variações, estoque e fotos, até 100 por página. Para sincronizar, envie updatedSince.',
+        auth: 'Chave de API (catalog:read)',
+        fields: [
+          ['updatedSince', 'query', 'opcional', 'Data e hora ISO 8601.'],
+          ['externalId / sku / categoryId / status', 'query', 'opcional', 'Filtros.'],
+          ['pageNumber / limit', 'query', 'opcional', 'Página e tamanho (máximo 100).'],
+        ],
+        sample: `curl "${'https://api.lemify.com.br'}/v1/products?sku=CAM-001-AZ-M" \\
+  -H "Authorization: Bearer lmf_SUA_CHAVE"`,
+      },
+      {
+        id: 'catalog-delete',
+        method: 'DELETE',
+        path: '/v1/products/external/{externalId}',
+        title: 'Desativar produto',
+        text: 'O produto e as variações ficam inativos (não são apagados). Reative com um PUT com status active.',
+        auth: 'Chave de API (catalog:write)',
+        fields: [['externalId', 'path', 'obrigatório', 'Id do produto no seu sistema.']],
+        sample: `curl -X DELETE ${'https://api.lemify.com.br'}/v1/products/external/CAM-001 \\
+  -H "Authorization: Bearer lmf_SUA_CHAVE"`,
+      },
+      {
+        id: 'catalog-taxonomy',
+        method: 'GET',
+        path: '/v1/product-categories',
+        title: 'Categorias, características e filiais',
+        text: 'Consulte também GET /v1/product-attributes (características e opções) e GET /v1/branches (ids para o estoque por filial).',
+        auth: 'Chave de API (catalog:read)',
+        fields: [],
+        sample: `curl ${'https://api.lemify.com.br'}/v1/product-categories \\
   -H "Authorization: Bearer lmf_SUA_CHAVE"`,
       },
     ],

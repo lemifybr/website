@@ -10,6 +10,7 @@ Especificação OpenAPI completa: https://docs.lemify.com.br/api-docs.json
 - [Mensagens (WhatsApp)](https://lemify.com.br/api-llms/lemify-api-mensagens.md): Envio de mensagens de texto e mídia pelo WhatsApp para qualquer número.
 - [Agenda](https://lemify.com.br/api-llms/lemify-api-agenda.md): Agendamentos: listar, consultar, criar, alterar, excluir, horários disponíveis e conflito de horário.
 - [CRM (negociações)](https://lemify.com.br/api-llms/lemify-api-crm.md): Negociações (deals), pipelines, etapas e motivos de ganho/perda; criação idempotente por externalId e sincronização por updatedSince.
+- [Catálogo (produtos)](https://lemify.com.br/api-llms/lemify-api-catalogo.md): Produtos com variações (grade), ficha técnica, categorias, fotos por URL e estoque por filial; upsert idempotente por externalId e estoque em lote por SKU.
 
 ## Opcional
 
