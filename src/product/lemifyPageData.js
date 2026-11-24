@@ -424,6 +424,7 @@ export function buildPlansView(rawList) {
   return {
     mainPlans,
     minPrice: formatMoney(plans[0].value),
+    minAnnualPrice: String(annualPrice(plans[0].value)),
     usersSummary,
   }
 }

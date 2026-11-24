@@ -56,7 +56,7 @@ export default function LemifyPage() {
 
   const [activeTabId, setActiveTabId] = useState(PRODUCT_SHOWCASE.tabs[0].id)
   const [activeAgentIdx, setActiveAgentIdx] = useState(0)
-  const [billing, setBilling] = useState('monthly')
+  const [billing, setBilling] = useState('annual')
   const [caseVideoPlaying, setCaseVideoPlaying] = useState(false)
   const [rawPlans, setRawPlans] = useState(() => readCachedPlans().data)
 
@@ -567,7 +567,7 @@ export default function LemifyPage() {
           <div className="wrap lp-cta__in">
             <h2 id="lp-cta-titulo">Veja o Lemify na rotina da sua empresa.</h2>
             <p>
-              Agende uma demonstração ao vivo com a nossa equipe. Planos a partir de R$ {plans.minPrice} por mês, e você cancela quando quiser.
+              Agende uma demonstração ao vivo com a nossa equipe. Planos a partir de R$ {billing === 'annual' ? plans.minAnnualPrice : plans.minPrice} por mês{billing === 'annual' ? ' no plano anual' : ''}, e você cancela quando quiser.
             </p>
             <div className="lp-cta__actions">
               <a className="btn btn--lime btn--lg" href={SITE.demo} target="_blank" rel="noopener noreferrer">
