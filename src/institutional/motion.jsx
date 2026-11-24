@@ -68,36 +68,119 @@ export function scrollToY(top, { duration = 0.72, onComplete } = {}) {
   }
 }
 
-/** Scroll suavizado (Lenis) sincronizado com o ScrollTrigger. Âncoras (#id) também rolam suave. */
+/** Scroll suavizado (Lenis) sincronizado com o ScrollTrigger. Âncoras (#id) funcionam na mesma página e ao chegar de outra rota. */
 export function useSmoothScroll() {
   useEffect(() => {
-    if (prefersReducedMotion()) return
-    const lenis = new Lenis({ duration: 0.6, anchors: { offset: -90 } })
-    activeLenis = lenis
-    lenis.on('scroll', ScrollTrigger.update)
-    const tick = (time) => lenis.raf(time * 1000)
-    gsap.ticker.add(tick)
-    gsap.ticker.lagSmoothing(0)
+    const reduced = prefersReducedMotion()
+    const lenis = reduced ? null : new Lenis({ duration: 0.6 })
+    let tick = null
+    if (lenis) {
+      activeLenis = lenis
+      lenis.on('scroll', ScrollTrigger.update)
+      tick = (time) => lenis.raf(time * 1000)
+      gsap.ticker.add(tick)
+      gsap.ticker.lagSmoothing(0)
+    }
 
-    // Links do menu como "/#produtos" fazem salto instantâneo no navegador; aqui rolam com animação.
+    const scrollToHash = (rawHash, { immediate = false } = {}) => {
+      if (!rawHash || rawHash === '#') return false
+      let id
+      try {
+        id = decodeURIComponent(rawHash.slice(1))
+      } catch {
+        id = rawHash.slice(1)
+      }
+      const target = document.getElementById(id)
+      if (!target) return false
+      lenis?.resize()
+      const pad = id === 'inicio' ? 0 : (parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 90)
+      const top = id === 'inicio' ? 0 : Math.max(0, target.getBoundingClientRect().top + window.scrollY - pad)
+      if (immediate && Math.abs(window.scrollY - top) < 2) return true
+      if (lenis) {
+        lenis.scrollTo(top, immediate ? { immediate: true, force: true } : { duration: 0.9 })
+      } else {
+        window.scrollTo({ top, left: 0, behavior: immediate || reduced ? 'auto' : 'smooth' })
+      }
+      ScrollTrigger.update()
+      return true
+    }
+
+    // Ao chegar de outra página com #hash (ex.: /lemify -> /#agentes), a seção só existe após o React montar
+    // e pode se deslocar quando o pin do ScrollTrigger, fontes ou blocos assíncronos terminam de medir.
+    let stopSettling = null
+    let rafId = 0
+    if (window.location.hash) {
+      let settled = false
+      const align = () => {
+        if (settled) return
+        scrollToHash(window.location.hash, { immediate: true })
+      }
+      const onKeyDown = (e) => {
+        if (['ArrowDown', 'ArrowUp', 'PageDown', 'PageUp', 'Home', 'End', ' '].includes(e.key)) stopSettling?.()
+      }
+      const ro = typeof ResizeObserver === 'undefined' ? null : new ResizeObserver(align)
+      ro?.observe(document.documentElement)
+      ScrollTrigger.addEventListener('refresh', align)
+      const settleTimer = setTimeout(() => stopSettling?.(), 1800)
+
+      stopSettling = () => {
+        if (settled) return
+        settled = true
+        cancelAnimationFrame(rafId)
+        clearTimeout(settleTimer)
+        ScrollTrigger.removeEventListener('refresh', align)
+        ro?.disconnect()
+        window.removeEventListener('wheel', stopSettling)
+        window.removeEventListener('touchstart', stopSettling)
+        window.removeEventListener('pointerdown', stopSettling)
+        window.removeEventListener('keydown', onKeyDown)
+      }
+
+      window.addEventListener('wheel', stopSettling, { passive: true })
+      window.addEventListener('touchstart', stopSettling, { passive: true })
+      window.addEventListener('pointerdown', stopSettling, { passive: true })
+      window.addEventListener('keydown', onKeyDown)
+
+      rafId = requestAnimationFrame(() => {
+        if (settled) return
+        ScrollTrigger.refresh()
+        align()
+      })
+      document.fonts?.ready.then(() => {
+        if (settled) return
+        ScrollTrigger.refresh()
+        align()
+      })
+    }
+
+    // Links do menu como "/#agentes" na própria página rolam suave sem salto instantâneo.
     const onClick = (e) => {
       const link = e.target.closest?.('a[href*="#"]')
       if (!link || e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey || link.target === '_blank') return
       const url = new URL(link.href, window.location.href)
-      if (url.origin !== window.location.origin || url.pathname !== window.location.pathname || !url.hash) return
-      const target = document.getElementById(decodeURIComponent(url.hash.slice(1)))
-      if (!target) return
+      const samePath = (url.pathname.replace(/\/+$/, '') || '/') === (window.location.pathname.replace(/\/+$/, '') || '/')
+      if (url.origin !== window.location.origin || !samePath || !url.hash) return
+      stopSettling?.()
+      if (!scrollToHash(url.hash, { immediate: false })) return
       e.preventDefault()
-      lenis.scrollTo(target, { offset: -90, duration: 0.9 })
-      history.pushState(null, '', url.hash)
+      if (window.location.hash !== url.hash) history.pushState(null, '', url.hash)
+    }
+    const onHashChange = () => {
+      stopSettling?.()
+      scrollToHash(window.location.hash, { immediate: false })
     }
     document.addEventListener('click', onClick)
+    window.addEventListener('hashchange', onHashChange)
 
     return () => {
-      if (activeLenis === lenis) activeLenis = null
+      stopSettling?.()
       document.removeEventListener('click', onClick)
-      gsap.ticker.remove(tick)
-      lenis.destroy()
+      window.removeEventListener('hashchange', onHashChange)
+      if (lenis) {
+        if (activeLenis === lenis) activeLenis = null
+        gsap.ticker.remove(tick)
+        lenis.destroy()
+      }
     }
   }, [])
 }

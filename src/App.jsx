@@ -32,8 +32,23 @@ function App() {
       return
     }
     applySeo(known ? SEO[path.startsWith('/blog/') ? '/blog' : path] : SEO['/'], known ? path : '/')
-    // Só força o topo em páginas sem âncora; com #hash o navegador cuida do scroll.
-    if (!window.location.hash) window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+    // Páginas com useSmoothScroll (/, /lemify, /api) já cuidam da âncora; nas demais, rola até o #hash montado.
+    if (!window.location.hash) {
+      window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+      return
+    }
+    const usesSmoothScroll = !known || path === '/lemify' || path === '/api'
+    if (usesSmoothScroll) return
+    let id
+    try {
+      id = decodeURIComponent(window.location.hash.slice(1))
+    } catch {
+      id = window.location.hash.slice(1)
+    }
+    const raf = requestAnimationFrame(() => {
+      document.getElementById(id)?.scrollIntoView({ behavior: 'auto' })
+    })
+    return () => cancelAnimationFrame(raf)
   }, [isLegacyPlans, known, path])
 
   if (doc) return <LegalPage doc={doc} />
