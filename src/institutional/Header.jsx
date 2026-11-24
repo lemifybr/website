@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { SITE } from './siteConfig.js'
-import logo from './assets/logo-dark.svg'
 
 const Arrow = () => (
   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -37,7 +36,7 @@ export default function Header() {
       <header className={`nav ${scrolled ? 'is-scrolled' : ''}`}>
         <div className="nav__inner">
           <a href="/#inicio" className="nav__logo" aria-label="Lemify" onClick={close}>
-            <img src={logo} alt="Lemify" />
+            <img src="/logo.png" alt="Lemify" width="130" height="30" />
           </a>
 
           <nav className="nav__links" aria-label="Principal">

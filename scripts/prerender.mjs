@@ -103,7 +103,7 @@ const lemifyFaqSchema = jsonLd({
 
 const pages = [
   ...[termos, privacidade, reembolso, termosIa, google, lgpd].map((d) => ({ route: d.path, body: legalBody(d), name: d.h1 })),
-  { route: '/lemify', body: lemifyBody(), name: 'Automatizar WhatsApp com IA · Agente de IA e CRM | Lemify', extraHead: [lemifyFaqSchema] },
+  { route: '/lemify', body: lemifyBody(), name: SEO['/lemify'].title, extraHead: [lemifyFaqSchema] },
   { route: '/docs', body: docsBody(), name: 'Documentação do Lemify' },
   { route: '/docs/api', body: apiBody(), name: 'API do Lemify' },
   { route: '/manual/bling', body: blingBody(), name: 'Manual de integração com o Bling' },

@@ -1026,6 +1026,11 @@ html.lenis:has(.inst) {
         animation-duration: 120s !important;
         animation-iteration-count: infinite !important;
       }
+
+      .inst .ihub__track {
+        animation-duration: var(--dur, 56s) !important;
+        animation-iteration-count: infinite !important;
+      }
     }
 
     @media (max-width: 760px) {

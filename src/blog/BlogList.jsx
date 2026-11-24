@@ -3,14 +3,13 @@ import '../institutional/site.css'
 import './blog.css'
 import Header from '../institutional/Header.jsx'
 import Footer from '../institutional/Footer.jsx'
-import logo from '../institutional/assets/logo-dark.svg'
 import { fetchPosts, formatDate } from './api.js'
 
 function Cover({ post, big = false }) {
   return post.coverImage ? (
     <img src={post.coverImage} alt="" loading={big ? 'eager' : 'lazy'} />
   ) : (
-    <span className="bcover__empty" aria-hidden="true"><img src={logo} alt="" /></span>
+    <span className="bcover__empty" aria-hidden="true"><img src="/logo.png" alt="" /></span>
   )
 }
 

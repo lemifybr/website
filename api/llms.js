@@ -81,7 +81,7 @@ Resolver de verdade; simples de usar; ninguém começa sozinho; dados com respon
 ## Páginas
 
 - [Início](${SITE}/)
-- [Lemify · Atendimento e CRM](${SITE}/lemify)
+- [Lemify - Sistema de atendimento com IA no WhatsApp](${SITE}/lemify)
 - [Planos e preços](${SITE}/lemify#planos)
 - [API de Mensageria · API Oficial (Waba), WhatsApp, Instagram, TikTok e Telegram](${SITE}/api)
 - [Blog](${SITE}/blog)

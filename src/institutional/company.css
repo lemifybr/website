@@ -1,67 +1,6 @@
-/* ───── Confiança ───── */
-.trust {
-  padding: 90px 0;
-}
-
-.trust__grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
-}
-
-.tcard {
-  padding: 32px;
-  border-radius: var(--r);
-  background: #fff;
-  box-shadow: 0 0 0 1px var(--line);
-  display: grid;
-  gap: 12px;
-  align-content: center;
-  justify-items: center;
-  text-align: center;
-  transition: box-shadow 0.2s ease;
-}
-
-.tcard:hover {
-  box-shadow: 0 0 0 1px var(--line), 0 16px 32px -22px rgba(14, 36, 33, 0.28);
-}
-
-.inst .tcard h3 {
-  font-size: 24px;
-  letter-spacing: -0.025em;
-  font-weight: 600;
-}
-
-.inst .tcard p {
-  color: var(--muted);
-  font-size: 16.5px;
-  line-height: 1.5;
-}
-
-.tcard__link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 6px;
-  font-weight: 600;
-  color: var(--brand);
-  border-bottom: 1.5px solid currentColor;
-  width: fit-content;
-  padding-bottom: 2px;
-  transition: opacity 0.15s ease;
-}
-
-.tcard__link:hover {
-  opacity: 0.72;
-}
-
 @media (max-width: 1000px) {
   .facts {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .trust__grid {
-    grid-template-columns: minmax(0, 1fr);
   }
 }
 

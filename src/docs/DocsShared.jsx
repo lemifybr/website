@@ -1,6 +1,4 @@
 import { useState } from 'react'
-import logoDark from '../institutional/assets/logo-dark.svg'
-import logoLight from '../institutional/assets/logo-light.svg'
 import { SITE } from '../institutional/siteConfig.js'
 import { API_FULL_REFERENCE } from './api.js'
 
@@ -37,7 +35,7 @@ export function DocsHeader({ query, setQuery, searchRef, placeholder, tabs, acti
   return (
     <header className="docs__top">
       <div className="docs__bar">
-        <a href="/" className="docs__logo" aria-label="Lemify, ir para o site"><img src={theme === 'dark' ? logoLight : logoDark} alt="Lemify" /><span>Docs</span></a>
+        <a href="/" className="docs__logo" aria-label="Lemify, ir para o site"><img src={theme === 'dark' ? '/logo-light.png' : '/logo.png'} alt="Lemify" /><span>Docs</span></a>
         <label className="docs__search">
           <span className="sr">Buscar na documentação</span>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="M20 20l-3.5-3.5" /></svg>

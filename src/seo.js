@@ -21,8 +21,8 @@ export const SEO = {
     description: 'Guias práticos sobre como automatizar o WhatsApp com IA, usar agentes de IA no atendimento comercial e vender mais por conversa.',
   },
   '/lemify': {
-    title: 'Automatizar WhatsApp com IA · Agente de IA e CRM | Lemify',
-    description: 'Coloque um agente de IA no seu WhatsApp que responde na hora, faz as perguntas certas, agenda horários e deixa a conversa pronta pro seu time fechar.',
+    title: 'Lemify - Sistema de atendimento com IA no WhatsApp',
+    description: 'Coloque um agente de IA no WhatsApp da sua empresa que responde na hora, faz as perguntas certas, agenda horários e deixa a conversa pronta pro seu time fechar.',
   },
   '/api': {
     title: 'API Oficial do WhatsApp (Waba), Instagram, TikTok e Telegram | Lemify',

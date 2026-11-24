@@ -1,4 +1,3 @@
-import logo from './assets/logo-light.svg'
 import { SITE } from './siteConfig.js'
 import { LEGAL_LINKS } from '../legal/common.js'
 import metaPartner from './assets/meta-partner.png'
@@ -24,7 +23,7 @@ export default function Footer() {
     <footer className="foot">
       <div className="wrap foot__grid">
         <div className="foot__brand">
-          <img src={logo} alt="Lemify" />
+          <img src="/logo-light.png" alt="Lemify" width="139" height="32" loading="lazy" />
           <p>Tecnologia com inteligência artificial para o negócio brasileiro vender, atender e crescer.</p>
           <div className="foot__social">
             {SOCIAL.map(([k, label, href, title]) => (

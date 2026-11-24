@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import './blog.css'
-import logo from '../institutional/assets/logo-dark.svg'
 import { Arrow } from '../institutional/Header.jsx'
 import { fetchPosts, formatDate } from './api.js'
 
@@ -34,7 +33,7 @@ export default function LatestPosts() {
             <article className="bcard" key={p.slug}>
               <a href={`/blog/${p.slug}`} className="bcard__link" aria-label={p.title} />
               <div className="bcard__cover">
-                {p.coverImage ? <img src={p.coverImage} alt="" loading="lazy" /> : <span className="bcover__empty" aria-hidden="true"><img src={logo} alt="" /></span>}
+                {p.coverImage ? <img src={p.coverImage} alt="" loading="lazy" /> : <span className="bcover__empty" aria-hidden="true"><img src="/logo.png" alt="" /></span>}
               </div>
               <div className="bcard__body">
                 {p.category && <span className="badge">{p.category}</span>}
